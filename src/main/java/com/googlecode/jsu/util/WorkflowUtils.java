@@ -27,6 +27,7 @@ import com.atlassian.jira.issue.fields.screen.FieldScreen;
 import com.atlassian.jira.issue.link.IssueLinkManager;
 import com.atlassian.jira.issue.priority.Priority;
 import com.atlassian.jira.issue.resolution.Resolution;
+import com.atlassian.jira.issue.security.IssueSecurityLevel;
 import com.atlassian.jira.issue.security.IssueSecurityLevelManager;
 import com.atlassian.jira.issue.status.Status;
 import com.atlassian.jira.issue.util.IssueChangeHolder;
@@ -347,10 +348,6 @@ public class WorkflowUtils {
 
             if (value instanceof IssueConstant) {
                 newValue = ((IssueConstant) value).getName();
-                /* TODO Where the heck was Entity used???
-            } else if (value instanceof Entity) {
-                newValue = ((Entity) value).getName();
-                */
             } else if (value instanceof GenericValue) {
                 final GenericValue gv = (GenericValue) value;
 
@@ -402,6 +399,8 @@ public class WorkflowUtils {
 
                     newValue = cfType.getValueFromCustomFieldParams(fieldParams);
                 }
+            } else if (newValue instanceof User && !(cfType instanceof UserCFType)) {
+                newValue = ((User)newValue).getName();
             } else if (cfType instanceof UserCFType) {
                 newValue = convertValueToUser(newValue);
             } else if (cfType instanceof AbstractMultiCFType) {
@@ -530,8 +529,6 @@ public class WorkflowUtils {
             } else if (fieldId.equals(IssueFieldConstants.RESOLUTION)) {
                 if (value == null) {
                     issue.setResolutionObject(null);
-                } else if (value instanceof GenericValue) {
-                    issue.setResolution((GenericValue) value);
                 } else if (value instanceof Resolution) {
                     issue.setResolutionId(((Resolution) value).getId());
                 } else {
@@ -556,8 +553,6 @@ public class WorkflowUtils {
             } else if (fieldId.equals(IssueFieldConstants.STATUS)) {
                 if (value == null) {
                     issue.setStatusObject(null);
-                } else if (value instanceof GenericValue) {
-                    issue.setStatus((GenericValue) value);
                 } else if (value instanceof Status) {
                     issue.setStatusId(((Status) value).getId());
                 } else {
@@ -571,19 +566,12 @@ public class WorkflowUtils {
                 }
             } else if (fieldId.equals(IssueFieldConstants.SECURITY)) {
                 if (value == null) {
-                    issue.setSecurityLevel(null);
-                } else if (value instanceof GenericValue) {
-                    issue.setSecurityLevel((GenericValue) value);
+                    issue.setSecurityLevelId(null);
                 } else if (value instanceof Long) {
                     issue.setSecurityLevelId((Long) value);
                 } else {
-                    Collection<GenericValue> levels;
-
-                    try {
-                        levels = issueSecurityLevelManager.getSecurityLevelsByName(value.toString());
-                    } catch (GenericEntityException e) {
-                        throw new IllegalArgumentException("Unable to find security level \"" + value + "\"");
-                    }
+                    Collection<IssueSecurityLevel> levels;
+                    levels = issueSecurityLevelManager.getIssueSecurityLevelsByName(value.toString());
 
                     if (levels == null) {
                         throw new IllegalArgumentException("Unable to find security level \"" + value + "\"");
@@ -593,7 +581,7 @@ public class WorkflowUtils {
                         throw new IllegalArgumentException("More that one security level with name \"" + value + "\"");
                     }
 
-                    issue.setSecurityLevel(levels.iterator().next());
+                    issue.setSecurityLevelId(levels.iterator().next().getId());
                 }
             } else if (fieldId.equals(IssueFieldConstants.ASSIGNEE)) {
                 User user = convertValueToUser(value);
@@ -753,25 +741,23 @@ public class WorkflowUtils {
         throw new IllegalArgumentException("Wrong project value '" + value + "'.");
     }
 
-    private GenericValue convertValueToProject(Object value) {
-        GenericValue project;
-        if (value == null || value instanceof GenericValue) {
-            return (GenericValue) value;
-        } else if (value instanceof Project) {
-            return ((Project) value).getGenericValue();
+    private Project convertValueToProject(Object value) {
+        Project project;
+        if (value instanceof Project) {
+            return (Project)value;
         } else if (value instanceof Long) {
-            project = projectManager.getProject((Long) value);
+            project = projectManager.getProjectObj((Long) value);
             if (project != null) return project;
         } else {
             String s = convertToString(value);
             try {
                 Long id = Long.parseLong(s);
-                project = projectManager.getProject(id);
+                project = projectManager.getProjectObj(id);
                 if (project != null) return project;
             } catch (NumberFormatException e) {
-                project = projectManager.getProjectByKey(s);
+                project = projectManager.getProjectObjByKey(s);
                 if (project == null) {
-                    project = projectManager.getProjectByName(s);
+                    project = projectManager.getProjectObjByName(s);
                 }
                 if (project != null) return project;
             }

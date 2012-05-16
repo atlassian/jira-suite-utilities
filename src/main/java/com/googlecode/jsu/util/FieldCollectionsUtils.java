@@ -98,25 +98,6 @@ public class FieldCollectionsUtils {
     }
 
     /**
-     * @return a list of fields, including custom fields, which could be modified.
-     */
-    public List<Field> getAllEditableFields(){
-        Set<Field> allFields = new TreeSet<Field>(getComparator());
-
-        try {
-            final Set<NavigableField> fields = fieldManager.getAllAvailableNavigableFields();
-
-            for (Field f : fields) {
-                allFields.add(f);
-            }
-        } catch (FieldException e) {
-            log.error("Unable to load navigable fields", e);
-        }
-
-        return new ArrayList<Field>(allFields);
-    }
-
-    /**
      * @param allFields list of fields to be sorted.
      * @return a list with fields sorted by name.
      */
@@ -289,7 +270,7 @@ public class FieldCollectionsUtils {
      * @return a list of fields that could be chosen to copy their value.
      */
     public List<Field> getCopyToFields(){
-        List<Field> allFields = getAllEditableFields();
+        List<Field> allFields = getAllFields();
         allFields.removeAll(getNonCopyToFields());
 
         return allFields;
