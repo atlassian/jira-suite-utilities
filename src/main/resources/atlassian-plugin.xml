@@ -9,6 +9,12 @@
         <application-version min="5.1" max="5.1"/>
     </plugin-info>
 
+    <web-resource key="common">
+        <resource type="download" name="LocationField.js" location="com/googlecode/jsu/maps/LocationField.js"/>
+        <resource type="download" name="LocationField.css" location="com/googlecode/jsu/maps/LocationField.css"/>
+        <context>atl.general</context>
+    </web-resource>
+
   <!-- Custom Fields -->
     <customfield-type key="locationtextfield"
                       name="Location Text Field"
