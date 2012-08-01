@@ -16,6 +16,7 @@ import com.atlassian.jira.issue.customfields.MultipleSettableCustomFieldType;
 import com.atlassian.jira.issue.customfields.impl.*;
 import com.atlassian.jira.issue.customfields.manager.OptionsManager;
 import com.atlassian.jira.issue.customfields.option.Option;
+import com.atlassian.jira.issue.customfields.option.Options;
 import com.atlassian.jira.issue.customfields.view.CustomFieldParams;
 import com.atlassian.jira.issue.customfields.view.CustomFieldParamsImpl;
 import com.atlassian.jira.issue.fields.CustomField;
@@ -366,6 +367,10 @@ public class WorkflowUtils {
                 newValue = convertValueToVersions(issue, newValue);
             } else if (cfType instanceof ProjectCFType) {
                 newValue = convertValueToProject(newValue);
+            } else if (cfType instanceof SelectCFType) {
+                SelectCFType selectCFType = (SelectCFType)cfType;
+                Options options = selectCFType.getOptions(customField.getRelevantConfig(issue),null);
+                newValue = options.getOptionForValue(newValue.toString(),null);
             } else if (newValue instanceof String) {
                 if (cfType instanceof MultipleSettableCustomFieldType) {
                     Option option = convertStringToOption(issue, customField, (String) newValue);
