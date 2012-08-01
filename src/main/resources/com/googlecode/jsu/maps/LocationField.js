@@ -5,7 +5,7 @@
             callback();
         } else {
             window.onGMapsLoad = callback;
-            $("body").append($("<script src='//maps.google.com/maps/api/js?sensor=false&callback=onGMapsLoad'></script>"));
+            $("body").append($("<script src='https://maps-api-ssl.google.com/maps/api/js?v=3&sensor=false&callback=onGMapsLoad'></script>"));
         }
     }
 
