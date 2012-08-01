@@ -368,9 +368,11 @@ public class WorkflowUtils {
             } else if (cfType instanceof ProjectCFType) {
                 newValue = convertValueToProject(newValue);
             } else if (cfType instanceof SelectCFType) {
-                SelectCFType selectCFType = (SelectCFType)cfType;
-                Options options = selectCFType.getOptions(customField.getRelevantConfig(issue),null);
-                newValue = options.getOptionForValue(newValue.toString(),null);
+                if(newValue!=null) {
+                    SelectCFType selectCFType = (SelectCFType)cfType;
+                    Options options = selectCFType.getOptions(customField.getRelevantConfig(issue),null);
+                    newValue = options.getOptionForValue(newValue.toString(),null);
+                }
             } else if (newValue instanceof String) {
                 if (cfType instanceof MultipleSettableCustomFieldType) {
                     Option option = convertStringToOption(issue, customField, (String) newValue);
