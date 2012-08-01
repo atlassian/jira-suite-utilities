@@ -1,17 +1,10 @@
-It must fulfill that 
-#if (${val-date1Selected})
-	<b>${val-date1Selected.name}</b>
+#if (${val-date1Selected} && ${val-windowsDays} && ${val-date2Selected})
+    #if (!${val-windowsDays.equals("")})
+        #set($days = "${val-windowsDays}")
+    #else
+        #set($days = "0")
+    #end
+    $i18n.getText("windowsdate-validator-view.validation_text","<b>${val-date1Selected.name}</b>","<b>$days</b>","<b>${val-date2Selected.name}</b>")
+#else
+    $i18n.getText("windowsdate-validator-view.wrong_selection")
 #end
- is within the 
-#if (${val-windowsDays})
-	  #if (!${val-windowsDays.equals("")})
-	    <b>${val-windowsDays}</b>
-	  #else
-	    0
-	  #end
-#end
- days from 
-#if (${val-date2Selected})
-	<b>${val-date2Selected.name}</b>
-#end
-.
