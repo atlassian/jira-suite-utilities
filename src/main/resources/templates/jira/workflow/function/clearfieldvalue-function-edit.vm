@@ -1,6 +1,6 @@
 <tr bgcolor="#ffffff">
     <td align="right" valign="top" bgcolor="#fffff0">
-        <span class="label">Field:</span>
+        <span class="label">$i18n.getText("clearfieldvalue-function-edit.field.label"):</span>
     </td>
     <td bgcolor="#ffffff" nowrap>
 		<select id="field" name="field">
@@ -12,6 +12,6 @@
                 >${val.name}</option>
 	        #end
 	        </select>
-        <br><font size="1">Choose the field.</font>
+        <br><font size="1">$i18n.getText("clearfieldvalue-function-edit.field.description")</font>
     </td>
 </tr>

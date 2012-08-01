@@ -1,4 +1,4 @@
-Fields required for this transition: 
+$i18n.getText("fieldsrequired-validator-edit.required_fields"):
 #if (${val-fieldsListSelected})
     #foreach ($singleValue in ${val-fieldsListSelected})
       <b>$!singleValue.getName()</b>#if ($velocityCount != ${val-fieldsListSelected.size()}), #end

@@ -1,23 +1,14 @@
 #if (${val-errorMessage})
 	<div style="background: red; color: white">${val-errorMessage}</div>
-#else  
-	The field 
-	#if (${val-fieldSelected})
-		<b>$textutils.htmlEncode(${val-fieldSelected.name})</b>
-	#end 
- 	will have to be 
-	#if (${val-conditionSelected})
-		<b>$textutils.htmlEncode(${val-conditionSelected.toString()})</b>
-	#end
- 	value 
-	#if (!${val-fieldValue.equals("")})
-		<b>$textutils.htmlEncode(${val-fieldValue.toString()})</b>
-	#else
-		<b>NULL</b>
-	#end
-	. Compared like 
-	#if (${val-comparisonTypeSelected})
-		<b>$textutils.htmlEncode(${val-comparisonTypeSelected.value})</b>
-	#end
-	.
+#else
+    #if (${val-fieldSelected} && ${val-conditionSelected} && ${val-comparisonTypeSelected})
+        #if (!${val-fieldValue.equals("")})
+            #set($val = "$textutils.htmlEncode(${val-fieldValue.toString()})")
+        #else
+            #set($val = $i18n.getText("fieldvalue-condition-view.null.text"))
+        #end
+        $i18n.getText("fieldvalue-condition-view.condition.text","<b>$textutils.htmlEncode(${val-fieldSelected.name})</b>","<b>$i18n.getText(${val-conditionSelected.getDisplayTextKey()})</b>","<b>$val</b>","<b>$i18n.getText(${val-comparisonTypeSelected.valueKey})</b>")
+    #else
+        $i18n.getText("fieldvalue-condition-view.wrong_selection")
+    #end
 #end

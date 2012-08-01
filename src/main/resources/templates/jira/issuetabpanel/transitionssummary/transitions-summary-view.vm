@@ -20,11 +20,11 @@
 
 <table width="100%" cellpadding="2">
     <tr>
-    	#headerCell("transition.summary.transition" "34%")
-    	#headerCell("transition.summary.timespent" "15%")
-    	#headerCell("transition.summary.occurence.nb" "15%")
-    	#headerCell("transition.summary.last.executer" "18%")
-    	#headerCell("transition.summary.last.occurence.date" "18%")
+    	#headerCell("transitions-summary-view.transition" "34%")
+    	#headerCell("transitions-summary-view.timespent" "15%")
+    	#headerCell("transitions-summary-view.occurence_nb" "15%")
+    	#headerCell("transitions-summary-view.last_executer" "18%")
+    	#headerCell("transitions-summary-view.last_occurence_date" "18%")
     </tr>
 
     #foreach ($tran in ${action.getTransitions()})

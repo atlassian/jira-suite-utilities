@@ -7,6 +7,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import com.atlassian.jira.ComponentManager;
+import com.atlassian.jira.util.I18nHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,22 +47,26 @@ public class DateCompareValidator extends GenericValidator {
 
     private final ApplicationProperties applicationProperties;
     private final ConditionCheckerFactory conditionCheckerFactory;
+    private final I18nHelper.BeanFactory beanFactory;
 
     /**
      * @param applicationProperties
      * @param conditionCheckerFactory
      * @param fieldCollectionsUtils
+     * @param beanFactory
      */
     public DateCompareValidator(
             ApplicationProperties applicationProperties,
             ConditionCheckerFactory conditionCheckerFactory,
             FieldCollectionsUtils fieldCollectionsUtils,
-            WorkflowUtils workflowUtils
+            WorkflowUtils workflowUtils,
+            I18nHelper.BeanFactory beanFactory
     ) {
         super(fieldCollectionsUtils, workflowUtils);
 
         this.applicationProperties = applicationProperties;
         this.conditionCheckerFactory = conditionCheckerFactory;
+        this.beanFactory = beanFactory;
     }
 
     /* (non-Javadoc)
@@ -71,7 +77,7 @@ public class DateCompareValidator extends GenericValidator {
         Field field2 = workflowUtils.getFieldFromKey(date2);
 
         ConditionType condition = conditionCheckerFactory.findConditionById(conditionId);
-        boolean includeTime = (Integer.parseInt(includeTimeValue) == 1) ? true : false;
+        boolean includeTime = Integer.parseInt(includeTimeValue) == 1;
 
         // Compare Dates.
         if ((field1 != null) && (field2 != null)) {
@@ -102,8 +108,8 @@ public class DateCompareValidator extends GenericValidator {
                 Calendar calDate1 = Calendar.getInstance(applicationProperties.getDefaultLocale());
                 Calendar calDate2 = Calendar.getInstance(applicationProperties.getDefaultLocale());
 
-                calDate1.setTime((Date) objDate1);
-                calDate2.setTime((Date) objDate2);
+                calDate1.setTime( objDate1);
+                calDate2.setTime( objDate2);
 
                 boolean result = checker.checkValues(calDate1, calDate2);
 
@@ -144,10 +150,13 @@ public class DateCompareValidator extends GenericValidator {
         final Issue issue = getIssue();
 
         if (fieldCollectionsUtils.isFieldRequired(issue, fldDate)) {
+            String msg = this.beanFactory.getInstance(
+                ComponentManager.getInstance().getJiraAuthenticationContext().getLoggedInUser())
+                .getText("datecompare-validator-view.is_required", fldDate.getName());
             this.setExceptionMessage(
                     fldDate,
-                    fldDate.getName() + " is required.",
-                    fldDate.getName() + " is required."
+                    msg,
+                    msg
             );
         }
     }
@@ -158,8 +167,8 @@ public class DateCompareValidator extends GenericValidator {
             ConditionType condition, boolean includeTime
     ) {
         // Formats date to current locale to display the Exception.
-        SimpleDateFormat formatter = null;
-        SimpleDateFormat defaultFormatter = null;
+        SimpleDateFormat formatter;
+        SimpleDateFormat defaultFormatter;
 
         if (includeTime) {
             defaultFormatter = new SimpleDateFormat(
@@ -179,7 +188,7 @@ public class DateCompareValidator extends GenericValidator {
             );
         }
 
-        String errorMsg = "";
+        String errorMsg;
 
         try{
             errorMsg = " ( " + formatter.format(fieldValue2) + " )";
@@ -191,20 +200,28 @@ public class DateCompareValidator extends GenericValidator {
             }
         }
 
+        I18nHelper i18nh = this.beanFactory.getInstance(
+            ComponentManager.getInstance().getJiraAuthenticationContext().getLoggedInUser());
+        String msg = i18nh.getText("datecompare-validator-view.is_not",
+            field1.getName(),i18nh.getText(condition.getDisplayTextKey()),field2.getName(),errorMsg);
+
         this.setExceptionMessage(
                 field1,
-                field1.getName() + " isn't " + condition.toString() + " " + field2.getName() + errorMsg,
-                field1.getName() + " isn't " + condition.toString() + " " + field2.getName() + errorMsg
+                msg,
+                msg
         );
     }
 
     private void wrongDataErrorMessage(
             Field field, Object fieldValue
     ) {
+        String msg = this.beanFactory.getInstance(
+            ComponentManager.getInstance().getJiraAuthenticationContext().getLoggedInUser())
+            .getText("datecompare-validator-view.not_a_date",field.getName(),fieldValue.toString());
         this.setExceptionMessage(
                 field,
-                field.getName() + " not a date value (" + fieldValue + ")",
-                field.getName() + " not a date value (" + fieldValue + ")"
+                msg,
+                msg
         );
     }
 }

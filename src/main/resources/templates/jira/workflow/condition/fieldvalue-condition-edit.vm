@@ -6,7 +6,7 @@
 #* @vtlvariable name="val-fieldsList" type="java.util.List<com.atlassian.jira.issue.fields.Field>" *#
 <tr bgcolor="#ffffff">
   <td align="right" valign="top" bgcolor="#fffff0">
-    <span class="label">Field:</span>
+    <span class="label">$i18n.getText("fieldvalue-condition-edit.field.label"):</span>
   </td>
   <td bgcolor="#ffffff" nowrap>
 	<select id="fieldsList" name="fieldsList">
@@ -16,13 +16,13 @@
       >$textutils.htmlEncode(${val.name})</option>
     #end
 	</select>
-    <br><font size="1">Choose the field that will be evaluated.</font>
+    <br><font size="1">$i18n.getText("fieldvalue-condition-edit.field.description")</font>
   </td>
 </tr>
 
 <tr bgcolor="#ffffff">
   <td align="right" valign="top" bgcolor="#fffff0">
-    <span class="label">Condition:</span>
+    <span class="label">$i18n.getText("fieldvalue-condition-edit.condition.label"):</span>
   </td>
   <td bgcolor="#ffffff" nowrap>
     <select id="conditionList" name="conditionList">
@@ -32,40 +32,40 @@
 	  >$textutils.htmlEncode(${val.value})</option>
     #end
     </select>
-	<br><font size="1">Choose a condition for the comparison.</font>
+	<br><font size="1">$i18n.getText("fieldvalue-condition-edit.condition.description")</font>
   </td>
 </tr>
 
 <tr bgcolor="#ffffff">
     <td align="right" valign="top" bgcolor="#fffff0">
-        <span class="label">Value:</span>
+        <span class="label">$i18n.getText("fieldvalue-condition-edit.value.label"):</span>
     </td>
     <td bgcolor="#ffffff" nowrap>
         <input type="text" id="fieldValue" name="fieldValue" value="$textutils.htmlEncode($!{val-fieldValue})"/>
-        <br><font size="1">Value with which the field will be compared.</font>
+        <br><font size="1">$i18n.getText("fieldvalue-condition-edit.value.description")</font>
     </td>
 </tr>
 
 <tr bgcolor="#ffffff">
   <td align="right" valign="top" bgcolor="#fffff0">
-    <span class="label">Comparison Type:</span>
+    <span class="label">$i18n.getText("fieldvalue-condition-edit.comparison_type.label"):</span>
   </td>
   <td bgcolor="#ffffff" nowrap>
     <select id="comparisonType" name="comparisonType">
     #foreach ($val in ${val-comparisonList})
 	  <option value="${val.id}"
       #if(${val.equals($val-comparisonTypeSelected)}) SELECTED #end
-	  >$textutils.htmlEncode(${val.value})</option>
+	  >$i18n.getText(${val.valueKey})</option>
     #end
     </select>
-	<br><font size="1">Choose the type of comparison.</font>
+	<br><font size="1">$i18n.getText("fieldvalue-condition-edit.comparison.description")</font>
   </td>
 </tr>
 
 <tr>
   <td colspan="2">
     <div style="width: 70%;" class="infoBox centred">
-      If you choose the comparison type String, only '=' and '!=' are valid options.
+      $i18n.getText("fieldvalue-condition-edit.infobox.text","=","!=")
     </div>
   </td>
 </tr>

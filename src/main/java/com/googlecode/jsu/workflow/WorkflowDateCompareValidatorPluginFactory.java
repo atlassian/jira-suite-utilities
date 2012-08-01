@@ -55,7 +55,6 @@ public class WorkflowDateCompareValidatorPluginFactory extends
         velocityParams.put("val-date2FieldsList", allDateFields);
         velocityParams.put("val-conditionList", conditionList);
         velocityParams.put("val-includeTime", asList(YES, NO));
-
     }
 
     /* (non-Javadoc)

@@ -9,20 +9,15 @@ package com.googlecode.jsu.helpers;
 public class ConditionType {
     private final int id;
     private final String shortText;
-    private final String displayText;
+    private final String displayTextKey;
     private final String mnemonic;
 
-    /**
-     * @param id
-     * @param value
-     * @param displayValue
-     */
     public ConditionType(
-            int id, String shortText, String displayText, String mnemonic
+            int id, String shortText, String displayTextKey, String mnemonic
     ) {
         this.id = id;
         this.shortText = shortText;
-        this.displayText = displayText;
+        this.displayTextKey = displayTextKey;
         this.mnemonic = mnemonic;
     }
 
@@ -42,10 +37,10 @@ public class ConditionType {
     }
 
     /**
-     * Get display name for condition.
+     * Get display text key for condition.
      */
-    public String toString() {
-        return displayText;
+    public String getDisplayTextKey() {
+        return displayTextKey;
     }
 
     /* (non-Javadoc)

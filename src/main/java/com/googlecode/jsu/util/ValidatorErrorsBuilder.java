@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.atlassian.jira.issue.fields.Field;
 import com.opensymphony.workflow.InvalidInputException;
-import com.opensymphony.workflow.WorkflowException;
 
 /**
  * Container for storing and processing validator errors.

@@ -1,5 +1,5 @@
-The field 
 #if(${selectedField})
-    <b>${selectedField.name}</b>
+    $i18n.getText("clearfieldvalue-function-view.function_text","<b>${selectedField.name}</b>")
+#else
+    $i18n.getText("clearfieldvalue-function-view.wrong_selection")
 #end
- will be purged.

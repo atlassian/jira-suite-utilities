@@ -1,11 +1,10 @@
-#if (${val-groupsListSelected})
+#if(${val-groupsListSelected})
   #if (${val-groupsListSelected.isEmpty()})
-    You have not selected groups. Nobody will be able to execute this transition.
+    $i18n.getText("userisinanygroups-condition-view.empty.text")
   #else
-    Only users in any of following groups 
+    $i18n.getText("userisinanygroups-condition-view.condition.text")
     #foreach ($singleValue in ${val-groupsListSelected})
       <b>$!singleValue.getName()</b>#if ($velocityCount != ${val-groupsListSelected.size()}), #end
     #end
-     can execute this transition.
   #end
 #end

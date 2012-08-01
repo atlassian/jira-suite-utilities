@@ -1,9 +1,5 @@
-The Field 
-#if(${val-destinationFieldSelected})
-    <b>${val-destinationFieldSelected.name}</b>
+#if(${val-destinationFieldSelected} && ${val-sourceFieldSelected})
+    $i18n.getText("copyvaluefromfield-function-view.function_text","<b>${val-destinationFieldSelected.name}</b>","<b>${val-sourceFieldSelected.name}</b>")
+#else
+    $i18n.getText("copyvaluefromfield-function-view.wrong_selection")
 #end
- will take the value from 
-#if(${val-sourceFieldSelected})
-    <b>${val-sourceFieldSelected.name}</b>
-#end
-.

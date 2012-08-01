@@ -1,22 +1,22 @@
 <tr bgcolor="#ffffff">
   <td align="right" valign="top" bgcolor="#fffff0">
-    <span class="label">User must be:</span>
+    <span class="label">$i18n.getText("userisincustomfield-condition-edit.user.label"):</span>
   </td>
   <td bgcolor="#ffffff" nowrap>
     <select id="allowUserInField" name="allowUserInField">
 	  <option value="true"
 	  #if($!{allowUserInField-selected}) selected #end
-	  >in field</option>
+	  >$i18n.getText("userisincustomfield-condition-edit.in_field.label")</option>
 	  <option value="false"
 	  #if(!$!{allowUserInField-selected}) selected #end
-	  >not in field</option>
+	  >$i18n.getText("userisincustomfield-condition-edit.not_in_field.label")</option>
     </select>
-	<br><font size="1">Decide whether to allow only the user in the field, or anyone *except* the user in the field.</font>
+	<br><font size="1">$i18n.getText("userisincustomfield-condition-edit.user.description")</font>
   </td>
 </tr>
 <tr bgcolor="#ffffff">
   <td align="right" valign="top" bgcolor="#fffff0">
-    <span class="label">Field:</span>
+    <span class="label">$i18n.getText("userisincustomfield-condition-edit.field.label"):</span>
   </td>
   <td bgcolor="#ffffff" nowrap>
 	<select id="fieldsList" name="fieldsList">
@@ -26,7 +26,7 @@
       >${val.name}</option>
     #end
 	</select>
-    <br><font size="1">Choose the field that will be evaluated.</font>
+    <br><font size="1">$i18n.getText("userisincustomfield-condition-edit.field.description")</font>
   </td>
 </tr>
 

@@ -31,7 +31,7 @@
 
 <tr bgcolor="#ffffff">
     <td class="fieldLabelArea" bgcolor="#fffff0">
-        Issue Custom Field:
+        $i18n.getText("updateissuefield-function-input.field.label"):
     </td>
     <td bgcolor="#ffffff" nowrap>
         <select name="fieldId" id="updateFieldId" onchange="retoreFieldValue();">
@@ -43,19 +43,19 @@
             >${descriptor.getText($field.nameKey)}</option>
         #end
         </select>
-        <br /><span class="subText">The custom field to change.</span>
+        <br /><span class="subText">$i18n.getText("updateissuefield-function-input.field.description")</span>
     </td>
 </tr>
 
 
 <tr bgcolor="#ffffff">
     <td class="fieldLabelArea" bgcolor="#fffff0">
-        Custom Field Value:
+        $i18n.getText("updateissuefield-function-input.value.label"):
     </td>
         #foreach ($field in ${fields})
             <td nowrap id="${field.id}_container" bgcolor="#ffffff">
                 <textarea rows="10" cols="35" type="text" name="${field.id}" id="${field.id}">$!{fieldValue}</textarea>
-                <br /><span class="subText">The value of the custom field to set.</span>
+                <br /><span class="subText">$i18n.getText("updateissuefield-function-input.description.label")</span>
             </td>
         #end
      
@@ -68,12 +68,7 @@
 </script>
 <tr bgcolor="#ffffff">
     <td colspan="2">
-        <div style="width: 60%;" class="infoBox centred">
-            Please make sure that the value you set is valid for the project using this workflow. <br> 
-            Otherwise, the transition may fail at execution time.<br>
-            You could use macro '%%CURRENT_USER%%' to insert the function caller. <br>
-            You could use macro '%%CURRENT_DATETIME%%' to insert the current date and time.
-        </div>
+        <div style="width: 60%;" class="infoBox centred">$i18n.getText("updateissuefield-function-input.infobox.text")</div>
     </td>
 </tr>
 

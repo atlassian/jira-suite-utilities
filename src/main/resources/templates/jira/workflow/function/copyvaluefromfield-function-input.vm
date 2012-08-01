@@ -1,6 +1,6 @@
 <tr bgcolor="#ffffff">
     <td align="right" valign="top" bgcolor="#fffff0">
-        <span class="label">Source Field:</span>
+        <span class="label">$i18n.getText("copyvaluefromfield-function.source.label"):</span>
     </td>
     <td bgcolor="#ffffff" nowrap>
 				        <select id="sourceFieldsList" name="sourceFieldsList">
@@ -8,7 +8,7 @@
 	                <option value="${val.id}">${val.name}</option>
 	            #end
 	        </select>
-        <br><font size="1">Choose the source field.</font>
+        <br><font size="1">$i18n.getText("copyvaluefromfield-function.source.description")</font>
     </td>
 </tr>
 <tr bgcolor="#ffffff">
@@ -21,6 +21,6 @@
 	                <option value="${val.id}">${val.name}</option>
 	            #end
 	        </select>
-        <br><font size="1">Choose the destination field.</font>
+        <br><font size="1">$i18n.getText("copyvaluefromfield-function.destination.description")</font>
     </td>
 </tr>

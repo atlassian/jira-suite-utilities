@@ -7,9 +7,11 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Map;
 
+import com.atlassian.jira.ComponentManager;
 import com.atlassian.jira.issue.MutableIssue;
 import com.atlassian.jira.issue.fields.Field;
 import com.atlassian.jira.issue.util.IssueChangeHolder;
+import com.atlassian.jira.util.I18nHelper;
 import com.googlecode.jsu.util.WorkflowUtils;
 import com.opensymphony.module.propertyset.PropertySet;
 import com.atlassian.crowd.embedded.api.User;
@@ -24,12 +26,14 @@ import com.opensymphony.workflow.WorkflowException;
  */
 public class UpdateIssueCustomFieldPostFunction extends AbstractPreserveChangesPostFunction {
     private final WorkflowUtils workflowUtils;
+    private final I18nHelper.BeanFactory beanFactory;
 
     /**
      * @param workflowUtils
      */
-    public UpdateIssueCustomFieldPostFunction(WorkflowUtils workflowUtils) {
+    public UpdateIssueCustomFieldPostFunction(WorkflowUtils workflowUtils, I18nHelper.BeanFactory beanFactory) {
         this.workflowUtils = workflowUtils;
+        this.beanFactory = beanFactory;
     }
 
     /* (non-Javadoc)
@@ -80,11 +84,9 @@ public class UpdateIssueCustomFieldPostFunction extends AbstractPreserveChangesP
 
             workflowUtils.setFieldValue(issue, fieldKey, newValue, holder);
         } catch (Exception e) {
-            final String message = String.format(
-                    "Unable to update custom field '%s - %s' in issue [%s]",
-                    fieldKey, fieldName,
-                    issueToString(issue)
-            );
+            I18nHelper i18nh = this.beanFactory.getInstance(
+                ComponentManager.getInstance().getJiraAuthenticationContext().getLoggedInUser());
+            String message = i18nh.getText("updateissuefield-function-view.unable_to_update",fieldKey,fieldName,issueToString(issue));
 
             log.error(message, e);
 

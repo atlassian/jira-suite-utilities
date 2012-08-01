@@ -1,6 +1,6 @@
 <tr bgcolor="#ffffff">
     <td align="right" valign="top" bgcolor="#fffff0">
-        <span class="label">This date:</span>
+        <span class="label">$i18n.getText("datecompare-validator.date.label"):</span>
     </td>
     <td bgcolor="#ffffff" nowrap>
         <select id="date1FieldsList" name="date1FieldsList">
@@ -12,12 +12,12 @@
                 >${val.name}</option>
             #end
         </select>
-		        <br><font size="1">Choose a date field.</font>
+		        <br><font size="1">$i18n.getText("datecompare-validator.date.description")</font>
     </td>
 </tr>
 <tr bgcolor="#ffffff">
     <td align="right" valign="top" bgcolor="#fffff0">
-        <span class="label">Condition:</span>
+        <span class="label">$i18n.getText("datecompare-validator.condition.label"):</span>
     </td>
     <td bgcolor="#ffffff" nowrap>
         <select id="conditionList" name="conditionList">
@@ -29,12 +29,12 @@
 	                >${val.value}</option>
             #end
         </select>
-		        <br><font size="1">Choose a condition for the comparison.</font>
+		        <br><font size="1">$i18n.getText("datecompare-validator.condition.description")</font>
     </td>
 </tr>
 <tr bgcolor="#ffffff">
     <td align="right" valign="top" bgcolor="#fffff0">
-        <span class="label">Compare with:</span>
+        <span class="label">$i18n.getText("datecompare-validator.compare.label"):</span>
     </td>
     <td bgcolor="#ffffff" nowrap>
         <select id="date2FieldsList" name="date2FieldsList">
@@ -46,12 +46,12 @@
 	                >${val.name}</option>
             #end
         </select>
-		        <br><font size="1">Choose a date field.</font>
+		        <br><font size="1">$i18n.getText("datecompare-validator.compare.description")</font>
     </td>
 </tr>
 <tr bgcolor="#ffffff">
     <td align="right" valign="top" bgcolor="#fffff0">
-        <span class="label">Include time part:</span>
+        <span class="label">$i18n.getText("datecompare-validator.timepart.label"):</span>
     </td>
     <td bgcolor="#ffffff" nowrap>
         <select id="includeTimeList" name="includeTimeList">
@@ -60,9 +60,9 @@
                 #if(${val.equals($val-includeTimeSelected)})
 	                    SELECTED
 	                #end
-	                >${val.value}</option>
+	                >$i18n.getText("datecompare-validator-view.${val.value}")</option>
             #end
         </select>
-		        <br><font size="1">Choose 'Yes' to include time part for the comparison. If the field doesn't have time part, the time will be 00:00:00</font>
+		        <br><font size="1">$i18n.getText("datecompare-validator.timepart.description")</font>
     </td>
 </tr>

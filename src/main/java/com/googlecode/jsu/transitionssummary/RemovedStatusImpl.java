@@ -13,6 +13,7 @@ public class RemovedStatusImpl implements Status {
     }
 
     public String getDescription() {
+      //TODO i18n
         return "Status representing an old Status removed from Database";
     }
 
@@ -41,6 +42,7 @@ public class RemovedStatusImpl implements Status {
     }
 
     public String getName() {
+      //TODO i18n
         return "Removed Status";
     }
 

@@ -2,9 +2,11 @@ package com.googlecode.jsu.workflow.function;
 
 import java.util.Map;
 
+import com.atlassian.jira.ComponentManager;
 import com.atlassian.jira.issue.MutableIssue;
 import com.atlassian.jira.issue.fields.Field;
 import com.atlassian.jira.issue.util.IssueChangeHolder;
+import com.atlassian.jira.util.I18nHelper;
 import com.googlecode.jsu.util.WorkflowUtils;
 import com.googlecode.jsu.workflow.WorkflowClearFieldValueFunctionPluginFactory;
 import com.opensymphony.module.propertyset.PropertySet;
@@ -17,12 +19,14 @@ import com.opensymphony.workflow.WorkflowException;
  */
 public class ClearFieldValuePostFunction extends AbstractPreserveChangesPostFunction {
     private final WorkflowUtils workflowUtils;
+    private final I18nHelper.BeanFactory beanFactory;
 
     /**
      * @param workflowUtils
      */
-    public ClearFieldValuePostFunction(WorkflowUtils workflowUtils) {
+    public ClearFieldValuePostFunction(WorkflowUtils workflowUtils, I18nHelper.BeanFactory beanFactory) {
         this.workflowUtils = workflowUtils;
+        this.beanFactory = beanFactory;
     }
 
     /* (non-Javadoc)
@@ -33,7 +37,7 @@ public class ClearFieldValuePostFunction extends AbstractPreserveChangesPostFunc
             Map<String, Object> transientVars, Map<String, String> args,
             PropertySet ps, IssueChangeHolder holder
     ) throws WorkflowException {
-        String fieldKey = (String) args.get(WorkflowClearFieldValueFunctionPluginFactory.FIELD);
+        String fieldKey = args.get(WorkflowClearFieldValueFunctionPluginFactory.FIELD);
         Field field = workflowUtils.getFieldFromKey(fieldKey);
 
         final String fieldName = (field != null) ? field.getName() : "null";
@@ -51,7 +55,9 @@ public class ClearFieldValuePostFunction extends AbstractPreserveChangesPostFunc
 
             workflowUtils.setFieldValue(issue, fieldKey, null, holder);
         } catch (Exception e) {
-            String message = "Unable to clean field - '" + fieldKey + " - " + fieldName + "'";
+            I18nHelper i18nh = this.beanFactory.getInstance(
+                ComponentManager.getInstance().getJiraAuthenticationContext().getLoggedInUser());
+            String message = i18nh.getText("clearfieldvalue-function-view.unable_to_purge",fieldKey,fieldName);
 
             log.error(message, e);
 

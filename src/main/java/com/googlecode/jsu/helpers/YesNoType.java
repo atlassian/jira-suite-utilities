@@ -8,8 +8,8 @@ package com.googlecode.jsu.helpers;
  *
  */
 public class YesNoType {
-    public static final YesNoType YES = new YesNoType(1, "Yes");
-    public static final YesNoType NO = new YesNoType(2, "No");
+    public static final YesNoType YES = new YesNoType(1, "yes");
+    public static final YesNoType NO = new YesNoType(2, "no");
 
     private final int id;
     private final String value;

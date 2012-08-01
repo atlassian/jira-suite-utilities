@@ -8,16 +8,12 @@ package com.googlecode.jsu.helpers;
  */
 public class ComparisonType {
     private final int id;
-    private final String value;
+    private final String valueKey;
     private final String mnemonic;
 
-    /**
-     * @param id
-     * @param value
-     */
-    public ComparisonType(int id, String value, String mnemonic) {
+    public ComparisonType(int id, String valueKey, String mnemonic) {
         this.id = id;
-        this.value = value;
+        this.valueKey = valueKey;
         this.mnemonic = mnemonic;
     }
 
@@ -30,12 +26,12 @@ public class ComparisonType {
     }
 
     /**
-     * Get name of comparision.
+     * Get name key of comparision.
      *
      * @return
      */
-    public String getValue() {
-        return value;
+    public String getValueKey() {
+        return valueKey;
     }
 
     /**

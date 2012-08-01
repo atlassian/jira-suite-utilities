@@ -1,12 +1,12 @@
 <tr bgcolor="#ffffff">
     <td align="right" valign="top" bgcolor="#fffff0">
-        <span class="label">Fields required during this action:</span>
+        <span class="label">$i18n.getText("fieldsrequired-validator-edit.required_fields.title"):</span>
     </td>
     <td bgcolor="#ffffff" nowrap>
     	    <table width=100%>
     	        <tr align="center">
 		                <td align="center" width=50% valign="top">
-		                    <span class="label">Available fields:</span><br>
+		                    <span class="label">$i18n.getText("fieldsrequired-validator-edit.available_fields"):</span><br>
                     <select id="fieldsList" name="fieldsList" multiple size="10" width=90%>
 	                        #foreach ($val in ${val-fieldsList})
 	                            <option value="${val.id}">${val.name}</option>
@@ -17,7 +17,7 @@
 			                </td>
 		    
 		                <td align="center" width=50% valign="top">
-			                    <span class="label">Required fields:</span><br>
+			                    <span class="label">$i18n.getText("fieldsrequired-validator-edit.required_fields"):</span><br>
 			                    <select id="fieldsListSelected" name="fieldsListSelected" multiple size="10" width=90%>
 		                        #if(${val-fieldsListSelected})
 			                            #foreach ($val in ${val-fieldsListSelected})
@@ -31,11 +31,11 @@
 		    	        
 			    	        <tr align="center" valign="center">
 		                <td align="center" width=50% valign="top">
-		                    <button type=button onclick="transfer('fieldsList', 'fieldsListSelected'); storeSelectedItems('fieldsListSelected', 'hidFieldsList')">Add &gt;&gt;</button>
+		                    <button type=button onclick="transfer('fieldsList', 'fieldsListSelected'); storeSelectedItems('fieldsListSelected', 'hidFieldsList')">$i18n.getText("action.add.label") &gt;&gt;</button>
 	                </td>
                 <td align="center" width=50% valign="top">
 	
-				    <button type=button onclick="transfer('fieldsListSelected', 'fieldsList'); storeSelectedItems('fieldsListSelected', 'hidFieldsList')">&lt;&lt; Remove</button>
+				    <button type=button onclick="transfer('fieldsListSelected', 'fieldsList'); storeSelectedItems('fieldsListSelected', 'hidFieldsList')">&lt;&lt; $i18n.getText("action.remove.label")</button>
 		                </td>
 			    	        </tr>
     	    </table>

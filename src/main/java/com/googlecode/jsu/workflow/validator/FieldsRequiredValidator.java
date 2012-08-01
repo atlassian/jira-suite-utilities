@@ -7,8 +7,10 @@ import static com.googlecode.jsu.workflow.WorkflowFieldsRequiredValidatorPluginF
 import java.util.Collection;
 import java.util.List;
 
+import com.atlassian.jira.ComponentManager;
 import com.atlassian.jira.issue.IssueFieldConstants;
 import com.atlassian.jira.issue.MutableIssue;
+import com.atlassian.jira.util.I18nHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,6 +36,7 @@ public class FieldsRequiredValidator extends GenericValidator {
     private String fieldList;
 
     private final ConditionCheckerFactory conditionCheckerFactory;
+    private final I18nHelper.BeanFactory beanFactory;
 
     /**
      * @param conditionCheckerFactory
@@ -42,11 +45,13 @@ public class FieldsRequiredValidator extends GenericValidator {
     public FieldsRequiredValidator(
             ConditionCheckerFactory conditionCheckerFactory,
             FieldCollectionsUtils fieldCollectionsUtils,
-            WorkflowUtils workflowUtils
+            WorkflowUtils workflowUtils,
+            I18nHelper.BeanFactory beanFactory
     ) {
         super(fieldCollectionsUtils, workflowUtils);
 
         this.conditionCheckerFactory = conditionCheckerFactory;
+        this.beanFactory = beanFactory;
     }
 
     /* (non-Javadoc)
@@ -99,11 +104,15 @@ public class FieldsRequiredValidator extends GenericValidator {
                 }
 
                 if (checker.checkValues(fieldValue, null)) {
+                    I18nHelper i18nh = this.beanFactory.getInstance(
+                        ComponentManager.getInstance().getJiraAuthenticationContext().getLoggedInUser());
+                    String msg1 = i18nh.getText("fieldsrequired-validator-view.is_required",field.getName());
+                    String msg2 = i18nh.getText("fieldsrequired-validator-view.is_required_not_present",field.getName());
                     // Sets Exception message.
                     this.setExceptionMessage(
                             field,
-                            field.getName() + " is required.",
-                            field.getName() + " is required. But it is not present on screen."
+                            msg1,
+                            msg2
                     );
                 }
             } else {

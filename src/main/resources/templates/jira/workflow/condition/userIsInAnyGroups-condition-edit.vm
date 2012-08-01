@@ -1,6 +1,6 @@
 <tr bgcolor="#ffffff">
     <td align="center" valign="center" bgcolor="#fffff0">
-        <span class="label">Groups allowed to execute this action:</span>
+        <span class="label">$i18n.getText("userisinanygroups-condition-edit.title"):</span>
     </td>
 </tr>
 <tr>
@@ -8,7 +8,7 @@
     	    <table width=100%>
     	        <tr align="center">
 		                <td align="center" width=50% valign="top">
-		                    <span class="label">Available groups:</span><br>
+		                    <span class="label">$i18n.getText("userisinanygroups-condition-edit.available_groups.label"):</span><br>
                     <select id="groupsList" name="groupsList" multiple size="10" width=90%>
 	                        #foreach ($val in ${val-groupsList})
 	                            <option value="${val.name}">${val.name}</option>
@@ -19,7 +19,7 @@
 			                </td>
 		    
 		                <td align="center" width=50% valign="top">
-			                    <span class="label">Allowed groups:</span><br>
+			                    <span class="label">$i18n.getText("userisinanygroups-condition-edit.allowed_groups.label"):</span><br>
 			                    <select id="groupsListSelected" name="groupsListSelected" multiple size="10" width=90%>
 		                        #if(${val-groupsListSelected})
 			                            #foreach ($val in ${val-groupsListSelected})
@@ -33,10 +33,10 @@
 		    	        
    	        <tr align="center" valign="center">
                 <td align="center" width=50% valign="top">
-                    <button type=button onclick="transfer('groupsList', 'groupsListSelected'); storeSelectedItems('groupsListSelected', 'hidGroupsList')">Add &gt;&gt;</button>
+                    <button type=button onclick="transfer('groupsList', 'groupsListSelected'); storeSelectedItems('groupsListSelected', 'hidGroupsList')">$i18n.getText("action.add.label") &gt;&gt;</button>
                 </td>
                 <td align="center" width=50% valign="top">
-				    <button type=button onclick="transfer('groupsListSelected', 'groupsList'); storeSelectedItems('groupsListSelected', 'hidGroupsList')">&lt;&lt; Remove</button>
+				    <button type=button onclick="transfer('groupsListSelected', 'groupsList'); storeSelectedItems('groupsListSelected', 'hidGroupsList')">&lt;&lt; $i18n.getText("action.remove.label")</button>
                 </td>
    	        </tr>
    	    </table>
@@ -45,7 +45,7 @@
 <tr>
   <td colspan="2">
     <div style="width: 70%;" class="infoBox centred">
-      If you do not select a group, nobody will be able to execute this Transition.
+      $i18n.getText("userisinanygroups-condition-edit.infobox.text")
     </div>
   </td>
 </tr>

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.atlassian.jira.issue.CustomFieldManager;
+import com.atlassian.jira.issue.IssueFieldConstants;
 import com.atlassian.jira.issue.fields.Field;
 import com.atlassian.jira.plugin.workflow.AbstractWorkflowPluginFactory;
 import com.atlassian.jira.plugin.workflow.WorkflowPluginConditionFactory;

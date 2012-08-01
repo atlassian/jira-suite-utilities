@@ -2,9 +2,11 @@ package com.googlecode.jsu.workflow.function;
 
 import java.util.Map;
 
+import com.atlassian.jira.ComponentManager;
 import com.atlassian.jira.issue.MutableIssue;
 import com.atlassian.jira.issue.fields.Field;
 import com.atlassian.jira.issue.util.IssueChangeHolder;
+import com.atlassian.jira.util.I18nHelper;
 import com.googlecode.jsu.util.WorkflowUtils;
 import com.opensymphony.module.propertyset.PropertySet;
 import com.opensymphony.workflow.WorkflowException;
@@ -16,12 +18,11 @@ import com.opensymphony.workflow.WorkflowException;
  */
 public class CopyValueFromOtherFieldPostFunction extends AbstractPreserveChangesPostFunction {
     private final WorkflowUtils workflowUtils;
+    private final I18nHelper.BeanFactory beanFactory;
 
-    /**
-     * @param workflowUtils
-     */
-    public CopyValueFromOtherFieldPostFunction(WorkflowUtils workflowUtils) {
+    public CopyValueFromOtherFieldPostFunction(WorkflowUtils workflowUtils, I18nHelper.BeanFactory beanFactory) {
         this.workflowUtils = workflowUtils;
+        this.beanFactory = beanFactory;
     }
 
     /* (non-Javadoc)
@@ -32,8 +33,8 @@ public class CopyValueFromOtherFieldPostFunction extends AbstractPreserveChanges
             Map<String, Object> transientVars, Map<String, String> args,
             PropertySet ps, IssueChangeHolder holder
     ) throws WorkflowException {
-        String fieldFromKey = (String) args.get("sourceField");
-        String fieldToKey = (String) args.get("destinationField");
+        String fieldFromKey = args.get("sourceField");
+        String fieldToKey = args.get("destinationField");
 
         Field fieldFrom = workflowUtils.getFieldFromKey(fieldFromKey);
         Field fieldTo = workflowUtils.getFieldFromKey(fieldToKey);
@@ -65,7 +66,9 @@ public class CopyValueFromOtherFieldPostFunction extends AbstractPreserveChanges
                 log.debug("Value was successfully copied");
             }
         } catch (Exception e) {
-            String message = String.format("Unable to copy value from '%s' to '%s'", fieldFromName, fieldToName);
+            I18nHelper i18nh = this.beanFactory.getInstance(
+                ComponentManager.getInstance().getJiraAuthenticationContext().getLoggedInUser());
+            String message = i18nh.getText("copyvaluefromfield-function-view.unable_to_copy",fieldFromName,fieldToName);
 
             log.error(message, e);
 

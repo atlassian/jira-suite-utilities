@@ -5,9 +5,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import com.atlassian.jira.ComponentManager;
 import com.atlassian.jira.config.properties.APKeys;
 import com.atlassian.jira.config.properties.ApplicationProperties;
 import com.atlassian.jira.issue.fields.Field;
+import com.atlassian.jira.util.I18nHelper;
 import com.googlecode.jsu.annotation.Argument;
 import com.googlecode.jsu.util.FieldCollectionsUtils;
 import com.googlecode.jsu.util.WorkflowUtils;
@@ -33,19 +35,18 @@ public class WindowsDateValidator extends GenericValidator {
     private String windowsDays;
 
     private final ApplicationProperties applicationProperties;
+    private final I18nHelper.BeanFactory beanFactory;
 
-    /**
-     * @param fieldCollectionsUtils
-     * @param applicationProperties
-     */
     public WindowsDateValidator(
             FieldCollectionsUtils fieldCollectionsUtils,
             ApplicationProperties applicationProperties,
-            WorkflowUtils workflowUtils
+            WorkflowUtils workflowUtils,
+            I18nHelper.BeanFactory beanFactory
     ) {
         super(fieldCollectionsUtils, workflowUtils);
 
         this.applicationProperties = applicationProperties;
+        this.beanFactory = beanFactory;
     }
 
     /* (non-Javadoc)
@@ -73,6 +74,9 @@ public class WindowsDateValidator extends GenericValidator {
 
         Object objDate1 = workflowUtils.getFieldValueFromIssue(getIssue(), fldDate1);
         Object objDate2 = workflowUtils.getFieldValueFromIssue(getIssue(), fldDate2);
+
+        I18nHelper i18nh = this.beanFactory.getInstance(
+            ComponentManager.getInstance().getJiraAuthenticationContext().getLoggedInUser());
 
         if ((objDate1 != null) && (objDate2 != null)) {
             // It Takes the Locale for inicialize dates.
@@ -113,32 +117,34 @@ public class WindowsDateValidator extends GenericValidator {
                         applicationProperties.getDefaultString(APKeys.JIRA_DATE_PICKER_JAVA_FORMAT), locale
                 );
 
-                String errorMsg = "";
-
+                String errorMsg;
                 try {
-                    errorMsg = " ( Between " + formatter.format(date2) + " and " + formatter.format(windowsDate) +  " )";
+                    errorMsg = i18nh.getText("windowsdate-validator-view.between_and",formatter.format(date2),formatter.format(windowsDate));
                 } catch (IllegalArgumentException e) {
                     try {
-                        errorMsg = " ( Between " + defaultFormatter.format(date2) + " and " + defaultFormatter.format(windowsDate) +  " )";
+                        errorMsg = i18nh.getText("windowsdate-validator-view.between_and",defaultFormatter.format(date2),defaultFormatter.format(windowsDate));
                     } catch (Exception e1) {
-                        errorMsg = " ( Between " + date2 + " and " + windowsDate +  " )";
+                        errorMsg = i18nh.getText("windowsdate-validator-view.between_and",date2.toString(),windowsDate.toString());
                     }
                 }
 
+                String msg = i18nh.getText("windowsdate-validator-view.not_within",
+                    fldDate1.getName(),fldDate2.getName(),window,errorMsg);
+
                 this.setExceptionMessage(
                         fldDate1,
-                        fldDate1.getName() + " is not within " + fldDate2.getName() + ", more " + window + " days. " + errorMsg,
-                        fldDate1.getName() + " is not within " + fldDate2.getName() + ", more " + window + " days. " + errorMsg
+                        msg,
+                        msg
                 );
             }
         } else {
             // If any of fields are null, validates if the field is required. Otherwise, doesn't throws an Exception.
             if (objDate1 == null) {
-                validateRequired(fldDate1);
+                validateRequired(fldDate1,i18nh);
             }
 
             if (objDate2 == null) {
-                validateRequired(fldDate2);
+                validateRequired(fldDate2,i18nh);
             }
         }
     }
@@ -148,12 +154,13 @@ public class WindowsDateValidator extends GenericValidator {
      *
      * Throws an Exception if the field is null, but it is required.
      */
-    private void validateRequired(Field fldDate){
+    private void validateRequired(Field fldDate, I18nHelper i18nHelper){
         if (fieldCollectionsUtils.isFieldRequired(getIssue(), fldDate)) {
+            String msg = i18nHelper.getText("windowsdate-validator-view.is_required",fldDate.getName());
             this.setExceptionMessage(
                     fldDate,
-                    fldDate.getName() + " is required.",
-                    fldDate.getName() + " is required."
+                    msg,
+                    msg
             );
         }
     }

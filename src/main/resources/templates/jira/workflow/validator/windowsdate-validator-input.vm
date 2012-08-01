@@ -1,6 +1,6 @@
 <tr bgcolor="#ffffff">
     <td align="right" valign="top" bgcolor="#fffff0">
-        <span class="label">Date to validate:</span>
+        <span class="label">$i18n.getText("windowsdate-validator-edit.date_to_validate"):</span>
     </td>
     <td bgcolor="#ffffff" nowrap>
         <select id="date1FieldsList" name="date1FieldsList">
@@ -8,21 +8,21 @@
 	                <option value="${val.id}">${val.name}</option>
             #end
         </select>
-		        <br><font size="1">Choose a date field.</font>
+		        <br><font size="1">$i18n.getText("windowsdate-validator-edit.choose_date_field")</font>
     </td>
 </tr>
 <tr bgcolor="#ffffff">
     <td align="right" valign="top" bgcolor="#fffff0">
-        <span class="label">Window days:</span>
+        <span class="label">$i18n.getText("windowsdate-validator-edit.day_frame.label"):</span>
     </td>
     <td bgcolor="#ffffff" nowrap>
         <input type="text" id="windowsDays" name="windowsDays" value=""/>
-        <br><font size="1">Amount of allowed days (later to the date <b>With respect to</b>).</font>
+        <br><font size="1">$i18n.getText("windowsdate-validator-edit.day_frame.description")</font>
     </td>
 </tr>
 <tr bgcolor="#ffffff">
     <td align="right" valign="top" bgcolor="#fffff0">
-        <span class="label">With respect to:</span>
+        <span class="label">$i18n.getText("windowsdate-validator-edit.in_relation_to.label"):</span>
     </td>
     <td bgcolor="#ffffff" nowrap>
         <select id="date2FieldsList" name="date2FieldsList">
@@ -30,13 +30,13 @@
 	                <option value="${val.id}">${val.name}</option>
             #end
         </select>
-		        <br><font size="1">Choose a date field.</font>
+		        <br><font size="1">$i18n.getText("windowsdate-validator-edit.in_relation_to.description")</font>
     </td>
 </tr>
 <tr>
     <td colspan="2">
     	    <div style="width: 70%;" class="infoBox centred">
-    	        If you do not specified Windows day, it will be considered like 0.
+    	        $i18n.getText("windowsdate-validator-edit.infobox.text")
     	    </div>
     	</td>
 </tr>

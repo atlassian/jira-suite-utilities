@@ -17,17 +17,17 @@ import com.googlecode.jsu.helpers.checkers.CheckerCompositeFactory;
  * @version $Id: GenericValidator.java 173 2008-10-14 13:04:43Z abashev $
  */
 public class ConditionCheckerFactory {
-    public static final ConditionType GREATER = new ConditionType(1, ">", "greater than", "G");
-    public static final ConditionType GREATER_EQUAL = new ConditionType(2, ">=", "greater than or equal to", "GE");
-    public static final ConditionType EQUAL = new ConditionType(3, "=", "equal to", "E");
-    public static final ConditionType LESS_EQUAL = new ConditionType(4, "<=", "less than or equal to", "LE");
-    public static final ConditionType LESS = new ConditionType(5, "<", "less than", "L");
-    public static final ConditionType NOT_EQUAL = new ConditionType(6, "!=", "not equal to", "NE");
+    public static final ConditionType GREATER = new ConditionType(1, ">", "conditiontype.greater_than", "G");
+    public static final ConditionType GREATER_EQUAL = new ConditionType(2, ">=", "conditiontype.greater_than_or_equal_to", "GE");
+    public static final ConditionType EQUAL = new ConditionType(3, "=", "conditiontype.equal_to", "E");
+    public static final ConditionType LESS_EQUAL = new ConditionType(4, "<=", "conditiontype.less_than_or_equal_to", "LE");
+    public static final ConditionType LESS = new ConditionType(5, "<", "contitiontype.less_than", "L");
+    public static final ConditionType NOT_EQUAL = new ConditionType(6, "!=", "conditiontype.not_equal_to", "NE");
 
-    public static final ComparisonType STRING = new ComparisonType(1, "String", "String");
-    public static final ComparisonType NUMBER = new ComparisonType(2, "Number", "Number");
-    public static final ComparisonType DATE = new ComparisonType(3, "Date with time", "Date");
-    public static final ComparisonType DATE_WITHOUT_TIME = new ComparisonType(4, "Date without time", "DateWithoutTime");
+    public static final ComparisonType STRING = new ComparisonType(1, "comparisontype.string", "String");
+    public static final ComparisonType NUMBER = new ComparisonType(2, "comparisontype.number", "Number");
+    public static final ComparisonType DATE = new ComparisonType(3, "comparisontype.date_with_time", "Date");
+    public static final ComparisonType DATE_WITHOUT_TIME = new ComparisonType(4, "comparisontype.date_without_time", "DateWithoutTime");
 
     /** Template for checker class. */
     private static final String PACKAGE = ConditionCheckerFactory.class.getPackage().getName();
@@ -68,7 +68,7 @@ public class ConditionCheckerFactory {
                     "Using class [" + conditionClassName +
                     "] for condition [" + condition.getValue() +
                     "]; class [" + comparisonClassName +
-                    "] for type [" + type.getValue() +
+                    "] for type [" + type.getValueKey() +
                     "]"
             );
         }

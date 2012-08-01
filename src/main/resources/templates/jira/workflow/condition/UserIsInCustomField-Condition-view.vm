@@ -1,13 +1,13 @@
-#if (${val-errorMessage})
-	<div style="background: red; color: white">${val-errorMessage}</div>
-#else  
-	Current user must
-	#if (!${allowUserInField-selected})
-		<b>not</b>
-	#end
-	match the field 
-	#if (${val-fieldSelected})
-		<b>${val-fieldSelected.name}</b>
-	#end 
-	.
+#if(${val-errorMessage})
+    <div style="background: red; color: white">${val-errorMessage}</div>
+#else
+    #if(${val-fieldSelected})
+        #if (!${allowUserInField-selected})
+            $i18n.getText("userisincustomfield-condition-view.condition_text_must_not","<b>${val-fieldSelected.name}</b>")
+         #else
+             $i18n.getText("userisincustomfield-condition-view.condition_text_must","<b>${val-fieldSelected.name}</b>")
+         #end
+    #else
+        $i18n.getText("userisincustomfield-condition-view.wrong_selection")
+    #end
 #end

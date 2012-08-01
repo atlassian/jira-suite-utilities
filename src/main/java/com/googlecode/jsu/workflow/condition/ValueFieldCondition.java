@@ -79,7 +79,7 @@ public class ValueFieldCondition extends AbstractJiraCondition {
                         "': [" + fieldValue + "]" +
                         condition.getValue() +
                         "[" + valueForCompare + "] as " +
-                        comparison.getValue() + " = " + result
+                        comparison.getValueKey() + " = " + result
                 );
             }
         } catch (Exception e) {

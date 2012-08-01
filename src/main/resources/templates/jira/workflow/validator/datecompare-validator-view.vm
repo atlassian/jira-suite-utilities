@@ -1,17 +1,13 @@
-It must fulfill that 
-#if (${val-date1Selected})
-	<b>${val-date1Selected.name}</b>
-#end
- is 
-#if (${val-conditionSelected})
-	<b>${val-conditionSelected.toString()}</b>
-#end
- value of 
-#if (${val-date2Selected})
-	<b>${val-date2Selected.name}</b>
-#end
-#if (${val-includeTimeSelected.value}=="Yes")
-	. Including time part.
+#if (${val-date1Selected} && ${val-conditionSelected} && ${val-date2Selected})
+    $i18n.getText("datecompare-validator-view.validation_text",
+        "<b>${val-date1Selected.name}</b>",
+        "<b>$i18n.getText(${val-conditionSelected.getDisplayTextKey()})</b>",
+        "<b>${val-date2Selected.name}</b>")
 #else
-	. Only date part.
+    $i18n.getText("datecompare-validator-view.wrong_selection")
+#end
+#if (${val-includeTimeSelected.id}==1)
+    $i18n.getText("datecompare-validator-view.including_time")
+#else
+    $i18n.getText("datecompare-validator-view.only_date")
 #end
