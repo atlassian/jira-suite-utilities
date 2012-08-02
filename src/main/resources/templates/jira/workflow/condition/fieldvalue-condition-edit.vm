@@ -65,7 +65,7 @@
 <tr>
   <td colspan="2">
     <div style="width: 70%;" class="infoBox centred">
-      $i18n.getText("fieldvalue-condition-edit.infobox.text","=","!=")
+      $i18n.getText("fieldvalue-condition-edit.infobox.text","=","!=","!=")
     </div>
   </td>
 </tr>
