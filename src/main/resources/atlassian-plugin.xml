@@ -41,18 +41,28 @@
         <resource type="velocity" name="xml" location="templates/plugins/fields/xml/xml-basictext.vm"/>
     </customfield-type>
 
-    <!-- Searches -->
-    <customfield-searcher key="textsearcher"
-                          i18n-name-key="customfield-searcher.textsearcher.name"
+    <!-- Searchers -->
+    <customfield-searcher key="textsearcher" name="Free Text Searcher"
+                          i18n-name-key="admin.customfield.searcher.textsearcher.name"
                           class="com.atlassian.jira.issue.customfields.searchers.TextSearcher">
-
-        <description key="customfield-searcher.textsearcher.description"/>
+        <description key="admin.customfield.searcher.textsearcher.desc">Search for values using a free text search.</description>
 
         <resource type="velocity" name="search" location="templates/plugins/fields/edit-searcher/search-basictext.vm"/>
-        <resource type="velocity" name="view"
-                  location="templates/plugins/fields/view-searcher/view-searcher-basictext.vm"/>
+        <resource type="velocity" name="view" location="templates/plugins/fields/view-searcher/view-searcher-basictext.vm"/>
 
         <valid-customfield-type package="${project.groupId}.${project.artifactId}" key="locationtextfield"/>
+    </customfield-searcher>
+
+    <customfield-searcher key="locationselectsearcher" name="Select List Searcher"
+                          i18n-name-key="admin.customfield.searcher.selectsearcher.name"
+                          class="com.googlecode.jsu.customfields.LocationSelectSearcher">
+        <description key="admin.customfield.searcher.selectsearcher.desc">Search for values using a select list.</description>
+
+        <resource type="velocity" name="search" location="templates/plugins/fields/edit-searcher/search-select.vm"/>
+        <resource type="velocity" name="view" location="templates/plugins/fields/view-searcher/view-searcher-select.vm"/>
+        <resource type="velocity" name="label" location="templates/plugins/fields/view-searcher/label-searcher-htmltext.vm"/>
+
+        <valid-customfield-type package="${project.groupId}.${project.artifactId}" key="locationselect"/>
     </customfield-searcher>
 
     <!-- Conditions -->
