@@ -76,6 +76,8 @@ public class UserIsInCustomFieldCondition extends AbstractJiraCondition {
             } else {
                 allowUser = compareValues(fieldValue, userLogged, allowUserInField);
             }
+        } else {
+            allowUser = !allowUserInField;
         }
 
         return allowUser;
