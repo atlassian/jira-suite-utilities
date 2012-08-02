@@ -93,17 +93,18 @@ public class WindowsDateValidator extends GenericValidator {
 
             fieldCollectionsUtils.clearCalendarTimePart(calDate1);
             fieldCollectionsUtils.clearCalendarTimePart(calDate2);
+            setTimePartMidnight(calWindowsDate);
 
             Date date1 = calDate1.getTime();
             Date date2 = calDate2.getTime();
             Date windowsDate = calWindowsDate.getTime();
 
-            int comparacion = date1.compareTo(windowsDate);
+            int comparison = date1.compareTo(windowsDate);
 
-            if(comparacion < 0){
-                comparacion = date1.compareTo(date2);
+            if(comparison < 0){
+                comparison = date1.compareTo(date2);
 
-                if(comparacion>=0){
+                if(comparison>=0){
                     condOK = true;
                 }
             }
@@ -147,6 +148,13 @@ public class WindowsDateValidator extends GenericValidator {
                 validateRequired(fldDate2,i18nh);
             }
         }
+    }
+
+    private void setTimePartMidnight(Calendar calendar) {
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE, 59);
+        calendar.set(Calendar.SECOND, 59);
+        calendar.set(Calendar.MILLISECOND, 999);
     }
 
     /**
