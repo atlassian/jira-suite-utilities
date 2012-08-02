@@ -28,6 +28,7 @@
         <resource type="velocity" name="view" location="templates/jira/fields/view/view-location.vm"/>
         <resource type="velocity" name="edit" location="templates/plugins/fields/edit/edit-maxlengthtext.vm"/>
         <resource type="velocity" name="xml" location="templates/plugins/fields/xml/xml-basictext.vm"/>
+        <resource type="velocity" name="column-view" location="templates/plugins/fields/view/view-basictext.vm"/>
     </customfield-type>
 
     <customfield-type key="locationselect"
@@ -39,6 +40,7 @@
         <resource type="velocity" name="view" location="templates/jira/fields/view/view-location.vm"/>
         <resource type="velocity" name="edit" location="templates/plugins/fields/edit/edit-select.vm"/>
         <resource type="velocity" name="xml" location="templates/plugins/fields/xml/xml-basictext.vm"/>
+        <resource type="velocity" name="column-view" location="templates/plugins/fields/view/view-basictext.vm"/>
     </customfield-type>
 
     <!-- Searchers -->
