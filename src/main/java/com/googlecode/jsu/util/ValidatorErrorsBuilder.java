@@ -37,19 +37,30 @@ public class ValidatorErrorsBuilder {
             return;
         }
 
-        InvalidInputException e = new InvalidInputException();
+        if(fields.size()==1) {
+            Field f = this.fields.get(0);
+            String m = this.messages.get(0);
 
-        for (int i = 0; i < fields.size(); i++) {
-            Field f = this.fields.get(i);
-            String m = this.messages.get(i);
-
-            if (f == null || ! forScreen) {
-                e.addError(m);
+            if(f == null || ! forScreen) {
+                throw new InvalidInputException(m);
             } else {
-                e.addError(f.getId(), m);
+                throw new InvalidInputException(f.getId(),m);
             }
-        }
+        } else {
+            InvalidInputException e = new InvalidInputException();
 
-        throw e;
+            for (int i = 0; i < fields.size(); i++) {
+                Field f = this.fields.get(i);
+                String m = this.messages.get(i);
+
+                if (f == null || ! forScreen) {
+                    e.addError(m);
+                } else {
+                    e.addError(f.getId(), m);
+                }
+            }
+
+            throw e;
+        }
     }
 }
