@@ -2,6 +2,7 @@ package com.googlecode.jsu.workflow.function;
 
 import java.util.Map;
 
+import com.atlassian.crowd.embedded.api.User;
 import com.atlassian.jira.ComponentManager;
 import com.atlassian.jira.issue.MutableIssue;
 import com.atlassian.jira.issue.fields.Field;
@@ -44,6 +45,7 @@ public class ClearFieldValuePostFunction extends AbstractPreserveChangesPostFunc
 
         // It set the value to field.
         try {
+            User currentUser = getCaller(transientVars, args);
             MutableIssue issue = getIssue(transientVars);
 
             if (log.isDebugEnabled()) {
@@ -53,7 +55,7 @@ public class ClearFieldValuePostFunction extends AbstractPreserveChangesPostFunc
                 ));
             }
 
-            workflowUtils.setFieldValue(issue, fieldKey, null, holder);
+            workflowUtils.setFieldValue(currentUser, issue, fieldKey, null, holder);
         } catch (Exception e) {
             I18nHelper i18nh = this.beanFactory.getInstance(
                 ComponentManager.getInstance().getJiraAuthenticationContext().getLoggedInUser());

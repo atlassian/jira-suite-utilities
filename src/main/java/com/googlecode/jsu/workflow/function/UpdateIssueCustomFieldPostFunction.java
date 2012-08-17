@@ -4,7 +4,6 @@ import static com.googlecode.jsu.workflow.WorkflowUpdateIssueCustomFieldFunction
 import static com.googlecode.jsu.workflow.WorkflowUpdateIssueCustomFieldFunctionPluginFactory.TARGET_FIELD_VALUE;
 
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.Map;
 
 import com.atlassian.jira.ComponentManager;
@@ -52,16 +51,18 @@ public class UpdateIssueCustomFieldPostFunction extends AbstractPreserveChangesP
         String configuredValue = args.get(TARGET_FIELD_VALUE);
         Object newValue;
 
+        User currentUser = null;
+        try {
+            currentUser = getCaller(transientVars, args);
+        } catch (Exception e) {
+            log.error("Unable to find caller for function", e);
+            throw(new WorkflowException(e));
+        }
+
         if ("null".equals(configuredValue)) {
             newValue = null;
         } else if ("%%CURRENT_USER%%".equals(configuredValue)) {
-            try {
-                User currentUser = getCaller(transientVars, args);
-                newValue = currentUser.getName();
-            } catch (Exception e) {
-                newValue = null;
-                log.error("Unable to find caller for function", e);
-            }
+            newValue = currentUser.getName();
         } else if ("%%CURRENT_DATETIME%%".equals(configuredValue)) {
             newValue = new Timestamp(System.currentTimeMillis());
         } else {
@@ -82,7 +83,7 @@ public class UpdateIssueCustomFieldPostFunction extends AbstractPreserveChangesP
                 ));
             }
 
-            workflowUtils.setFieldValue(issue, fieldKey, newValue, holder);
+            workflowUtils.setFieldValue(currentUser, issue, fieldKey, newValue, holder);
         } catch (Exception e) {
             I18nHelper i18nh = this.beanFactory.getInstance(
                 ComponentManager.getInstance().getJiraAuthenticationContext().getLoggedInUser());

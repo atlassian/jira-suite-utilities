@@ -25,6 +25,7 @@ import com.atlassian.jira.issue.fields.FieldManager;
 import com.atlassian.jira.issue.fields.config.FieldConfig;
 import com.atlassian.jira.issue.fields.layout.field.FieldLayoutItem;
 import com.atlassian.jira.issue.fields.screen.FieldScreen;
+import com.atlassian.jira.issue.label.LabelManager;
 import com.atlassian.jira.issue.link.IssueLinkManager;
 import com.atlassian.jira.issue.priority.Priority;
 import com.atlassian.jira.issue.resolution.Resolution;
@@ -83,6 +84,8 @@ public class WorkflowUtils {
     private final OptionsManager optionsManager;
     private final ProjectManager projectManager;
     private final PriorityManager priorityManager;
+    private final LabelManager labelManager;
+
     /**
      * @param fieldManager
      * @param issueManager
@@ -92,6 +95,7 @@ public class WorkflowUtils {
      * @param applicationProperties
      * @param fieldCollectionsUtils
      * @param issueLinkManager
+     * @param labelManager;
      */
     public WorkflowUtils(
             FieldManager fieldManager, IssueManager issueManager,
@@ -99,7 +103,7 @@ public class WorkflowUtils {
             IssueSecurityLevelManager issueSecurityLevelManager, ApplicationProperties applicationProperties,
             FieldCollectionsUtils fieldCollectionsUtils, IssueLinkManager issueLinkManager,
             UserManager userManager, CrowdService crowdService, OptionsManager optionsManager,
-            ProjectManager projectManager, PriorityManager priorityManager) {
+            ProjectManager projectManager, PriorityManager priorityManager, LabelManager labelManager) {
         this.fieldManager = fieldManager;
         this.issueManager = issueManager;
         this.projectComponentManager = projectComponentManager;
@@ -113,6 +117,7 @@ public class WorkflowUtils {
         this.optionsManager = optionsManager;
         this.projectManager = projectManager;
         this.priorityManager = priorityManager;
+        this.labelManager = labelManager;
     }
 
     /**
@@ -319,11 +324,12 @@ public class WorkflowUtils {
     /**
      * Sets specified value to the field for the issue.
      *
+     * @param currentUser
      * @param issue
      * @param field
      * @param value
      */
-    public void setFieldValue(MutableIssue issue, Field field, Object value, IssueChangeHolder changeHolder) {
+    public void setFieldValue(User currentUser, MutableIssue issue, Field field, Object value, IssueChangeHolder changeHolder) {
         if (fieldManager.isCustomField(field)) {
             CustomField customField = (CustomField) field;
             Object oldValue = issue.getCustomFieldValue(customField);
@@ -383,20 +389,28 @@ public class WorkflowUtils {
                     } else {
                         newValue = option;
                     }
-                } else if (cfType instanceof LabelsCFType && ((String) newValue).contains(" ")) {
-                    throw new UnsupportedOperationException("Setting multiple labels is not implemented");
-                    //JSUTIL-28
-                    //Would need quite different implementation with
-                    //LabelManager.setLabels(...)
+                } else if (cfType instanceof LabelsCFType) {
+                    Set<String> set = new HashSet<String>();
+                    StringTokenizer st = new StringTokenizer((String)newValue," ");
+                    while(st.hasMoreTokens()) {
+                        set.add(st.nextToken());
+                    }
+                    this.labelManager.setLabels(currentUser,issue.getId(),customField.getIdAsLong(),set,false,true);
                 } else {
                     //convert from string to Object
                     CustomFieldParams fieldParams = new CustomFieldParamsImpl(customField, newValue);
                     newValue = cfType.getValueFromCustomFieldParams(fieldParams);
                 }
             } else if (newValue instanceof Collection<?>) {
-                if ((customField.getCustomFieldType() instanceof AbstractMultiCFType) ||
-                        (customField.getCustomFieldType() instanceof MultipleCustomFieldType)) {
+                if ((cfType instanceof AbstractMultiCFType) ||
+                        (cfType instanceof MultipleCustomFieldType)) {
                     // format already correct
+                } else if (cfType instanceof  LabelsCFType) {
+                    Set<String> set = new HashSet<String>();
+                    for(Object o:(Collection)newValue) {
+                        set.add(o.toString());
+                    }
+                    this.labelManager.setLabels(currentUser,issue.getId(),customField.getIdAsLong(),set,false,true);
                 } else {
                     //convert from string to Object
                     CustomFieldParams fieldParams = new CustomFieldParamsImpl(
@@ -410,6 +424,11 @@ public class WorkflowUtils {
                 newValue = ((User)newValue).getName();
             } else if (cfType instanceof UserCFType) {
                 newValue = convertValueToUser(newValue);
+            } else if (cfType instanceof LabelsCFType) {
+                if (newValue == null) {
+                    this.labelManager.setLabels(
+                            currentUser,issue.getId(),customField.getIdAsLong(),new HashSet<String>(),false,true);
+              }
             } else if (cfType instanceof AbstractMultiCFType) {
                 if (cfType instanceof MultiUserCFType) {
                     newValue = convertValueToUser(newValue);
@@ -428,13 +447,15 @@ public class WorkflowUtils {
                 );
             }
 
-            // Updating internal custom field value
-            issue.setCustomFieldValue(customField, newValue);
+            // Updating internal custom field value if it is not a label, which got handled before by the label manager
+            if(!(cfType instanceof LabelsCFType)) {
+                issue.setCustomFieldValue(customField, newValue);
 
-            customField.updateValue(
-                    fieldLayoutItem, issue,
-                    new ModifiedValue(oldValue, newValue),	changeHolder
-            );
+                customField.updateValue(
+                        fieldLayoutItem, issue,
+                        new ModifiedValue(oldValue, newValue),	changeHolder
+                );
+            }
 
             if (log.isDebugEnabled()) {
                 log.debug(
@@ -842,6 +863,8 @@ public class WorkflowUtils {
     /**
      * Method sets value for issue field. Field was defined as string
      *
+     * @param currentUser
+     *            Current user.
      * @param issue
      *            Muttable issue for changing
      * @param fieldKey
@@ -850,12 +873,12 @@ public class WorkflowUtils {
      *            Value for setting
      */
     public void setFieldValue(
-            MutableIssue issue, String fieldKey, Object value,
+            User currentUser, MutableIssue issue, String fieldKey, Object value,
             IssueChangeHolder changeHolder
     ) {
         final Field field = getFieldFromKey(fieldKey);
 
-        setFieldValue(issue, field, value, changeHolder);
+        setFieldValue(currentUser, issue, field, value, changeHolder);
     }
 
     /**
