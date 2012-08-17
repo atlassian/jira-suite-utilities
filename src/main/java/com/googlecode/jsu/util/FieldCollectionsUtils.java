@@ -262,7 +262,8 @@ public class FieldCollectionsUtils {
                 ISSUE_LINKS,
                 SUBTASKS,
                 THUMBNAIL,
-                TIMETRACKING
+                TIMETRACKING,
+                PROGRESS
         );
     }
 
