@@ -263,7 +263,8 @@ public class FieldCollectionsUtils {
                 SUBTASKS,
                 THUMBNAIL,
                 TIMETRACKING,
-                PROGRESS
+                PROGRESS,
+                TIME_SPENT
         );
     }
 
