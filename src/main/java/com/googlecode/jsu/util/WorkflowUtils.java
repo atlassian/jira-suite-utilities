@@ -372,7 +372,13 @@ public class WorkflowUtils {
             if (cfType instanceof VersionCFType) {
                 newValue = convertValueToVersions(issue, newValue);
             } else if (cfType instanceof ProjectCFType) {
-                newValue = convertValueToProject(newValue);
+                Project p = convertValueToProject(newValue);
+                if(p!=null) {
+                    //JIRA 5.1 and 5.2, custom fields still expect GenericValue
+                    newValue = p.getGenericValue();
+                } else {
+                    newValue = null;
+                }
             } else if (cfType instanceof SelectCFType) {
                 if(newValue!=null) {
                     SelectCFType selectCFType = (SelectCFType)cfType;
@@ -435,6 +441,10 @@ public class WorkflowUtils {
                 }
                 if (newValue != null) {
                     newValue = asArrayList(newValue);
+                }
+            } else if (cfType instanceof GenericTextCFType) {
+                if (newValue instanceof Project) {
+                    newValue = ((Project)newValue).getKey();
                 }
             }
 
@@ -739,9 +749,7 @@ public class WorkflowUtils {
         }
     }
 
-
-    //Custom fields still (JIRA 5.0) expect GenericValue. They cannot yet handle ProjectObj. - So this implementation is for later. For now we keep using convertValueToProject(...)
-    private Project convertValueToProjectObj(Object value) {
+    private Project convertValueToProject(Object value) {
         Project project;
         if (value == null || value instanceof Project) {
             return (Project) value;
@@ -750,30 +758,6 @@ public class WorkflowUtils {
         }
 
         if (value instanceof Long) {
-            project = projectManager.getProjectObj((Long) value);
-            if (project != null) return project;
-        } else {
-            String s = convertToString(value);
-            try {
-                Long id = Long.parseLong(s);
-                project = projectManager.getProjectObj(id);
-                if (project != null) return project;
-            } catch (NumberFormatException e) {
-                project = projectManager.getProjectObjByKey(s);
-                if (project == null) {
-                    project = projectManager.getProjectObjByName(s);
-                }
-                if (project != null) return project;
-            }
-        }
-        throw new IllegalArgumentException("Wrong project value '" + value + "'.");
-    }
-
-    private Project convertValueToProject(Object value) {
-        Project project;
-        if (value instanceof Project) {
-            return (Project)value;
-        } else if (value instanceof Long) {
             project = projectManager.getProjectObj((Long) value);
             if (project != null) return project;
         } else {
