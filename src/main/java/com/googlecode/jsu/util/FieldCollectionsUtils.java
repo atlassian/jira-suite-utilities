@@ -98,6 +98,24 @@ public class FieldCollectionsUtils {
     }
 
     /**
+     * @return a complete list of fields for which theyr value may be cleared with API functionality,
+     * actually all without {@link ReadOnlyCFType}.
+     */
+    public List<Field> getAllClearableFields() {
+        List<Field> fields = getAllFields();
+        Iterator<Field> it = fields.iterator();
+        while(it.hasNext()) {
+            Field f = it.next();
+            if(f instanceof CustomField) {
+                if(((CustomField)f).getCustomFieldType() instanceof ReadOnlyCFType) {
+                    it.remove();
+                }
+            }
+        }
+        return fields;
+    }
+
+    /**
      * @param allFields list of fields to be sorted.
      * @return a list with fields sorted by name.
      */

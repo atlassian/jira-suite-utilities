@@ -51,7 +51,7 @@ public class WorkflowClearFieldValueFunctionPluginFactory
      */
     @SuppressWarnings("unchecked")
     protected void getVelocityParamsForInput(Map velocityParams) {
-        List<Field> fields = fieldCollectionsUtils.getAllFields();
+        List<Field> fields = fieldCollectionsUtils.getAllClearableFields();
 
         velocityParams.put(FIELD_LIST, Collections.unmodifiableList(fields));
     }
