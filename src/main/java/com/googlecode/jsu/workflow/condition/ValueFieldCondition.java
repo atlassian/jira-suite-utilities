@@ -57,15 +57,12 @@ public class ValueFieldCondition extends AbstractJiraCondition {
             Field field = workflowUtils.getFieldFromKey(fieldId);
             Object fieldValue = workflowUtils.getFieldValueFromIssue(issue, field);
 
-            //With mutliple values, we are happy, if one is matching.
+            //multiple values slightly different, equal means contains, not equal means does not contain
             if (fieldValue instanceof Collection) {
-                for (Object o : (Collection) fieldValue) {
-                    result = conditionCheckerFactory.
-                            getChecker(comparison, condition).
-                            checkValues(o, valueForCompare);
-                    if (result) {
-                        break;
-                    }
+                if(condition.equals(ConditionCheckerFactory.NOT_EQUAL)) {
+                    result = checkCollectionDoesNotContain(comparison,condition,(Collection)fieldValue,valueForCompare);
+                } else {
+                    result = checkCollection(comparison,condition,(Collection)fieldValue,valueForCompare);
                 }
             } else {
                 result = conditionCheckerFactory.
@@ -86,6 +83,31 @@ public class ValueFieldCondition extends AbstractJiraCondition {
             log.error("Unable to compare values for field '" + fieldId + "'", e);
         }
 
+        return result;
+    }
+
+    //ensures that given value to compare is not within the collection items
+    private boolean checkCollectionDoesNotContain(ComparisonType comparison,
+                                                  ConditionType condition,
+                                                  Collection values,
+                                                  String valueToCompare) {
+        return !checkCollection(comparison,ConditionCheckerFactory.EQUAL,values,valueToCompare);
+    }
+
+    //if only one single item fulfils the condition, will return
+    private boolean checkCollection(ComparisonType comparison,
+                                    ConditionType condition,
+                                    Collection values,
+                                    String valueToCompare) {
+        boolean result = false;
+        for (Object o : values) {
+            result = conditionCheckerFactory.
+                    getChecker(comparison, condition).
+                    checkValues(o, valueToCompare);
+            if (result) {
+                break;
+            }
+        }
         return result;
     }
 }
