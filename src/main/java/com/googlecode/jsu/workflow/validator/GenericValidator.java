@@ -31,6 +31,7 @@ public abstract class GenericValidator implements Validator {
     private ValidatorErrorsBuilder errorBuilder;
     private FieldScreen fieldScreen = null;
     private Issue issue = null;
+    private Issue originalIssue = null;
     private String transitionComment = null;
 
     protected final FieldCollectionsUtils fieldCollectionsUtils;
@@ -68,6 +69,7 @@ public abstract class GenericValidator implements Validator {
         this.fieldScreen = initScreen(transientVars);
         this.errorBuilder = new ValidatorErrorsBuilder(hasViewScreen());
         this.issue = (Issue) transientVars.get("issue");
+        this.originalIssue = (Issue) transientVars.get("originalissueobject");
         this.transitionComment = (String) transientVars.get("comment");
 
         this.validate();
@@ -91,6 +93,10 @@ public abstract class GenericValidator implements Validator {
 
     protected final Issue getIssue() {
         return this.issue;
+    }
+
+    protected final Issue getOriginalIssue() {
+        return this.originalIssue;
     }
 
     protected final String getTransitionComment() {

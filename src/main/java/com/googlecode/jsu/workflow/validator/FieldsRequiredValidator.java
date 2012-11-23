@@ -10,6 +10,9 @@ import java.util.List;
 import com.atlassian.jira.ComponentManager;
 import com.atlassian.jira.issue.IssueFieldConstants;
 import com.atlassian.jira.issue.MutableIssue;
+import com.atlassian.jira.issue.fields.AffectedVersionsSystemField;
+import com.atlassian.jira.project.version.Version;
+import com.atlassian.jira.project.version.VersionManager;
 import com.atlassian.jira.util.I18nHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,21 +40,20 @@ public class FieldsRequiredValidator extends GenericValidator {
 
     private final ConditionCheckerFactory conditionCheckerFactory;
     private final I18nHelper.BeanFactory beanFactory;
+    private final VersionManager versionManager;
 
-    /**
-     * @param conditionCheckerFactory
-     * @param fieldCollectionsUtils
-     */
     public FieldsRequiredValidator(
             ConditionCheckerFactory conditionCheckerFactory,
             FieldCollectionsUtils fieldCollectionsUtils,
             WorkflowUtils workflowUtils,
-            I18nHelper.BeanFactory beanFactory
+            I18nHelper.BeanFactory beanFactory,
+            VersionManager versionManager
     ) {
         super(fieldCollectionsUtils, workflowUtils);
 
         this.conditionCheckerFactory = conditionCheckerFactory;
         this.beanFactory = beanFactory;
+        this.versionManager = versionManager;
     }
 
     /* (non-Javadoc)
@@ -63,6 +65,7 @@ public class FieldsRequiredValidator extends GenericValidator {
         // It obtains the fields that are required for the transition.
         Collection<Field> fieldsSelected = workflowUtils.getFields(fieldList, WorkflowUtils.SPLITTER);
         final Issue issue = getIssue();
+        final Issue originalissue = getOriginalIssue();
         String issueKey = issue.getKey();
 
         if (issueKey == null) {
@@ -91,6 +94,12 @@ public class FieldsRequiredValidator extends GenericValidator {
                     } catch (Exception e) {
                         fieldValue = null; //No time spent.
                     }
+                } else if (IssueFieldConstants.AFFECTED_VERSIONS.equals(field.getId())) {
+                    //special case, archived versions, they are no longer selectable, nor removable, thus if the
+                    //original issue has an archived version in affected field, use that as value too
+                    fieldValue = getVersionsWithArchived(issue,field,originalissue.getAffectedVersions());
+                } else if (IssueFieldConstants.FIX_FOR_VERSIONS.equals(field.getId())) {
+                    fieldValue = getVersionsWithArchived(issue,field,originalissue.getFixVersions());
                 } else {
                     fieldValue = workflowUtils.getFieldValueFromIssue(issue, field);
                 }
@@ -126,4 +135,23 @@ public class FieldsRequiredValidator extends GenericValidator {
             }
         }
     }
+
+    private Collection getVersionsWithArchived(Issue issue, Field field, Collection alreadySelectedVersions) {
+        Collection archived = versionManager.getVersionsArchived(issue.getProjectObject());
+        archived.retainAll(alreadySelectedVersions);
+        Object selected = workflowUtils.getFieldValueFromIssue(issue,field);
+        if(selected!=null) {
+            archived.addAll((Collection)selected);
+        }
+        return archived.isEmpty()?null:archived;
+    }
+
+    //TODO
+    private Collection getArchivedVersionsThatAreSelected(Issue issue, Collection selectedVersions) {
+        Collection archivedVersions = versionManager.getVersionsArchived(issue.getProjectObject());
+        archivedVersions.retainAll(selectedVersions);
+
+        return archivedVersions;
+    }
+
 }
