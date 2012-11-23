@@ -145,13 +145,4 @@ public class FieldsRequiredValidator extends GenericValidator {
         }
         return archived.isEmpty()?null:archived;
     }
-
-    //TODO
-    private Collection getArchivedVersionsThatAreSelected(Issue issue, Collection selectedVersions) {
-        Collection archivedVersions = versionManager.getVersionsArchived(issue.getProjectObject());
-        archivedVersions.retainAll(selectedVersions);
-
-        return archivedVersions;
-    }
-
 }
