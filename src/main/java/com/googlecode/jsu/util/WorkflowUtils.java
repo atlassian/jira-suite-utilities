@@ -426,8 +426,6 @@ public class WorkflowUtils {
 
                     newValue = cfType.getValueFromCustomFieldParams(fieldParams);
                 }
-            } else if (newValue instanceof User && !(cfType instanceof UserCFType)) {
-                newValue = ((User)newValue).getName();
             } else if (cfType instanceof UserCFType) {
                 newValue = convertValueToUser(newValue);
             } else if (cfType instanceof LabelsCFType) {
@@ -442,6 +440,8 @@ public class WorkflowUtils {
                 if (newValue != null) {
                     newValue = asArrayList(newValue);
                 }
+            } else if (newValue instanceof User && !(cfType instanceof UserCFType)) {
+                newValue = ((User)newValue).getName();
             } else if (cfType instanceof GenericTextCFType) {
                 if (newValue instanceof Project) {
                     newValue = ((Project)newValue).getKey();
