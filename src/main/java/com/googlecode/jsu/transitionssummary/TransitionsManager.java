@@ -1,6 +1,9 @@
 package com.googlecode.jsu.transitionssummary;
 
 import com.atlassian.core.util.map.EasyMap;
+import com.atlassian.jira.datetime.DateTimeFormatter;
+import com.atlassian.jira.datetime.DateTimeFormatterFactory;
+import com.atlassian.jira.datetime.DateTimeStyle;
 import com.atlassian.jira.issue.Issue;
 import com.atlassian.jira.ofbiz.OfBizDelegator;
 import com.googlecode.jsu.util.FieldCollectionsUtils;
@@ -20,15 +23,13 @@ import java.util.*;
 public class TransitionsManager {
     private static final Logger log = LoggerFactory.getLogger(TransitionsManager.class);
 
-    private final FieldCollectionsUtils fieldCollectionsUtils;
     private final OfBizDelegator ofBizDelegator;
+    private final DateTimeFormatter userFormatter;
 
-    /**
-     * @param fieldCollectionsUtils
-     */
-    public TransitionsManager(FieldCollectionsUtils fieldCollectionsUtils, OfBizDelegator ofBizDelegator) {
-        this.fieldCollectionsUtils = fieldCollectionsUtils;
+    public TransitionsManager(OfBizDelegator ofBizDelegator,
+                              DateTimeFormatterFactory dateTimeFormatterFactory) {
         this.ofBizDelegator = ofBizDelegator;
+        this.userFormatter = dateTimeFormatterFactory.formatter().forLoggedInUser();
     }
 
     /**
@@ -61,8 +62,10 @@ public class TransitionsManager {
                 tranSummary = (TransitionSummary) summary.get(transitionId);
             } else {
                 tranSummary = new TransitionSummary(
-                        fieldCollectionsUtils,
-                        transitionId, trans.getFromStatus(), trans.getToStatus()
+                        transitionId,
+                        trans.getFromStatus(),
+                        trans.getToStatus(),
+                        this.userFormatter
                 );
 
                 summary.put(transitionId, tranSummary);

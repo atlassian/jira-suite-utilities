@@ -4,8 +4,8 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.atlassian.jira.datetime.DateTimeFormatter;
 import com.atlassian.jira.issue.status.Status;
-import com.googlecode.jsu.util.FieldCollectionsUtils;
 
 /**
  * @author Gustavo Martin
@@ -24,8 +24,7 @@ public class TransitionSummary {
     private String lastUpdater;
     private Timestamp lastUpdate;
     private List<Transition> transitions = new ArrayList<Transition>();
-
-    private final FieldCollectionsUtils fieldCollectionsUtils;
+    private DateTimeFormatter userFormatter;
 
     /**
      * @param id an external ID generate.
@@ -33,15 +32,16 @@ public class TransitionSummary {
      * @param toStatus
      */
     public TransitionSummary(
-            FieldCollectionsUtils fieldCollectionsUtils,
-            String id, Status fromStatus, Status toStatus
+            String id,
+            Status fromStatus,
+            Status toStatus,
+            DateTimeFormatter userFormatter
     ) {
-        this.fieldCollectionsUtils = fieldCollectionsUtils;
-
         setId(id);
         setFromStatus(fromStatus);
         setToStatus(toStatus);
         setDuration(new Long("0"));
+        this.userFormatter = userFormatter;
     }
 
     /**
@@ -65,7 +65,7 @@ public class TransitionSummary {
         String retVal = "";
         Long duration = this.getDurationInMillis();
 
-        if(duration!=new Long("0")){
+        if(duration!=0){
             Long days = new Long(duration.longValue() / 86400000);
             Long restDay = new Long(duration.longValue() % 86400000);
 
@@ -116,7 +116,7 @@ public class TransitionSummary {
      * @return a nice formatted date as String.
      */
     public String getLastUpdateAsString(){
-        return fieldCollectionsUtils.getNiceDate(lastUpdate);
+        return this.userFormatter.format(lastUpdate);
     }
 
     /**
