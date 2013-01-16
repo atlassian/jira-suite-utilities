@@ -4,6 +4,7 @@ import static com.googlecode.jsu.helpers.ConditionCheckerFactory.EQUAL;
 import static com.googlecode.jsu.helpers.ConditionCheckerFactory.STRING;
 import static com.googlecode.jsu.workflow.WorkflowFieldsRequiredValidatorPluginFactory.SELECTED_FIELDS;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -99,7 +100,8 @@ public class FieldsRequiredValidator extends GenericValidator {
                     //original issue has an archived version in affected field, use that as value too
                     fieldValue = getVersionsWithArchived(issue,field,originalissue.getAffectedVersions());
                 } else if (IssueFieldConstants.FIX_FOR_VERSIONS.equals(field.getId())) {
-                    fieldValue = getVersionsWithArchived(issue,field,originalissue.getFixVersions());
+                    Collection originalFixVersions = originalissue!=null?originalissue.getFixVersions():new ArrayList<Version>();
+                    fieldValue = getVersionsWithArchived(issue,field,originalFixVersions);
                 } else {
                     fieldValue = workflowUtils.getFieldValueFromIssue(issue, field);
                 }
