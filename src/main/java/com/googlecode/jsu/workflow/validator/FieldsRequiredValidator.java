@@ -98,7 +98,8 @@ public class FieldsRequiredValidator extends GenericValidator {
                 } else if (IssueFieldConstants.AFFECTED_VERSIONS.equals(field.getId())) {
                     //special case, archived versions, they are no longer selectable, nor removable, thus if the
                     //original issue has an archived version in affected field, use that as value too
-                    fieldValue = getVersionsWithArchived(issue,field,originalissue.getAffectedVersions());
+                    Collection originalAffectedVersions = originalissue!=null?originalissue.getAffectedVersions():new ArrayList<Version>();
+                    fieldValue = getVersionsWithArchived(issue,field,originalAffectedVersions);
                 } else if (IssueFieldConstants.FIX_FOR_VERSIONS.equals(field.getId())) {
                     Collection originalFixVersions = originalissue!=null?originalissue.getFixVersions():new ArrayList<Version>();
                     fieldValue = getVersionsWithArchived(issue,field,originalFixVersions);
