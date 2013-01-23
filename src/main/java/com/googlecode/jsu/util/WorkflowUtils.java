@@ -157,6 +157,34 @@ public class WorkflowUtils {
     }
 
     /**
+     * @param issue The issue to work with.
+     * @param fieldKey Key of the field for which to retrieve the current value.
+     * @return The value of the field on given issue, comma separated if field contains multiple values, null if none.
+     */
+    public String getFieldStringValue(Issue issue, String fieldKey) {
+        Object value = getFieldValueFromIssue(issue,getFieldFromKey(fieldKey));
+
+        if(value instanceof String) {
+            return (String)value;
+        } else if(value instanceof List) {
+            StringBuilder sb = new StringBuilder();
+            for(Object o:((List)value)) {
+                if(sb.length()>0) {
+                    sb.append(", ");
+                }
+                if(o instanceof User) {
+                    sb.append(((User)o).getName());
+                } else {
+                    sb.append(o.toString());
+                }
+            }
+            return sb.toString();
+        } else {
+            return null;
+        }
+    }
+
+    /**
      * @param issue
      *            an issue object.
      * @param field

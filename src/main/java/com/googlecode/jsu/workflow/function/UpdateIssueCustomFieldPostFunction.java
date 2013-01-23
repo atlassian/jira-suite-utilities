@@ -4,6 +4,7 @@ import static com.googlecode.jsu.workflow.WorkflowUpdateIssueCustomFieldFunction
 import static com.googlecode.jsu.workflow.WorkflowUpdateIssueCustomFieldFunctionPluginFactory.TARGET_FIELD_VALUE;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Map;
 
 import com.atlassian.jira.ComponentManager;
@@ -59,20 +60,27 @@ public class UpdateIssueCustomFieldPostFunction extends AbstractPreserveChangesP
             throw(new WorkflowException(e));
         }
 
-        if ("null".equals(configuredValue)) {
-            newValue = null;
-        } else if ("%%CURRENT_USER%%".equals(configuredValue)) {
-            newValue = currentUser.getName();
-        } else if ("%%CURRENT_DATETIME%%".equals(configuredValue)) {
-            newValue = new Timestamp(System.currentTimeMillis());
-        } else {
-            newValue = configuredValue;
-        }
-
         MutableIssue issue = null;
 
         try {
             issue = getIssue(transientVars);
+
+            if ("null".equals(configuredValue)) {
+                newValue = null;
+            } else if ("%%CURRENT_USER%%".equals(configuredValue)) {
+                newValue = currentUser.getName();
+            } else if ("%%ADD_CURRENT_USER%%".equals(configuredValue)) {
+                String s = workflowUtils.getFieldStringValue(issue,fieldKey);
+                if(s!=null && s.length()>0) {
+                    newValue = s + ", " + currentUser.getName();
+                } else {
+                    newValue = currentUser.getName();
+                }
+            } else if ("%%CURRENT_DATETIME%%".equals(configuredValue)) {
+                newValue = new Timestamp(System.currentTimeMillis());
+            } else {
+                newValue = configuredValue;
+            }
 
             if (log.isDebugEnabled()) {
                 log.debug(String.format(
