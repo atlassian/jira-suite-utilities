@@ -1,5 +1,5 @@
 #if(${val-destinationFieldSelected} && ${val-sourceFieldSelected})
-    $i18n.getText("copyvaluefromfield-function-view.function_text","<b>${val-destinationFieldSelected.name}</b>","<b>${val-sourceFieldSelected.name}</b>")
+    $i18n.getText("copyvaluefromfield-function-view.function_text","<b>$textutils.htmlEncode(${val-destinationFieldSelected.name})</b>","<b>$textutils.htmlEncode(${val-sourceFieldSelected.name})</b>")
 #else
     $i18n.getText("copyvaluefromfield-function-view.wrong_selection")
 #end

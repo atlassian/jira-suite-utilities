@@ -41,20 +41,20 @@
 				</table>
             </td>
 			<td width=15% valign=top align=left>
-              	${tran.durationAsString}
+                $textutils.htmlEncode(${tran.durationAsString})
 		    </td>
 			<td width=15% valign=top align=center>
             	${tran.timesToTransition}
 		    </td>
 			<td width=18% valign=top>
 				#if (${action.isUserExists(${tran.lastUpdater})})
-					#authorlink (${tran.lastUpdater})
+					#authorlink ($textutils.htmlEncode(${tran.lastUpdater}))
 				#else
-					${tran.lastUpdater}
+                    $textutils.htmlEncode(${tran.lastUpdater})
 				#end
 	        </td>
 			<td width=18% valign=top align=right>
-    	    	${tran.lastUpdateAsString}
+                $textutils.htmlEncode(${tran.lastUpdateAsString})
         	</td>
 		</tr>
 	#end

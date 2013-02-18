@@ -3,9 +3,9 @@
 #else
     #if(${val-fieldSelected})
         #if (!${allowUserInField-selected})
-            $i18n.getText("userisincustomfield-condition-view.condition_text_must_not","<b>${val-fieldSelected.name}</b>")
+            $i18n.getText("userisincustomfield-condition-view.condition_text_must_not","<b>$textutils.htmlEncode(${val-fieldSelected.name})</b>")
          #else
-             $i18n.getText("userisincustomfield-condition-view.condition_text_must","<b>${val-fieldSelected.name}</b>")
+             $i18n.getText("userisincustomfield-condition-view.condition_text_must","<b>$textutils.htmlEncode(${val-fieldSelected.name})</b>")
          #end
     #else
         $i18n.getText("userisincustomfield-condition-view.wrong_selection")

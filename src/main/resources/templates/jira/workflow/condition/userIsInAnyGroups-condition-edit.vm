@@ -11,7 +11,7 @@
 		                    <span class="label">$i18n.getText("userisinanygroups-condition-edit.available_groups.label"):</span><br>
                     <select id="groupsList" name="groupsList" multiple size="10" width=90%>
 	                        #foreach ($val in ${val-groupsList})
-	                            <option value="${val.name}">${val.name}</option>
+	                            <option value="${val.name}">$textutils.htmlEncode(${val.name})</option>
 	                        #end
 	                    </select>
 		        
@@ -23,7 +23,7 @@
 			                    <select id="groupsListSelected" name="groupsListSelected" multiple size="10" width=90%>
 		                        #if(${val-groupsListSelected})
 			                            #foreach ($val in ${val-groupsListSelected})
-		                                <option value="${val.name}">${val.name}</option>
+		                                <option value="${val.name}">$textutils.htmlEncode(${val.name})</option>
 			                            #end
 				                        #end
 	                    </select>

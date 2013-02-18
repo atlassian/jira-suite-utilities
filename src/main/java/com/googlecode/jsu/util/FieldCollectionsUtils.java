@@ -36,6 +36,7 @@ import static com.atlassian.jira.issue.IssueFieldConstants.*;
  * @author <A href="mailto:abashev at gmail dot com">Alexey Abashev</A>
  * @version $Id$
  */
+//TODO Can we remove dependencies to jira-core (instead only jira-api) by using interfaces (instead of classes) of referenced custom field types?
 public class FieldCollectionsUtils {
     private static final Logger log = LoggerFactory.getLogger(FieldCollectionsUtils.class);
 

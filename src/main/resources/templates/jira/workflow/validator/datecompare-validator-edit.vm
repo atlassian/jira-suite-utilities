@@ -9,7 +9,7 @@
 	                #if(${val.id.equals($val-date1Selected.id)})
 	                    SELECTED
 	                #end
-                >${val.name}</option>
+                >$textutils.htmlEncode(${val.name})</option>
             #end
         </select>
 		        <br><font size="1">$i18n.getText("datecompare-validator.date.description")</font>
@@ -26,7 +26,7 @@
                 #if(${val.equals($val-conditionSelected)})
 	                    SELECTED
 	                #end
-	                >${val.value}</option>
+	                >$textutils.htmlEncode(${val.value})</option>
             #end
         </select>
 		        <br><font size="1">$i18n.getText("datecompare-validator.condition.description")</font>
@@ -43,7 +43,7 @@
                 #if(${val.id.equals($val-date2Selected.id)})
 	                    SELECTED
 	                #end
-	                >${val.name}</option>
+	                >$textutils.htmlEncode(${val.name})</option>
             #end
         </select>
 		        <br><font size="1">$i18n.getText("datecompare-validator.compare.description")</font>

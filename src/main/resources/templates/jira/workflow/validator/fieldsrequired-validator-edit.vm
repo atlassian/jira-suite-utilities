@@ -9,11 +9,11 @@
 		                    <span class="label">$i18n.getText("fieldsrequired-validator-edit.available_fields"):</span><br>
                     <select id="fieldsList" name="fieldsList" multiple size="10" width=90%>
 	                        #foreach ($val in ${val-fieldsList})
-	                            <option value="${val.id}">${val.name}</option>
+	                            <option value="${val.id}">$textutils.htmlEncode(${val.name})</option>
 	                        #end
 	                    </select>
 		        
-					                    <br><input id="hidFieldsList" name="hidFieldsList" type="hidden" value="$!{val-hidFieldsList}">
+					                    <br><input id="hidFieldsList" name="hidFieldsList" type="hidden" value="$textutils.htmlEncode($!{val-hidFieldsList})">
 			                </td>
 		    
 		                <td align="center" width=50% valign="top">
@@ -21,7 +21,7 @@
 			                    <select id="fieldsListSelected" name="fieldsListSelected" multiple size="10" width=90%>
 		                        #if(${val-fieldsListSelected})
 			                            #foreach ($val in ${val-fieldsListSelected})
-		                                <option value="${val.id}">${val.name}</option>
+		                                <option value="${val.id}">$textutils.htmlEncode(${val.name})</option>
 			                            #end
 				                        #end
 	                    </select>

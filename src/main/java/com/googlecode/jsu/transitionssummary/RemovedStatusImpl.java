@@ -78,6 +78,11 @@ public class RemovedStatusImpl implements Status {
     public void setSequence(Long sequence) {
     }
 
+    @Override
+    public String getCompleteIconUrl() {
+        return null;
+    }
+
     public void setTranslation(String translatedName, String translatedDesc, String issueConstantPrefix, Locale locale) {
     }
 

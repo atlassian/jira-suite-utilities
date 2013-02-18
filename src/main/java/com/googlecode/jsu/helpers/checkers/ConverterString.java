@@ -1,13 +1,13 @@
 package com.googlecode.jsu.helpers.checkers;
 
 import com.atlassian.crowd.embedded.api.User;
+import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.issue.customfields.option.Option;
 import org.apache.commons.lang.StringUtils;
 import org.ofbiz.core.entity.GenericEntity;
 
 import com.atlassian.jira.issue.IssueConstant;
 import com.atlassian.jira.project.Project;
-//import com.opensymphony.user.Entity;
 
 
 import java.lang.reflect.Method;
@@ -49,9 +49,13 @@ public class ConverterString implements ValueConverter {
             return ((Option) value).getValue();
         } else if (value instanceof com.atlassian.jira.issue.fields.option.Option) {
             return ((com.atlassian.jira.issue.fields.option.Option) value).getName();
+        } else if (value instanceof ApplicationUser) {
+            return ((ApplicationUser) value).getName();
+            //https://developer.atlassian.com/display/JIRADEV/Renamable+Users+in+JIRA+6.0
         } else if (value instanceof User) {
             return ((User) value).getName();
-        } else if (value instanceof GenericEntity) {
+        }
+        else if (value instanceof GenericEntity) {
             String s = ((GenericEntity) value).getString("name");
             if (StringUtils.isEmpty(s)) {
                 s = ((GenericEntity) value).getString("id");

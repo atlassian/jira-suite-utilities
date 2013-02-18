@@ -11,6 +11,7 @@ import com.atlassian.jira.issue.customfields.persistence.CustomFieldValuePersist
  * @author <A href="mailto:abashev at gmail dot com">Alexey Abashev</A>
  * @version $Id$
  */
+//TODO Can we remove dependencies to jira-core (instead only jira-api) by using interfaces (instead of classes) of referenced custom field types?
 public class LocationTextCFType extends RenderableTextCFType {
     /**
      * @param customFieldValuePersister

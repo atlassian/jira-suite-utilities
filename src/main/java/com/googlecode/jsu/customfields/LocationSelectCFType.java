@@ -1,7 +1,5 @@
 package com.googlecode.jsu.customfields;
 
-import com.atlassian.jira.issue.customfields.converters.SelectConverter;
-import com.atlassian.jira.issue.customfields.converters.StringConverter;
 import com.atlassian.jira.issue.customfields.impl.SelectCFType;
 import com.atlassian.jira.issue.customfields.manager.GenericConfigManager;
 import com.atlassian.jira.issue.customfields.manager.OptionsManager;
@@ -14,6 +12,7 @@ import com.atlassian.jira.issue.fields.rest.json.beans.JiraBaseUrls;
  * @author <A href="mailto:abashev at gmail dot com">Alexey Abashev</A>
  * @version $Id$
  */
+//TODO Can we remove dependencies to jira-core (instead only jira-api) by using interfaces (instead of classes) of referenced custom field types?
 public class LocationSelectCFType extends SelectCFType {
     /**
      * @param customFieldValuePersister

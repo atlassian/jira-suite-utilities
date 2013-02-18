@@ -9,7 +9,7 @@
 	                #if(${val.id.equals($val-date1Selected.id)})
 	                    SELECTED
 	                #end
-                >${val.name}</option>
+                >$textutils.htmlEncode(${val.name})</option>
             #end
         </select>
 		        <br><font size="1">$i18n.getText("windowsdate-validator-edit.choose_date_field")</font>
@@ -39,7 +39,7 @@
                 #if(${val.id.equals($val-date2Selected.id)})
 	                    SELECTED
 	                #end
-	                >${val.name}</option>
+	                >$textutils.htmlEncode(${val.name})</option>
             #end
         </select>
 		        <br><font size="1">$i18n.getText("windowsdate-validator-edit.in_relation_to.description")</font>

@@ -89,6 +89,7 @@
                 <configuration>
                     <productVersion>${jira.version}</productVersion>
                     <productDataVersion>${jira.data.version}</productDataVersion>
+                    <productDataPath>${project.basedir}/src/test/resources/generated-test-resources.zip</productDataPath>
                 </configuration>
             </plugin>
             <plugin>
@@ -125,20 +126,21 @@
     <dependencies>
         <dependency>
             <groupId>com.atlassian.jira</groupId>
-            <artifactId>atlassian-jira</artifactId>
+            <artifactId>jira-api</artifactId>
             <version>${jira.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>junit</groupId>
-                    <artifactId>junit</artifactId>
-                </exclusion>
-            </exclusions>
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>com.atlassian.jira</groupId>
+            <artifactId>jira-core</artifactId>
+            <version>${jira.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.8.1</version>
+            <version>4.10</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -164,8 +166,8 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <jira.version>5.1-rc1</jira.version>
-        <jira.data.version>5.1-rc1</jira.data.version>
+        <jira.version>6.0-m05</jira.version>
+        <jira.data.version>6.0-m05</jira.data.version>
         <jira.plugin.version>3.10.2</jira.plugin.version>
 
         <scm.connection>scm:git:git://github.com/atlassian/jira-suite-utilities.git</scm.connection>

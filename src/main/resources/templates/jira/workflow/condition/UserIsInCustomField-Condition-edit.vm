@@ -23,7 +23,7 @@
 	#foreach ($val in ${val-fieldsList})
       <option value="${val.id}"
 	  #if($!{val.id.equals($val-fieldSelected.id)}) SELECTED #end
-      >${val.name}</option>
+      >$textutils.htmlEncode(${val.name})</option>
     #end
 	</select>
     <br><font size="1">$i18n.getText("userisincustomfield-condition-edit.field.description")</font>

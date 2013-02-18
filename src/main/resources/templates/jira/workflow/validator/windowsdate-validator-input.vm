@@ -27,7 +27,7 @@
     <td bgcolor="#ffffff" nowrap>
         <select id="date2FieldsList" name="date2FieldsList">
             #foreach ($val in ${val-date2FieldsList})
-	                <option value="${val.id}">${val.name}</option>
+	                <option value="${val.id}">$textutils.htmlEncode(${val.name})</option>
             #end
         </select>
 		        <br><font size="1">$i18n.getText("windowsdate-validator-edit.in_relation_to.description")</font>

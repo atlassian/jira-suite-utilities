@@ -4,7 +4,7 @@
   #else
     $i18n.getText("userisinanygroups-condition-view.condition.text")
     #foreach ($singleValue in ${val-groupsListSelected})
-      <b>$!singleValue.getName()</b>#if ($velocityCount != ${val-groupsListSelected.size()}), #end
+      <b>$textutils.htmlEncode($!singleValue.getName())</b>#if ($velocityCount != ${val-groupsListSelected.size()}), #end
     #end
   #end
 #end

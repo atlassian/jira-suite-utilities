@@ -40,7 +40,7 @@
             #if ($field.id.equals($fieldId))
                 SELECTED
             #end
-            >${descriptor.getText($field.nameKey)}</option>
+            >$textutils.htmlEncode(${descriptor.getText($field.nameKey)})</option>
         #end
         </select>
         <br /><span class="subText">$i18n.getText("updateissuefield-function-input.field.description")</span>

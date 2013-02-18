@@ -65,6 +65,8 @@ import java.util.*;
  * This utils class exposes common methods to custom workflow objects.
  *
  */
+
+//TODO Can we remove dependencies to jira-core (instead only jira-api) by using interfaces (instead of classes) of referenced custom field types?
 public class WorkflowUtils {
     public static final String SPLITTER = "@@";
 
