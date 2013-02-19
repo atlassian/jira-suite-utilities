@@ -451,7 +451,7 @@ public class WorkflowUtils {
                     //convert from string to Object
                     CustomFieldParams fieldParams = new CustomFieldParamsImpl(
                             customField,
-                            StringUtils.join((Collection<?>) newValue, ",")
+                            convertToString(newValue)
                     );
 
                     newValue = cfType.getValueFromCustomFieldParams(fieldParams);
@@ -691,7 +691,8 @@ public class WorkflowUtils {
                 if ((value == null) || (value instanceof String)) {
                     issue.setDescription((String) value);
                 } else {
-                    issue.setDescription(value.toString());
+                    issue.setDescription(convertToString(value));
+//                    issue.setDescription(value.toString());
                 }
             } else if (fieldId.equals(IssueFieldConstants.ENVIRONMENT)) {
                 if ((value == null) || (value instanceof String)) {
@@ -707,7 +708,17 @@ public class WorkflowUtils {
 
     private static final ConverterString CONVERTER_STRING = new ConverterString();
     public String convertToString(Object value) {
-        return CONVERTER_STRING.convert(value);
+        if (value instanceof Collection) {
+            List list = (List) value;
+            List<Object> resultList = new ArrayList<Object>();
+            for (Object object : list) {
+                object = convertToString(object);
+                resultList.add(object);
+            }
+            return StringUtils.join((Collection<?>) resultList, ",");
+        } else {
+            return CONVERTER_STRING.convert(value);
+        }
     }
 
     private Option convertStringToOption(Issue issue, CustomField customField, String value) {
