@@ -18,3 +18,7 @@
 .jsuLocation.open .jsuHideMap, .jsuLocation.open .jsuMap, .jsuLocation.notFound .jsuMapNotFound {
     display: block
 }
+
+.type-locationtextfield, .type-locationselect{
+    display: block !important;
+}

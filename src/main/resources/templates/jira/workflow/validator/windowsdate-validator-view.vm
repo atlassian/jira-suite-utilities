@@ -4,7 +4,7 @@
     #else
         #set($days = "0")
     #end
-    $i18n.getText("windowsdate-validator-view.validation_text","<b>${val-date1Selected.name}</b>","<b>$days</b>","<b>${val-date2Selected.name}</b>")
+    $i18n.getText("windowsdate-validator-view.validation_text","<b>$textutils.htmlEncode(${val-date1Selected.name})</b>","<b>$days</b>","<b>$textutils.htmlEncode(${val-date2Selected.name})</b>")
 #else
     $i18n.getText("windowsdate-validator-view.wrong_selection")
 #end

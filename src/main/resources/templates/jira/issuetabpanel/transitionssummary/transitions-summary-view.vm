@@ -9,7 +9,7 @@
 	#end
 </td>
 <td width=40% valign=top>
-	${status.nameTranslation}
+	$textutils.htmlEncode(${status.nameTranslation})
 </td>
 #end
 
