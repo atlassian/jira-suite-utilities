@@ -3,6 +3,7 @@ package com.googlecode.jsu.workflow.condition;
 import com.atlassian.crowd.embedded.api.CrowdService;
 import com.atlassian.crowd.embedded.api.Group;
 import com.atlassian.crowd.embedded.api.User;
+import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.user.util.UserManager;
 import com.atlassian.jira.workflow.condition.AbstractJiraCondition;
 import com.googlecode.jsu.util.WorkflowUtils;
@@ -42,7 +43,7 @@ public class UserIsInAnyGroupsCondition extends AbstractJiraCondition {
         String caller = context.getCaller();
 
         if (caller != null) { // null -> User not logged in
-            User userLogged = userManager.getUserObject(caller);
+            ApplicationUser userLogged = userManager.getUserByName(caller);
 
             // If there aren't groups selected, hidGroupsList is equal to "".
             // And groupsSelected will be an empty collection.
@@ -51,7 +52,7 @@ public class UserIsInAnyGroupsCondition extends AbstractJiraCondition {
 
             for (Group group : groupsSelected) {
                 try {
-                    if (crowdService.isUserMemberOfGroup(userLogged, group)) {
+                    if (crowdService.isUserMemberOfGroup(convertApplicationUserToCrowdEmbeddedUser(userLogged), group)) {
                         return true;
                     }
                 } catch (Exception e) {
@@ -62,4 +63,16 @@ public class UserIsInAnyGroupsCondition extends AbstractJiraCondition {
 
         return false;
     }
+    /**
+     * This ist deprecated because Atlassian API is not working with ApplicationUser
+     * As soon as this is working this method can be deleted
+     * @param applicationUser
+     * @return
+     */
+    @Deprecated
+    private User convertApplicationUserToCrowdEmbeddedUser(ApplicationUser applicationUser){
+        return userManager.getUserObject(applicationUser.getUsername());
+    }
+
+
 }

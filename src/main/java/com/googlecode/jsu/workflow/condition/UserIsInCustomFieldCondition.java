@@ -5,10 +5,10 @@ import static com.googlecode.jsu.workflow.WorkflowUserIsInCustomFieldConditionPl
 import java.util.Collection;
 import java.util.Map;
 
+import com.atlassian.jira.user.ApplicationUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.atlassian.crowd.embedded.api.User;
 import com.atlassian.jira.issue.Issue;
 import com.atlassian.jira.issue.fields.Field;
 import com.atlassian.jira.user.util.UserManager;
@@ -44,7 +44,7 @@ public class UserIsInCustomFieldCondition extends AbstractJiraCondition {
 
         // Obtains the current user.
         WorkflowContext context = (WorkflowContext) transientVars.get("context");
-        User userLogged = userManager.getUserObject(context.getCaller());
+        ApplicationUser userLogged = userManager.getUserByName(context.getCaller());
 
         if (userLogged == null) {
             log.warn("Unable to check condition");
@@ -83,11 +83,11 @@ public class UserIsInCustomFieldCondition extends AbstractJiraCondition {
         return allowUser;
     }
 
-    private boolean compareValues(Object fieldValue, User user, boolean allowUserInField) {
+    private boolean compareValues(Object fieldValue, ApplicationUser user, boolean allowUserInField) {
         boolean result = !allowUserInField;
 
         if (fieldValue instanceof String) {
-            if (fieldValue.equals(user.getName())) {
+            if (fieldValue.equals(user.getUsername())) {
                 result = allowUserInField;
             }
         } else {

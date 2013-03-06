@@ -2,11 +2,11 @@ package com.googlecode.jsu.workflow.function;
 
 import java.util.Map;
 
-import com.atlassian.crowd.embedded.api.User;
 import com.atlassian.jira.ComponentManager;
 import com.atlassian.jira.issue.MutableIssue;
 import com.atlassian.jira.issue.fields.Field;
 import com.atlassian.jira.issue.util.IssueChangeHolder;
+import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.util.I18nHelper;
 import com.googlecode.jsu.util.WorkflowUtils;
 import com.opensymphony.module.propertyset.PropertySet;
@@ -44,7 +44,7 @@ public class CopyValueFromOtherFieldPostFunction extends AbstractPreserveChanges
         String fieldToName = (fieldTo != null) ? fieldTo.getName() : fieldToKey;
 
         try {
-            User currentUser = getCaller(transientVars, args);
+            ApplicationUser currentUser = getCallerUser(transientVars, args);
             MutableIssue issue = getIssue(transientVars);
 
             // It gives the value from the source field.

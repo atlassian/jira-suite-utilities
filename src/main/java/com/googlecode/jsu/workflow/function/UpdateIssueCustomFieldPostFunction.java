@@ -11,10 +11,10 @@ import com.atlassian.jira.ComponentManager;
 import com.atlassian.jira.issue.MutableIssue;
 import com.atlassian.jira.issue.fields.Field;
 import com.atlassian.jira.issue.util.IssueChangeHolder;
+import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.util.I18nHelper;
 import com.googlecode.jsu.util.WorkflowUtils;
 import com.opensymphony.module.propertyset.PropertySet;
-import com.atlassian.crowd.embedded.api.User;
 import com.opensymphony.workflow.WorkflowException;
 
 /**
@@ -52,9 +52,9 @@ public class UpdateIssueCustomFieldPostFunction extends AbstractPreserveChangesP
         String configuredValue = args.get(TARGET_FIELD_VALUE);
         Object newValue;
 
-        User currentUser = null;
+        ApplicationUser currentUser = null;
         try {
-            currentUser = getCaller(transientVars, args);
+            currentUser = getCallerUser(transientVars, args);
         } catch (Exception e) {
             log.error("Unable to find caller for function", e);
             throw(new WorkflowException(e));
@@ -68,13 +68,13 @@ public class UpdateIssueCustomFieldPostFunction extends AbstractPreserveChangesP
             if ("null".equals(configuredValue)) {
                 newValue = null;
             } else if ("%%CURRENT_USER%%".equals(configuredValue)) {
-                newValue = currentUser.getName();
+                newValue = currentUser.getUsername();
             } else if ("%%ADD_CURRENT_USER%%".equals(configuredValue)) {
                 String s = workflowUtils.getFieldStringValue(issue,fieldKey);
                 if(s!=null && s.length()>0) {
-                    newValue = s + ", " + currentUser.getName();
+                    newValue = s + ", " + currentUser.getUsername();
                 } else {
-                    newValue = currentUser.getName();
+                    newValue = currentUser.getUsername();
                 }
             } else if ("%%CURRENT_DATETIME%%".equals(configuredValue)) {
                 newValue = new Timestamp(System.currentTimeMillis());

@@ -143,6 +143,12 @@
             <version>4.10</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.atlassian.jira</groupId>
+            <artifactId>jira-func-tests</artifactId>
+            <version>5.2.5</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <scm>

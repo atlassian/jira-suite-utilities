@@ -38,6 +38,7 @@ import com.atlassian.jira.project.Project;
 import com.atlassian.jira.project.ProjectManager;
 import com.atlassian.jira.project.version.Version;
 import com.atlassian.jira.project.version.VersionManager;
+import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.user.util.UserManager;
 import com.atlassian.jira.util.ObjectUtils;
 import com.atlassian.jira.workflow.WorkflowActionsBean;
@@ -359,7 +360,7 @@ public class WorkflowUtils {
      * @param field
      * @param value
      */
-    public void setFieldValue(User currentUser, MutableIssue issue, Field field, Object value, IssueChangeHolder changeHolder) {
+    public void setFieldValue(ApplicationUser currentUser, MutableIssue issue, Field field, Object value, IssueChangeHolder changeHolder) {
         if (fieldManager.isCustomField(field)) {
             CustomField customField = (CustomField) field;
             Object oldValue = issue.getCustomFieldValue(customField);
@@ -426,12 +427,8 @@ public class WorkflowUtils {
                         newValue = option;
                     }
                 } else if (cfType instanceof LabelsCFType) {
-                    Set<String> set = new HashSet<String>();
-                    StringTokenizer st = new StringTokenizer((String)newValue," ");
-                    while(st.hasMoreTokens()) {
-                        set.add(st.nextToken());
-                    }
-                    this.labelManager.setLabels(currentUser,issue.getId(),customField.getIdAsLong(),set,false,true);
+                    Set<String> set = convertToSetForLabels((String) newValue);
+                    this.labelManager.setLabels(convertApplicationUserToCrowdEmbeddedUser(currentUser),issue.getId(),customField.getIdAsLong(),set,false,true);
                 } else {
                     //convert from string to Object
                     CustomFieldParams fieldParams = new CustomFieldParamsImpl(customField, newValue);
@@ -446,13 +443,10 @@ public class WorkflowUtils {
                     for(Object o:(Collection)newValue) {
                         set.add(o.toString());
                     }
-                    this.labelManager.setLabels(currentUser,issue.getId(),customField.getIdAsLong(),set,false,true);
+                    this.labelManager.setLabels(convertApplicationUserToCrowdEmbeddedUser(currentUser),issue.getId(),customField.getIdAsLong(),set,false,true);
                 } else {
                     //convert from string to Object
-                    CustomFieldParams fieldParams = new CustomFieldParamsImpl(
-                            customField,
-                            convertToString(newValue)
-                    );
+                    CustomFieldParams fieldParams = new CustomFieldParamsImpl(customField,convertToString(newValue));
 
                     newValue = cfType.getValueFromCustomFieldParams(fieldParams);
                 }
@@ -460,9 +454,14 @@ public class WorkflowUtils {
                 newValue = convertValueToUser(newValue);
             } else if (cfType instanceof LabelsCFType) {
                 if (newValue == null) {
-                    this.labelManager.setLabels(
-                            currentUser,issue.getId(),customField.getIdAsLong(),new HashSet<String>(),false,true);
-              }
+                    this.labelManager.setLabels(convertApplicationUserToCrowdEmbeddedUser(currentUser),issue.getId(),customField.getIdAsLong(),new HashSet<String>(),false,true);
+              }else{
+                    String stringValue = convertToString(newValue);
+                    stringValue = stringValue.replaceAll(",", " ");
+                    Set<String> set = convertToSetForLabels(stringValue);
+                    this.labelManager.setLabels(convertApplicationUserToCrowdEmbeddedUser(currentUser),issue.getId(),customField.getIdAsLong(),set,false,true);
+                }
+
             } else if (cfType instanceof AbstractMultiCFType) {
                 if (cfType instanceof MultiUserCFType) {
                     newValue = convertValueToUser(newValue);
@@ -652,7 +651,7 @@ public class WorkflowUtils {
                     issue.setSecurityLevelId(levels.iterator().next().getId());
                 }
             } else if (fieldId.equals(IssueFieldConstants.ASSIGNEE)) {
-                User user = convertValueToUser(value);
+                User user = convertApplicationUserToCrowdEmbeddedUser(convertValueToUser(value));
                 issue.setAssignee(user);
             } else if (fieldId.equals(IssueFieldConstants.DUE_DATE)) {
                 if (value == null) {
@@ -679,7 +678,7 @@ public class WorkflowUtils {
                     }
                 }
             } else if (fieldId.equals(IssueFieldConstants.REPORTER)) {
-                User user = convertValueToUser(value);
+                User user =  convertApplicationUserToCrowdEmbeddedUser(convertValueToUser(value));
                 issue.setReporter(user);
             } else if (fieldId.equals(IssueFieldConstants.SUMMARY)) {
                 if ((value == null) || (value instanceof String)) {
@@ -704,6 +703,15 @@ public class WorkflowUtils {
                 log.error("Issue field \"" + fieldId + "\" is not supported for setting.");
             }
         }
+    }
+
+    private Set<String> convertToSetForLabels(String newValue) {
+        Set<String> set = new HashSet<String>();
+        StringTokenizer st = new StringTokenizer(newValue," ");
+        while(st.hasMoreTokens()) {
+            set.add(st.nextToken());
+        }
+        return set;
     }
 
     private static final ConverterString CONVERTER_STRING = new ConverterString();
@@ -775,14 +783,14 @@ public class WorkflowUtils {
         }
     }
 
-    private User convertValueToUser(Object value) {
+    private ApplicationUser convertValueToUser(Object value) {
         if (value instanceof Collection<?>) {
             value = firstValue((Collection) value);
         }
-        if (value == null || value instanceof User) {
-            return  (User) value;
+        if (value == null || value instanceof ApplicationUser) {
+            return (ApplicationUser)value;
         } else {
-            User user = userManager.getUserObject(convertToString(value));
+            ApplicationUser user = userManager.getUserByName(convertToString(value));
             if (user != null) {
                 return user;
             }
@@ -867,6 +875,18 @@ public class WorkflowUtils {
         return params;
     }
 
+
+    /**
+     *This ist deprecated because Atlassian API is not working with ApplicationUser
+     * As soon as this is working this method can be deleted
+     * @param applicationUser
+     * @return
+     */
+    @Deprecated
+    private User convertApplicationUserToCrowdEmbeddedUser(ApplicationUser applicationUser){
+        return userManager.getUserObject(applicationUser.getUsername());
+    }
+
     private <T> ArrayList<T> asArrayList(T value) {
         ArrayList<T> list = new ArrayList<T>(1);
         list.add(value);
@@ -898,7 +918,7 @@ public class WorkflowUtils {
      *            Value for setting
      */
     public void setFieldValue(
-            User currentUser, MutableIssue issue, String fieldKey, Object value,
+            ApplicationUser currentUser, MutableIssue issue, String fieldKey, Object value,
             IssueChangeHolder changeHolder
     ) {
         final Field field = getFieldFromKey(fieldKey);
