@@ -3,9 +3,9 @@
 
 <td width=7% valign=center>
 	#if ($iconurl.startsWith('http://') || $iconurl.startsWith('https://'))
-		<img src="$iconurl" height="16" width="16" alt="$status.getNameTranslation()" title="$status.getNameTranslation() - $!status.getDescTranslation()" />
+		<img src="$iconurl" height="16" width="16" alt='$textutils.htmlEncode($status.getNameTranslation())' title="$textutils.htmlEncode($status.getNameTranslation()) - $textutils.htmlEncode($!status.getDescTranslation())" />
 	#else
-		<img src="${req.getContextPath()}${iconurl}" height="16" width="16" alt="$status.getNameTranslation()" title="$status.getNameTranslation() - $!status.getDescTranslation()" />
+		<img src="${req.getContextPath()}${iconurl}" height="16" width="16" alt="$textutils.htmlEncode($status.getNameTranslation())" title="$textutils.htmlEncode($status.getNameTranslation()) - $textutils.htmlEncode($!status.getDescTranslation())" />
 	#end
 </td>
 <td width=40% valign=top>
