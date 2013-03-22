@@ -172,8 +172,8 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <jira.version>6.0-m07.1</jira.version>
-        <jira.data.version>6.0-m07.1</jira.data.version>
+        <jira.version>6.0-m09</jira.version>
+        <jira.data.version>6.0-m09</jira.data.version>
         <jira.plugin.version>3.10.2</jira.plugin.version>
 
         <scm.connection>scm:git:git://github.com/atlassian/jira-suite-utilities.git</scm.connection>

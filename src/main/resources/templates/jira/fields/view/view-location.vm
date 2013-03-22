@@ -1,12 +1,17 @@
 #if ($value)
+
     #if ($textOnly || $excelView)
         $textutils.br($textutils.htmlEncode($!value.toString(), false))
     #else
+        #if($customField.customFieldType.name == "Location Select List")
+            #set ($value = $textutils.htmlEncode($value.toString()))
+        #end
         <div class="jsuLocation ready">
             <a href="#" class="location" title="$i18n.getText("view-location.display_map")">$!value.toString()</a>
-            <a href="#" class="smallgrey jsuHideMap"  title="$i18n.getText("view-location.hide_map")">$i18n.getText("view-location.hide_map")</a>
+            <a href="#" class="smallgrey jsuHideMap"  title="($i18n.getText("view-location.hide_map")">$i18n.getText("view-location.hide_map")</a>
             <div class="jsuMap uneditable" title=""></div>
             <div class="jsuMapNotFound">$i18n.getText("view-location.location_not_found", $!value.toString())</div>
         </div>
+
     #end
 #end
