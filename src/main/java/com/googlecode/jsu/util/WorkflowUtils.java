@@ -884,7 +884,7 @@ public class WorkflowUtils {
      */
     @Deprecated
     private User convertApplicationUserToCrowdEmbeddedUser(ApplicationUser applicationUser){
-        return userManager.getUserObject(applicationUser.getUsername());
+        return applicationUser == null ? null : applicationUser.getDirectoryUser();
     }
 
     private <T> ArrayList<T> asArrayList(T value) {
