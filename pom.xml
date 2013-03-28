@@ -6,7 +6,7 @@
     <groupId>com.googlecode</groupId>
     <artifactId>jira-suite-utilities</artifactId>
     <name>JIRA Suite Utilities</name>
-    <version>1.4.5-SNAPSHOT</version>
+    <version>1.4.5</version>
     <packaging>atlassian-plugin</packaging>
 
     <organization>
