@@ -108,6 +108,6 @@ public class ValueFieldCondition extends AbstractJiraCondition {
                 break;
             }
         }
-        return result;
+        return values.isEmpty()?valueToCompare==null||valueToCompare.isEmpty():result;
     }
 }
