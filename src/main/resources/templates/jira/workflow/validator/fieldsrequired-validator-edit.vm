@@ -54,11 +54,16 @@
 			newOption.text = selectedOption.text;
 			newOption.value = selectedOption.value;
 			
-			try {
-				dest.add(newOption, null); // standards compliant; doesn't work in IE
-			} catch(ex) {
-				dest.add(newOption, 0); // IE only
-			}
+            try {
+                dest.add(newOption, null); // standards compliant; doesn't work in IE
+            } catch(ex) {
+                try {
+                    dest.add(newOption, 0); // IE only
+                } catch(ex2) {
+                    var newIEOption = new Option(selectedOption.text,selectedOption.value);
+                    dest.add(newIEOption); // IE only, second attempt }
+                }
+            }
 
 			src.remove(src.selectedIndex);		
 		}
