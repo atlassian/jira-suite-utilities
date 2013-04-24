@@ -64,23 +64,38 @@ public class TransitionSummary {
     public String getDurationAsString(){
         String retVal = "";
         Long duration = this.getDurationInMillis();
+        
+        long daysInWeek = 5;
+        long hoursInDay = 8;
+        long minutesInHour = 60;
+        long secondsInMinute = 60;
+
+        long millisInMinute = secondsInMinute * getMillisInSecond();
+        long millisInHour = millisInMinute * minutesInHour;
+        long millisInDay = millisInHour * hoursInDay;
+        long millisInWeek = daysInWeek * millisInDay;
 
         if(duration!=0){
-            Long days = new Long(duration.longValue() / 86400000);
-            Long restDay = new Long(duration.longValue() % 86400000);
+            Long weeks = new Long(duration.longValue() / millisInWeek);
+            Long restWeek = new Long(duration.longValue() % millisInWeek);
 
-            Long hours = new Long(restDay.longValue() / 3600000);
-            Long resthours = new Long(restDay.longValue() % 3600000);
+            Long days = new Long(restWeek.longValue() / millisInDay);
+            Long restDay = new Long(restWeek.longValue() % millisInDay);
 
-            Long minutes = new Long(resthours.longValue() / 60000);
-            Long restMinutes = new Long(resthours.longValue() % 60000);
+            Long hours = new Long(restDay.longValue() / millisInHour);
+            Long resthours = new Long(restDay.longValue() % millisInHour);
 
-            Long seconds = new Long(restMinutes.longValue() / 1000);
+            Long minutes = new Long(resthours.longValue() / millisInMinute);
+            Long restMinutes = new Long(resthours.longValue() % millisInMinute);
+
+            Long seconds = new Long(restMinutes.longValue() / getMillisInSecond());
 
             // If it has been days, it does not have sense to show the seconds.
-            retVal = days.equals(new Long("0"))?"":String.valueOf(days) + "d ";
+            retVal = weeks.equals(new Long("0"))?"":String.valueOf(days) + "w ";
+            retVal = retVal + (days.equals(new Long("0"))?"":String.valueOf(days) + "d ");
             retVal = retVal + (hours.equals(new Long("0"))?"":String.valueOf(hours) + "h ");
             retVal = retVal + (minutes.equals(new Long("0"))?"":String.valueOf(minutes) + "m ");
+
             if((days.equals(new Long("0"))) && (hours.equals(new Long("0")))){
                 retVal = retVal + (seconds.equals(new Long("0"))?"":String.valueOf(seconds) + "s");
             }
@@ -90,6 +105,10 @@ public class TransitionSummary {
         }
 
         return retVal;
+    }
+
+    public long getMillisInSecond(){
+    	return 1000;
     }
 
     public int getTimesToTransition(){
@@ -137,6 +156,11 @@ public class TransitionSummary {
     public Long getDurationInMillis() {
         return duration;
     }
+    
+    public Long getDurationInSeconds() {
+        return duration/getMillisInSecond();
+    }
+
 
     private void setFromStatus(Status fromStatus) {
         this.fromStatus = fromStatus;
