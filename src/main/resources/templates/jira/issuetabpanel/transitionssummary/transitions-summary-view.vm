@@ -1,3 +1,4 @@
+#disable_html_escaping()
 #macro(statusWithIcon $status)
 #set ($iconurl = $status.getIconUrl())
 
@@ -14,7 +15,6 @@
 #end
 
 #macro(headerCell $caption $width)
-##<td bgcolor="#f0f0f0" width="$width"><b>$i18n.getText($caption)</b></td>
 <th bgcolor="#f0f0f0" width="$width">$i18n.getText($caption)</th>
 #end
 
@@ -48,7 +48,7 @@
 		    </td>
 			<td width=18% valign=top>
 				#if (${action.isUserExists(${tran.lastUpdater})})
-					#authorlink ($textutils.htmlEncode(${tran.lastUpdater}))
+                    #authorlinkname(${tran.lastUpdater})
 				#else
                     $textutils.htmlEncode(${tran.lastUpdater})
 				#end
