@@ -422,7 +422,7 @@ public class WorkflowUtils {
                     if (cfType instanceof MultiSelectCFType) {
                         newValue = asArrayList(option);
                     } else if (cfType instanceof CascadingSelectCFType) {
-                        newValue = convertOptionToCustomFieldParamsImpl(customField, option);
+                        newValue = convertOptionToCascadingSelect(option);
                     } else {
                         newValue = option;
                     }
@@ -858,21 +858,16 @@ public class WorkflowUtils {
         return priority;
     }
 
-    private CustomFieldParamsImpl convertOptionToCustomFieldParamsImpl(CustomField customField, Option option) {
-        CustomFieldParamsImpl params = new CustomFieldParamsImpl(customField);
+    private HashMap convertOptionToCascadingSelect(Option option) {
+        HashMap map = new HashMap();
         Option upperOption = option.getParentOption();
-        Collection<String> val;
         if (upperOption != null) {
-            val = asArrayList(upperOption.getOptionId().toString());
-            params.put(CascadingSelectCFType.PARENT_KEY, val);
-            val = asArrayList(option.getOptionId().toString());
-            params.put(CascadingSelectCFType.CHILD_KEY, val);
+            map.put(CascadingSelectCFType.PARENT_KEY, upperOption);
+            map.put(CascadingSelectCFType.CHILD_KEY, option);
         } else {
-            val = asArrayList(option.getOptionId().toString());
-            params.put(CascadingSelectCFType.PARENT_KEY, val);
+            map.put(CascadingSelectCFType.PARENT_KEY, option);
         }
-        params.transformStringsToObjects();
-        return params;
+        return map;
     }
 
 
