@@ -254,6 +254,8 @@
         <resource type="velocity"
                   name="view"
                   location="templates/jira/issuetabpanel/transitionssummary/transitions-summary-view.vm"/>
+
+        <supports-ajax-load>true</supports-ajax-load>
     </issue-tabpanel>
 
     <!-- Components -->
