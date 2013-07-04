@@ -1,5 +1,6 @@
 package com.googlecode.jsu.workflow;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -56,12 +57,17 @@ public class WorkflowUserIsInAnyGroupsConditionPluginFactory extends
         Collection<Group> groupsSelected = workflowUtils.getGroups(strGroupsSelected, WorkflowUtils.SPLITTER);
 
         Collection<Group> groups = groupManager.getAllGroups();
-        groups.removeAll(groupsSelected);
 
+        Collection<Group> availableGroups = new ArrayList<Group>();
+        //do not use remove or removeAll, does not work in OD for whatever reason
+        for(Group g:groups) {
+            if(!groupsSelected.contains(g)) {
+                availableGroups.add(g);
+            }
+        }
         velocityParams.put("val-groupsListSelected", groupsSelected);
         velocityParams.put("val-hidGroupsList", workflowUtils.getStringGroup(groupsSelected, WorkflowUtils.SPLITTER));
-        velocityParams.put("val-groupsList", groups);
-
+        velocityParams.put("val-groupsList", availableGroups);
     }
 
     /* (non-Javadoc)
