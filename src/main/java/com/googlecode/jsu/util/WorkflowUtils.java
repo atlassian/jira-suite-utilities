@@ -490,10 +490,12 @@ public class WorkflowUtils {
             if(!(cfType instanceof LabelsCFType)) {
                 issue.setCustomFieldValue(customField, newValue);
 
-                customField.updateValue(
-                        fieldLayoutItem, issue,
-                        new ModifiedValue(oldValue, newValue),	changeHolder
-                );
+                if(issue.getKey()!=null) {
+                    customField.updateValue(
+                            fieldLayoutItem, issue,
+                            new ModifiedValue(oldValue, newValue),	changeHolder
+                    );
+                }
             }
 
             if (log.isDebugEnabled()) {
