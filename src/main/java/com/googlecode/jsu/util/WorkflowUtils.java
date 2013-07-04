@@ -500,7 +500,7 @@ public class WorkflowUtils {
                 log.debug(
                         "Issue [" +
                         issue +
-                        "] got modfied fields - [" +
+                        "] got modified fields - [" +
                         issue.getModifiedFields() +
                         "]"
                 );
