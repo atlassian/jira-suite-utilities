@@ -27,10 +27,6 @@ public class WorkflowFieldsRequiredValidatorPluginFactory
     private final FieldCollectionsUtils fieldCollectionsUtils;
     private final WorkflowUtils workflowUtils;
 
-    /**
-     * @param fieldCollectionsUtils
-     * @param workflowUtils
-     */
     public WorkflowFieldsRequiredValidatorPluginFactory(
             FieldCollectionsUtils fieldCollectionsUtils,
             WorkflowUtils workflowUtils
@@ -102,9 +98,6 @@ public class WorkflowFieldsRequiredValidatorPluginFactory
 
     /**
      * Get fields were selected in UI.
-     *
-     * @param args
-     * @return
      */
     public Collection<Field> getSelectedFields(Map<String, Object> args) {
         String strFieldsSelected = (String) args.get(SELECTED_FIELDS);

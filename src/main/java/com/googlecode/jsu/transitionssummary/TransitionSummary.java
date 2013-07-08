@@ -28,8 +28,6 @@ public class TransitionSummary {
 
     /**
      * @param id an external ID generate.
-     * @param fromStatus
-     * @param toStatus
      */
     public TransitionSummary(
             String id,
@@ -62,20 +60,20 @@ public class TransitionSummary {
      * @return a nice String format of the duration.
      */
     public String getDurationAsString(){
-        String retVal = "";
-        Long duration = this.getDurationInMillis();
+        String retVal;
+        long duration = this.getDurationInMillis();
 
         if(duration!=0){
-            Long days = new Long(duration.longValue() / 86400000);
-            Long restDay = new Long(duration.longValue() % 86400000);
+            Long days = duration / 86400000;
+            Long restDay = duration % 86400000;
 
-            Long hours = new Long(restDay.longValue() / 3600000);
-            Long resthours = new Long(restDay.longValue() % 3600000);
+            Long hours = restDay / 3600000;
+            Long resthours = restDay % 3600000;
 
-            Long minutes = new Long(resthours.longValue() / 60000);
-            Long restMinutes = new Long(resthours.longValue() % 60000);
+            Long minutes = resthours / 60000;
+            Long restMinutes = resthours % 60000;
 
-            Long seconds = new Long(restMinutes.longValue() / 1000);
+            Long seconds = restMinutes / 1000;
 
             // If it has been days, it does not have sense to show the seconds.
             retVal = days.equals(new Long("0"))?"":String.valueOf(days) + "d ";
@@ -97,7 +95,7 @@ public class TransitionSummary {
     }
 
     private void addTime(Long timeInMillis){
-        setDuration(new Long(getDurationInMillis().longValue() + timeInMillis.longValue()));
+        setDuration(getDurationInMillis() + timeInMillis);
     }
 
     public String getId() {

@@ -5,17 +5,12 @@ import org.slf4j.LoggerFactory;
 
 /**
  * @author <A href="mailto:abashev at gmail dot com">Alexey Abashev</A>
- * @version $Id$
  */
 public class CheckerCompositeFactory {
     private static final Logger log = LoggerFactory.getLogger(CheckerCompositeFactory.class);
 
     /**
      * Create composite for checking values.
-     *
-     * @param converterClass
-     * @param snipetClass
-     * @return
      */
     public CheckerComposite getComposite(String converterClass, String snipetClass) {
         ComparingSnipet snipet = getInstance(snipetClass);

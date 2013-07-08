@@ -89,17 +89,6 @@ public class WorkflowUtils {
     private final PriorityManager priorityManager;
     private final LabelManager labelManager;
 
-    /**
-     * @param fieldManager
-     * @param issueManager
-     * @param projectComponentManager
-     * @param versionManager
-     * @param issueSecurityLevelManager
-     * @param applicationProperties
-     * @param fieldCollectionsUtils
-     * @param issueLinkManager
-     * @param labelManager;
-     */
     public WorkflowUtils(
             FieldManager fieldManager, IssueManager issueManager,
             ProjectComponentManager projectComponentManager, VersionManager versionManager,
@@ -124,7 +113,6 @@ public class WorkflowUtils {
     }
 
     /**
-     * @param key
      * @return a String with the field name from given key.
      */
     public String getFieldNameFromKey(String key) {
@@ -132,7 +120,6 @@ public class WorkflowUtils {
     }
 
     /**
-     * @param key
      * @return a Field object from given key. (Field or Custom Field).
      */
     public Field getFieldFromKey(String key) {
@@ -240,7 +227,7 @@ public class WorkflowUtils {
                 }
             } else {
                 String fieldId = field.getId();
-                Collection<?> retCollection = null;
+                Collection<?> retCollection;
 
                 // Special treatment of fields.
                 if (fieldId.equals(IssueFieldConstants.ATTACHMENT)) {
@@ -354,11 +341,6 @@ public class WorkflowUtils {
 
     /**
      * Sets specified value to the field for the issue.
-     *
-     * @param currentUser
-     * @param issue
-     * @param field
-     * @param value
      */
     public void setFieldValue(ApplicationUser currentUser, MutableIssue issue, Field field, Object value, IssueChangeHolder changeHolder) {
         if (fieldManager.isCustomField(field)) {
@@ -876,8 +858,6 @@ public class WorkflowUtils {
     /**
      *This ist deprecated because Atlassian API is not working with ApplicationUser
      * As soon as this is working this method can be deleted
-     * @param applicationUser
-     * @return
      */
     @Deprecated
     private User convertApplicationUserToCrowdEmbeddedUser(ApplicationUser applicationUser){
@@ -924,8 +904,6 @@ public class WorkflowUtils {
     }
 
     /**
-     * @param strGroups
-     * @param splitter
      * @return a List of Group
      *
      * Get Groups from a string.
@@ -944,8 +922,6 @@ public class WorkflowUtils {
     }
 
     /**
-     * @param groups
-     * @param splitter
      * @return a String with the groups selected.
      *
      * Get Groups as String.
@@ -962,8 +938,6 @@ public class WorkflowUtils {
     }
 
     /**
-     * @param strFields
-     * @param splitter
      * @return a List of Field
      *
      * Get Fields from a string.
@@ -985,8 +959,6 @@ public class WorkflowUtils {
     }
 
     /**
-     * @param fields
-     * @param splitter
      * @return a String with the fields selected.
      *
      * Get Fields as String.
@@ -1003,7 +975,6 @@ public class WorkflowUtils {
     }
 
     /**
-     * @param actionDescriptor
      * @return the FieldScreen of the transition. Or null, if the transition
      *         hasn't a screen asociated.
      *

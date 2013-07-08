@@ -27,10 +27,6 @@ public class UserIsInCustomFieldCondition extends AbstractJiraCondition {
     private final UserManager userManager;
     private final WorkflowUtils workflowUtils;
 
-    /**
-     * @param userManager
-     * @param workflowUtils
-     */
     public UserIsInCustomFieldCondition(UserManager userManager, WorkflowUtils workflowUtils) {
         this.userManager = userManager;
         this.workflowUtils = workflowUtils;

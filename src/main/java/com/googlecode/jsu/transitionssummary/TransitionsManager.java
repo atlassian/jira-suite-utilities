@@ -50,14 +50,14 @@ public class TransitionsManager {
 
         for (Transition trans : statusChanges) {
             // Sets an ID for the Transition.
-            String transitionId = trans.getFromStatus().getId().toString() + "to" + trans.getToStatus().getId().toString();
+            String transitionId = trans.getFromStatus().getId() + "to" + trans.getToStatus().getId();
 
             log.debug("Transition found [" + transitionId + "] for issue " + issue.getKey());
 
-            TransitionSummary tranSummary = null;
+            TransitionSummary tranSummary;
 
             if (summary.containsKey(transitionId)) {
-                tranSummary = (TransitionSummary) summary.get(transitionId);
+                tranSummary = summary.get(transitionId);
             } else {
                 tranSummary = new TransitionSummary(
                         transitionId,

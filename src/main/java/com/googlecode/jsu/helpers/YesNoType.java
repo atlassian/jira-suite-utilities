@@ -14,10 +14,6 @@ public class YesNoType {
     private final int id;
     private final String value;
 
-    /**
-     * @param id
-     * @param value
-     */
     private YesNoType(int id, String value) {
         this.id = id;
         this.value = value;
@@ -54,8 +50,6 @@ public class YesNoType {
         if (!(obj instanceof YesNoType))
             return false;
         YesNoType other = (YesNoType) obj;
-        if (id != other.id)
-            return false;
-        return true;
+        return id == other.id;
     }
 }

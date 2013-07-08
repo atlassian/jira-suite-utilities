@@ -86,8 +86,6 @@ public class WorkflowUpdateIssueCustomFieldFunctionPluginFactory extends
                     PARAM_FIELD_VALUE,
                     functionDescriptor.getArgs().get(TARGET_FIELD_VALUE)
             );
-
-            return;
         }
     }
 }

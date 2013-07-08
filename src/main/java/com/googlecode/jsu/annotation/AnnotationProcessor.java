@@ -7,7 +7,6 @@ import java.util.List;
 
 /**
  * @author <A href="mailto:abashev at gmail dot com">Alexey Abashev</A>
- * @version $Id: AnnotationProcessor.java 105 2007-10-09 13:34:25Z abashev $
  */
 public class AnnotationProcessor {
     private List<AbstractVisitor> visitors = new ArrayList<AbstractVisitor>();

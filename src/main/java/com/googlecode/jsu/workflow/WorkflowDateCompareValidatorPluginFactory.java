@@ -32,11 +32,6 @@ public class WorkflowDateCompareValidatorPluginFactory extends
     private final FieldCollectionsUtils fieldCollectionsUtils;
     private final WorkflowUtils workflowUtils;
 
-    /**
-     * @param conditionCheckerFactory
-     * @param fieldCollectionsUtils
-     * @param workflowUtils
-     */
     public WorkflowDateCompareValidatorPluginFactory(ConditionCheckerFactory conditionCheckerFactory,
             FieldCollectionsUtils fieldCollectionsUtils, WorkflowUtils workflowUtils) {
         this.conditionCheckerFactory = conditionCheckerFactory;

@@ -14,7 +14,6 @@ import com.googlecode.jsu.helpers.checkers.CheckerCompositeFactory;
  * Return object for checking conditions.
  *
  * @author <A href="mailto:abashev at gmail dot com">Alexey Abashev</A>
- * @version $Id: GenericValidator.java 173 2008-10-14 13:04:43Z abashev $
  */
 public class ConditionCheckerFactory {
     public static final ConditionType GREATER = new ConditionType(1, ">", "conditiontype.greater_than", "G");
@@ -78,8 +77,6 @@ public class ConditionCheckerFactory {
 
     /**
      * Get all possible condition types.
-     *
-     * @return
      */
     public List<ConditionType> getConditionTypes() {
         return new ArrayList<ConditionType>(CONDITIONS_CACHE.values());
@@ -87,7 +84,6 @@ public class ConditionCheckerFactory {
 
     /**
      * Get all possible comparison types.
-     * @return
      */
     public List<ComparisonType> getComparisonTypes() {
 
@@ -100,9 +96,6 @@ public class ConditionCheckerFactory {
 
     /**
      * Find condition by id.
-     *
-     * @param id
-     * @return
      */
     public ConditionType findConditionById(String id) {
         return CONDITIONS_CACHE.get(Integer.valueOf(id));
@@ -110,9 +103,6 @@ public class ConditionCheckerFactory {
 
     /**
      * Find comparison by id.
-     *
-     * @param id
-     * @return
      */
     public ComparisonType findComparisonById(String id) {
         return COMPARISONS_CACHE.get(Integer.valueOf(id));

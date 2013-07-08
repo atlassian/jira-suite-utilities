@@ -22,7 +22,7 @@ import java.util.Map;
  *
  */
 public class UserIsInAnyGroupsCondition extends AbstractJiraCondition {
-    private final Logger log = LoggerFactory.getLogger(UserIsInAnyGroupsCondition.class);
+    private static final Logger LOG = LoggerFactory.getLogger(UserIsInAnyGroupsCondition.class);
 
     private final WorkflowUtils workflowUtils;
     private final UserManager userManager;
@@ -66,8 +66,6 @@ public class UserIsInAnyGroupsCondition extends AbstractJiraCondition {
     /**
      * This ist deprecated because Atlassian API is not working with ApplicationUser
      * As soon as this is working this method can be deleted
-     * @param applicationUser
-     * @return
      */
     @Deprecated
     private User convertApplicationUserToCrowdEmbeddedUser(ApplicationUser applicationUser){

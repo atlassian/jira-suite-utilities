@@ -34,7 +34,6 @@ import static com.atlassian.jira.issue.IssueFieldConstants.*;
  * This utils class exposes common methods to get field collections.
  *
  * @author <A href="mailto:abashev at gmail dot com">Alexey Abashev</A>
- * @version $Id$
  */
 //TODO Can we remove dependencies to jira-core (instead only jira-api) by using interfaces (instead of classes) of referenced custom field types?
 public class FieldCollectionsUtils {
@@ -56,15 +55,6 @@ public class FieldCollectionsUtils {
     private final CustomFieldManager customFieldManager;
     private final FieldVisibilityManager fieldVisibilityManager;
 
-    /**
-     * @param i18nHelper
-     * @param applicationProperties
-     * @param dateTimeFormatter
-     * @param fieldManager
-     * @param fieldLayoutManager
-     * @param customFieldManager
-     * @param fieldVisibilityManager
-     */
     public FieldCollectionsUtils(
             BeanFactory i18nHelper, ApplicationProperties applicationProperties,
             DateTimeFormatter dateTimeFormatter, FieldManager fieldManager,
@@ -208,7 +198,7 @@ public class FieldCollectionsUtils {
     public boolean isIssueHasField(Issue issue, Field field) {
         final String fieldId = field.getId();
 
-        boolean isHidden = false;
+        boolean isHidden;
 
         if (TIME_TRACKING_FIELDS.contains(fieldId)) {
             isHidden = !fieldManager.isTimeTrackingOn();
@@ -407,7 +397,6 @@ public class FieldCollectionsUtils {
     }
 
     /**
-     * @param tsDate
      * @return a String.
      *
      * It formats to a date nice.
@@ -419,7 +408,6 @@ public class FieldCollectionsUtils {
 
     /**
      * Get comparator for sorting fields.
-     * @return
      */
     private Comparator<Field> getComparator() {
         I18nHelper i18n = i18nHelper.getInstance(applicationProperties.getDefaultLocale());
@@ -429,8 +417,6 @@ public class FieldCollectionsUtils {
 
     /**
      * Convert array of names into list of fields
-     * @param names
-     * @return
      */
     private List<Field> asFields(String ... names) {
         List<Field> result = new ArrayList<Field>(names.length);

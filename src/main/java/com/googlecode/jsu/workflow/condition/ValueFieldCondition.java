@@ -26,10 +26,6 @@ public class ValueFieldCondition extends AbstractJiraCondition {
     private final ConditionCheckerFactory conditionCheckerFactory;
     private final WorkflowUtils workflowUtils;
 
-    /**
-     * @param conditionCheckerFactory
-     * @param workflowUtils
-     */
     public ValueFieldCondition(ConditionCheckerFactory conditionCheckerFactory, WorkflowUtils workflowUtils) {
         this.conditionCheckerFactory = conditionCheckerFactory;
         this.workflowUtils = workflowUtils;

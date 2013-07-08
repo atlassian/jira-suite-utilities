@@ -23,7 +23,6 @@ import java.util.Map;
 
 /**
  * @author <A href="mailto:abashev at gmail dot com">Alexey Abashev</A>
- * @version $Id: GenericValidator.java 173 2008-10-14 13:04:43Z abashev $
  */
 public abstract class GenericValidator implements Validator {
     private final Logger log = LoggerFactory.getLogger(this.getClass());

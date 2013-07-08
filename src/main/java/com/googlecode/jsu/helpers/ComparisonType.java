@@ -19,7 +19,6 @@ public class ComparisonType {
 
     /**
      * Get comparision id.
-     * @return
      */
     public Integer getId() {
         return id;
@@ -27,8 +26,6 @@ public class ComparisonType {
 
     /**
      * Get name key of comparision.
-     *
-     * @return
      */
     public String getValueKey() {
         return valueKey;
@@ -64,8 +61,6 @@ public class ComparisonType {
         if (!(obj instanceof ComparisonType))
             return false;
         ComparisonType other = (ComparisonType) obj;
-        if (id != other.id)
-            return false;
-        return true;
+        return id == other.id;
     }
 }

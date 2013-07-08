@@ -26,7 +26,6 @@ public class TransitionSummaryAction extends AbstractIssueAction {
 
     /**
      * @param tranSummaries List containing TransitionSummary objects.
-     * @param descriptor
      */
     public TransitionSummaryAction(List<TransitionSummary> tranSummaries, IssueTabPanelModuleDescriptor descriptor, UserManager userManager){
         super(descriptor);
@@ -50,7 +49,7 @@ public class TransitionSummaryAction extends AbstractIssueAction {
      * @see com.atlassian.jira.issue.action.IssueAction#getTimePerformed()
      */
     public Date getTimePerformed() {
-        return (Date) this.timePerformed;
+        return this.timePerformed;
     }
 
     /* (non-Javadoc)

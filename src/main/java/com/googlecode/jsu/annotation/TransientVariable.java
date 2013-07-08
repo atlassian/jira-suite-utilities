@@ -12,7 +12,6 @@ import java.lang.annotation.Target;
  * conditions and post-function.
  *
  * @author <A href="mailto:abashev at gmail dot com">Alexey Abashev</A>
- * @version $Id: TransientVariable.java 105 2007-10-09 13:34:25Z abashev $
  */
 @Documented
 @Retention(RUNTIME)

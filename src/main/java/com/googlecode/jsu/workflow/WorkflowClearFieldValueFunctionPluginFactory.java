@@ -26,10 +26,6 @@ public class WorkflowClearFieldValueFunctionPluginFactory
     private final FieldCollectionsUtils fieldCollectionsUtils;
     private final WorkflowUtils workflowUtils;
 
-    /**
-     * @param fieldCollectionsUtils
-     * @param workflowUtils
-     */
     public WorkflowClearFieldValueFunctionPluginFactory(FieldCollectionsUtils fieldCollectionsUtils,
             WorkflowUtils workflowUtils) {
         this.fieldCollectionsUtils = fieldCollectionsUtils;

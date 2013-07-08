@@ -28,10 +28,6 @@ public class WorkflowValueFieldConditionPluginFactory extends
     private final FieldCollectionsUtils fieldCollectionsUtils;
     private final WorkflowUtils workflowUtils;
 
-    /**
-     * @param conditionCheckerFactory
-     * @param fieldCollectionsUtils
-     */
     public WorkflowValueFieldConditionPluginFactory(
             ConditionCheckerFactory conditionCheckerFactory,
             FieldCollectionsUtils fieldCollectionsUtils,

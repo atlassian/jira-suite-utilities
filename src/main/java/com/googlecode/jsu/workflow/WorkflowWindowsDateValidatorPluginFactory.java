@@ -25,10 +25,6 @@ public class WorkflowWindowsDateValidatorPluginFactory extends
     private final FieldCollectionsUtils fieldCollectionsUtils;
     private final WorkflowUtils workflowUtils;
 
-    /**
-     * @param fieldCollectionsUtils
-     * @param workflowUtils
-     */
     public WorkflowWindowsDateValidatorPluginFactory(
             FieldCollectionsUtils fieldCollectionsUtils,
             WorkflowUtils workflowUtils

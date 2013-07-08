@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 
 /**
  * @author <A href="mailto:abashev at gmail dot com">Alexey Abashev</A>
- * @version $Id: MapFieldProcessor.java 105 2007-10-09 13:34:25Z abashev $
  */
 public class MapFieldProcessor extends AbstractVisitor {
     private final Logger log = LoggerFactory.getLogger(MapFieldProcessor.class);
@@ -19,10 +18,6 @@ public class MapFieldProcessor extends AbstractVisitor {
     private final Class<? extends Annotation> annotation;
     private final Map<String, Object> values;
 
-    /**
-     * @param annotation
-     * @param values
-     */
     public MapFieldProcessor(Class<? extends Annotation> annotation, Map<String, Object> values) {
         super();
 

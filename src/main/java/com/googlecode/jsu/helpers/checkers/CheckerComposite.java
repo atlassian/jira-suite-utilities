@@ -7,7 +7,6 @@ import com.googlecode.jsu.helpers.ConditionChecker;
 
 /**
  * @author <A href="mailto:abashev at gmail dot com">Alexey Abashev</A>
- * @version $Id$
  */
 class CheckerComposite implements ConditionChecker {
     private final Logger log = LoggerFactory.getLogger(CheckerComposite.class);
@@ -15,10 +14,6 @@ class CheckerComposite implements ConditionChecker {
     private final ValueConverter valueConverter;
     private final ComparingSnipet comparingSnipet;
 
-    /**
-     * @param valueConverter
-     * @param comparingSnipet
-     */
     public CheckerComposite(
             ValueConverter valueConverter, ComparingSnipet comparingSnipet
     ) {

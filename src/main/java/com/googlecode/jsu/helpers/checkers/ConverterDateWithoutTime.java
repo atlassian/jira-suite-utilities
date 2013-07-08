@@ -4,7 +4,6 @@ import java.util.Calendar;
 
 /**
  * @author <A href="mailto:abashev at gmail dot com">Alexey Abashev</A>
- * @version $Id$
  */
 class ConverterDateWithoutTime extends ConverterDate {
     /* (non-Javadoc)

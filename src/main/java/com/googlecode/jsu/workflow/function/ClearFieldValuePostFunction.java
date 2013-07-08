@@ -22,9 +22,6 @@ public class ClearFieldValuePostFunction extends AbstractPreserveChangesPostFunc
     private final WorkflowUtils workflowUtils;
     private final I18nHelper.BeanFactory beanFactory;
 
-    /**
-     * @param workflowUtils
-     */
     public ClearFieldValuePostFunction(WorkflowUtils workflowUtils, I18nHelper.BeanFactory beanFactory) {
         this.workflowUtils = workflowUtils;
         this.beanFactory = beanFactory;

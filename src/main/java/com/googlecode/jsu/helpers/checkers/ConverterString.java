@@ -15,7 +15,6 @@ import java.util.Collection;
 
 /**
  * @author <A href="mailto:abashev at gmail dot com">Alexey Abashev</A>
- * @version $Id$
  */
 public class ConverterString implements ValueConverter {
     /* (non-Javadoc)

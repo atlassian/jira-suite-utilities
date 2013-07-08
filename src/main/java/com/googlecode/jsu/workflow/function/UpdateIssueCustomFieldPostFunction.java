@@ -4,7 +4,6 @@ import static com.googlecode.jsu.workflow.WorkflowUpdateIssueCustomFieldFunction
 import static com.googlecode.jsu.workflow.WorkflowUpdateIssueCustomFieldFunctionPluginFactory.TARGET_FIELD_VALUE;
 
 import java.sql.Timestamp;
-import java.util.List;
 import java.util.Map;
 
 import com.atlassian.jira.ComponentManager;
@@ -28,9 +27,6 @@ public class UpdateIssueCustomFieldPostFunction extends AbstractPreserveChangesP
     private final WorkflowUtils workflowUtils;
     private final I18nHelper.BeanFactory beanFactory;
 
-    /**
-     * @param workflowUtils
-     */
     public UpdateIssueCustomFieldPostFunction(WorkflowUtils workflowUtils, I18nHelper.BeanFactory beanFactory) {
         this.workflowUtils = workflowUtils;
         this.beanFactory = beanFactory;
@@ -52,7 +48,7 @@ public class UpdateIssueCustomFieldPostFunction extends AbstractPreserveChangesP
         String configuredValue = args.get(TARGET_FIELD_VALUE);
         Object newValue;
 
-        ApplicationUser currentUser = null;
+        ApplicationUser currentUser;
         try {
             currentUser = getCallerUser(transientVars, args);
         } catch (Exception e) {

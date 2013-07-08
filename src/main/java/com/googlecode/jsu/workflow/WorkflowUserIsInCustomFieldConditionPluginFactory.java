@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.atlassian.jira.issue.CustomFieldManager;
-import com.atlassian.jira.issue.IssueFieldConstants;
 import com.atlassian.jira.issue.fields.Field;
 import com.atlassian.jira.plugin.workflow.AbstractWorkflowPluginFactory;
 import com.atlassian.jira.plugin.workflow.WorkflowPluginConditionFactory;
@@ -24,10 +23,6 @@ public class WorkflowUserIsInCustomFieldConditionPluginFactory
     private final CustomFieldManager customFieldManager;
     private final WorkflowUtils workflowUtils;
 
-    /**
-     * @param customFieldManager
-     * @param workflowUtils
-     */
     public WorkflowUserIsInCustomFieldConditionPluginFactory(
             CustomFieldManager customFieldManager,
             WorkflowUtils workflowUtils
@@ -119,8 +114,6 @@ public class WorkflowUserIsInCustomFieldConditionPluginFactory
 
     /**
      * Get allowUserInField parameter. Not use default valueOf to store previous behavior.
-     *
-     * @return
      */
     public static boolean getAllowUserInField(Map<String, Object> args) {
         String param = (String) args.get(ALLOW_USER_IN_FIELD);

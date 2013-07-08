@@ -66,8 +66,6 @@ public class ConditionType {
         if (!(obj instanceof ConditionType))
             return false;
         ConditionType other = (ConditionType) obj;
-        if (id != other.id)
-            return false;
-        return true;
+        return id == other.id;
     }
 }

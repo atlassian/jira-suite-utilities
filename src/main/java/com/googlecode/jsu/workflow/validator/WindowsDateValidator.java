@@ -63,10 +63,6 @@ public class WindowsDateValidator extends GenericValidator {
     }
 
     /**
-     * @param fldDate1
-     * @param fldDate2
-     * @param window
-     *
      * It makes the comparison properly this.
      */
     private void checkDatesCondition(Field fldDate1, Field fldDate2, String window) {

@@ -2,7 +2,6 @@ package com.googlecode.jsu.helpers.checkers;
 
 /**
  * @author <A href="mailto:abashev at gmail dot com">Alexey Abashev</A>
- * @version $Id$
  */
 class SnipetE implements ComparingSnipet {
     /* (non-Javadoc)

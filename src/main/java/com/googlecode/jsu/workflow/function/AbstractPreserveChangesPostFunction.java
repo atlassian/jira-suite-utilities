@@ -18,7 +18,6 @@ import com.opensymphony.workflow.WorkflowException;
  * Abstract post-function with transparent change tracking.
  *
  * @author <A href="mailto:abashev at gmail dot com">Alexey Abashev</A>
- * @version $Id$
  */
 abstract class AbstractPreserveChangesPostFunction extends AbstractJiraFunctionProvider {
     private static final String CHANGE_ITEMS = "changeItems";
@@ -28,10 +27,6 @@ abstract class AbstractPreserveChangesPostFunction extends AbstractJiraFunctionP
     /**
      * Mirror for execute method but with holder for changes
      *
-     * @param transientVars
-     * @param args
-     * @param ps
-     * @param holder
      * @throws WorkflowException
      */
     protected abstract void executeFunction(
@@ -64,8 +59,6 @@ abstract class AbstractPreserveChangesPostFunction extends AbstractJiraFunctionP
 
     /**
      * Create new holder with changes from transient vars
-     * @param transientVars
-     * @return
      */
     @SuppressWarnings("unchecked")
     private IssueChangeHolder createChangeHolder(Map<String, Object> transientVars) {
@@ -88,8 +81,6 @@ abstract class AbstractPreserveChangesPostFunction extends AbstractJiraFunctionP
 
     /**
      * Release holder for changes.
-     * @param holder
-     * @param transientVars
      */
     @SuppressWarnings("unchecked")
     private void releaseChangeHolder(IssueChangeHolder holder, Map<String, Object> transientVars) {

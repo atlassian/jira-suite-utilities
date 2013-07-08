@@ -21,10 +21,6 @@ public class WorkflowCopyValueFromOtherFieldPostFunctionPluginFactory extends Ab
     private final FieldCollectionsUtils fieldCollectionsUtils;
     private final WorkflowUtils workflowUtils;
 
-    /**
-     * @param fieldCollectionsUtils
-     * @param workflowUtils
-     */
     public WorkflowCopyValueFromOtherFieldPostFunctionPluginFactory(
             FieldCollectionsUtils fieldCollectionsUtils,
             WorkflowUtils workflowUtils
