@@ -89,7 +89,7 @@
                 <configuration>
                     <productVersion>${jira.version}</productVersion>
                     <productDataVersion>${jira.data.version}</productDataVersion>
-                    <!--productDataPath>${project.basedir}/src/test/resources/generated-test-resources.zip</productDataPath-->
+                    <productDataPath>${project.basedir}/src/test/resources/generated-test-resources.zip</productDataPath>
                     <pluginArtifacts>
                         <pluginArtifact>
                             <groupId>com.atlassian.jira.tests</groupId>
