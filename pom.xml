@@ -89,7 +89,14 @@
                 <configuration>
                     <productVersion>${jira.version}</productVersion>
                     <productDataVersion>${jira.data.version}</productDataVersion>
-                    <productDataPath>${project.basedir}/src/test/resources/generated-test-resources.zip</productDataPath>
+                    <!--productDataPath>${project.basedir}/src/test/resources/generated-test-resources.zip</productDataPath-->
+                    <pluginArtifacts>
+                        <pluginArtifact>
+                            <groupId>com.atlassian.jira.tests</groupId>
+                            <artifactId>jira-testkit-plugin</artifactId>
+                            <version>${testkit.version}</version>
+                        </pluginArtifact>
+                    </pluginArtifacts>
                 </configuration>
             </plugin>
             <plugin>
@@ -146,7 +153,14 @@
         <dependency>
             <groupId>com.atlassian.jira</groupId>
             <artifactId>jira-func-tests</artifactId>
-            <version>5.2.5</version>
+            <version>${jira.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.jira.tests</groupId>
+            <artifactId>jira-testkit-client</artifactId>
+            <version>${testkit.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -174,7 +188,9 @@
 
         <jira.version>6.0</jira.version>
         <jira.data.version>6.0</jira.data.version>
-        <jira.plugin.version>3.10.2</jira.plugin.version>
+        <jira.plugin.version>4.2.0</jira.plugin.version>
+        
+        <testkit.version>6.0.26</testkit.version>
 
         <scm.connection>scm:git:git://github.com/atlassian/jira-suite-utilities.git</scm.connection>
     </properties>
