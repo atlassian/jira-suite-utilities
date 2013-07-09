@@ -9,6 +9,8 @@ import com.atlassian.jira.testkit.client.restclient.*;
 import com.atlassian.jira.testkit.client.util.TimeBombLicence;
 import com.atlassian.jira.webtests.ztests.bundledplugins2.rest.RestFuncTest;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -35,6 +37,10 @@ public class PostFunctionTest extends RestFuncTest {
     private static final String FIELD_MULTI_GROUP = "customfield_10112";
     private static final String FIELD_READONLY_TEXT = "customfield_10115";
     private static final String FIELD_CASCADING_SELECT = "customfield_10108";
+    private static final String FIELD_RADIO_BUTTONS = "customfield_10105";
+    private static final String FIELD_DATE_PICKER = "customfield_10100";
+
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
     @Override
     protected void setUpTest() {
@@ -364,6 +370,369 @@ public class PostFunctionTest extends RestFuncTest {
     /**
      * Single test using transition.
      * <table>
+     * <tr><th style="text-align:left;">Test-Nr</th><td>PF11</td></tr>
+     * <tr><th style="text-align:left;">Post Function</th><td>copy value from other field</td></tr>
+     * <tr><th style="text-align:left;">Transition (id)</th><td>copy value from other field 10 (1011)</td></tr>
+     * <tr><th style="text-align:left;">Description</th><td>The field UserPicker will take the value from Reporter.</td></tr>
+     * </table>
+     * @throws Exception
+     */
+    public void testPF11() throws Exception {
+        ensureResolved(SECOND_ISSUE_KEY);
+
+        Issue issue = issueClient.get(SECOND_ISSUE_KEY);
+        Map single = issue.fields.get(FIELD_USER_PICKER);
+        assertNotSame(issue.fields.reporter.name,getSingleAsString(single,"name"));
+
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId("1011"));
+
+        final Response response = transitionsClient.postResponse(SECOND_ISSUE_KEY, issueUpdateRequest);
+
+        assertEquals(204, response.statusCode);
+
+        issue = issueClient.get(SECOND_ISSUE_KEY);
+        single = issue.fields.get(FIELD_USER_PICKER);
+        assertEquals(issue.fields.reporter.name,getSingleAsString(single,"name"));
+    }
+
+    /**
+     * Single test using transition.
+     * <table>
+     * <tr><th style="text-align:left;">Test-Nr</th><td>PF12</td></tr>
+     * <tr><th style="text-align:left;">Post Function</th><td>update issue custom field</td></tr>
+     * <tr><th style="text-align:left;">Transition (id)</th><td>update issue custom field (801)</td></tr>
+     * <tr><th style="text-align:left;">Description</th><td>The FreeText of the issue will be set to %%CURRENT_USER%%.</td></tr>
+     * </table>
+     * @throws Exception
+     */
+    public void testPF12() throws Exception {
+        ensureResolved(SECOND_ISSUE_KEY);
+
+        Issue issue = issueClient.get(SECOND_ISSUE_KEY);
+        assertNotSame("admin",issue.fields.get(FIELD_FREE_TEXT));
+
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId("801"));
+
+        final Response response = transitionsClient.postResponse(SECOND_ISSUE_KEY, issueUpdateRequest);
+
+        assertEquals(204, response.statusCode);
+
+        issue = issueClient.get(SECOND_ISSUE_KEY);
+        assertEquals("admin",issue.fields.get(FIELD_FREE_TEXT));
+    }
+
+    /**
+     * Single test using transition.
+     * <table>
+     * <tr><th style="text-align:left;">Test-Nr</th><td>PF13</td></tr>
+     * <tr><th style="text-align:left;">Post Function</th><td>update issue custom field</td></tr>
+     * <tr><th style="text-align:left;">Transition (id)</th><td>update issue custom field 1 (811)</td></tr>
+     * <tr><th style="text-align:left;">Description</th><td>The DateTime of the issue will be set to %%CURRENT_DATETIME%%.</td></tr>
+     * </table>
+     * @throws Exception
+     */
+    public void testPF13() throws Exception {
+        ensureResolved(SECOND_ISSUE_KEY);
+
+        Issue issue = issueClient.get(SECOND_ISSUE_KEY);
+        String oldDate = issue.fields.get(FIELD_DATE_TIME);
+
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId("811"));
+
+        String newDate = DATE_FORMAT.format(new Date());
+
+        final Response response = transitionsClient.postResponse(SECOND_ISSUE_KEY, issueUpdateRequest);
+
+        assertEquals(204, response.statusCode);
+
+        issue = issueClient.get(SECOND_ISSUE_KEY);
+        assertNotSame(issue.fields.get(FIELD_DATE_TIME),oldDate);
+        assertEquals(newDate,issue.fields.get(FIELD_DATE_TIME).toString().substring(0,10));
+    }
+
+    /**
+     * Single test using transition.
+     * <table>
+     * <tr><th style="text-align:left;">Test-Nr</th><td>PF14</td></tr>
+     * <tr><th style="text-align:left;">Post Function</th><td>update issue custom field</td></tr>
+     * <tr><th style="text-align:left;">Transition (id)</th><td>update issue custom field 2 (1021)</td></tr>
+     * <tr><th style="text-align:left;">Description</th><td>The LocationText of the issue will be set to Zurich.</td></tr>
+     * </table>
+     * @throws Exception
+     */
+    public void testPF14() throws Exception {
+        ensureResolved(SECOND_ISSUE_KEY);
+
+        Issue issue = issueClient.get(SECOND_ISSUE_KEY);
+        assertNotNull("Zurich",issue.fields.get(FIELD_LOCATION_TEXT));
+
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId("1021"));
+
+        final Response response = transitionsClient.postResponse(SECOND_ISSUE_KEY, issueUpdateRequest);
+
+        assertEquals(204, response.statusCode);
+
+        issue = issueClient.get(SECOND_ISSUE_KEY);
+        assertEquals("Zurich",issue.fields.get(FIELD_LOCATION_TEXT));
+    }
+
+    /**
+     * Single test using transition.
+     * <table>
+     * <tr><th style="text-align:left;">Test-Nr</th><td>PF15</td></tr>
+     * <tr><th style="text-align:left;">Post Function</th><td>update issue custom field</td></tr>
+     * <tr><th style="text-align:left;">Transition (id)</th><td>update issue custom field 3 (1031)</td></tr>
+     * <tr><th style="text-align:left;">Description</th><td>The LocationSelect of the issue will be set to Berlin.</td></tr>
+     * </table>
+     * @throws Exception
+     */
+    public void testPF15() throws Exception {
+        ensureResolved(SECOND_ISSUE_KEY);
+
+        Issue issue = issueClient.get(SECOND_ISSUE_KEY);
+        Map single = issue.fields.get(FIELD_LOCATION_SELECT);
+        assertNotSame("Berlin",getSingleAsString(single,"value"));
+
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId("1031"));
+
+        final Response response = transitionsClient.postResponse(SECOND_ISSUE_KEY, issueUpdateRequest);
+
+        assertEquals(204, response.statusCode);
+
+        issue = issueClient.get(SECOND_ISSUE_KEY);
+        single = issue.fields.get(FIELD_LOCATION_SELECT);
+        assertEquals("Berlin",getSingleAsString(single,"value"));
+    }
+
+    /**
+     * Single test using transition.
+     * <table>
+     * <tr><th style="text-align:left;">Test-Nr</th><td>PF16</td></tr>
+     * <tr><th style="text-align:left;">Post Function</th><td>update issue custom field</td></tr>
+     * <tr><th style="text-align:left;">Transition (id)</th><td>update issue custom field 4 (1041)</td></tr>
+     * <tr><th style="text-align:left;">Description</th><td>The CascadingSelect of the issue will be set to Option AB.</td></tr>
+     * </table>
+     * @throws Exception
+     */
+    public void testPF16() throws Exception {
+        ensureResolved(SECOND_ISSUE_KEY);
+
+        Issue issue = issueClient.get(SECOND_ISSUE_KEY);
+        Map cascadeContent = issue.fields.get(FIELD_CASCADING_SELECT);
+        assertNotSame("Option AB",getCascadeChildValue(cascadeContent));
+
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId("1041"));
+
+        final Response response = transitionsClient.postResponse(SECOND_ISSUE_KEY, issueUpdateRequest);
+
+        assertEquals(204, response.statusCode);
+
+        issue = issueClient.get(SECOND_ISSUE_KEY);
+        cascadeContent = issue.fields.get(FIELD_CASCADING_SELECT);
+
+        assertEquals("Option AB",getCascadeChildValue(cascadeContent));
+    }
+
+    /**
+     * Single test using transition.
+     * <table>
+     * <tr><th style="text-align:left;">Test-Nr</th><td>PF17</td></tr>
+     * <tr><th style="text-align:left;">Post Function</th><td>update issue custom field</td></tr>
+     * <tr><th style="text-align:left;">Transition (id)</th><td>update issue custom field 5 (1051)</td></tr>
+     * <tr><th style="text-align:left;">Description</th><td>The MultiSelect of the issue will be set to Option C.</td></tr>
+     * </table>
+     * @throws Exception
+     */
+    public void testPF17() throws Exception {
+        ensureResolved(SECOND_ISSUE_KEY);
+
+        Issue issue = issueClient.get(SECOND_ISSUE_KEY);
+        List<Map> multiContent = issue.fields.get(FIELD_MULTI_SELECT);
+        assertNotSame("Option C",getMultiAsString(multiContent,"name"));
+
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId("1051"));
+
+        final Response response = transitionsClient.postResponse(SECOND_ISSUE_KEY, issueUpdateRequest);
+
+        assertEquals(204, response.statusCode);
+
+        issue = issueClient.get(SECOND_ISSUE_KEY);
+        multiContent = issue.fields.get(FIELD_MULTI_SELECT);
+
+        assertEquals("Option C",getMultiAsString(multiContent,"value"));
+    }
+
+    /**
+     * Single test using transition.
+     * <table>
+     * <tr><th style="text-align:left;">Test-Nr</th><td>PF18</td></tr>
+     * <tr><th style="text-align:left;">Post Function</th><td>update issue custom field</td></tr>
+     * <tr><th style="text-align:left;">Transition (id)</th><td>update issue custom field 6 (1061)</td></tr>
+     * <tr><th style="text-align:left;">Description</th><td>The UserPicker of the issue will be set to user.</td></tr>
+     * </table>
+     * @throws Exception
+     */
+    public void testPF18() throws Exception {
+        ensureResolved(SECOND_ISSUE_KEY);
+
+        Issue issue = issueClient.get(SECOND_ISSUE_KEY);
+        Map single = issue.fields.get(FIELD_USER_PICKER);
+        assertNotSame("user",getSingleAsString(single,"name"));
+
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId("1061"));
+
+        final Response response = transitionsClient.postResponse(SECOND_ISSUE_KEY, issueUpdateRequest);
+
+        assertEquals(204, response.statusCode);
+
+        issue = issueClient.get(SECOND_ISSUE_KEY);
+        single = issue.fields.get(FIELD_USER_PICKER);
+
+        assertEquals("user",getSingleAsString(single,"name"));
+    }
+
+    /**
+     * Single test using transition.
+     * <table>
+     * <tr><th style="text-align:left;">Test-Nr</th><td>PF19</td></tr>
+     * <tr><th style="text-align:left;">Post Function</th><td>update issue custom field</td></tr>
+     * <tr><th style="text-align:left;">Transition (id)</th><td>update issue custom field 7 (1071)</td></tr>
+     * <tr><th style="text-align:left;">Description</th><td>The RadioButtons of the issue will be set to Option A.</td></tr>
+     * </table>
+     * @throws Exception
+     */
+    public void testPF19() throws Exception {
+        ensureResolved(SECOND_ISSUE_KEY);
+
+        Issue issue = issueClient.get(SECOND_ISSUE_KEY);
+        Map radio = issue.fields.get(FIELD_RADIO_BUTTONS);
+        assertNotSame("Option A",getSingleAsString(radio,"value"));
+
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId("1071"));
+
+        final Response response = transitionsClient.postResponse(SECOND_ISSUE_KEY, issueUpdateRequest);
+
+        assertEquals(204, response.statusCode);
+
+        issue = issueClient.get(SECOND_ISSUE_KEY);
+        radio = issue.fields.get(FIELD_RADIO_BUTTONS);
+
+        assertEquals("Option A",getSingleAsString(radio,"value"));
+    }
+
+    /**
+     * Single test using transition.
+     * <table>
+     * <tr><th style="text-align:left;">Test-Nr</th><td>PF20</td></tr>
+     * <tr><th style="text-align:left;">Post Function</th><td>update issue custom field</td></tr>
+     * <tr><th style="text-align:left;">Transition (id)</th><td>update issue custom field 8 (1081)</td></tr>
+     * <tr><th style="text-align:left;">Description</th><td>The GroupPicker of the issue will be set to jira-administrators.</td></tr>
+     * </table>
+     * @throws Exception
+     */
+    public void testPF20() throws Exception {
+        ensureResolved(SECOND_ISSUE_KEY);
+
+        Issue issue = issueClient.get(SECOND_ISSUE_KEY);
+        Map group = issue.fields.get(FIELD_GROUP_PICKER);
+        assertNotSame("jira-administrators",getSingleAsString(group,"name"));
+
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId("1081"));
+
+        final Response response = transitionsClient.postResponse(SECOND_ISSUE_KEY, issueUpdateRequest);
+
+        assertEquals(204, response.statusCode);
+
+        issue = issueClient.get(SECOND_ISSUE_KEY);
+        group = issue.fields.get(FIELD_GROUP_PICKER);
+
+        assertEquals("jira-administrators",getSingleAsString(group,"name"));
+    }
+
+    /**
+     * Single test using transition.
+     * <table>
+     * <tr><th style="text-align:left;">Test-Nr</th><td>PF21</td></tr>
+     * <tr><th style="text-align:left;">Post Function</th><td>update issue custom field</td></tr>
+     * <tr><th style="text-align:left;">Transition (id)</th><td>update issue custom field 9 (1091)</td></tr>
+     * <tr><th style="text-align:left;">Description</th><td>The DatePicker of the issue will be set to %%CURRENT_DATETIME%%.</td></tr>
+     * </table>
+     * @throws Exception
+     */
+    public void testPF21() throws Exception {
+        ensureResolved(SECOND_ISSUE_KEY);
+
+        Issue issue = issueClient.get(SECOND_ISSUE_KEY);
+        String oldDate = issue.fields.get(FIELD_DATE_PICKER);
+
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId("1091"));
+
+        String newDate = DATE_FORMAT.format(new Date());
+
+        final Response response = transitionsClient.postResponse(SECOND_ISSUE_KEY, issueUpdateRequest);
+
+        assertEquals(204, response.statusCode);
+
+        issue = issueClient.get(SECOND_ISSUE_KEY);
+        assertNotSame(issue.fields.get(FIELD_DATE_PICKER),oldDate);
+        assertEquals(newDate,issue.fields.get(FIELD_DATE_PICKER));
+    }
+
+    /**
+     * Single test using transition.
+     * <table>
+     * <tr><th style="text-align:left;">Test-Nr</th><td>PF22</td></tr>
+     * <tr><th style="text-align:left;">Post Function</th><td>update issue custom field</td></tr>
+     * <tr><th style="text-align:left;">Transition (id)</th><td>update issue custom field 10 (1101)</td></tr>
+     * <tr><th style="text-align:left;">Description</th><td>The SelectList of the issue will be set to Option B.</td></tr>
+     * </table>
+     * @throws Exception
+     */
+    public void testPF22() throws Exception {
+        ensureResolved(SECOND_ISSUE_KEY);
+
+        Issue issue = issueClient.get(SECOND_ISSUE_KEY);
+        Map listContent = issue.fields.get(FIELD_SELECT_LIST);
+        assertNotSame("Option B",getSingleAsString(listContent,"value)"));
+
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId("1101"));
+
+        final Response response = transitionsClient.postResponse(SECOND_ISSUE_KEY, issueUpdateRequest);
+
+        assertEquals(204, response.statusCode);
+
+        issue = issueClient.get(SECOND_ISSUE_KEY);
+        listContent = issue.fields.get(FIELD_SELECT_LIST);
+        assertEquals("Option B",getSingleAsString(listContent,"value"));
+    }
+
+    /**
+     * Single test using transition.
+     * <table>
      * <tr><th style="text-align:left;">Test-Nr</th><td>PF23</td></tr>
      * <tr><th style="text-align:left;">Post Function</th><td>clear field value</td></tr>
      * <tr><th style="text-align:left;">Transition (id)</th><td>clear field value (821)</td></tr>
@@ -555,6 +924,17 @@ public class PostFunctionTest extends RestFuncTest {
 
     // get string out of field, stored as map
     private String getSingleAsString(Map singleContent, String key) {
-        return singleContent.get(key).toString();
+        Object value = singleContent.get(key);
+        if(value!=null) {
+            return value.toString();
+        } else {
+            return null;
+        }
+    }
+
+    // get value of selected cascading select its child
+    private String getCascadeChildValue(Map cascadeContent) {
+        Map child = (Map)cascadeContent.get("child");
+        return (String)child.get("value");
     }
 }
