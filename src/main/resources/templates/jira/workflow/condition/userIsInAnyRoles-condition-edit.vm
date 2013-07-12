@@ -1,0 +1,85 @@
+<tr bgcolor="#ffffff">
+    <td align="center" valign="center" bgcolor="#fffff0">
+        <span class="label">$i18n.getText("userisinanyroles-condition-edit.title"):</span>
+    </td>
+</tr>
+<tr>
+    <td bgcolor="#ffffff" nowrap>
+    	    <table width=100%>
+    	        <tr align="center">
+		                <td align="center" width=50% valign="top">
+		                    <span class="label">$i18n.getText("userisinanyroles-condition-edit.available_roles.label"):</span><br>
+                    <select id="rolesList" name="rolesList" multiple size="10" width=90%>
+	                        #foreach ($val in ${val-rolesList})
+	                            <option value="${val.name}">$textutils.htmlEncode(${val.name})</option>
+	                        #end
+	                    </select>
+		        
+		                    <br><input id="hidRolesList" name="hidRolesList" type="hidden" value="$!{val-hidRolesList}">
+			                </td>
+		    
+		                <td align="center" width=50% valign="top">
+			                    <span class="label">$i18n.getText("userisinanyroles-condition-edit.allowed_roles.label"):</span><br>
+			                    <select id="rolesListSelected" name="rolesListSelected" multiple size="10" width=90%>
+		                        #if(${val-rolesListSelected})
+			                            #foreach ($val in ${val-rolesListSelected})
+		                                <option value="${val.name}">$textutils.htmlEncode(${val.name})</option>
+			                            #end
+				                        #end
+	                    </select>
+	
+		                </td>
+		    	        </tr>
+		    	        
+   	        <tr align="center" valign="center">
+                <td align="center" width=50% valign="top">
+                    <button type=button onclick="transfer('rolesList', 'rolesListSelected'); storeSelectedItems('rolesListSelected', 'hidRolesList')">$i18n.getText("action.add.label") &gt;&gt;</button>
+                </td>
+                <td align="center" width=50% valign="top">
+				    <button type=button onclick="transfer('rolesListSelected', 'rolesList'); storeSelectedItems('rolesListSelected', 'hidRolesList')">&lt;&lt; $i18n.getText("action.remove.label")</button>
+                </td>
+   	        </tr>
+   	    </table>
+    </td>
+</tr>
+<tr>
+  <td colspan="2">
+    <div style="width: 70%;" class="infoBox centred">
+      $i18n.getText("userisinanyroles-condition-edit.infobox.text")
+    </div>
+  </td>
+</tr>
+
+<script type="text/javascript">
+	function transfer(srcList, destList) {
+        var src = document.getElementById(srcList);
+        var dest = document.getElementById(destList);
+
+		while (src.selectedIndex >= 0) {
+			var selectedOption = src.options[src.selectedIndex];
+			var newOption = document.createElement('option');
+
+			newOption.text = selectedOption.text;
+			newOption.value = selectedOption.value;
+
+			try {
+				dest.add(newOption, null); // standards compliant; doesn't work in IE
+			} catch(ex) {
+				dest.add(newOption, 0); // IE only
+			}
+
+			src.remove(src.selectedIndex);
+		}
+	}
+
+	function storeSelectedItems(srcList, storage) {
+        var src = document.getElementById(srcList);
+        var selected = document.getElementById(storage);
+
+        selected.value = "";
+
+        for (i = 0; i < src.length ; i++) {
+            selected.value += src[i].value + "${val-splitter}";
+        }
+	}
+</script>

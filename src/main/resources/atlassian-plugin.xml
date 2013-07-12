@@ -87,6 +87,23 @@
                   location="templates/jira/workflow/condition/userIsInAnyGroups-condition-edit.vm"/>
     </workflow-condition>
 
+    <workflow-condition key="userIsInAnyRoles-condition"
+                        i18n-name-key="workflow-condition.userisinanyroles-condition.name"
+                        class="com.googlecode.jsu.workflow.WorkflowUserIsInAnyRolesConditionPluginFactory">
+        <description key="workflow-condition.userisinanyroles-condition.description"/>
+
+        <condition-class>
+            com.googlecode.jsu.workflow.condition.UserIsInAnyRolesCondition
+        </condition-class>
+
+        <resource type="velocity" name="view"
+                  location="templates/jira/workflow/condition/userIsInAnyRoles-condition-view.vm"/>
+        <resource type="velocity" name="input-parameters"
+                  location="templates/jira/workflow/condition/userIsInAnyRoles-condition-edit.vm"/>
+        <resource type="velocity" name="edit-parameters"
+                  location="templates/jira/workflow/condition/userIsInAnyRoles-condition-edit.vm"/>
+    </workflow-condition>
+
     <workflow-condition key="valueField-condition"
                         i18n-name-key="workflow-condition.valuefield-condition.name"
                         class="com.googlecode.jsu.workflow.WorkflowValueFieldConditionPluginFactory">

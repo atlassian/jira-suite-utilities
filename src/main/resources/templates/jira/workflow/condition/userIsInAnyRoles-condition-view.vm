@@ -1,0 +1,10 @@
+#if(${val-rolesListSelected})
+  #if (${val-rolesListSelected.isEmpty()})
+    $i18n.getText("userisinanyroles-condition-view.empty.text")
+  #else
+    $i18n.getText("userisinanyroles-condition-view.condition.text")
+    #foreach ($singleValue in ${val-rolesListSelected})
+      <b>$textutils.htmlEncode($!singleValue.getName())</b>#if ($velocityCount != ${val-rolesListSelected.size()}), #end
+    #end
+  #end
+#end

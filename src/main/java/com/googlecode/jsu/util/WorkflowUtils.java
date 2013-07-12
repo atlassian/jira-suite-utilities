@@ -38,6 +38,8 @@ import com.atlassian.jira.project.Project;
 import com.atlassian.jira.project.ProjectManager;
 import com.atlassian.jira.project.version.Version;
 import com.atlassian.jira.project.version.VersionManager;
+import com.atlassian.jira.security.roles.ProjectRole;
+import com.atlassian.jira.security.roles.ProjectRoleManager;
 import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.user.util.UserManager;
 import com.atlassian.jira.util.ObjectUtils;
@@ -88,6 +90,7 @@ public class WorkflowUtils {
     private final ProjectManager projectManager;
     private final PriorityManager priorityManager;
     private final LabelManager labelManager;
+    private final ProjectRoleManager projectRoleManager;
 
     public WorkflowUtils(
             FieldManager fieldManager, IssueManager issueManager,
@@ -95,7 +98,8 @@ public class WorkflowUtils {
             IssueSecurityLevelManager issueSecurityLevelManager, ApplicationProperties applicationProperties,
             FieldCollectionsUtils fieldCollectionsUtils, IssueLinkManager issueLinkManager,
             UserManager userManager, CrowdService crowdService, OptionsManager optionsManager,
-            ProjectManager projectManager, PriorityManager priorityManager, LabelManager labelManager) {
+            ProjectManager projectManager, PriorityManager priorityManager, LabelManager labelManager,
+            ProjectRoleManager projectRoleManager) {
         this.fieldManager = fieldManager;
         this.issueManager = issueManager;
         this.projectComponentManager = projectComponentManager;
@@ -110,6 +114,7 @@ public class WorkflowUtils {
         this.projectManager = projectManager;
         this.priorityManager = priorityManager;
         this.labelManager = labelManager;
+        this.projectRoleManager = projectRoleManager;
     }
 
     /**
@@ -932,6 +937,39 @@ public class WorkflowUtils {
 
         for (Group g : groups) {
             sb.append(g.getName()).append(splitter);
+        }
+
+        return sb.toString();
+    }
+
+    /**
+     * @return a List of ProjectRoles
+     *
+     * Get ProjectRoles from a string.
+     *
+     */
+    public List<ProjectRole> getRoles(String strRoles, String splitter) {
+        String[] roles = strRoles.split("\\Q" + splitter + "\\E");
+        List<ProjectRole> roleList = new ArrayList<ProjectRole>(roles.length);
+
+        for (String s : roles) {
+            roleList.add(projectRoleManager.getProjectRole(s));
+        }
+
+        return roleList;
+    }
+
+    /**
+     * @return a String with the project roles selected.
+     *
+     * Get project roles as String.
+     *
+     */
+    public String getStringRole(Collection<ProjectRole> roles, String splitter) {
+        StringBuilder sb = new StringBuilder();
+
+        for (ProjectRole p : roles) {
+            sb.append(p.getName()).append(splitter);
         }
 
         return sb.toString();
