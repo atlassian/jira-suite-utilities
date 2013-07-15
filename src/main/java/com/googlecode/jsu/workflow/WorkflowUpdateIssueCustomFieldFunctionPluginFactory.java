@@ -76,7 +76,7 @@ public class WorkflowUpdateIssueCustomFieldFunctionPluginFactory extends
         } else {
             FunctionDescriptor functionDescriptor = (FunctionDescriptor) descriptor;
 
-            String fieldName = (String) functionDescriptor.getArgs().get("field.name");
+            String fieldName = (String) functionDescriptor.getArgs().get(TARGET_FIELD_NAME);
 
             velocityParams.put(
                     PARAM_FIELD_ID,
