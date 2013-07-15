@@ -23,6 +23,7 @@ public class PostFunctionTest extends RestFuncTest {
 
     private static final String FIRST_ISSUE_KEY = "TJP-1"; // empty one, resolved
     private static final String SECOND_ISSUE_KEY = "TJP-2"; // with all field data set, resolved
+    private static final String SUBTASK_ISSUE_KEY = "TJP-3"; // empty one, resolved
 
     private static final String FIELD_LOCATION_TEXT = "customfield_10001";
     private static final String FIELD_GROUP_PICKER = "customfield_10110";
@@ -39,6 +40,7 @@ public class PostFunctionTest extends RestFuncTest {
     private static final String FIELD_CASCADING_SELECT = "customfield_10108";
     private static final String FIELD_RADIO_BUTTONS = "customfield_10105";
     private static final String FIELD_DATE_PICKER = "customfield_10100";
+    private static final String FIELD_TEXT_FIELD = "customfield_10107";
 
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -896,6 +898,57 @@ public class PostFunctionTest extends RestFuncTest {
 
         issue = issueClient.get(SECOND_ISSUE_KEY);
         assertNull(issue.fields.duedate);
+    }
+
+    /**
+     * Single test using transition.
+     * <table>
+     * <tr><th style="text-align:left;">Test-Nr</th><td>PF29</td></tr>
+     * <th style="text-align:left;">Post Function</th><td>copy value from other field</td></tr>
+     * <th style="text-align:left;">Transition (id)</th><td>copy value from other field 11 (1201)</td></tr>
+     * <th style="text-align:left;">Description</th><td>The field TextField will take the value from Assignee. Source issue is the parent, destination the sub-task. (issue is sub-task)</td></tr>
+     * </table>
+     * @throws Exception
+     */
+    public void testPF29() throws Exception {
+        ensureResolved(SUBTASK_ISSUE_KEY);
+
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId("1201"));
+
+        final Response response = transitionsClient.postResponse(SUBTASK_ISSUE_KEY, issueUpdateRequest);
+
+        assertEquals(204, response.statusCode);
+
+        Issue parent = issueClient.get(SECOND_ISSUE_KEY);
+        Issue subtask = issueClient.get(SUBTASK_ISSUE_KEY);
+        assertEquals(subtask.fields.get(FIELD_TEXT_FIELD),parent.fields.assignee.name);
+    }
+
+    /**
+     * Single test using transition.
+     * <table>
+     * <tr><th style="text-align:left;">Test-Nr</th><td>PF30</td></tr>
+     * <th style="text-align:left;">Post Function</th><td>copy value from other field</td></tr>
+     * <th style="text-align:left;">Transition (id)</th><td>copy value from other field 11 (1201)</td></tr>
+     * <th style="text-align:left;">Description</th><td>The field TextField will take the value from Assignee. Source issue is the parent, destination the sub-task. (issue is casual issue)</td></tr>
+     * </table>
+     * @throws Exception
+     */
+    public void testPF30() throws Exception {
+        ensureResolved(FIRST_ISSUE_KEY);
+
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId("1201"));
+
+        final Response response = transitionsClient.postResponse(FIRST_ISSUE_KEY, issueUpdateRequest);
+
+        assertEquals(204, response.statusCode);
+
+        Issue issue = issueClient.get(FIRST_ISSUE_KEY);
+        assertNotSame(issue.fields.get(FIELD_TEXT_FIELD),issue.fields.assignee.name);
     }
 
     // all PostFunction transitions made out of resolved state

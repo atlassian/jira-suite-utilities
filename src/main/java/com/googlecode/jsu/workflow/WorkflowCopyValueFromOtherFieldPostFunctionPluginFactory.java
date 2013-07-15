@@ -11,6 +11,7 @@ import com.atlassian.jira.plugin.workflow.WorkflowPluginFunctionFactory;
 import com.googlecode.jsu.util.FieldCollectionsUtils;
 import com.googlecode.jsu.util.WorkflowUtils;
 import com.opensymphony.workflow.loader.AbstractDescriptor;
+import com.opensymphony.workflow.loader.FunctionDescriptor;
 
 /**
  * This class defines the parameters available for Copy Value From Other Field Post Function.
@@ -18,6 +19,17 @@ import com.opensymphony.workflow.loader.AbstractDescriptor;
  * @author Gustavo Martin.
  */
 public class WorkflowCopyValueFromOtherFieldPostFunctionPluginFactory extends AbstractWorkflowPluginFactory implements WorkflowPluginFunctionFactory {
+
+    public static final String PARAM_SOURCE_FIELD = "sourceField";
+    public static final String PARAM_DEST_FIELD = "destinationField";
+    public static final String PARAM_COPY_TYPE = "copyType";
+    private static final String VALUE_SOURCE_LIST = "val-sourceFieldsList";
+    private static final String VALUE_DEST_LIST = "val-destinationFieldsList";
+    private static final String VALUE_SOURCE_SELECTED = "val-sourceFieldSelected";
+    private static final String VALUE_DEST_SELECTED = "val-destinationFieldSelected";
+    private static final String VALUE_COPY_TYPE = "val-copyType";
+
+
     private final FieldCollectionsUtils fieldCollectionsUtils;
     private final WorkflowUtils workflowUtils;
 
@@ -36,8 +48,8 @@ public class WorkflowCopyValueFromOtherFieldPostFunctionPluginFactory extends Ab
         List<Field> sourceFields = fieldCollectionsUtils.getCopyFromFields();
         List<Field> destinationFields = fieldCollectionsUtils.getCopyToFields();
 
-        velocityParams.put("val-sourceFieldsList", Collections.unmodifiableList(sourceFields));
-        velocityParams.put("val-destinationFieldsList", Collections.unmodifiableList(destinationFields));
+        velocityParams.put(VALUE_SOURCE_LIST, Collections.unmodifiableList(sourceFields));
+        velocityParams.put(VALUE_DEST_LIST, Collections.unmodifiableList(destinationFields));
     }
 
     /* (non-Javadoc)
@@ -46,22 +58,28 @@ public class WorkflowCopyValueFromOtherFieldPostFunctionPluginFactory extends Ab
     protected void getVelocityParamsForEdit(Map<String, Object> velocityParams, AbstractDescriptor descriptor) {
         getVelocityParamsForInput(velocityParams);
 
-        Field sourceFieldId = workflowUtils.getFieldFromDescriptor(descriptor, "sourceField");
-        Field destinationField = workflowUtils.getFieldFromDescriptor(descriptor, "destinationField");
+        Field sourceFieldId = workflowUtils.getFieldFromDescriptor(descriptor, PARAM_SOURCE_FIELD);
+        Field destinationField = workflowUtils.getFieldFromDescriptor(descriptor, PARAM_DEST_FIELD);
 
-        velocityParams.put("val-sourceFieldSelected", sourceFieldId);
-        velocityParams.put("val-destinationFieldSelected", destinationField);
+        velocityParams.put(VALUE_SOURCE_SELECTED, sourceFieldId);
+        velocityParams.put(VALUE_DEST_SELECTED, destinationField);
+
+        FunctionDescriptor functionDescriptor = (FunctionDescriptor) descriptor;
+        velocityParams.put(VALUE_COPY_TYPE,getCopyType(functionDescriptor));
     }
 
     /* (non-Javadoc)
      * @see com.googlecode.jsu.workflow.AbstractWorkflowPluginFactory#getVelocityParamsForView(java.util.Map, com.opensymphony.workflow.loader.AbstractDescriptor)
      */
     protected void getVelocityParamsForView(Map<String, Object> velocityParams, AbstractDescriptor descriptor) {
-        Field sourceFieldId = workflowUtils.getFieldFromDescriptor(descriptor, "sourceField");
-        Field destinationField = workflowUtils.getFieldFromDescriptor(descriptor, "destinationField");
+        Field sourceFieldId = workflowUtils.getFieldFromDescriptor(descriptor, PARAM_SOURCE_FIELD);
+        Field destinationField = workflowUtils.getFieldFromDescriptor(descriptor, PARAM_DEST_FIELD);
 
-        velocityParams.put("val-sourceFieldSelected", sourceFieldId);
-        velocityParams.put("val-destinationFieldSelected", destinationField);
+        velocityParams.put(VALUE_SOURCE_SELECTED, sourceFieldId);
+        velocityParams.put(VALUE_DEST_SELECTED, destinationField);
+
+        FunctionDescriptor functionDescriptor = (FunctionDescriptor) descriptor;
+        velocityParams.put(VALUE_COPY_TYPE,getCopyType(functionDescriptor));
     }
 
     /* (non-Javadoc)
@@ -73,13 +91,25 @@ public class WorkflowCopyValueFromOtherFieldPostFunctionPluginFactory extends Ab
         try{
             String sourceField = extractSingleParam(conditionParams, "sourceFieldsList");
             String destinationField = extractSingleParam(conditionParams, "destinationFieldsList");
+            String copyType = extractSingleParam(conditionParams, PARAM_COPY_TYPE);
 
-            params.put("sourceField", sourceField);
-            params.put("destinationField", destinationField);
+            params.put(PARAM_SOURCE_FIELD, sourceField);
+            params.put(PARAM_DEST_FIELD, destinationField);
+            params.put(PARAM_COPY_TYPE, copyType);
         } catch (IllegalArgumentException iae) {
             // Aggregate so that Transitions can be added.
         }
 
         return params;
+    }
+
+    private String getCopyType(FunctionDescriptor functionDescriptor) {
+        String value = (String) functionDescriptor.getArgs().get(PARAM_COPY_TYPE);
+
+        if (value == null || value.equals("null")) {
+            return "same";
+        } else {
+            return value;
+        }
     }
 }

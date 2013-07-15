@@ -1,5 +1,10 @@
 #if(${val-destinationFieldSelected} && ${val-sourceFieldSelected})
     $i18n.getText("copyvaluefromfield-function-view.function_text","<b>$textutils.htmlEncode(${val-destinationFieldSelected.name})</b>","<b>$textutils.htmlEncode(${val-sourceFieldSelected.name})</b>")
+    #if(${val-copyType} && ${val-copyType} == 'parent')
+        $i18n.getText("copyvaluefromfield-function-view.function_from_parent")
+    #else
+        $i18n.getText("copyvaluefromfield-function-view.function_within_same")
+    #end
 #else
     $i18n.getText("copyvaluefromfield-function-view.wrong_selection")
 #end

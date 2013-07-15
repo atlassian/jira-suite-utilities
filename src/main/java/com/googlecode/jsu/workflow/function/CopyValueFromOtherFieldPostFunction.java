@@ -1,5 +1,10 @@
 package com.googlecode.jsu.workflow.function;
 
+
+import static com.googlecode.jsu.workflow.WorkflowCopyValueFromOtherFieldPostFunctionPluginFactory.PARAM_SOURCE_FIELD;
+import static com.googlecode.jsu.workflow.WorkflowCopyValueFromOtherFieldPostFunctionPluginFactory.PARAM_DEST_FIELD;
+import static com.googlecode.jsu.workflow.WorkflowCopyValueFromOtherFieldPostFunctionPluginFactory.PARAM_COPY_TYPE;
+
 import java.util.Map;
 
 import com.atlassian.jira.ComponentManager;
@@ -34,8 +39,9 @@ public class CopyValueFromOtherFieldPostFunction extends AbstractPreserveChanges
             Map<String, Object> transientVars, Map<String, String> args,
             PropertySet ps, IssueChangeHolder holder
     ) throws WorkflowException {
-        String fieldFromKey = args.get("sourceField");
-        String fieldToKey = args.get("destinationField");
+        String fieldFromKey = args.get(PARAM_SOURCE_FIELD);
+        String fieldToKey = args.get(PARAM_DEST_FIELD);
+        String copyType = args.get(PARAM_COPY_TYPE);
 
         Field fieldFrom = workflowUtils.getFieldFromKey(fieldFromKey);
         Field fieldTo = workflowUtils.getFieldFromKey(fieldToKey);
@@ -46,23 +52,39 @@ public class CopyValueFromOtherFieldPostFunction extends AbstractPreserveChanges
         try {
             ApplicationUser currentUser = getCallerUser(transientVars, args);
             MutableIssue issue = getIssue(transientVars);
+            MutableIssue sourceIssue;
+            MutableIssue destIssue;
+            if("parent".equals(copyType)) {
+                sourceIssue = (MutableIssue) issue.getParentObject();
+                destIssue = issue;
+                if(sourceIssue==null) {
+                    log.debug("Issue (" + destIssue.getKey() + ") has no parent, wont do anything.");
+                    return;
+                }
+            } else {
+                //either same, not set, past versions of this did not have this feature, they will be unset
+                sourceIssue = issue;
+                destIssue = issue;
+            }
 
             // It gives the value from the source field.
-            Object sourceValue = workflowUtils.getFieldValueFromIssue(issue, fieldFrom);
+            Object sourceValue = workflowUtils.getFieldValueFromIssue(sourceIssue, fieldFrom);
 
             if (log.isDebugEnabled()) {
                 log.debug(
                         String.format(
-                                "Copying value [%s] from issue %s field '%s' to '%s'",
-                                sourceValue, issue.getKey(),
+                                "Copying value [%s] from issue %s field '%s' to issue %s field '%s'",
+                                sourceValue,
+                                sourceIssue.getKey(),
                                 fieldFromName,
+                                destIssue.getKey(),
                                 fieldToName
                         )
                 );
             }
 
             // It set the value to field.
-            workflowUtils.setFieldValue(currentUser, issue, fieldToKey, sourceValue, holder);
+            workflowUtils.setFieldValue(currentUser, destIssue, fieldToKey, sourceValue, holder);
 
             if (log.isDebugEnabled()) {
                 log.debug("Value was successfully copied");
