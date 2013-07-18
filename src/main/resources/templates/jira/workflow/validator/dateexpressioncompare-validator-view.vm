@@ -1,0 +1,13 @@
+#if (${val-dateFieldSelected} && ${val-conditionSelected} && ${val-expressionSelected})
+    $i18n.getText("datecompare-validator-view.validation_text",
+        "<b>${val-dateFieldSelected.name}</b>",
+        "<b>$i18n.getText(${val-conditionSelected.getDisplayTextKey()})</b>",
+        "<b>${val-expressionSelected}</b>")
+#else
+    $i18n.getText("dateexpressioncompare-validator-view.wrong_selection")
+#end
+#if (${val-includeTimeSelected.id}==1)
+    $i18n.getText("datecompare-validator-view.including_time")
+#else
+    $i18n.getText("datecompare-validator-view.only_date")
+#end

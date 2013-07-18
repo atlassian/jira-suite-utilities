@@ -156,6 +156,23 @@
                   location="templates/jira/workflow/validator/datecompare-validator-edit.vm"/>
     </workflow-validator>
 
+    <workflow-validator key="dateExpressionCompare-validator"
+                        i18n-name-key="workflow-validator.dateexpressioncompare-validator.name"
+                        class="com.googlecode.jsu.workflow.WorkflowDateExpressionCompareValidatorPluginFactory">
+        <description key="workflow-validator.dateexpressioncompare-validator.description"/>
+
+        <validator-class>
+            com.googlecode.jsu.workflow.validator.DateExpressionCompareValidator
+        </validator-class>
+
+        <resource type="velocity" name="view"
+                  location="templates/jira/workflow/validator/dateexpressioncompare-validator-view.vm"/>
+        <resource type="velocity" name="input-parameters"
+                  location="templates/jira/workflow/validator/dateexpressioncompare-validator-input.vm"/>
+        <resource type="velocity" name="edit-parameters"
+                  location="templates/jira/workflow/validator/dateexpressioncompare-validator-edit.vm"/>
+    </workflow-validator>
+
     <workflow-validator key="fieldsRequired-validator"
                         i18n-name-key="workflow-validator.fieldsrequired-validator.name"
                         class="com.googlecode.jsu.workflow.WorkflowFieldsRequiredValidatorPluginFactory">

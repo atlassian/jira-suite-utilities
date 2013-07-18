@@ -1,21 +1,8 @@
 package com.googlecode.jsu.workflow.validator;
 
-import static com.googlecode.jsu.helpers.ConditionCheckerFactory.DATE;
-import static com.googlecode.jsu.helpers.ConditionCheckerFactory.DATE_WITHOUT_TIME;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
-import com.atlassian.jira.ComponentManager;
-import com.atlassian.jira.util.I18nHelper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.atlassian.jira.config.properties.APKeys;
 import com.atlassian.jira.config.properties.ApplicationProperties;
-import com.atlassian.jira.issue.Issue;
 import com.atlassian.jira.issue.fields.Field;
+import com.atlassian.jira.util.I18nHelper;
 import com.googlecode.jsu.annotation.Argument;
 import com.googlecode.jsu.helpers.ComparisonType;
 import com.googlecode.jsu.helpers.ConditionChecker;
@@ -25,17 +12,26 @@ import com.googlecode.jsu.util.FieldCollectionsUtils;
 import com.googlecode.jsu.util.WorkflowUtils;
 import com.opensymphony.workflow.InvalidInputException;
 import com.opensymphony.workflow.WorkflowException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.Calendar;
+import java.util.Date;
+
+import static com.googlecode.jsu.helpers.ConditionCheckerFactory.DATE;
+import static com.googlecode.jsu.helpers.ConditionCheckerFactory.DATE_WITHOUT_TIME;
 
 /**
- * This validator compare two datetime fields, using the given comparison type.
- * And returning an exception if it doesn't fulfill the condition.
+ * This validator compares a datetime field to a datetime expression, like for
+ * example now, or 2d, for plus 2 days, or -1m for one month ago, using the given
+ * comparison type. And returning an exception if it doesn't fulfill the condition.
  */
-public class DateCompareValidator extends AbstractDateCompareValidator {
-    @Argument("date1Selected")
-    private String date1;
+public class DateExpressionCompareValidator extends AbstractDateCompareValidator {
+    @Argument("dateFieldSelected")
+    private String dateField;
 
-    @Argument("date2Selected")
-    private String date2;
+    @Argument("expressionSelected")
+    private String expression;
 
     @Argument("conditionSelected")
     private String conditionId;
@@ -43,13 +39,12 @@ public class DateCompareValidator extends AbstractDateCompareValidator {
     @Argument("includeTimeSelected")
     private String includeTimeValue;
 
-    private final Logger log = LoggerFactory.getLogger(DateCompareValidator.class);
+    private final Logger log = LoggerFactory.getLogger(DateExpressionCompareValidator.class);
 
     private final ApplicationProperties applicationProperties;
     private final ConditionCheckerFactory conditionCheckerFactory;
-    private final I18nHelper.BeanFactory beanFactory;
 
-    public DateCompareValidator(
+    public DateExpressionCompareValidator(
             ApplicationProperties applicationProperties,
             ConditionCheckerFactory conditionCheckerFactory,
             FieldCollectionsUtils fieldCollectionsUtils,
@@ -60,42 +55,39 @@ public class DateCompareValidator extends AbstractDateCompareValidator {
 
         this.applicationProperties = applicationProperties;
         this.conditionCheckerFactory = conditionCheckerFactory;
-        this.beanFactory = beanFactory;
     }
 
     /* (non-Javadoc)
      * @see com.googlecode.jsu.workflow.validator.GenericValidator#validate()
      */
     protected void validate() throws InvalidInputException, WorkflowException {
-        Field field1 = workflowUtils.getFieldFromKey(date1);
-        Field field2 = workflowUtils.getFieldFromKey(date2);
+        Field field = workflowUtils.getFieldFromKey(dateField);
 
         ConditionType condition = conditionCheckerFactory.findConditionById(conditionId);
         boolean includeTime = Integer.parseInt(includeTimeValue) == 1;
 
         // Compare Dates.
-        if ((field1 != null) && (field2 != null)) {
-            Object objValue1 = workflowUtils.getFieldValueFromIssue(getIssue(), field1);
-            Object objValue2 = workflowUtils.getFieldValueFromIssue(getIssue(), field2);
+        if ((field != null) && (expression != null)) {
+            Object objValue1 = workflowUtils.getFieldValueFromIssue(getIssue(), field);
+
             Date objDate1, objDate2;
 
             try {
                 objDate1 = (Date) objValue1;
             } catch (ClassCastException e) {
-                wrongDataErrorMessage(field1, objValue1);
+                wrongDataErrorMessage(field, objValue1);
 
                 return;
             }
 
-            try {
-                objDate2 = (Date) objValue2;
-            } catch (ClassCastException e) {
-                wrongDataErrorMessage(field2, objValue2);
+            objDate2 = getSecondDate();
+            if(objDate2==null) {
+                invalidExpression(field,expression);
 
                 return;
             }
 
-            if ((objDate1 != null) && (objDate2 != null)) {
+            if ((objDate1 != null)) {
                 ComparisonType comparison = (includeTime) ? DATE : DATE_WITHOUT_TIME;
                 ConditionChecker checker = conditionCheckerFactory.getChecker(comparison, condition);
 
@@ -109,8 +101,8 @@ public class DateCompareValidator extends AbstractDateCompareValidator {
 
                 if (log.isDebugEnabled()) {
                     log.debug(
-                            "Compare field \"" + field1.getName() +
-                            "\" and field \"" + field2.getName() +
+                            "Compare field \"" + field.getName() +
+                            "\" and expression \"" + expression +
                             "\" with values [" + calDate1 +
                             "] and [" + calDate2 +
                             "] with result " + result
@@ -118,20 +110,48 @@ public class DateCompareValidator extends AbstractDateCompareValidator {
                 }
 
                 if (!result) {
-                    generateErrorMessage(field1, objDate1, field2.getName(), objDate2, condition, includeTime);
+                    generateErrorMessage(field, objDate1, null, objDate2, condition, includeTime);
                 }
             } else {
-                // If any of fields are null, validates if the field is required. Otherwise, doesn't throws an Exception.
-                if (objDate1 == null) {
-                    validateRequired(field1);
-                }
-
-                if (objDate2 == null) {
-                    validateRequired(field2);
-                }
+                // If date field is null, validate if the field is required. Otherwise, doesn't throws an Exception.
+                validateRequired(field);
             }
         } else {
-            log.error("Unable to find field with ids [" + date1 + "] and [" + date2 + "]");
+            log.error("Unable to find field with id [" + dateField + "]");
         }
+    }
+
+    private Date getSecondDate() {
+        if(expression!=null) {
+            if("now".equals(expression)) {
+                return new Date();
+            } else {
+                Integer offset;
+                String unit = expression.substring(expression.length()-1);
+                try {
+                    offset = Integer.parseInt(expression.substring(0,expression.length()-1));
+                } catch(Exception e) {
+                    return null;
+                }
+
+                Calendar cal = Calendar.getInstance();
+                int calField;
+                if("d".equals(unit)) {
+                    calField = Calendar.DAY_OF_YEAR;
+                } else if("w".equals(unit)) {
+                    calField = Calendar.WEEK_OF_YEAR;
+                } else if("m".equals(unit)) {
+                    calField = Calendar.MONTH;
+                } else if("y".equals(unit)) {
+                    calField = Calendar.YEAR;
+                } else {
+                    return null;
+                }
+                cal.add(calField, offset);
+                return cal.getTime();
+            }
+        }
+
+        return null;
     }
 }
