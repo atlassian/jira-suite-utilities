@@ -1,8 +1,14 @@
 package com.googlecode.jsu.workflow.condition;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
+import com.atlassian.jira.issue.customfields.option.LazyLoadedOption;
+import com.atlassian.jira.issue.fields.CustomField;
+import com.atlassian.jira.issue.fields.option.Option;
+import com.atlassian.jira.issue.status.Status;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,7 +57,13 @@ public class ValueFieldCondition extends AbstractJiraCondition {
 
         try {
             Field field = workflowUtils.getFieldFromKey(fieldId);
-            Object fieldValue = workflowUtils.getFieldValueFromIssue(issue, field);
+            Object fieldValue = workflowUtils.getFieldValueFromIssue(issue, field, true);
+
+            //special case Option, behave like String comparison, however compare id of option to value of input
+            if(ConditionCheckerFactory.OPTIONID.equals(comparison)) {
+                comparison = ConditionCheckerFactory.STRING;
+                fieldValue = getOptionId(fieldValue);
+            }
 
             //multiple values slightly different, equal means contains, not equal means does not contain
             if (fieldValue instanceof Collection) {
@@ -80,6 +92,26 @@ public class ValueFieldCondition extends AbstractJiraCondition {
         }
 
         return result;
+    }
+
+    private Object getOptionId(Object fieldValue) {
+        if(fieldValue instanceof LazyLoadedOption) {
+            return ((LazyLoadedOption)fieldValue).getOptionId().toString();
+        } else  if(fieldValue instanceof Status) {
+            return ((Status)fieldValue).getId();
+        } else if(fieldValue instanceof Collection) {
+            ArrayList<String> al = new ArrayList<String>();
+            for(Object v:(Collection)fieldValue) {
+                if(v instanceof LazyLoadedOption) {
+                    al.add(((LazyLoadedOption)v).getOptionId().toString());
+                }
+            }
+            return al;
+        }
+
+        //TODO cascados ?? und doc obiges
+
+        return fieldValue;
     }
 
     //ensures that given value to compare is not within the collection items

@@ -179,18 +179,27 @@ public class WorkflowUtils {
         }
     }
 
+    //temporary solution for JSUTIL-134, unless cleanup of cascading selects is not made for other uses
+    //select list, multi select and so on are always returned as options
+    public Object getFieldValueFromIssue(Issue issue, Field field) {
+        return getFieldValueFromIssue(issue,field,false);
+    }
+
     /**
      * @param issue
      *            an issue object.
      * @param field
      *            a field object. (May be a Custom Field)
+     * @param asOption
+     *            if set, cascading select value will be returned as option, else
+     *            as string.
      * @return an Object
      *
      * It returns the value of a field within issue object. May be a Collection,
      * a List, a Strong, or any FildType within JIRA.
      *
      */
-    public Object getFieldValueFromIssue(Issue issue, Field field) {
+    public Object getFieldValueFromIssue(Issue issue, Field field, boolean asOption) {
         Object retVal = null;
 
         try {
@@ -208,12 +217,12 @@ public class WorkflowUtils {
 
                         if (parent != null) {
                             if (ObjectUtils.isValueSelected(child)) {
-                                retVal = child.toString();
+                                retVal = asOption?child:child.toString();
                             } else {
                                 final List<Option> childOptions = parent.getChildOptions();
 
                                 if ((childOptions == null) || (childOptions.isEmpty())) {
-                                    retVal = parent.toString();
+                                    retVal = asOption?parent:parent.toString();
                                 }
                             }
                         }

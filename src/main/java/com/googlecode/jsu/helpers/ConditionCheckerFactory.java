@@ -27,6 +27,7 @@ public class ConditionCheckerFactory {
     public static final ComparisonType NUMBER = new ComparisonType(2, "comparisontype.number", "Number");
     public static final ComparisonType DATE = new ComparisonType(3, "comparisontype.date_with_time", "Date");
     public static final ComparisonType DATE_WITHOUT_TIME = new ComparisonType(4, "comparisontype.date_without_time", "DateWithoutTime");
+    public static final ComparisonType OPTIONID = new ComparisonType(5, "comparisontype.optionid", "OptionID");
 
     /** Template for checker class. */
     private static final String PACKAGE = ConditionCheckerFactory.class.getPackage().getName();
@@ -53,6 +54,7 @@ public class ConditionCheckerFactory {
             put(NUMBER.getId(), NUMBER);
             put(DATE.getId(), DATE);
             put(DATE_WITHOUT_TIME.getId(), DATE_WITHOUT_TIME);
+            put(OPTIONID.getId(),OPTIONID);
     }};
 
     private final Logger log = LoggerFactory.getLogger(ConditionCheckerFactory.class);
