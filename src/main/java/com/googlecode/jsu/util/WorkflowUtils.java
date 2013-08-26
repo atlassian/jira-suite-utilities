@@ -422,6 +422,19 @@ public class WorkflowUtils {
                     } else {
                         newValue = option;
                     }
+                } else if(cfType instanceof MultiUserCFType) {
+                    StringTokenizer st = new StringTokenizer((String)newValue,",");
+                    ArrayList<ApplicationUser> userList = new ArrayList<ApplicationUser>();
+                    while(st.hasMoreTokens()) {
+                        String username = st.nextToken();
+                        if(username.indexOf('(')>0) {
+                            username=username.substring(0,username.indexOf('(')).trim();
+                        } else {
+                            username=username.trim();
+                        }
+                        userList.add(convertValueToUser(username));
+                    }
+                    newValue = userList;
                 } else if (cfType instanceof LabelsCFType) {
                     Set<String> set = convertToSetForLabels((String) newValue);
                     this.labelManager.setLabels(convertApplicationUserToCrowdEmbeddedUser(currentUser),issue.getId(),customField.getIdAsLong(),set,false,true);
