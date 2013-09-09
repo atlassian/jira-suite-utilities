@@ -801,7 +801,7 @@ public class WorkflowUtils {
         if (value == null || value instanceof ApplicationUser) {
             return (ApplicationUser)value;
         } else {
-            ApplicationUser user = userManager.getUserByName(convertToString(value));
+            ApplicationUser user = userManager.getUserByKey(convertToString(value));
             if (user != null) {
                 return user;
             }

@@ -43,7 +43,7 @@ public class UserIsInAnyGroupsCondition extends AbstractJiraCondition {
         String caller = context.getCaller();
 
         if (caller != null) { // null -> User not logged in
-            ApplicationUser userLogged = userManager.getUserByName(caller);
+            ApplicationUser userLogged = userManager.getUserByKey(caller);
 
             // If there aren't groups selected, hidGroupsList is equal to "".
             // And groupsSelected will be an empty collection.

@@ -40,7 +40,7 @@ public class UserIsInCustomFieldCondition extends AbstractJiraCondition {
 
         // Obtains the current user.
         WorkflowContext context = (WorkflowContext) transientVars.get("context");
-        ApplicationUser userLogged = userManager.getUserByName(context.getCaller());
+        ApplicationUser userLogged = userManager.getUserByKey(context.getCaller());
 
         if (userLogged == null) {
             log.warn("Unable to check condition");
