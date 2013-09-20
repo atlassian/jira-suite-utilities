@@ -6,8 +6,6 @@ import com.atlassian.jira.rest.api.issue.IssueFields;
 import com.atlassian.jira.rest.api.issue.IssueUpdateRequest;
 import com.atlassian.jira.rest.api.issue.ResourceRef;
 import com.atlassian.jira.testkit.client.restclient.*;
-import com.atlassian.jira.testkit.client.util.TimeBombLicence;
-import com.atlassian.jira.webtests.ztests.bundledplugins2.rest.RestFuncTest;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,11 +14,7 @@ import java.util.Map;
 
 
 @WebTest({ Category.FUNC_TEST, Category.REST })
-public class PostFunctionTest extends RestFuncTest {
-
-    private IssueClient issueClient;
-    private TransitionsClient transitionsClient;
-
+public class PostFunctionTest extends AbstractTestBase {
     private static final String FIRST_ISSUE_KEY = "TJP-1"; // empty one, resolved
     private static final String SECOND_ISSUE_KEY = "TJP-2"; // with all field data set, resolved
     private static final String SUBTASK_ISSUE_KEY = "TJP-3"; // empty one, resolved
@@ -43,14 +37,6 @@ public class PostFunctionTest extends RestFuncTest {
     private static final String FIELD_TEXT_FIELD = "customfield_10107";
 
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
-
-    @Override
-    protected void setUpTest() {
-        super.setUpTest();
-        administration.restoreDataWithLicense("test1.xml", TimeBombLicence.LICENCE_FOR_TESTING);
-        issueClient = new IssueClient(getEnvironmentData());
-        transitionsClient = new TransitionsClient(getEnvironmentData());
-    }
 
     /**
      * Single test using transition.
