@@ -4,7 +4,7 @@
 
 ___ Exported on _____________________________
 
-     on                                            : Friday, 20 September 2013 14:40:52 o'clock CEST
+     on                                            : Monday, 23 September 2013 13:40:49 o'clock CEST
      by                                            : admin ( admin )
 
 ___ Environment ____________________________
@@ -14,15 +14,15 @@ ___ Environment ____________________________
      JIRA Installation Type                        : unknown
      Java Version                                  : 1.6.0_32 - Sun Microsystems Inc.
      Current Working Directory                     : /home/stephan.bielmann/workspace/jira-suite-utilities/target/container/tomcat6x/cargo-jira-home
-     Maximum Allowable Memory                      : 455MB
-     Total Memory                                  : 425MB
-     Free Memory                                   : 231MB
-     Used Memory                                   : 194MB
-     Memory Pool: Code Cache                       : Code Cache: init = 2555904(2496K) used = 18701248(18262K) committed = 18874368(18432K) max = 50331648(49152K)
-     Memory Pool: PS Eden Space                    : PS Eden Space: init = 33554432(32768K) used = 9142064(8927K) committed = 123666432(120768K) max = 125370368(122432K)
-     Memory Pool: PS Survivor Space                : PS Survivor Space: init = 5570560(5440K) used = 8070096(7880K) committed = 26476544(25856K) max = 26476544(25856K)
-     Memory Pool: PS Old Gen                       : PS Old Gen: init = 89522176(87424K) used = 186253296(181887K) committed = 296091648(289152K) max = 357957632(349568K)
-     Memory Pool: PS Perm Gen                      : PS Perm Gen: init = 50331648(49152K) used = 173949928(169872K) committed = 260308992(254208K) max = 268435456(262144K)
+     Maximum Allowable Memory                      : 497MB
+     Total Memory                                  : 497MB
+     Free Memory                                   : 33MB
+     Used Memory                                   : 464MB
+     Memory Pool: Code Cache                       : Code Cache: init = 2555904(2496K) used = 29760640(29063K) committed = 30081024(29376K) max = 50331648(49152K)
+     Memory Pool: PS Eden Space                    : PS Eden Space: init = 33554432(32768K) used = 128480920(125469K) committed = 148242432(144768K) max = 148242432(144768K)
+     Memory Pool: PS Survivor Space                : PS Survivor Space: init = 5570560(5440K) used = 0(0K) committed = 15335424(14976K) max = 15335424(14976K)
+     Memory Pool: PS Old Gen                       : PS Old Gen: init = 89522176(87424K) used = 357957608(349567K) committed = 357957632(349568K) max = 357957632(349568K)
+     Memory Pool: PS Perm Gen                      : PS Perm Gen: init = 50331648(49152K) used = 187520160(183125K) committed = 208863232(203968K) max = 268435456(262144K)
      JVM Input Arguments                           : -Xmx512m -XX:MaxPermSize=256m -Xms128m -XX:PermSize=48m -Datlassian.dev.mode=true -Dplugin.resource.directories=/home/stephan.bielmann/workspace/jira-suite-utilities/src/main/resources -Dcargo.datasource.datasource=cargo.datasource.url=jdbc:hsqldb:/home/stephan.bielmann/workspace/jira-suite-utilities/target/jira/home/database|cargo.datasource.driver=org.hsqldb.jdbcDriver|cargo.datasource.username=sa|cargo.datasource.password=|cargo.datasource.jndi=jdbc/JiraDS|cargo.datasource.type=javax.sql.DataSource -Djira.home=/home/stephan.bielmann/workspace/jira-suite-utilities/target/jira/home -Dplugin.root.directories=/home/stephan.bielmann/workspace/jira-suite-utilities -Djava.awt.headless=true -Dbaseurl=http://beedevsb:2990/jira -Datlassian.sdk.version=4.2.0 -Dcargo.servlet.uriencoding=UTF-8 -Dcatalina.home=/home/stephan.bielmann/workspace/jira-suite-utilities/target/container/tomcat6x/apache-tomcat-6.0.20 -Dcatalina.base=/home/stephan.bielmann/workspace/jira-suite-utilities/target/container/tomcat6x/cargo-jira-home -Djava.io.tmpdir=/home/stephan.bielmann/workspace/jira-suite-utilities/target/container/tomcat6x/cargo-jira-home/temp -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager -Djava.util.logging.config.file=/home/stephan.bielmann/workspace/jira-suite-utilities/target/container/tomcat6x/cargo-jira-home/conf/logging.properties
      Java Compatibility Information                : JIRA version = 6.0, Java Version = 1.6.0_32
 
@@ -335,7 +335,7 @@ ___ License Details ________________________
 
 ___ Database Statistics ____________________
 
-     Issues                                        : 11
+     Issues                                        : 23
      Projects                                      : 1
      Custom Fields                                 : 23
      Workflows                                     : 1
@@ -433,7 +433,7 @@ ___ User Plugins ____________________________
      jira-suite-utilities-1.4.8-SNAPSHOT-tests.jar : jira-suite-utilities-1.4.8-SNAPSHOT-tests.jar
           Version                                       : 0.0
           Status                                        : disabled
-          Unloadable Reason                             : No plugin factories found for plugin file Unit: /home/stephan.bielmann/workspace/jira-suite-utilities/target/jira/home/plugins/installed-plugins/jira-suite-utilities-1.4.8-SNAPSHOT-tests.jar (1379680744000)
+          Unloadable Reason                             : No plugin factories found for plugin file Unit: /home/stephan.bielmann/workspace/jira-suite-utilities/target/jira/home/plugins/installed-plugins/jira-suite-utilities-1.4.8-SNAPSHOT-tests.jar (1379935088000)
           Vendor                                        : (unknown)
           Description                                   : 
 
@@ -1177,42 +1177,45 @@ ___ Services _______________________________
      Instance Count                                : 11
 
      AddOnLicensingEmailNotificationsPluginJob-job : com.atlassian.sal.jira.scheduling.JiraPluginSchedulerService
-          Service Delay                                 : 60000ms
-     Last Run                                      : 20/09/13 14:40
+          Service Delay                                 : 14400000ms
+     Last Run                                      : 23/09/13 13:21
           pluginJobName                                 : AddOnLicensingEmailNotificationsPluginJob-job
           repeatInterval                                : 14400000
-          initiallyFired                                : false
+          initiallyFired                                : true
      Backup Service                                : com.atlassian.jira.service.services.export.ExportService
           Service Delay                                 : 43200000ms
-     Last Run                                      : 20/09/13 14:40
+     Last Run                                      : 23/09/13 13:19
           USE_DEFAULT_DIRECTORY                         : true
      LocalPluginLicenseNotificationPluginJob-job   : com.atlassian.sal.jira.scheduling.JiraPluginSchedulerService
           Service Delay                                 : 86400000ms
+     Last Run                                      : 23/09/13 13:20
           pluginJobName                                 : LocalPluginLicenseNotificationPluginJob-job
           repeatInterval                                : 86400000
           initiallyFired                                : true
      Mail Queue Service                            : com.atlassian.jira.service.services.mail.MailQueueService
           Service Delay                                 : 60000ms
-     Last Run                                      : 20/09/13 14:40
+     Last Run                                      : 23/09/13 13:39
      PluginRequestCheckPluginJob-job               : com.atlassian.sal.jira.scheduling.JiraPluginSchedulerService
           Service Delay                                 : 3600000ms
+     Last Run                                      : 23/09/13 13:20
           pluginJobName                                 : PluginRequestCheckPluginJob-job
           repeatInterval                                : 3600000
           initiallyFired                                : true
      PluginUpdateCheckPluginJob-job                : com.atlassian.sal.jira.scheduling.JiraPluginSchedulerService
-          Service Delay                                 : 38860651ms
-     Last Run                                      : 20/09/13 14:40
+          Service Delay                                 : 44428549ms
+     Last Run                                      : 23/09/13 13:19
           pluginJobName                                 : PluginUpdateCheckPluginJob-job
           repeatInterval                                : 86400000
           initiallyFired                                : false
      RemotePluginLicenseNotificationPluginJob-job  : com.atlassian.sal.jira.scheduling.JiraPluginSchedulerService
           Service Delay                                 : 3600000ms
+     Last Run                                      : 23/09/13 13:20
           pluginJobName                                 : RemotePluginLicenseNotificationPluginJob-job
           repeatInterval                                : 3600000
           initiallyFired                                : true
      Service Provider Session Remover              : com.atlassian.sal.jira.scheduling.JiraPluginSchedulerService
           Service Delay                                 : 28800000ms
-     Last Run                                      : 20/09/13 14:40
+     Last Run                                      : 23/09/13 13:19
           pluginJobName                                 : Service Provider Session Remover
           repeatInterval                                : 28800000
           initiallyFired                                : false
@@ -1220,15 +1223,16 @@ ___ Services _______________________________
           Service Delay                                 : 28800000ms
      com.atlassian.jira.plugin.ext.bamboo.service.PlanStatusUpdateServiceImpl:job : com.atlassian.sal.jira.scheduling.JiraPluginSchedulerService
           Service Delay                                 : 60000ms
+     Last Run                                      : 23/09/13 13:39
           pluginJobName                                 : com.atlassian.jira.plugin.ext.bamboo.service.PlanStatusUpdateServiceImpl:job
           repeatInterval                                : 60000
           initiallyFired                                : true
      com.atlassian.jira.plugins.dvcs.scheduler.DvcsScheduler:job : com.atlassian.sal.jira.scheduling.JiraPluginSchedulerService
-          Service Delay                                 : 2919140ms
-     Last Run                                      : 20/09/13 14:40
+          Service Delay                                 : 3600000ms
+     Last Run                                      : 23/09/13 13:24
           pluginJobName                                 : com.atlassian.jira.plugins.dvcs.scheduler.DvcsScheduler:job
           repeatInterval                                : 3600000
-          initiallyFired                                : false
+          initiallyFired                                : true
 
 ___ Trusted Applications ___________________
 
@@ -1309,6 +1313,18 @@ ___ Trusted Applications ___________________
     <ChangeGroup id="10701" issue="10000" author="admin" created="2013-07-12 14:56:24.778"/>
     <ChangeGroup id="10800" issue="10200" author="admin" created="2013-07-15 14:31:45.671"/>
     <ChangeGroup id="10900" issue="10200" author="admin" created="2013-07-15 16:13:39.212"/>
+    <ChangeGroup id="11000" issue="10400" author="admin" created="2013-09-23 13:36:42.215"/>
+    <ChangeGroup id="11001" issue="10401" author="admin" created="2013-09-23 13:36:46.476"/>
+    <ChangeGroup id="11002" issue="10402" author="admin" created="2013-09-23 13:37:00.985"/>
+    <ChangeGroup id="11003" issue="10403" author="admin" created="2013-09-23 13:37:03.655"/>
+    <ChangeGroup id="11004" issue="10404" author="admin" created="2013-09-23 13:37:08.311"/>
+    <ChangeGroup id="11005" issue="10405" author="admin" created="2013-09-23 13:37:10.896"/>
+    <ChangeGroup id="11006" issue="10406" author="admin" created="2013-09-23 13:37:12.896"/>
+    <ChangeGroup id="11007" issue="10407" author="admin" created="2013-09-23 13:37:15.073"/>
+    <ChangeGroup id="11008" issue="10410" author="admin" created="2013-09-23 13:37:17.779"/>
+    <ChangeGroup id="11009" issue="10409" author="admin" created="2013-09-23 13:37:19.951"/>
+    <ChangeGroup id="11010" issue="10411" author="admin" created="2013-09-23 13:37:21.822"/>
+    <ChangeGroup id="11011" issue="10408" author="admin" created="2013-09-23 13:38:18.442"/>
     <ChangeItem id="10000" group="10000" fieldtype="jira" field="status" oldvalue="1" oldstring="Open" newvalue="5" newstring="Resolved"/>
     <ChangeItem id="10001" group="10000" fieldtype="jira" field="resolution" newvalue="1" newstring="Fixed"/>
     <ChangeItem id="10100" group="10100" fieldtype="custom" field="FreeText" newstring="admin"/>
@@ -1344,6 +1360,18 @@ ___ Trusted Applications ___________________
     <ChangeItem id="10800" group="10800" fieldtype="jira" field="status" oldvalue="1" oldstring="Open" newvalue="5" newstring="Resolved"/>
     <ChangeItem id="10801" group="10800" fieldtype="jira" field="resolution" newvalue="1" newstring="Fixed"/>
     <ChangeItem id="10900" group="10900" fieldtype="jira" field="assignee" oldvalue="admin" oldstring="admin" newvalue="developer" newstring="developer"/>
+    <ChangeItem id="11000" group="11000" fieldtype="jira" field="status" oldvalue="1" oldstring="Open" newvalue="3" newstring="In Progress"/>
+    <ChangeItem id="11001" group="11001" fieldtype="jira" field="status" oldvalue="1" oldstring="Open" newvalue="3" newstring="In Progress"/>
+    <ChangeItem id="11002" group="11002" fieldtype="jira" field="status" oldvalue="1" oldstring="Open" newvalue="3" newstring="In Progress"/>
+    <ChangeItem id="11003" group="11003" fieldtype="jira" field="status" oldvalue="1" oldstring="Open" newvalue="3" newstring="In Progress"/>
+    <ChangeItem id="11004" group="11004" fieldtype="jira" field="status" oldvalue="1" oldstring="Open" newvalue="3" newstring="In Progress"/>
+    <ChangeItem id="11005" group="11005" fieldtype="jira" field="status" oldvalue="1" oldstring="Open" newvalue="3" newstring="In Progress"/>
+    <ChangeItem id="11006" group="11006" fieldtype="jira" field="status" oldvalue="1" oldstring="Open" newvalue="3" newstring="In Progress"/>
+    <ChangeItem id="11007" group="11007" fieldtype="jira" field="status" oldvalue="1" oldstring="Open" newvalue="3" newstring="In Progress"/>
+    <ChangeItem id="11008" group="11008" fieldtype="jira" field="status" oldvalue="1" oldstring="Open" newvalue="3" newstring="In Progress"/>
+    <ChangeItem id="11009" group="11009" fieldtype="jira" field="status" oldvalue="1" oldstring="Open" newvalue="3" newstring="In Progress"/>
+    <ChangeItem id="11010" group="11010" fieldtype="jira" field="status" oldvalue="1" oldstring="Open" newvalue="3" newstring="In Progress"/>
+    <ChangeItem id="11011" group="11011" fieldtype="jira" field="status" oldvalue="1" oldstring="Open" newvalue="3" newstring="In Progress"/>
     <Component id="10000" project="10000" name="Mobile" assigneetype="0"/>
     <Component id="10001" project="10000" name="Server" assigneetype="0"/>
     <Component id="10002" project="10000" name="Desktop" assigneetype="0"/>
@@ -1708,6 +1736,18 @@ ___ Trusted Applications ___________________
     <Issue id="10305" key="TJP-9" project="10000" reporter="admin" assignee="admin" type="1" summary="C13 fail" priority="3" status="1" created="2013-09-20 14:05:32.461" updated="2013-09-20 14:05:32.461" votes="0" watches="1" workflowId="10305"/>
     <Issue id="10306" key="TJP-10" project="10000" reporter="admin" assignee="admin" type="1" summary="C14 pass" priority="3" status="1" created="2013-09-20 14:05:48.954" updated="2013-09-20 14:05:48.954" votes="0" watches="1" workflowId="10306"/>
     <Issue id="10307" key="TJP-11" project="10000" reporter="admin" assignee="admin" type="1" summary="C14 fail" priority="3" status="1" created="2013-09-20 14:06:06.341" updated="2013-09-20 14:06:06.341" votes="0" watches="1" workflowId="10307"/>
+    <Issue id="10400" key="TJP-12" project="10000" reporter="admin" assignee="admin" type="1" summary="V10 pass" priority="3" status="3" created="2013-09-23 13:34:30.34" updated="2013-09-23 13:36:42.214" votes="0" watches="1" workflowId="10400"/>
+    <Issue id="10401" key="TJP-13" project="10000" reporter="admin" assignee="admin" type="1" summary="V10 fail" priority="3" status="3" created="2013-09-23 13:34:36.258" updated="2013-09-23 13:36:46.476" votes="0" watches="1" workflowId="10401"/>
+    <Issue id="10402" key="TJP-14" project="10000" reporter="admin" assignee="admin" type="1" summary="V11 pass" priority="3" status="3" created="2013-09-23 13:35:07.306" updated="2013-09-23 13:37:00.984" votes="0" watches="1" workflowId="10402"/>
+    <Issue id="10403" key="TJP-15" project="10000" reporter="admin" assignee="admin" type="1" summary="V11 fail" priority="3" status="3" created="2013-09-23 13:35:12.698" updated="2013-09-23 13:37:03.655" votes="0" watches="1" workflowId="10403"/>
+    <Issue id="10404" key="TJP-16" project="10000" reporter="admin" assignee="admin" type="1" summary="V12 pass" priority="3" status="3" created="2013-09-23 13:35:16.914" updated="2013-09-23 13:37:08.311" votes="0" watches="1" workflowId="10404"/>
+    <Issue id="10405" key="TJP-17" project="10000" reporter="admin" assignee="admin" type="1" summary="V12 fail" priority="3" status="3" created="2013-09-23 13:35:19.127" updated="2013-09-23 13:37:10.896" votes="0" watches="1" workflowId="10405"/>
+    <Issue id="10406" key="TJP-18" project="10000" reporter="admin" assignee="admin" type="1" summary="V13 pass" priority="3" status="3" created="2013-09-23 13:35:21.263" updated="2013-09-23 13:37:12.895" votes="0" watches="1" workflowId="10406"/>
+    <Issue id="10407" key="TJP-19" project="10000" reporter="admin" assignee="admin" type="1" summary="V13 fail" priority="3" status="3" created="2013-09-23 13:35:23.345" updated="2013-09-23 13:37:15.073" votes="0" watches="1" workflowId="10407"/>
+    <Issue id="10408" key="TJP-20" project="10000" reporter="admin" assignee="admin" type="1" summary="V14 pass" priority="3" status="3" created="2013-09-23 13:35:25.34" updated="2013-09-23 13:38:18.442" votes="0" watches="1" workflowId="10408"/>
+    <Issue id="10409" key="TJP-21" project="10000" reporter="admin" assignee="admin" type="1" summary="V15 fail" priority="3" status="3" created="2013-09-23 13:35:27.974" updated="2013-09-23 13:37:19.951" votes="0" watches="1" workflowId="10409"/>
+    <Issue id="10410" key="TJP-22" project="10000" reporter="admin" assignee="admin" type="1" summary="V14 fail" priority="3" status="3" created="2013-09-23 13:35:48.107" updated="2013-09-23 13:37:17.778" votes="0" watches="1" workflowId="10410"/>
+    <Issue id="10411" key="TJP-23" project="10000" reporter="admin" assignee="admin" type="1" summary="V15 pass" priority="3" status="3" created="2013-09-23 13:35:53.534" updated="2013-09-23 13:37:21.822" votes="0" watches="1" workflowId="10411"/>
     <IssueLink id="10000" linktype="10100" source="10100" destination="10200" sequence="0"/>
     <IssueLinkType id="10000" linkname="Blocks" inward="is blocked by" outward="blocks"/>
     <IssueLinkType id="10001" linkname="Cloners" inward="is cloned by" outward="clones"/>
@@ -1808,6 +1848,18 @@ ___ Trusted Applications ___________________
     <OSCurrentStep id="10705" entryId="10305" stepId="1" actionId="0" owner="" startDate="2013-09-20 14:05:32.46" status="Open"/>
     <OSCurrentStep id="10706" entryId="10306" stepId="1" actionId="0" owner="" startDate="2013-09-20 14:05:48.954" status="Open"/>
     <OSCurrentStep id="10707" entryId="10307" stepId="1" actionId="0" owner="" startDate="2013-09-20 14:06:06.341" status="Open"/>
+    <OSCurrentStep id="10812" entryId="10400" stepId="3" actionId="0" owner="" startDate="2013-09-23 13:36:42.187" status="Underway"/>
+    <OSCurrentStep id="10813" entryId="10401" stepId="3" actionId="0" owner="" startDate="2013-09-23 13:36:46.475" status="Underway"/>
+    <OSCurrentStep id="10814" entryId="10402" stepId="3" actionId="0" owner="" startDate="2013-09-23 13:37:00.984" status="Underway"/>
+    <OSCurrentStep id="10815" entryId="10403" stepId="3" actionId="0" owner="" startDate="2013-09-23 13:37:03.654" status="Underway"/>
+    <OSCurrentStep id="10816" entryId="10404" stepId="3" actionId="0" owner="" startDate="2013-09-23 13:37:08.311" status="Underway"/>
+    <OSCurrentStep id="10817" entryId="10405" stepId="3" actionId="0" owner="" startDate="2013-09-23 13:37:10.895" status="Underway"/>
+    <OSCurrentStep id="10818" entryId="10406" stepId="3" actionId="0" owner="" startDate="2013-09-23 13:37:12.894" status="Underway"/>
+    <OSCurrentStep id="10819" entryId="10407" stepId="3" actionId="0" owner="" startDate="2013-09-23 13:37:15.072" status="Underway"/>
+    <OSCurrentStep id="10820" entryId="10410" stepId="3" actionId="0" owner="" startDate="2013-09-23 13:37:17.778" status="Underway"/>
+    <OSCurrentStep id="10821" entryId="10409" stepId="3" actionId="0" owner="" startDate="2013-09-23 13:37:19.95" status="Underway"/>
+    <OSCurrentStep id="10822" entryId="10411" stepId="3" actionId="0" owner="" startDate="2013-09-23 13:37:21.821" status="Underway"/>
+    <OSCurrentStep id="10823" entryId="10408" stepId="3" actionId="0" owner="" startDate="2013-09-23 13:38:18.442" status="Underway"/>
     <OSCurrentStepPrev id="10001" previousId="10000"/>
     <OSCurrentStepPrev id="10100" previousId="10001"/>
     <OSCurrentStepPrev id="10101" previousId="10100"/>
@@ -1821,6 +1873,18 @@ ___ Trusted Applications ___________________
     <OSCurrentStepPrev id="10400" previousId="10301"/>
     <OSCurrentStepPrev id="10500" previousId="10106"/>
     <OSCurrentStepPrev id="10601" previousId="10600"/>
+    <OSCurrentStepPrev id="10812" previousId="10800"/>
+    <OSCurrentStepPrev id="10813" previousId="10801"/>
+    <OSCurrentStepPrev id="10814" previousId="10802"/>
+    <OSCurrentStepPrev id="10815" previousId="10803"/>
+    <OSCurrentStepPrev id="10816" previousId="10804"/>
+    <OSCurrentStepPrev id="10817" previousId="10805"/>
+    <OSCurrentStepPrev id="10818" previousId="10806"/>
+    <OSCurrentStepPrev id="10819" previousId="10807"/>
+    <OSCurrentStepPrev id="10820" previousId="10810"/>
+    <OSCurrentStepPrev id="10821" previousId="10809"/>
+    <OSCurrentStepPrev id="10822" previousId="10811"/>
+    <OSCurrentStepPrev id="10823" previousId="10808"/>
     <OSHistoryStep id="10000" entryId="10000" stepId="1" actionId="5" owner="" startDate="2013-03-06 11:15:17.861" finishDate="2013-03-06 11:15:38.429" status="Finished" caller="admin"/>
     <OSHistoryStep id="10001" entryId="10000" stepId="4" actionId="781" owner="" startDate="2013-03-06 11:15:38.43" finishDate="2013-07-08 10:25:15.215" status="Not Done" caller="admin"/>
     <OSHistoryStep id="10100" entryId="10000" stepId="1" actionId="5" owner="" startDate="2013-07-08 10:25:15.216" finishDate="2013-07-08 10:29:59.688" status="Finished" caller="admin"/>
@@ -1834,6 +1898,18 @@ ___ Trusted Applications ___________________
     <OSHistoryStep id="10300" entryId="10100" stepId="4" actionId="1151" owner="" startDate="2013-07-08 14:54:37.322" finishDate="2013-07-08 14:54:37.448" status="Not Done" caller="admin"/>
     <OSHistoryStep id="10301" entryId="10100" stepId="1" actionId="5" owner="" startDate="2013-07-08 14:54:37.449" finishDate="2013-07-09 07:50:28.489" status="Finished" caller="admin"/>
     <OSHistoryStep id="10600" entryId="10200" stepId="1" actionId="5" owner="" startDate="2013-07-15 14:31:37.721" finishDate="2013-07-15 14:31:45.665" status="Finished" caller="admin"/>
+    <OSHistoryStep id="10800" entryId="10400" stepId="1" actionId="4" owner="" startDate="2013-09-23 13:34:30.337" finishDate="2013-09-23 13:36:42.186" status="Finished" caller="admin"/>
+    <OSHistoryStep id="10801" entryId="10401" stepId="1" actionId="4" owner="" startDate="2013-09-23 13:34:36.257" finishDate="2013-09-23 13:36:46.473" status="Finished" caller="admin"/>
+    <OSHistoryStep id="10802" entryId="10402" stepId="1" actionId="4" owner="" startDate="2013-09-23 13:35:07.305" finishDate="2013-09-23 13:37:00.983" status="Finished" caller="admin"/>
+    <OSHistoryStep id="10803" entryId="10403" stepId="1" actionId="4" owner="" startDate="2013-09-23 13:35:12.698" finishDate="2013-09-23 13:37:03.654" status="Finished" caller="admin"/>
+    <OSHistoryStep id="10804" entryId="10404" stepId="1" actionId="4" owner="" startDate="2013-09-23 13:35:16.914" finishDate="2013-09-23 13:37:08.31" status="Finished" caller="admin"/>
+    <OSHistoryStep id="10805" entryId="10405" stepId="1" actionId="4" owner="" startDate="2013-09-23 13:35:19.127" finishDate="2013-09-23 13:37:10.894" status="Finished" caller="admin"/>
+    <OSHistoryStep id="10806" entryId="10406" stepId="1" actionId="4" owner="" startDate="2013-09-23 13:35:21.263" finishDate="2013-09-23 13:37:12.893" status="Finished" caller="admin"/>
+    <OSHistoryStep id="10807" entryId="10407" stepId="1" actionId="4" owner="" startDate="2013-09-23 13:35:23.345" finishDate="2013-09-23 13:37:15.071" status="Finished" caller="admin"/>
+    <OSHistoryStep id="10808" entryId="10408" stepId="1" actionId="4" owner="" startDate="2013-09-23 13:35:25.339" finishDate="2013-09-23 13:38:18.441" status="Finished" caller="admin"/>
+    <OSHistoryStep id="10809" entryId="10409" stepId="1" actionId="4" owner="" startDate="2013-09-23 13:35:27.974" finishDate="2013-09-23 13:37:19.95" status="Finished" caller="admin"/>
+    <OSHistoryStep id="10810" entryId="10410" stepId="1" actionId="4" owner="" startDate="2013-09-23 13:35:48.107" finishDate="2013-09-23 13:37:17.777" status="Finished" caller="admin"/>
+    <OSHistoryStep id="10811" entryId="10411" stepId="1" actionId="4" owner="" startDate="2013-09-23 13:35:53.533" finishDate="2013-09-23 13:37:21.821" status="Finished" caller="admin"/>
     <OSHistoryStepPrev id="10001" previousId="10000"/>
     <OSHistoryStepPrev id="10100" previousId="10001"/>
     <OSHistoryStepPrev id="10101" previousId="10100"/>
@@ -1978,7 +2054,6 @@ ___ Trusted Applications ___________________
     <OSPropertyEntry id="12245" entityName="ApplicationUser" entityId="10000" propertyKey="user.search.filter.id" type="6"/>
     <OSPropertyEntry id="12246" entityName="ApplicationUser" entityId="10000" propertyKey="user.search.jql" type="6"/>
     <OSPropertyEntry id="12247" entityName="ApplicationUser" entityId="10000" propertyKey="jira.issues.preferred.layout.key" type="5"/>
-    <OSPropertyEntry id="12847" entityName="jira.properties" entityId="1" propertyKey="com.atlassian.upm.mail.impl.PluginSettingsLicenseEmailStorelicense-emails_v2" type="5"/>
     <OSPropertyEntry id="12905" entityName="jira.properties" entityId="1" propertyKey="com.atlassian.activeobjects.admin.ActiveObjectsPluginToTablesMapping" type="6"/>
     <OSPropertyEntry id="12906" entityName="ServiceConfig" entityId="12500" propertyKey="pluginJobName" type="5"/>
     <OSPropertyEntry id="12907" entityName="ServiceConfig" entityId="12500" propertyKey="repeatInterval" type="5"/>
@@ -2005,12 +2080,14 @@ ___ Trusted Applications ___________________
     <OSPropertyEntry id="12928" entityName="ServiceConfig" entityId="12507" propertyKey="pluginJobName" type="5"/>
     <OSPropertyEntry id="12929" entityName="ServiceConfig" entityId="12507" propertyKey="repeatInterval" type="5"/>
     <OSPropertyEntry id="12930" entityName="ServiceConfig" entityId="12507" propertyKey="initiallyFired" type="5"/>
-    <OSPropertyEntry id="12934" entityName="jira.properties" entityId="1" propertyKey="com.atlassian.upm:notifications:notification-plugin.request" type="5"/>
-    <OSPropertyEntry id="12935" entityName="jira.properties" entityId="1" propertyKey="com.atlassian.upm:notifications:notification-edition.mismatch" type="5"/>
-    <OSPropertyEntry id="12936" entityName="jira.properties" entityId="1" propertyKey="com.atlassian.upm:notifications:notification-evaluation.expired" type="5"/>
-    <OSPropertyEntry id="12937" entityName="jira.properties" entityId="1" propertyKey="com.atlassian.upm:notifications:notification-evaluation.nearlyexpired" type="5"/>
-    <OSPropertyEntry id="12938" entityName="jira.properties" entityId="1" propertyKey="com.atlassian.upm:notifications:notification-maintenance.expired" type="5"/>
-    <OSPropertyEntry id="12939" entityName="jira.properties" entityId="1" propertyKey="com.atlassian.upm:notifications:notification-maintenance.nearlyexpired" type="5"/>
+    <OSPropertyEntry id="12941" entityName="jira.properties" entityId="1" propertyKey="com.atlassian.upm:notifications:notification-plugin.request" type="5"/>
+    <OSPropertyEntry id="12942" entityName="jira.properties" entityId="1" propertyKey="com.atlassian.upm:notifications:notification-edition.mismatch" type="5"/>
+    <OSPropertyEntry id="12943" entityName="jira.properties" entityId="1" propertyKey="com.atlassian.upm:notifications:notification-evaluation.expired" type="5"/>
+    <OSPropertyEntry id="12944" entityName="jira.properties" entityId="1" propertyKey="com.atlassian.upm:notifications:notification-evaluation.nearlyexpired" type="5"/>
+    <OSPropertyEntry id="12945" entityName="jira.properties" entityId="1" propertyKey="com.atlassian.upm:notifications:notification-maintenance.expired" type="5"/>
+    <OSPropertyEntry id="12946" entityName="jira.properties" entityId="1" propertyKey="com.atlassian.upm:notifications:notification-maintenance.nearlyexpired" type="5"/>
+    <OSPropertyEntry id="12947" entityName="jira.properties" entityId="1" propertyKey="com.atlassian.upm.mail.impl.PluginSettingsLicenseEmailStorelicense-emails_v2" type="5"/>
+    <OSPropertyEntry id="12948" entityName="ApplicationUser" entityId="10000" propertyKey="user.search.mode" type="5"/>
     <OSPropertyNumber id="10001" value="22"/>
     <OSPropertyNumber id="10007" value="1"/>
     <OSPropertyNumber id="10008" value="1"/>
@@ -2177,10 +2254,6 @@ Examples: 4d, 5h 30m, 60m and 3w.]]></value>
 com.atlassian.jira.plugins.jira-importers-plugin]]></value>
     </OSPropertyString>
     <OSPropertyString id="12247" value="split-view"/>
-    <OSPropertyString id="12847">
-        <value><![CDATA[#java.util.List
-]]></value>
-    </OSPropertyString>
     <OSPropertyString id="12906" value="Service Provider Session Remover"/>
     <OSPropertyString id="12907" value="28800000"/>
     <OSPropertyString id="12908" value="false"/>
@@ -2201,34 +2274,39 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
     <OSPropertyString id="12923" value="false"/>
     <OSPropertyString id="12924" value="AddOnLicensingEmailNotificationsPluginJob-job"/>
     <OSPropertyString id="12925" value="14400000"/>
-    <OSPropertyString id="12926" value="false"/>
+    <OSPropertyString id="12926" value="true"/>
     <OSPropertyString id="12928" value="com.atlassian.jira.plugins.dvcs.scheduler.DvcsScheduler:job"/>
     <OSPropertyString id="12929" value="3600000"/>
-    <OSPropertyString id="12930" value="false"/>
-    <OSPropertyString id="12934">
+    <OSPropertyString id="12930" value="true"/>
+    <OSPropertyString id="12941">
         <value><![CDATA[#java.util.List
 ]]></value>
     </OSPropertyString>
-    <OSPropertyString id="12935">
+    <OSPropertyString id="12942">
         <value><![CDATA[#java.util.List
 ]]></value>
     </OSPropertyString>
-    <OSPropertyString id="12936">
+    <OSPropertyString id="12943">
         <value><![CDATA[#java.util.List
 ]]></value>
     </OSPropertyString>
-    <OSPropertyString id="12937">
+    <OSPropertyString id="12944">
         <value><![CDATA[#java.util.List
 ]]></value>
     </OSPropertyString>
-    <OSPropertyString id="12938">
+    <OSPropertyString id="12945">
         <value><![CDATA[#java.util.List
 ]]></value>
     </OSPropertyString>
-    <OSPropertyString id="12939">
+    <OSPropertyString id="12946">
         <value><![CDATA[#java.util.List
 ]]></value>
     </OSPropertyString>
+    <OSPropertyString id="12947">
+        <value><![CDATA[#java.util.List
+]]></value>
+    </OSPropertyString>
+    <OSPropertyString id="12948" value="advanced"/>
     <OSPropertyText id="10014" value="AAABiQ0ODAoPeNp1kk9TwjAQxe/9FJnxXKYpeoCZHqCtgsqfgaIO4yWELURD0tm0KN/eWOjYdvD68vbtb3dzM9GKTBgS2iOU9n3a7/pkHiXE96jvbNhho3XnWXBQBuKtyIVWQTxN4sV8MV7GTirMHk5QOZJTBsG91eITvPdJBEeQOgN0uNRHwIYtLKWGa1ocNoCzdGUATUA9h2uVdhjPxRGCHAtw5gXyPTMQsRwCn1Lf9XzXv3NqwVN2gGCZDBYWstLj70zgqSyad0fVWPXgJaClGUfB8KGXuG+rl1v3ab0euUOPvjofAlmD/XG8GJBY5YAZCtMa9Ze5MagVZAGKX/FVE4eyMDZtqrdgAq+19zJlWEr/Na0TXjkTx4KLjWzeKbyIjaAJE7aDYpa2tTSO+mvbCrBKo/ryate4Up9KfylnhjumhGEl0SCXzBjB1B9Q/QYhQulrH/fcue6svl1di8BwFFnZKAGTE3mGIalGksliJxTZVqTmvLF6fXxksjhzpkwaqP5s3fMDBMYhRDAtAhUAhcR3uL05YCxbclq7h1dNa+Nc+j4CFBrdN005oVlMN9yBlWeM4TlnrOhqX02j3"/>
     <OSPropertyText id="10201">
         <value><![CDATA[http://www.atlassian.com/*
@@ -2240,11 +2318,11 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
     <OSPropertyText id="11646" value=""/>
     <OSPropertyText id="11659" value="fixVersions,assignee,labels,components,priority,comment"/>
     <OSPropertyText id="12245"/>
-    <OSPropertyText id="12246" value="project = TJP"/>
+    <OSPropertyText id="12246" value=""/>
     <OSPropertyText id="12905" value="{&quot;AO_38321B_CUSTOM_CONTENT_LINK&quot;:{&quot;key&quot;:&quot;com.atlassian.plugins.atlassian-nav-links-plugin&quot;,&quot;name&quot;:&quot;Atlassian Navigation Links Plugin&quot;,&quot;version&quot;:&quot;3.2.2&quot;,&quot;vendorName&quot;:&quot;Atlassian&quot;,&quot;vendorUrl&quot;:&quot;http://www.atlassian.com/&quot;},&quot;AO_B9A0F0_APPLIED_TEMPLATE&quot;:{&quot;key&quot;:&quot;com.atlassian.jira.project-templates-plugin&quot;,&quot;name&quot;:&quot;Project Templates Plugin&quot;,&quot;version&quot;:&quot;1.8.4&quot;,&quot;vendorName&quot;:&quot;Atlassian&quot;,&quot;vendorUrl&quot;:&quot;http://www.atlassian.com/&quot;},&quot;AO_563AEE_ACTIVITY_ENTITY&quot;:{&quot;key&quot;:&quot;com.atlassian.streams.streams-thirdparty-plugin&quot;,&quot;name&quot;:&quot;Streams Third Party Provider Plugin&quot;,&quot;version&quot;:&quot;5.3.0-m7&quot;,&quot;vendorName&quot;:&quot;Atlassian&quot;,&quot;vendorUrl&quot;:&quot;http://www.atlassian.com/&quot;},&quot;AO_563AEE_TARGET_ENTITY&quot;:{&quot;key&quot;:&quot;com.atlassian.streams.streams-thirdparty-plugin&quot;,&quot;name&quot;:&quot;Streams Third Party Provider Plugin&quot;,&quot;version&quot;:&quot;5.3.0-m7&quot;,&quot;vendorName&quot;:&quot;Atlassian&quot;,&quot;vendorUrl&quot;:&quot;http://www.atlassian.com/&quot;},&quot;AO_563AEE_MEDIA_LINK_ENTITY&quot;:{&quot;key&quot;:&quot;com.atlassian.streams.streams-thirdparty-plugin&quot;,&quot;name&quot;:&quot;Streams Third Party Provider Plugin&quot;,&quot;version&quot;:&quot;5.3.0-m7&quot;,&quot;vendorName&quot;:&quot;Atlassian&quot;,&quot;vendorUrl&quot;:&quot;http://www.atlassian.com/&quot;},&quot;AO_4AEACD_WEBHOOK_DAO&quot;:{&quot;key&quot;:&quot;com.atlassian.jira.plugins.webhooks.jira-webhooks-plugin&quot;,&quot;name&quot;:&quot;JIRA WebHooks Plugin&quot;,&quot;version&quot;:&quot;1.0.10&quot;,&quot;vendorName&quot;:&quot;Atlassian&quot;,&quot;vendorUrl&quot;:&quot;http://www.atlassian.com/&quot;},&quot;AO_E8B6CC_ORGANIZATION_MAPPING&quot;:{&quot;key&quot;:&quot;com.atlassian.jira.plugins.jira-bitbucket-connector-plugin&quot;,&quot;name&quot;:&quot;JIRA DVCS Connector Plugin&quot;,&quot;version&quot;:&quot;1.3.1&quot;,&quot;vendorName&quot;:&quot;Atlassian&quot;,&quot;vendorUrl&quot;:&quot;http://www.atlassian.com/&quot;},&quot;AO_563AEE_OBJECT_ENTITY&quot;:{&quot;key&quot;:&quot;com.atlassian.streams.streams-thirdparty-plugin&quot;,&quot;name&quot;:&quot;Streams Third Party Provider Plugin&quot;,&quot;version&quot;:&quot;5.3.0-m7&quot;,&quot;vendorName&quot;:&quot;Atlassian&quot;,&quot;vendorUrl&quot;:&quot;http://www.atlassian.com/&quot;},&quot;AO_563AEE_ACTOR_ENTITY&quot;:{&quot;key&quot;:&quot;com.atlassian.streams.streams-thirdparty-plugin&quot;,&quot;name&quot;:&quot;Streams Third Party Provider Plugin&quot;,&quot;version&quot;:&quot;5.3.0-m7&quot;,&quot;vendorName&quot;:&quot;Atlassian&quot;,&quot;vendorUrl&quot;:&quot;http://www.atlassian.com/&quot;},&quot;AO_97EDAB_USERINVITATION&quot;:{&quot;key&quot;:&quot;com.atlassian.jira.jira-invite-user-plugin&quot;,&quot;name&quot;:&quot;Atlassian JIRA - Plugins - Invite User&quot;,&quot;version&quot;:&quot;1.10&quot;,&quot;vendorName&quot;:&quot;Atlassian&quot;,&quot;vendorUrl&quot;:&quot;http://www.atlassian.com/&quot;},&quot;AO_E8B6CC_REPOSITORY_MAPPING&quot;:{&quot;key&quot;:&quot;com.atlassian.jira.plugins.jira-bitbucket-connector-plugin&quot;,&quot;name&quot;:&quot;JIRA DVCS Connector Plugin&quot;,&quot;version&quot;:&quot;1.3.1&quot;,&quot;vendorName&quot;:&quot;Atlassian&quot;,&quot;vendorUrl&quot;:&quot;http://www.atlassian.com/&quot;},&quot;AO_E8B6CC_CHANGESET_MAPPING&quot;:{&quot;key&quot;:&quot;com.atlassian.jira.plugins.jira-bitbucket-connector-plugin&quot;,&quot;name&quot;:&quot;JIRA DVCS Connector Plugin&quot;,&quot;version&quot;:&quot;1.3.1&quot;,&quot;vendorName&quot;:&quot;Atlassian&quot;,&quot;vendorUrl&quot;:&quot;http://www.atlassian.com/&quot;},&quot;AO_563AEE_ACTIVITY_OBJ_ENTITY&quot;:{&quot;key&quot;:&quot;com.atlassian.streams.streams-thirdparty-plugin&quot;,&quot;name&quot;:&quot;Streams Third Party Provider Plugin&quot;,&quot;version&quot;:&quot;5.3.0-m7&quot;,&quot;vendorName&quot;:&quot;Atlassian&quot;,&quot;vendorUrl&quot;:&quot;http://www.atlassian.com/&quot;}}"/>
     <OSPropertyText id="12927">
         <value><![CDATA[#java.util.List
-{"userKey":"JIRA","date":1379680819361,"i18nKey":"upm.auditLog.upm.startup","entryType":"UPM_STARTUP","params":[]}
+{"userKey":"JIRA","date":1379935173225,"i18nKey":"upm.auditLog.upm.startup","entryType":"UPM_STARTUP","params":[]}
 {"userKey":"JIRA","date":1379678563708,"i18nKey":"upm.auditLog.upm.startup","entryType":"UPM_STARTUP","params":[]}
 {"userKey":"JIRA","date":1379672810087,"i18nKey":"upm.auditLog.upm.startup","entryType":"UPM_STARTUP","params":[]}
 {"userKey":"JIRA","date":1379670641722,"i18nKey":"upm.auditLog.upm.startup","entryType":"UPM_STARTUP","params":[]}
@@ -2267,6 +2345,18 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
     <OSWorkflowEntry id="10305" name="JSU TEST" state="1"/>
     <OSWorkflowEntry id="10306" name="JSU TEST" state="1"/>
     <OSWorkflowEntry id="10307" name="JSU TEST" state="1"/>
+    <OSWorkflowEntry id="10400" name="JSU TEST" state="1"/>
+    <OSWorkflowEntry id="10401" name="JSU TEST" state="1"/>
+    <OSWorkflowEntry id="10402" name="JSU TEST" state="1"/>
+    <OSWorkflowEntry id="10403" name="JSU TEST" state="1"/>
+    <OSWorkflowEntry id="10404" name="JSU TEST" state="1"/>
+    <OSWorkflowEntry id="10405" name="JSU TEST" state="1"/>
+    <OSWorkflowEntry id="10406" name="JSU TEST" state="1"/>
+    <OSWorkflowEntry id="10407" name="JSU TEST" state="1"/>
+    <OSWorkflowEntry id="10408" name="JSU TEST" state="1"/>
+    <OSWorkflowEntry id="10409" name="JSU TEST" state="1"/>
+    <OSWorkflowEntry id="10410" name="JSU TEST" state="1"/>
+    <OSWorkflowEntry id="10411" name="JSU TEST" state="1"/>
     <OptionConfiguration id="10100" fieldid="issuetype" optionid="1" fieldconfig="10000" sequence="0"/>
     <OptionConfiguration id="10101" fieldid="issuetype" optionid="2" fieldconfig="10000" sequence="1"/>
     <OptionConfiguration id="10102" fieldid="issuetype" optionid="3" fieldconfig="10000" sequence="2"/>
@@ -2424,7 +2514,7 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
     <PluginVersion id="10412" name="sisu-guice" key="org.sonatype.sisu.guice-3.1.3" version="3.1.3" created="2013-07-05 12:16:44.257"/>
     <PluginVersion id="10413" name="jira-suite-utilities-1.4.8-SNAPSHOT-tests.jar" key="jira-suite-utilities-1.4.8-SNAPSHOT-tests.jar" version="0.0" created="2013-07-05 12:16:44.269"/>
     <PluginVersion id="10600" name="JIRA TestKit - Plugin" key="com.atlassian.jira.tests.jira-testkit-plugin" version="6.0.26" created="2013-07-08 10:45:27.597"/>
-    <PluginVersion id="11300" name="Remotable Plugins I18n plugin" key="remotable.plugins.i18n" version="1" created="2013-09-20 14:40:19.456"/>
+    <PluginVersion id="11300" name="Remotable Plugins I18n plugin" key="remotable.plugins.i18n" version="1" created="2013-09-23 13:19:31.5"/>
     <PortalPage id="10000" pagename="System Dashboard" sequence="0" favCount="0" layout="AA" version="0"/>
     <PortletConfiguration id="10000" portalpage="10000" columnNumber="0" position="0" gadgetXml="rest/gadgets/1.0/g/com.atlassian.jira.gadgets:introduction-gadget/gadgets/introduction-gadget.xml"/>
     <PortletConfiguration id="10001" portalpage="10000" columnNumber="0" position="1" gadgetXml="rest/gadgets/1.0/g/com.atlassian.streams.streams-jira-plugin:activitystream-gadget/gadgets/activitystream-gadget.xml"/>
@@ -2436,7 +2526,7 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
     <Priority id="3" sequence="3" name="Major" description="Major loss of function." iconurl="/images/icons/priorities/major.png" statusColor="#009900"/>
     <Priority id="4" sequence="4" name="Minor" description="Minor loss of function, or other problem where easy workaround is present." iconurl="/images/icons/priorities/minor.png" statusColor="#006600"/>
     <Priority id="5" sequence="5" name="Trivial" description="Cosmetic problem like misspelt words or misaligned text." iconurl="/images/icons/priorities/trivial.png" statusColor="#003300"/>
-    <Project id="10000" name="Test Jsu Project" lead="admin" key="TJP" counter="11" assigneetype="2" avatar="10011"/>
+    <Project id="10000" name="Test Jsu Project" lead="admin" key="TJP" counter="23" assigneetype="2" avatar="10011"/>
     <ProjectRole id="10000" name="Users" description="A project role that represents users in a project"/>
     <ProjectRole id="10001" name="Developers" description="A project role that represents developers in a project"/>
     <ProjectRole id="10002" name="Administrators" description="A project role that represents administrators in a project"/>
@@ -2494,14 +2584,14 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
     <SchemePermissions id="10200" scheme="0" permission="45" type="projectrole" parameter="10000"/>
     <SequenceValueItem seqName="ApplicationUser" seqId="10100"/>
     <SequenceValueItem seqName="Avatar" seqId="10300"/>
-    <SequenceValueItem seqName="ChangeGroup" seqId="11000"/>
-    <SequenceValueItem seqName="ChangeItem" seqId="11000"/>
+    <SequenceValueItem seqName="ChangeGroup" seqId="11100"/>
+    <SequenceValueItem seqName="ChangeItem" seqId="11100"/>
     <SequenceValueItem seqName="Component" seqId="10100"/>
     <SequenceValueItem seqName="ConfigurationContext" seqId="10400"/>
     <SequenceValueItem seqName="CustomField" seqId="10300"/>
     <SequenceValueItem seqName="CustomFieldOption" seqId="10200"/>
     <SequenceValueItem seqName="CustomFieldValue" seqId="10400"/>
-    <SequenceValueItem seqName="DraftWorkflow" seqId="10500"/>
+    <SequenceValueItem seqName="DraftWorkflow" seqId="10600"/>
     <SequenceValueItem seqName="ExternalEntity" seqId="210"/>
     <SequenceValueItem seqName="FieldConfigScheme" seqId="10400"/>
     <SequenceValueItem seqName="FieldConfigSchemeIssueType" seqId="10500"/>
@@ -2516,7 +2606,7 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
     <SequenceValueItem seqName="GadgetUserPreference" seqId="10100"/>
     <SequenceValueItem seqName="GenericConfiguration" seqId="10100"/>
     <SequenceValueItem seqName="Group" seqId="10010"/>
-    <SequenceValueItem seqName="Issue" seqId="10400"/>
+    <SequenceValueItem seqName="Issue" seqId="10500"/>
     <SequenceValueItem seqName="IssueLink" seqId="10100"/>
     <SequenceValueItem seqName="IssueLinkType" seqId="10200"/>
     <SequenceValueItem seqName="IssueTypeScreenSchemeEntity" seqId="10100"/>
@@ -2526,12 +2616,12 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
     <SequenceValueItem seqName="Notification" seqId="10300"/>
     <SequenceValueItem seqName="NotificationScheme" seqId="10100"/>
     <SequenceValueItem seqName="OAuthConsumer" seqId="10100"/>
-    <SequenceValueItem seqName="OSCurrentStep" seqId="10800"/>
+    <SequenceValueItem seqName="OSCurrentStep" seqId="10900"/>
     <SequenceValueItem seqName="OSGroup" seqId="10100"/>
     <SequenceValueItem seqName="OSMembership" seqId="10100"/>
     <SequenceValueItem seqName="OSPropertyEntry" seqId="13000"/>
     <SequenceValueItem seqName="OSUser" seqId="10100"/>
-    <SequenceValueItem seqName="OSWorkflowEntry" seqId="10400"/>
+    <SequenceValueItem seqName="OSWorkflowEntry" seqId="10500"/>
     <SequenceValueItem seqName="OptionConfiguration" seqId="10200"/>
     <SequenceValueItem seqName="PluginVersion" seqId="11400"/>
     <SequenceValueItem seqName="PortalPage" seqId="10100"/>
@@ -2546,7 +2636,7 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
     <SequenceValueItem seqName="UpgradeVersionHistory" seqId="10400"/>
     <SequenceValueItem seqName="User" seqId="10110"/>
     <SequenceValueItem seqName="UserAttribute" seqId="410"/>
-    <SequenceValueItem seqName="UserHistoryItem" seqId="10800"/>
+    <SequenceValueItem seqName="UserHistoryItem" seqId="10900"/>
     <SequenceValueItem seqName="Version" seqId="10100"/>
     <SequenceValueItem seqName="Workflow" seqId="10300"/>
     <SequenceValueItem seqName="WorkflowScheme" seqId="10100"/>
@@ -2559,9 +2649,9 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
     <ServiceConfig id="12502" time="86400000" clazz="com.atlassian.sal.jira.scheduling.JiraPluginSchedulerService" name="LocalPluginLicenseNotificationPluginJob-job"/>
     <ServiceConfig id="12503" time="3600000" clazz="com.atlassian.sal.jira.scheduling.JiraPluginSchedulerService" name="RemotePluginLicenseNotificationPluginJob-job"/>
     <ServiceConfig id="12504" time="3600000" clazz="com.atlassian.sal.jira.scheduling.JiraPluginSchedulerService" name="PluginRequestCheckPluginJob-job"/>
-    <ServiceConfig id="12505" time="38860651" clazz="com.atlassian.sal.jira.scheduling.JiraPluginSchedulerService" name="PluginUpdateCheckPluginJob-job"/>
-    <ServiceConfig id="12506" time="60000" clazz="com.atlassian.sal.jira.scheduling.JiraPluginSchedulerService" name="AddOnLicensingEmailNotificationsPluginJob-job"/>
-    <ServiceConfig id="12507" time="2919140" clazz="com.atlassian.sal.jira.scheduling.JiraPluginSchedulerService" name="com.atlassian.jira.plugins.dvcs.scheduler.DvcsScheduler:job"/>
+    <ServiceConfig id="12505" time="44428549" clazz="com.atlassian.sal.jira.scheduling.JiraPluginSchedulerService" name="PluginUpdateCheckPluginJob-job"/>
+    <ServiceConfig id="12506" time="14400000" clazz="com.atlassian.sal.jira.scheduling.JiraPluginSchedulerService" name="AddOnLicensingEmailNotificationsPluginJob-job"/>
+    <ServiceConfig id="12507" time="3600000" clazz="com.atlassian.sal.jira.scheduling.JiraPluginSchedulerService" name="com.atlassian.jira.plugins.dvcs.scheduler.DvcsScheduler:job"/>
     <SharePermissions id="10000" entityId="10000" entityType="PortalPage" type="global"/>
     <Status id="1" sequence="1" name="Open" description="The issue is open and ready for the assignee to start work on it." iconurl="/images/icons/statuses/open.png"/>
     <Status id="3" sequence="3" name="In Progress" description="This issue is being actively worked on at the moment by the assignee." iconurl="/images/icons/statuses/inprogress.png"/>
@@ -2599,13 +2689,25 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
     <UserAssociation sourceName="admin" sinkNodeId="10305" sinkNodeEntity="Issue" associationType="WatchIssue" created="2013-09-20 14:05:32.465"/>
     <UserAssociation sourceName="admin" sinkNodeId="10306" sinkNodeEntity="Issue" associationType="WatchIssue" created="2013-09-20 14:05:48.957"/>
     <UserAssociation sourceName="admin" sinkNodeId="10307" sinkNodeEntity="Issue" associationType="WatchIssue" created="2013-09-20 14:06:06.345"/>
+    <UserAssociation sourceName="admin" sinkNodeId="10400" sinkNodeEntity="Issue" associationType="WatchIssue" created="2013-09-23 13:34:30.363"/>
+    <UserAssociation sourceName="admin" sinkNodeId="10401" sinkNodeEntity="Issue" associationType="WatchIssue" created="2013-09-23 13:34:36.262"/>
+    <UserAssociation sourceName="admin" sinkNodeId="10402" sinkNodeEntity="Issue" associationType="WatchIssue" created="2013-09-23 13:35:07.311"/>
+    <UserAssociation sourceName="admin" sinkNodeId="10403" sinkNodeEntity="Issue" associationType="WatchIssue" created="2013-09-23 13:35:12.704"/>
+    <UserAssociation sourceName="admin" sinkNodeId="10404" sinkNodeEntity="Issue" associationType="WatchIssue" created="2013-09-23 13:35:16.919"/>
+    <UserAssociation sourceName="admin" sinkNodeId="10405" sinkNodeEntity="Issue" associationType="WatchIssue" created="2013-09-23 13:35:19.131"/>
+    <UserAssociation sourceName="admin" sinkNodeId="10406" sinkNodeEntity="Issue" associationType="WatchIssue" created="2013-09-23 13:35:21.267"/>
+    <UserAssociation sourceName="admin" sinkNodeId="10407" sinkNodeEntity="Issue" associationType="WatchIssue" created="2013-09-23 13:35:23.35"/>
+    <UserAssociation sourceName="admin" sinkNodeId="10408" sinkNodeEntity="Issue" associationType="WatchIssue" created="2013-09-23 13:35:25.347"/>
+    <UserAssociation sourceName="admin" sinkNodeId="10409" sinkNodeEntity="Issue" associationType="WatchIssue" created="2013-09-23 13:35:27.978"/>
+    <UserAssociation sourceName="admin" sinkNodeId="10410" sinkNodeEntity="Issue" associationType="WatchIssue" created="2013-09-23 13:35:48.11"/>
+    <UserAssociation sourceName="admin" sinkNodeId="10411" sinkNodeEntity="Issue" associationType="WatchIssue" created="2013-09-23 13:35:53.538"/>
     <UserAttribute id="10" userId="10000" directoryId="1" name="invalidPasswordAttempts" value="0" lowerValue="0"/>
     <UserAttribute id="11" userId="10000" directoryId="1" name="requiresPasswordChange" value="false" lowerValue="false"/>
-    <UserAttribute id="12" userId="10000" directoryId="1" name="lastAuthenticated" value="1379680833912" lowerValue="1379680833912"/>
+    <UserAttribute id="12" userId="10000" directoryId="1" name="lastAuthenticated" value="1379936026714" lowerValue="1379936026714"/>
     <UserAttribute id="13" userId="10000" directoryId="1" name="login.currentFailedCount" value="0" lowerValue="0"/>
-    <UserAttribute id="14" userId="10000" directoryId="1" name="login.lastLoginMillis" value="1379680835073" lowerValue="1379680835073"/>
-    <UserAttribute id="15" userId="10000" directoryId="1" name="login.count" value="44" lowerValue="44"/>
-    <UserAttribute id="110" userId="10000" directoryId="1" name="login.previousLoginMillis" value="1379678597600" lowerValue="1379678597600"/>
+    <UserAttribute id="14" userId="10000" directoryId="1" name="login.lastLoginMillis" value="1379936026717" lowerValue="1379936026717"/>
+    <UserAttribute id="15" userId="10000" directoryId="1" name="login.count" value="45" lowerValue="45"/>
+    <UserAttribute id="110" userId="10000" directoryId="1" name="login.previousLoginMillis" value="1379935185167" lowerValue="1379935185167"/>
     <UserAttribute id="210" userId="10010" directoryId="1" name="requiresPasswordChange" value="false" lowerValue="false"/>
     <UserAttribute id="211" userId="10010" directoryId="1" name="passwordLastChanged" value="1360935294108" lowerValue="1360935294108"/>
     <UserAttribute id="212" userId="10010" directoryId="1" name="password.reset.request.expiry" value="1361021694451" lowerValue="1361021694451"/>
@@ -2620,17 +2722,17 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
     <UserAttribute id="227" userId="10013" directoryId="1" name="password.reset.request.token" value="e5f5329a26ff4ddc7d6c57b7d9ed1426c0bf8ad3" lowerValue="e5f5329a26ff4ddc7d6c57b7d9ed1426c0bf8ad3"/>
     <UserAttribute id="310" userId="10000" directoryId="1" name="login.lastFailedLoginMillis" value="1373890938979" lowerValue="1373890938979"/>
     <UserAttribute id="311" userId="10000" directoryId="1" name="login.totalFailedCount" value="1" lowerValue="1"/>
-    <UserHistoryItem id="10000" type="Dashboard" entityId="10000" username="admin" lastViewed="1379680836183"/>
+    <UserHistoryItem id="10000" type="Dashboard" entityId="10000" username="admin" lastViewed="1379936180046"/>
     <UserHistoryItem id="10001" type="Assignee" entityId="admin" username="admin" lastViewed="1360847761836"/>
-    <UserHistoryItem id="10100" type="Project" entityId="10000" username="admin" lastViewed="1379678766378"/>
+    <UserHistoryItem id="10100" type="Project" entityId="10000" username="admin" lastViewed="1379936298439"/>
     <UserHistoryItem id="10200" type="Issue" entityId="10000" username="admin" lastViewed="1373633784838"/>
     <UserHistoryItem id="10201" type="Resolution" entityId="1" username="admin" lastViewed="1373891505654" data="Fixed"/>
     <UserHistoryItem id="10300" type="Issue" entityId="10100" username="admin" lastViewed="1373891498239"/>
     <UserHistoryItem id="10400" type="UsedUser" entityId="developer" username="admin" lastViewed="1373897619198"/>
-    <UserHistoryItem id="10500" type="Searcher" entityId="project" username="admin" lastViewed="1373891476356"/>
-    <UserHistoryItem id="10501" type="Searcher" entityId="issuetype" username="admin" lastViewed="1373891476367"/>
-    <UserHistoryItem id="10502" type="Searcher" entityId="assignee" username="admin" lastViewed="1373891476387"/>
-    <UserHistoryItem id="10503" type="Searcher" entityId="status" username="admin" lastViewed="1373891476410"/>
+    <UserHistoryItem id="10500" type="Searcher" entityId="project" username="admin" lastViewed="1379936414940"/>
+    <UserHistoryItem id="10501" type="Searcher" entityId="issuetype" username="admin" lastViewed="1379936414943"/>
+    <UserHistoryItem id="10502" type="Searcher" entityId="assignee" username="admin" lastViewed="1379936414947"/>
+    <UserHistoryItem id="10503" type="Searcher" entityId="status" username="admin" lastViewed="1379936414951"/>
     <UserHistoryItem id="10600" type="Issue" entityId="10200" username="admin" lastViewed="1373897619516"/>
     <UserHistoryItem id="10700" type="Issue" entityId="10300" username="admin" lastViewed="1379678623964"/>
     <UserHistoryItem id="10701" type="Issue" entityId="10301" username="admin" lastViewed="1379678655633"/>
@@ -2640,6 +2742,20 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
     <UserHistoryItem id="10705" type="Issue" entityId="10305" username="admin" lastViewed="1379678732506"/>
     <UserHistoryItem id="10706" type="Issue" entityId="10306" username="admin" lastViewed="1379678773390"/>
     <UserHistoryItem id="10707" type="Issue" entityId="10307" username="admin" lastViewed="1379678768561"/>
+    <UserHistoryItem id="10800" type="Issue" entityId="10400" username="admin" lastViewed="1379936338129"/>
+    <UserHistoryItem id="10801" type="Issue" entityId="10401" username="admin" lastViewed="1379936337374"/>
+    <UserHistoryItem id="10802" type="Issue" entityId="10402" username="admin" lastViewed="1379936258645"/>
+    <UserHistoryItem id="10803" type="Issue" entityId="10403" username="admin" lastViewed="1379936257759"/>
+    <UserHistoryItem id="10804" type="Issue" entityId="10404" username="admin" lastViewed="1379936257082"/>
+    <UserHistoryItem id="10805" type="Issue" entityId="10405" username="admin" lastViewed="1379936256429"/>
+    <UserHistoryItem id="10806" type="Issue" entityId="10406" username="admin" lastViewed="1379936255554"/>
+    <UserHistoryItem id="10807" type="Issue" entityId="10407" username="admin" lastViewed="1379936335473"/>
+    <UserHistoryItem id="10808" type="Issue" entityId="10408" username="admin" lastViewed="1379936335063"/>
+    <UserHistoryItem id="10809" type="Issue" entityId="10409" username="admin" lastViewed="1379936334175"/>
+    <UserHistoryItem id="10810" type="Issue" entityId="10410" username="admin" lastViewed="1379936333418"/>
+    <UserHistoryItem id="10811" type="Issue" entityId="10411" username="admin" lastViewed="1379936423390"/>
+    <UserHistoryItem id="10812" type="Searcher" entityId="summary" username="admin" lastViewed="1379936313353"/>
+    <UserHistoryItem id="10813" type="Searcher" entityId="text" username="admin" lastViewed="1379936320305"/>
     <Version id="10000" project="10000" name="1.0" sequence="1"/>
     <Version id="10001" project="10000" name="2.0" sequence="2"/>
     <Version id="10002" project="10000" name="3.0" sequence="3"/>
@@ -2650,7 +2766,7 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
 <workflow>
   <meta name="jira.update.author.key">admin</meta>
   <meta name="jira.description">The JSU Test workflow.</meta>
-  <meta name="jira.updated.date">1379672876112</meta>
+  <meta name="jira.updated.date">1379936018798</meta>
   <initial-actions>
     <action id="1" name="Create Issue">
       <meta name="opsbar-sequence">0</meta>
@@ -2678,8 +2794,8 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
   </initial-actions>
   <common-actions>
     <action id="2" name="Close Issue" view="resolveissue">
-      <meta name="opsbar-sequence">60</meta>
       <meta name="jira.i18n.submit">closeissue.close</meta>
+      <meta name="opsbar-sequence">60</meta>
       <meta name="jira.i18n.description">closeissue.desc</meta>
       <meta name="jira.i18n.title">closeissue.title</meta>
       <restrict-to>
@@ -2718,8 +2834,8 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
       </results>
     </action>
     <action id="3" name="Reopen Issue" view="commentassign">
-      <meta name="opsbar-sequence">80</meta>
       <meta name="jira.i18n.submit">issue.operations.reopen.issue</meta>
+      <meta name="opsbar-sequence">80</meta>
       <meta name="jira.i18n.description">issue.operations.reopen.description</meta>
       <meta name="jira.i18n.title">issue.operations.reopen.issue</meta>
       <restrict-to>
@@ -2734,8 +2850,8 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
         <unconditional-result old-status="Finished" status="Reopened" step="5">
           <post-functions>
             <function type="class">
-              <arg name="class.name">com.atlassian.jira.workflow.function.issue.UpdateIssueFieldFunction</arg>
               <arg name="field.value"></arg>
+              <arg name="class.name">com.atlassian.jira.workflow.function.issue.UpdateIssueFieldFunction</arg>
               <arg name="field.name">resolution</arg>
             </function>
             <function type="class">
@@ -2772,8 +2888,8 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
         <unconditional-result old-status="Finished" status="Underway" step="3">
           <post-functions>
             <function type="class">
-              <arg name="class.name">com.atlassian.jira.workflow.function.issue.UpdateIssueFieldFunction</arg>
               <arg name="field.value"></arg>
+              <arg name="class.name">com.atlassian.jira.workflow.function.issue.UpdateIssueFieldFunction</arg>
               <arg name="field.name">resolution</arg>
             </function>
             <function type="class">
@@ -2797,8 +2913,8 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
       </results>
     </action>
     <action id="5" name="Resolve Issue" view="resolveissue">
-      <meta name="opsbar-sequence">40</meta>
       <meta name="jira.i18n.submit">resolveissue.resolve</meta>
+      <meta name="opsbar-sequence">40</meta>
       <meta name="jira.i18n.description">resolveissue.desc.line1</meta>
       <meta name="jira.i18n.title">resolveissue.title</meta>
       <restrict-to>
@@ -2881,8 +2997,8 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
                 <arg name="comparisonType">1</arg>
                 <arg name="fieldValue">Zurich</arg>
                 <arg name="class.name">com.googlecode.jsu.workflow.condition.ValueFieldCondition</arg>
-                <arg name="fieldsList">customfield_10001</arg>
                 <arg name="conditionList">3</arg>
+                <arg name="fieldsList">customfield_10001</arg>
               </condition>
             </conditions>
           </restrict-to>
@@ -3018,8 +3134,8 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
                 <arg name="comparisonType">1</arg>
                 <arg name="fieldValue">admin</arg>
                 <arg name="class.name">com.googlecode.jsu.workflow.condition.ValueFieldCondition</arg>
-                <arg name="conditionList">3</arg>
                 <arg name="fieldsList">customfield_10002</arg>
+                <arg name="conditionList">3</arg>
               </condition>
             </conditions>
           </restrict-to>
@@ -3054,8 +3170,8 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
                 <arg name="comparisonType">2</arg>
                 <arg name="fieldValue">10</arg>
                 <arg name="class.name">com.googlecode.jsu.workflow.condition.ValueFieldCondition</arg>
-                <arg name="conditionList">5</arg>
                 <arg name="fieldsList">customfield_10104</arg>
+                <arg name="conditionList">5</arg>
               </condition>
             </conditions>
           </restrict-to>
@@ -3121,8 +3237,8 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
           <restrict-to>
             <conditions>
               <condition type="class">
-                <arg name="class.name">com.googlecode.jsu.workflow.condition.UserIsInAnyRolesCondition</arg>
                 <arg name="hidRolesList">SuperUser@@</arg>
+                <arg name="class.name">com.googlecode.jsu.workflow.condition.UserIsInAnyRolesCondition</arg>
               </condition>
             </conditions>
           </restrict-to>
@@ -3147,8 +3263,8 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
                 </function>
                 <function type="class">
                   <arg name="class.name">com.atlassian.jira.workflow.function.event.FireIssueEventFunction</arg>
-                  <arg name="full.module.key">com.atlassian.jira.plugin.system.workflowfireevent-function</arg>
                   <arg name="eventTypeId">13</arg>
+                  <arg name="full.module.key">com.atlassian.jira.plugin.system.workflowfireevent-function</arg>
                 </function>
               </post-functions>
             </unconditional-result>
@@ -3159,8 +3275,8 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
           <restrict-to>
             <conditions>
               <condition type="class">
-                <arg name="hidRolesList">Visitors@@</arg>
                 <arg name="class.name">com.googlecode.jsu.workflow.condition.UserIsInAnyRolesCondition</arg>
+                <arg name="hidRolesList">Visitors@@</arg>
               </condition>
             </conditions>
           </restrict-to>
@@ -3185,8 +3301,8 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
                 </function>
                 <function type="class">
                   <arg name="class.name">com.atlassian.jira.workflow.function.event.FireIssueEventFunction</arg>
-                  <arg name="eventTypeId">13</arg>
                   <arg name="full.module.key">com.atlassian.jira.plugin.system.workflowfireevent-function</arg>
+                  <arg name="eventTypeId">13</arg>
                 </function>
               </post-functions>
             </unconditional-result>
@@ -3200,8 +3316,8 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
                 <arg name="comparisonType">5</arg>
                 <arg name="fieldValue">10007</arg>
                 <arg name="class.name">com.googlecode.jsu.workflow.condition.ValueFieldCondition</arg>
-                <arg name="fieldsList">customfield_10108</arg>
                 <arg name="conditionList">3</arg>
+                <arg name="fieldsList">customfield_10108</arg>
               </condition>
             </conditions>
           </restrict-to>
@@ -3226,8 +3342,8 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
                 </function>
                 <function type="class">
                   <arg name="class.name">com.atlassian.jira.workflow.function.event.FireIssueEventFunction</arg>
-                  <arg name="full.module.key">com.atlassian.jira.plugin.system.workflowfireevent-function</arg>
                   <arg name="eventTypeId">13</arg>
+                  <arg name="full.module.key">com.atlassian.jira.plugin.system.workflowfireevent-function</arg>
                 </function>
               </post-functions>
             </unconditional-result>
@@ -3241,8 +3357,8 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
                 <arg name="comparisonType">5</arg>
                 <arg name="fieldValue">10102</arg>
                 <arg name="class.name">com.googlecode.jsu.workflow.condition.ValueFieldCondition</arg>
-                <arg name="fieldsList">customfield_10106</arg>
                 <arg name="conditionList">3</arg>
+                <arg name="fieldsList">customfield_10106</arg>
               </condition>
             </conditions>
           </restrict-to>
@@ -3267,8 +3383,8 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
                 </function>
                 <function type="class">
                   <arg name="class.name">com.atlassian.jira.workflow.function.event.FireIssueEventFunction</arg>
-                  <arg name="full.module.key">com.atlassian.jira.plugin.system.workflowfireevent-function</arg>
                   <arg name="eventTypeId">13</arg>
+                  <arg name="full.module.key">com.atlassian.jira.plugin.system.workflowfireevent-function</arg>
                 </function>
               </post-functions>
             </unconditional-result>
@@ -3282,8 +3398,8 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
                 <arg name="comparisonType">5</arg>
                 <arg name="fieldValue">10021</arg>
                 <arg name="class.name">com.googlecode.jsu.workflow.condition.ValueFieldCondition</arg>
-                <arg name="fieldsList">customfield_10103</arg>
                 <arg name="conditionList">3</arg>
+                <arg name="fieldsList">customfield_10103</arg>
               </condition>
             </conditions>
           </restrict-to>
@@ -3308,8 +3424,8 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
                 </function>
                 <function type="class">
                   <arg name="class.name">com.atlassian.jira.workflow.function.event.FireIssueEventFunction</arg>
-                  <arg name="full.module.key">com.atlassian.jira.plugin.system.workflowfireevent-function</arg>
                   <arg name="eventTypeId">13</arg>
+                  <arg name="full.module.key">com.atlassian.jira.plugin.system.workflowfireevent-function</arg>
                 </function>
               </post-functions>
             </unconditional-result>
@@ -3323,8 +3439,8 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
                 <arg name="comparisonType">5</arg>
                 <arg name="fieldValue">10101</arg>
                 <arg name="class.name">com.googlecode.jsu.workflow.condition.ValueFieldCondition</arg>
-                <arg name="fieldsList">customfield_10106</arg>
                 <arg name="conditionList">6</arg>
+                <arg name="fieldsList">customfield_10106</arg>
               </condition>
             </conditions>
           </restrict-to>
@@ -3349,8 +3465,8 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
                 </function>
                 <function type="class">
                   <arg name="class.name">com.atlassian.jira.workflow.function.event.FireIssueEventFunction</arg>
-                  <arg name="full.module.key">com.atlassian.jira.plugin.system.workflowfireevent-function</arg>
                   <arg name="eventTypeId">13</arg>
+                  <arg name="full.module.key">com.atlassian.jira.plugin.system.workflowfireevent-function</arg>
                 </function>
               </post-functions>
             </unconditional-result>
@@ -3377,8 +3493,8 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
             <unconditional-result old-status="Finished" status="Assigned" step="1">
               <post-functions>
                 <function type="class">
-                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.UpdateIssueFieldFunction</arg>
                   <arg name="field.value"></arg>
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.UpdateIssueFieldFunction</arg>
                   <arg name="field.name">resolution</arg>
                 </function>
                 <function type="class">
@@ -3699,6 +3815,246 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
             </unconditional-result>
           </results>
         </action>
+        <action id="1251" name="date expression compare" view="fieldscreen">
+          <meta name="jira.description"></meta>
+          <meta name="jira.fieldscreen.id">3</meta>
+          <validators>
+            <validator name="" type="class">
+              <arg name="includeTimeSelected">2</arg>
+              <arg name="dateFieldSelected">customfield_10100</arg>
+              <arg name="class.name">com.googlecode.jsu.workflow.validator.DateExpressionCompareValidator</arg>
+              <arg name="conditionSelected">5</arg>
+              <arg name="expressionSelected">now</arg>
+            </validator>
+          </validators>
+          <results>
+            <unconditional-result old-status="Not Done" status="Done" step="4">
+              <post-functions>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.UpdateIssueStatusFunction</arg>
+                  <arg name="full.module.key">com.atlassian.jira.plugin.system.workflowupdateissuestatus-function</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.misc.CreateCommentFunction</arg>
+                  <arg name="full.module.key">com.atlassian.jira.plugin.system.workflowcreatecomment-function</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.GenerateChangeHistoryFunction</arg>
+                  <arg name="full.module.key">com.atlassian.jira.plugin.system.workflowgeneratechangehistory-function</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.IssueReindexFunction</arg>
+                  <arg name="full.module.key">com.atlassian.jira.plugin.system.workflowreindexissue-function</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.event.FireIssueEventFunction</arg>
+                  <arg name="full.module.key">com.atlassian.jira.plugin.system.workflowfireevent-function</arg>
+                  <arg name="eventTypeId">13</arg>
+                </function>
+              </post-functions>
+            </unconditional-result>
+          </results>
+        </action>
+        <action id="1261" name="date expression compare 1" view="fieldscreen">
+          <meta name="jira.description"></meta>
+          <meta name="jira.fieldscreen.id">3</meta>
+          <validators>
+            <validator name="" type="class">
+              <arg name="includeTimeSelected">1</arg>
+              <arg name="dateFieldSelected">customfield_10109</arg>
+              <arg name="class.name">com.googlecode.jsu.workflow.validator.DateExpressionCompareValidator</arg>
+              <arg name="conditionSelected">1</arg>
+              <arg name="expressionSelected">5d</arg>
+            </validator>
+          </validators>
+          <results>
+            <unconditional-result old-status="Not Done" status="Done" step="4">
+              <post-functions>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.UpdateIssueStatusFunction</arg>
+                  <arg name="full.module.key">com.atlassian.jira.plugin.system.workflowupdateissuestatus-function</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.misc.CreateCommentFunction</arg>
+                  <arg name="full.module.key">com.atlassian.jira.plugin.system.workflowcreatecomment-function</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.GenerateChangeHistoryFunction</arg>
+                  <arg name="full.module.key">com.atlassian.jira.plugin.system.workflowgeneratechangehistory-function</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.IssueReindexFunction</arg>
+                  <arg name="full.module.key">com.atlassian.jira.plugin.system.workflowreindexissue-function</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.event.FireIssueEventFunction</arg>
+                  <arg name="full.module.key">com.atlassian.jira.plugin.system.workflowfireevent-function</arg>
+                  <arg name="eventTypeId">13</arg>
+                </function>
+              </post-functions>
+            </unconditional-result>
+          </results>
+        </action>
+        <action id="1271" name="date expression compare 2" view="fieldscreen">
+          <meta name="jira.description"></meta>
+          <meta name="jira.fieldscreen.id">3</meta>
+          <validators>
+            <validator name="" type="class">
+              <arg name="includeTimeSelected">2</arg>
+              <arg name="dateFieldSelected">customfield_10100</arg>
+              <arg name="class.name">com.googlecode.jsu.workflow.validator.DateExpressionCompareValidator</arg>
+              <arg name="conditionSelected">5</arg>
+              <arg name="expressionSelected">-1m</arg>
+            </validator>
+          </validators>
+          <results>
+            <unconditional-result old-status="Not Done" status="Done" step="4">
+              <post-functions>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.UpdateIssueStatusFunction</arg>
+                  <arg name="full.module.key">com.atlassian.jira.plugin.system.workflowupdateissuestatus-function</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.misc.CreateCommentFunction</arg>
+                  <arg name="full.module.key">com.atlassian.jira.plugin.system.workflowcreatecomment-function</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.GenerateChangeHistoryFunction</arg>
+                  <arg name="full.module.key">com.atlassian.jira.plugin.system.workflowgeneratechangehistory-function</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.IssueReindexFunction</arg>
+                  <arg name="full.module.key">com.atlassian.jira.plugin.system.workflowreindexissue-function</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.event.FireIssueEventFunction</arg>
+                  <arg name="full.module.key">com.atlassian.jira.plugin.system.workflowfireevent-function</arg>
+                  <arg name="eventTypeId">13</arg>
+                </function>
+              </post-functions>
+            </unconditional-result>
+          </results>
+        </action>
+        <action id="1281" name="date expression compare 3" view="fieldscreen">
+          <meta name="jira.description"></meta>
+          <meta name="jira.fieldscreen.id">3</meta>
+          <validators>
+            <validator name="" type="class">
+              <arg name="includeTimeSelected">2</arg>
+              <arg name="dateFieldSelected">customfield_10100</arg>
+              <arg name="class.name">com.googlecode.jsu.workflow.validator.DateExpressionCompareValidator</arg>
+              <arg name="conditionSelected">2</arg>
+              <arg name="expressionSelected">1w</arg>
+            </validator>
+          </validators>
+          <results>
+            <unconditional-result old-status="Not Done" status="Done" step="4">
+              <post-functions>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.UpdateIssueStatusFunction</arg>
+                  <arg name="full.module.key">com.atlassian.jira.plugin.system.workflowupdateissuestatus-function</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.misc.CreateCommentFunction</arg>
+                  <arg name="full.module.key">com.atlassian.jira.plugin.system.workflowcreatecomment-function</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.GenerateChangeHistoryFunction</arg>
+                  <arg name="full.module.key">com.atlassian.jira.plugin.system.workflowgeneratechangehistory-function</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.IssueReindexFunction</arg>
+                  <arg name="full.module.key">com.atlassian.jira.plugin.system.workflowreindexissue-function</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.event.FireIssueEventFunction</arg>
+                  <arg name="full.module.key">com.atlassian.jira.plugin.system.workflowfireevent-function</arg>
+                  <arg name="eventTypeId">13</arg>
+                </function>
+              </post-functions>
+            </unconditional-result>
+          </results>
+        </action>
+        <action id="1291" name="date expression compare 4" view="fieldscreen">
+          <meta name="jira.description"></meta>
+          <meta name="jira.fieldscreen.id">3</meta>
+          <validators>
+            <validator name="" type="class">
+              <arg name="includeTimeSelected">2</arg>
+              <arg name="dateFieldSelected">customfield_10100</arg>
+              <arg name="class.name">com.googlecode.jsu.workflow.validator.DateExpressionCompareValidator</arg>
+              <arg name="conditionSelected">6</arg>
+              <arg name="expressionSelected">now</arg>
+            </validator>
+          </validators>
+          <results>
+            <unconditional-result old-status="Not Done" status="Done" step="4">
+              <post-functions>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.UpdateIssueStatusFunction</arg>
+                  <arg name="full.module.key">com.atlassian.jira.plugin.system.workflowupdateissuestatus-function</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.misc.CreateCommentFunction</arg>
+                  <arg name="full.module.key">com.atlassian.jira.plugin.system.workflowcreatecomment-function</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.GenerateChangeHistoryFunction</arg>
+                  <arg name="full.module.key">com.atlassian.jira.plugin.system.workflowgeneratechangehistory-function</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.IssueReindexFunction</arg>
+                  <arg name="full.module.key">com.atlassian.jira.plugin.system.workflowreindexissue-function</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.event.FireIssueEventFunction</arg>
+                  <arg name="full.module.key">com.atlassian.jira.plugin.system.workflowfireevent-function</arg>
+                  <arg name="eventTypeId">13</arg>
+                </function>
+              </post-functions>
+            </unconditional-result>
+          </results>
+        </action>
+        <action id="1301" name="date expression compare 5" view="fieldscreen">
+          <meta name="jira.description"></meta>
+          <meta name="jira.fieldscreen.id">3</meta>
+          <validators>
+            <validator name="" type="class">
+              <arg name="includeTimeSelected">2</arg>
+              <arg name="dateFieldSelected">customfield_10100</arg>
+              <arg name="class.name">com.googlecode.jsu.workflow.validator.DateExpressionCompareValidator</arg>
+              <arg name="conditionSelected">1</arg>
+              <arg name="expressionSelected">1y</arg>
+            </validator>
+          </validators>
+          <results>
+            <unconditional-result old-status="Not Done" status="Done" step="4">
+              <post-functions>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.UpdateIssueStatusFunction</arg>
+                  <arg name="full.module.key">com.atlassian.jira.plugin.system.workflowupdateissuestatus-function</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.misc.CreateCommentFunction</arg>
+                  <arg name="full.module.key">com.atlassian.jira.plugin.system.workflowcreatecomment-function</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.GenerateChangeHistoryFunction</arg>
+                  <arg name="full.module.key">com.atlassian.jira.plugin.system.workflowgeneratechangehistory-function</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.IssueReindexFunction</arg>
+                  <arg name="full.module.key">com.atlassian.jira.plugin.system.workflowreindexissue-function</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.event.FireIssueEventFunction</arg>
+                  <arg name="full.module.key">com.atlassian.jira.plugin.system.workflowfireevent-function</arg>
+                  <arg name="eventTypeId">13</arg>
+                </function>
+              </post-functions>
+            </unconditional-result>
+          </results>
+        </action>
       </actions>
     </step>
     <step id="4" name="Resolved">
@@ -3706,11 +4062,11 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
       <actions>
 <common-action id="3" />
         <action id="701" name="Close Issue" view="commentassign">
-          <meta name="opsbar-sequence">60</meta>
           <meta name="jira.i18n.submit">closeissue.close</meta>
+          <meta name="opsbar-sequence">60</meta>
           <meta name="jira.i18n.description">closeissue.desc</meta>
-          <meta name="jira.i18n.title">closeissue.title</meta>
           <meta name="jira.description">Closing an issue indicates there is no more work to be done on it, and it has been verified as complete.</meta>
+          <meta name="jira.i18n.title">closeissue.title</meta>
           <restrict-to>
             <conditions>
               <condition type="class">
@@ -3748,9 +4104,9 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
             <unconditional-result old-status="Not Done" status="Done" step="1">
               <post-functions>
                 <function type="class">
-                  <arg name="sourceField">assignee</arg>
-                  <arg name="destinationField">customfield_10101</arg>
                   <arg name="class.name">com.googlecode.jsu.workflow.function.CopyValueFromOtherFieldPostFunction</arg>
+                  <arg name="destinationField">customfield_10101</arg>
+                  <arg name="sourceField">assignee</arg>
                 </function>
                 <function type="class">
                   <arg name="class.name">com.atlassian.jira.workflow.function.issue.UpdateIssueStatusFunction</arg>
@@ -3778,9 +4134,9 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
             <unconditional-result old-status="Not Done" status="Done" step="1">
               <post-functions>
                 <function type="class">
-                  <arg name="sourceField">customfield_10000</arg>
-                  <arg name="destinationField">customfield_10001</arg>
                   <arg name="class.name">com.googlecode.jsu.workflow.function.CopyValueFromOtherFieldPostFunction</arg>
+                  <arg name="destinationField">customfield_10001</arg>
+                  <arg name="sourceField">customfield_10000</arg>
                 </function>
                 <function type="class">
                   <arg name="class.name">com.atlassian.jira.workflow.function.issue.UpdateIssueStatusFunction</arg>
@@ -3808,8 +4164,8 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
             <unconditional-result old-status="Not Done" status="Done" step="1">
               <post-functions>
                 <function type="class">
-                  <arg name="field.value">%%CURRENT_USER%%</arg>
                   <arg name="class.name">com.googlecode.jsu.workflow.function.UpdateIssueCustomFieldPostFunction</arg>
+                  <arg name="field.value">%%CURRENT_USER%%</arg>
                   <arg name="field.name">customfield_10101</arg>
                 </function>
                 <function type="class">
@@ -3838,8 +4194,8 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
             <unconditional-result old-status="Not Done" status="Done" step="1">
               <post-functions>
                 <function type="class">
-                  <arg name="field.value">%%CURRENT_DATETIME%%</arg>
                   <arg name="class.name">com.googlecode.jsu.workflow.function.UpdateIssueCustomFieldPostFunction</arg>
+                  <arg name="field.value">%%CURRENT_DATETIME%%</arg>
                   <arg name="field.name">customfield_10109</arg>
                 </function>
                 <function type="class">
@@ -3897,9 +4253,9 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
             <unconditional-result old-status="Not Done" status="Done" step="1">
               <post-functions>
                 <function type="class">
-                  <arg name="class.name">com.googlecode.jsu.workflow.function.CopyValueFromOtherFieldPostFunction</arg>
-                  <arg name="destinationField">customfield_10101</arg>
                   <arg name="sourceField">customfield_10113</arg>
+                  <arg name="destinationField">customfield_10101</arg>
+                  <arg name="class.name">com.googlecode.jsu.workflow.function.CopyValueFromOtherFieldPostFunction</arg>
                 </function>
                 <function type="class">
                   <arg name="class.name">com.atlassian.jira.workflow.function.issue.UpdateIssueStatusFunction</arg>
@@ -3927,9 +4283,9 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
             <unconditional-result old-status="Not Done" status="Done" step="1">
               <post-functions>
                 <function type="class">
-                  <arg name="class.name">com.googlecode.jsu.workflow.function.CopyValueFromOtherFieldPostFunction</arg>
-                  <arg name="destinationField">customfield_10109</arg>
                   <arg name="sourceField">updated</arg>
+                  <arg name="destinationField">customfield_10109</arg>
+                  <arg name="class.name">com.googlecode.jsu.workflow.function.CopyValueFromOtherFieldPostFunction</arg>
                 </function>
                 <function type="class">
                   <arg name="class.name">com.atlassian.jira.workflow.function.issue.UpdateIssueStatusFunction</arg>
@@ -3957,9 +4313,9 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
             <unconditional-result old-status="Not Done" status="Done" step="1">
               <post-functions>
                 <function type="class">
-                  <arg name="class.name">com.googlecode.jsu.workflow.function.CopyValueFromOtherFieldPostFunction</arg>
-                  <arg name="destinationField">assignee</arg>
                   <arg name="sourceField">customfield_10002</arg>
+                  <arg name="destinationField">assignee</arg>
+                  <arg name="class.name">com.googlecode.jsu.workflow.function.CopyValueFromOtherFieldPostFunction</arg>
                 </function>
                 <function type="class">
                   <arg name="class.name">com.atlassian.jira.workflow.function.issue.UpdateIssueStatusFunction</arg>
@@ -3987,9 +4343,9 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
             <unconditional-result old-status="Not Done" status="Done" step="1">
               <post-functions>
                 <function type="class">
-                  <arg name="class.name">com.googlecode.jsu.workflow.function.CopyValueFromOtherFieldPostFunction</arg>
-                  <arg name="destinationField">description</arg>
                   <arg name="sourceField">customfield_10103</arg>
+                  <arg name="destinationField">description</arg>
+                  <arg name="class.name">com.googlecode.jsu.workflow.function.CopyValueFromOtherFieldPostFunction</arg>
                 </function>
                 <function type="class">
                   <arg name="class.name">com.atlassian.jira.workflow.function.issue.UpdateIssueStatusFunction</arg>
@@ -4017,9 +4373,9 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
             <unconditional-result old-status="Not Done" status="Done" step="1">
               <post-functions>
                 <function type="class">
-                  <arg name="class.name">com.googlecode.jsu.workflow.function.CopyValueFromOtherFieldPostFunction</arg>
-                  <arg name="destinationField">customfield_10112</arg>
                   <arg name="sourceField">customfield_10110</arg>
+                  <arg name="destinationField">customfield_10112</arg>
+                  <arg name="class.name">com.googlecode.jsu.workflow.function.CopyValueFromOtherFieldPostFunction</arg>
                 </function>
                 <function type="class">
                   <arg name="class.name">com.atlassian.jira.workflow.function.issue.UpdateIssueStatusFunction</arg>
@@ -4047,9 +4403,9 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
             <unconditional-result old-status="Not Done" status="Done" step="1">
               <post-functions>
                 <function type="class">
-                  <arg name="class.name">com.googlecode.jsu.workflow.function.CopyValueFromOtherFieldPostFunction</arg>
-                  <arg name="destinationField">customfield_10115</arg>
                   <arg name="sourceField">summary</arg>
+                  <arg name="destinationField">customfield_10115</arg>
+                  <arg name="class.name">com.googlecode.jsu.workflow.function.CopyValueFromOtherFieldPostFunction</arg>
                 </function>
                 <function type="class">
                   <arg name="class.name">com.atlassian.jira.workflow.function.issue.UpdateIssueStatusFunction</arg>
@@ -4077,9 +4433,9 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
             <unconditional-result old-status="Not Done" status="Done" step="1">
               <post-functions>
                 <function type="class">
-                  <arg name="class.name">com.googlecode.jsu.workflow.function.CopyValueFromOtherFieldPostFunction</arg>
-                  <arg name="destinationField">customfield_10101</arg>
                   <arg name="sourceField">customfield_10103</arg>
+                  <arg name="destinationField">customfield_10101</arg>
+                  <arg name="class.name">com.googlecode.jsu.workflow.function.CopyValueFromOtherFieldPostFunction</arg>
                 </function>
                 <function type="class">
                   <arg name="class.name">com.atlassian.jira.workflow.function.issue.UpdateIssueStatusFunction</arg>
@@ -4107,9 +4463,9 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
             <unconditional-result old-status="Not Done" status="Done" step="1">
               <post-functions>
                 <function type="class">
-                  <arg name="class.name">com.googlecode.jsu.workflow.function.CopyValueFromOtherFieldPostFunction</arg>
-                  <arg name="destinationField">customfield_10101</arg>
                   <arg name="sourceField">customfield_10108</arg>
+                  <arg name="destinationField">customfield_10101</arg>
+                  <arg name="class.name">com.googlecode.jsu.workflow.function.CopyValueFromOtherFieldPostFunction</arg>
                 </function>
                 <function type="class">
                   <arg name="class.name">com.atlassian.jira.workflow.function.issue.UpdateIssueStatusFunction</arg>
@@ -4137,9 +4493,9 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
             <unconditional-result old-status="Not Done" status="Done" step="1">
               <post-functions>
                 <function type="class">
-                  <arg name="class.name">com.googlecode.jsu.workflow.function.CopyValueFromOtherFieldPostFunction</arg>
-                  <arg name="destinationField">customfield_10002</arg>
                   <arg name="sourceField">reporter</arg>
+                  <arg name="destinationField">customfield_10002</arg>
+                  <arg name="class.name">com.googlecode.jsu.workflow.function.CopyValueFromOtherFieldPostFunction</arg>
                 </function>
                 <function type="class">
                   <arg name="class.name">com.atlassian.jira.workflow.function.issue.UpdateIssueStatusFunction</arg>
@@ -4167,8 +4523,8 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
             <unconditional-result old-status="Not Done" status="Done" step="1">
               <post-functions>
                 <function type="class">
-                  <arg name="class.name">com.googlecode.jsu.workflow.function.UpdateIssueCustomFieldPostFunction</arg>
                   <arg name="field.value">Zurich</arg>
+                  <arg name="class.name">com.googlecode.jsu.workflow.function.UpdateIssueCustomFieldPostFunction</arg>
                   <arg name="field.name">customfield_10001</arg>
                 </function>
                 <function type="class">
@@ -4197,8 +4553,8 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
             <unconditional-result old-status="Not Done" status="Done" step="1">
               <post-functions>
                 <function type="class">
-                  <arg name="class.name">com.googlecode.jsu.workflow.function.UpdateIssueCustomFieldPostFunction</arg>
                   <arg name="field.value">Berlin</arg>
+                  <arg name="class.name">com.googlecode.jsu.workflow.function.UpdateIssueCustomFieldPostFunction</arg>
                   <arg name="field.name">customfield_10000</arg>
                 </function>
                 <function type="class">
@@ -4227,8 +4583,8 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
             <unconditional-result old-status="Not Done" status="Done" step="1">
               <post-functions>
                 <function type="class">
-                  <arg name="class.name">com.googlecode.jsu.workflow.function.UpdateIssueCustomFieldPostFunction</arg>
                   <arg name="field.value">Option AB</arg>
+                  <arg name="class.name">com.googlecode.jsu.workflow.function.UpdateIssueCustomFieldPostFunction</arg>
                   <arg name="field.name">customfield_10108</arg>
                 </function>
                 <function type="class">
@@ -4257,8 +4613,8 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
             <unconditional-result old-status="Not Done" status="Done" step="1">
               <post-functions>
                 <function type="class">
-                  <arg name="class.name">com.googlecode.jsu.workflow.function.UpdateIssueCustomFieldPostFunction</arg>
                   <arg name="field.value">Option C</arg>
+                  <arg name="class.name">com.googlecode.jsu.workflow.function.UpdateIssueCustomFieldPostFunction</arg>
                   <arg name="field.name">customfield_10103</arg>
                 </function>
                 <function type="class">
@@ -4287,8 +4643,8 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
             <unconditional-result old-status="Not Done" status="Done" step="1">
               <post-functions>
                 <function type="class">
-                  <arg name="class.name">com.googlecode.jsu.workflow.function.UpdateIssueCustomFieldPostFunction</arg>
                   <arg name="field.value">user</arg>
+                  <arg name="class.name">com.googlecode.jsu.workflow.function.UpdateIssueCustomFieldPostFunction</arg>
                   <arg name="field.name">customfield_10002</arg>
                 </function>
                 <function type="class">
@@ -4317,8 +4673,8 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
             <unconditional-result old-status="Not Done" status="Done" step="1">
               <post-functions>
                 <function type="class">
-                  <arg name="class.name">com.googlecode.jsu.workflow.function.UpdateIssueCustomFieldPostFunction</arg>
                   <arg name="field.value">Option A</arg>
+                  <arg name="class.name">com.googlecode.jsu.workflow.function.UpdateIssueCustomFieldPostFunction</arg>
                   <arg name="field.name">customfield_10105</arg>
                 </function>
                 <function type="class">
@@ -4347,8 +4703,8 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
             <unconditional-result old-status="Not Done" status="Done" step="1">
               <post-functions>
                 <function type="class">
-                  <arg name="class.name">com.googlecode.jsu.workflow.function.UpdateIssueCustomFieldPostFunction</arg>
                   <arg name="field.value">jira-administrators</arg>
+                  <arg name="class.name">com.googlecode.jsu.workflow.function.UpdateIssueCustomFieldPostFunction</arg>
                   <arg name="field.name">customfield_10110</arg>
                 </function>
                 <function type="class">
@@ -4377,8 +4733,8 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
             <unconditional-result old-status="Not Done" status="Done" step="1">
               <post-functions>
                 <function type="class">
-                  <arg name="class.name">com.googlecode.jsu.workflow.function.UpdateIssueCustomFieldPostFunction</arg>
                   <arg name="field.value">%%CURRENT_DATETIME%%</arg>
+                  <arg name="class.name">com.googlecode.jsu.workflow.function.UpdateIssueCustomFieldPostFunction</arg>
                   <arg name="field.name">customfield_10100</arg>
                 </function>
                 <function type="class">
@@ -4407,8 +4763,8 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
             <unconditional-result old-status="Not Done" status="Done" step="1">
               <post-functions>
                 <function type="class">
-                  <arg name="class.name">com.googlecode.jsu.workflow.function.UpdateIssueCustomFieldPostFunction</arg>
                   <arg name="field.value">Option B</arg>
+                  <arg name="class.name">com.googlecode.jsu.workflow.function.UpdateIssueCustomFieldPostFunction</arg>
                   <arg name="field.name">customfield_10106</arg>
                 </function>
                 <function type="class">
@@ -4607,9 +4963,9 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
             <unconditional-result old-status="Not Done" status="Done" step="1">
               <post-functions>
                 <function type="class">
-                  <arg name="class.name">com.googlecode.jsu.workflow.function.CopyValueFromOtherFieldPostFunction</arg>
-                  <arg name="destinationField">customfield_10200</arg>
                   <arg name="sourceField">customfield_10113</arg>
+                  <arg name="destinationField">customfield_10200</arg>
+                  <arg name="class.name">com.googlecode.jsu.workflow.function.CopyValueFromOtherFieldPostFunction</arg>
                 </function>
                 <function type="class">
                   <arg name="class.name">com.atlassian.jira.workflow.function.issue.UpdateIssueStatusFunction</arg>
@@ -4637,9 +4993,9 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
             <unconditional-result old-status="Not Done" status="Done" step="1">
               <post-functions>
                 <function type="class">
-                  <arg name="sourceField">assignee</arg>
-                  <arg name="destinationField">customfield_10107</arg>
                   <arg name="class.name">com.googlecode.jsu.workflow.function.CopyValueFromOtherFieldPostFunction</arg>
+                  <arg name="destinationField">customfield_10107</arg>
+                  <arg name="sourceField">assignee</arg>
                   <arg name="copyType">parent</arg>
                   <arg name="full.module.key">com.googlecode.jira-suite-utilitiescopyValueFromOtherField-function</arg>
                 </function>
@@ -4661,8 +5017,8 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
                 </function>
                 <function type="class">
                   <arg name="class.name">com.atlassian.jira.workflow.function.event.FireIssueEventFunction</arg>
-                  <arg name="full.module.key">com.atlassian.jira.plugin.system.workflowfireevent-function</arg>
                   <arg name="eventTypeId">13</arg>
+                  <arg name="full.module.key">com.atlassian.jira.plugin.system.workflowfireevent-function</arg>
                 </function>
               </post-functions>
             </unconditional-result>
@@ -4701,13 +5057,13 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
 
 ___ Entities ________________________________
 
-     Total                                         : 1338
+     Total                                         : 1450
 
      Application                                   : 1
      ApplicationUser                               : 4
      Avatar                                        : 48
-     ChangeGroup                                   : 19
-     ChangeItem                                    : 35
+     ChangeGroup                                   : 31
+     ChangeItem                                    : 47
      Component                                     : 3
      ConfigurationContext                          : 24
      CustomField                                   : 23
@@ -4731,7 +5087,7 @@ ___ Entities ________________________________
      GadgetUserPreference                          : 6
      GenericConfiguration                          : 1
      Group                                         : 3
-     Issue                                         : 11
+     Issue                                         : 23
      IssueLink                                     : 1
      IssueLinkType                                 : 5
      IssueType                                     : 5
@@ -4744,15 +5100,15 @@ ___ Entities ________________________________
      Notification                                  : 51
      NotificationScheme                            : 1
      OAuthConsumer                                 : 1
-     OSCurrentStep                                 : 11
-     OSCurrentStepPrev                             : 13
-     OSHistoryStep                                 : 13
+     OSCurrentStep                                 : 23
+     OSCurrentStepPrev                             : 25
+     OSHistoryStep                                 : 25
      OSHistoryStepPrev                             : 10
-     OSPropertyEntry                               : 167
+     OSPropertyEntry                               : 168
      OSPropertyNumber                              : 37
-     OSPropertyString                              : 120
+     OSPropertyString                              : 121
      OSPropertyText                                : 11
-     OSWorkflowEntry                               : 11
+     OSWorkflowEntry                               : 23
      OptionConfiguration                           : 5
      PermissionScheme                              : 1
      PluginVersion                                 : 152
@@ -4771,9 +5127,9 @@ ___ Entities ________________________________
      UpgradeHistory                                : 13
      UpgradeVersionHistory                         : 3
      User                                          : 4
-     UserAssociation                               : 11
+     UserAssociation                               : 23
      UserAttribute                                 : 21
-     UserHistoryItem                               : 20
+     UserHistoryItem                               : 34
      Version                                       : 4
      Workflow                                      : 1
      WorkflowScheme                                : 1

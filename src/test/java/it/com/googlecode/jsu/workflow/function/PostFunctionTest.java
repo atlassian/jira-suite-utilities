@@ -19,25 +19,6 @@ public class PostFunctionTest extends AbstractTestBase {
     private static final String SECOND_ISSUE_KEY = "TJP-2"; // with all field data set, resolved
     private static final String SUBTASK_ISSUE_KEY = "TJP-3"; // empty one, resolved
 
-    private static final String FIELD_LOCATION_TEXT = "customfield_10001";
-    private static final String FIELD_GROUP_PICKER = "customfield_10110";
-    private static final String FIELD_USER_PICKER = "customfield_10002";
-    private static final String FIELD_MULTI_USER = "customfield_10113";
-    private static final String FIELD_SELECT_LIST = "customfield_10106";
-    private static final String FIELD_FREE_TEXT = "customfield_10101";
-    private static final String FIELD_LOCATION_SELECT = "customfield_10000";
-    private static final String FIELD_MULTI_USER1 = "customfield_10200";
-    private static final String FIELD_DATE_TIME = "customfield_10109";
-    private static final String FIELD_MULTI_SELECT = "customfield_10103";
-    private static final String FIELD_MULTI_GROUP = "customfield_10112";
-    private static final String FIELD_READONLY_TEXT = "customfield_10115";
-    private static final String FIELD_CASCADING_SELECT = "customfield_10108";
-    private static final String FIELD_RADIO_BUTTONS = "customfield_10105";
-    private static final String FIELD_DATE_PICKER = "customfield_10100";
-    private static final String FIELD_TEXT_FIELD = "customfield_10107";
-
-    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
-
     /**
      * Single test using transition.
      * <table>
@@ -113,7 +94,7 @@ public class PostFunctionTest extends AbstractTestBase {
 
         Issue issue = issueClient.get(SECOND_ISSUE_KEY);
         List<Map> multi = issue.fields.get(FIELD_MULTI_USER);
-        assertEquals(issue.fields.get("customfield_10101"),getMultiAsString(multi,"name"));
+        assertEquals(issue.fields.get(FIELD_FREE_TEXT),getMultiAsString(multi,"name"));
     }
 
     /**

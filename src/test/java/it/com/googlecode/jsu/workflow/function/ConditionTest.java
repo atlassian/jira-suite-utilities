@@ -19,9 +19,6 @@ public class ConditionTest extends AbstractTestBase {
     private static final String ISSUE_C14_PASS = "TJP-10";
     private static final String ISSUE_C14_FAIL = "TJP-11";
 
-    private static final String STATUS_OPEN = "Open";
-    private static final String STATUS_IN_PROGRESS = "In Progress";
-
     private static final String TRANSITION_C11 = "1211";
     private static final String TRANSITION_C12 = "1221";
     private static final String TRANSITION_C13 = "1231";
