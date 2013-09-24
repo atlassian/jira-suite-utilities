@@ -7,7 +7,6 @@ import com.atlassian.jira.rest.api.issue.IssueUpdateRequest;
 import com.atlassian.jira.rest.api.issue.ResourceRef;
 import com.atlassian.jira.testkit.client.restclient.*;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +17,9 @@ public class PostFunctionTest extends AbstractTestBase {
     private static final String FIRST_ISSUE_KEY = "TJP-1"; // empty one, resolved
     private static final String SECOND_ISSUE_KEY = "TJP-2"; // with all field data set, resolved
     private static final String SUBTASK_ISSUE_KEY = "TJP-3"; // empty one, resolved
+    private static final String ISSUE_PF31 = "TJP-24";
+
+    private static final String TRANSITION_PF31 = "1311";
 
     /**
      * Single test using transition.
@@ -916,6 +918,21 @@ public class PostFunctionTest extends AbstractTestBase {
 
         Issue issue = issueClient.get(FIRST_ISSUE_KEY);
         assertNotSame(issue.fields.get(FIELD_TEXT_FIELD),issue.fields.assignee.name);
+    }
+
+    //The MultiUser of the issue will be set to %%ADD_CURRENT_USER%%.
+    public void testPF31() throws Exception {
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId(TRANSITION_PF31));
+
+        final Response response = transitionsClient.postResponse(ISSUE_PF31, issueUpdateRequest);
+
+        assertEquals(204, response.statusCode);
+
+        Issue issue = issueClient.get(ISSUE_PF31);
+        List<Map> multi = issue.fields.get(FIELD_MULTI_USER);
+        assertEquals("admin,user",getMultiAsString(multi,"name"));
     }
 
     // all PostFunction transitions made out of resolved state
