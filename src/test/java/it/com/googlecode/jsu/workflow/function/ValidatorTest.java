@@ -2,7 +2,6 @@ package it.com.googlecode.jsu.workflow.function;
 
 import com.atlassian.jira.functest.framework.suite.Category;
 import com.atlassian.jira.functest.framework.suite.WebTest;
-import com.atlassian.jira.functest.framework.util.date.DateUtil;
 import com.atlassian.jira.rest.api.issue.IssueFields;
 import com.atlassian.jira.rest.api.issue.IssueUpdateRequest;
 import com.atlassian.jira.rest.api.issue.ResourceRef;

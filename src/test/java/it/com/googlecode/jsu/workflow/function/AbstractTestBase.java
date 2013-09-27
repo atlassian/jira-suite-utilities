@@ -14,7 +14,6 @@ public abstract class AbstractTestBase extends RestFuncTest {
     protected IssueClient issueClient;
     protected TransitionsClient transitionsClient;
 
-    protected static final String STATUS_OPEN = "Open";
     protected static final String STATUS_IN_PROGRESS = "In Progress";
     protected static final String STATUS_RESOLVED = "Resolved";
 
