@@ -2,11 +2,13 @@ package it.com.googlecode.jsu.workflow.function;
 
 import com.atlassian.jira.functest.framework.suite.Category;
 import com.atlassian.jira.functest.framework.suite.WebTest;
+import com.atlassian.jira.functest.framework.util.date.DateUtil;
 import com.atlassian.jira.rest.api.issue.IssueFields;
 import com.atlassian.jira.rest.api.issue.IssueUpdateRequest;
 import com.atlassian.jira.rest.api.issue.ResourceRef;
 import com.atlassian.jira.testkit.client.restclient.Issue;
 import com.atlassian.jira.testkit.client.restclient.Response;
+import org.apache.commons.lang.time.DateUtils;
 
 import java.util.*;
 
@@ -39,7 +41,7 @@ public class ValidatorTest extends AbstractTestBase {
 
         IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
         IssueFields issueFields = new IssueFields();
-        issueFields.customField(FIELD_DATE_PICKER_ID,DATE_FORMAT.format(dayOffset(new Date(),-2)));
+        issueFields.customField(FIELD_DATE_PICKER_ID,DATE_FORMAT.format(DateUtils.addDays(new Date(), -2)));
         issueUpdateRequest.fields(issueFields);
         final Response updateReponse = issueClient.updateResponse(ISSUE_V10_PASS, issueUpdateRequest);
         assertEquals(204, updateReponse.statusCode);
@@ -61,7 +63,7 @@ public class ValidatorTest extends AbstractTestBase {
 
         IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
         IssueFields issueFields = new IssueFields();
-        issueFields.customField(FIELD_DATE_PICKER_ID,DATE_FORMAT.format(dayOffset(new Date(),+2)));
+        issueFields.customField(FIELD_DATE_PICKER_ID,DATE_FORMAT.format(DateUtils.addDays(new Date(),+2)));
         issueUpdateRequest.fields(issueFields);
         final Response updateReponse = issueClient.updateResponse(ISSUE_V10_FAIL, issueUpdateRequest);
         assertEquals(204, updateReponse.statusCode);
@@ -83,7 +85,7 @@ public class ValidatorTest extends AbstractTestBase {
 
         IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
         IssueFields issueFields = new IssueFields();
-        issueFields.customField(FIELD_DATE_TIME_ID,DATE_TIME_FORMAT.format(dayOffset(new Date(),+6)));
+        issueFields.customField(FIELD_DATE_TIME_ID,DATE_TIME_FORMAT.format(DateUtils.addDays(new Date(),+6)));
         issueUpdateRequest.fields(issueFields);
         final Response updateReponse = issueClient.updateResponse(ISSUE_V11_PASS, issueUpdateRequest);
         assertEquals(204, updateReponse.statusCode);
@@ -105,7 +107,7 @@ public class ValidatorTest extends AbstractTestBase {
 
         IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
         IssueFields issueFields = new IssueFields();
-        issueFields.customField(FIELD_DATE_TIME_ID,DATE_TIME_FORMAT.format(dayOffset(new Date(),+4)));
+        issueFields.customField(FIELD_DATE_TIME_ID,DATE_TIME_FORMAT.format(DateUtils.addDays(new Date(),+4)));
         issueUpdateRequest.fields(issueFields);
         final Response updateReponse = issueClient.updateResponse(ISSUE_V11_FAIL, issueUpdateRequest);
         assertEquals(204, updateReponse.statusCode);
@@ -127,7 +129,7 @@ public class ValidatorTest extends AbstractTestBase {
 
         IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
         IssueFields issueFields = new IssueFields();
-        issueFields.customField(FIELD_DATE_PICKER_ID,DATE_FORMAT.format(dayOffset(new Date(),-40)));
+        issueFields.customField(FIELD_DATE_PICKER_ID,DATE_FORMAT.format(DateUtils.addDays(new Date(),-40)));
         issueUpdateRequest.fields(issueFields);
         final Response updateReponse = issueClient.updateResponse(ISSUE_V12_PASS, issueUpdateRequest);
         assertEquals(204, updateReponse.statusCode);
@@ -149,7 +151,7 @@ public class ValidatorTest extends AbstractTestBase {
 
         IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
         IssueFields issueFields = new IssueFields();
-        issueFields.customField(FIELD_DATE_PICKER_ID,DATE_FORMAT.format(dayOffset(new Date(),-25)));
+        issueFields.customField(FIELD_DATE_PICKER_ID,DATE_FORMAT.format(DateUtils.addDays(new Date(),-25)));
         issueUpdateRequest.fields(issueFields);
         final Response updateReponse = issueClient.updateResponse(ISSUE_V12_FAIL, issueUpdateRequest);
         assertEquals(204, updateReponse.statusCode);
@@ -171,7 +173,7 @@ public class ValidatorTest extends AbstractTestBase {
 
         IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
         IssueFields issueFields = new IssueFields();
-        issueFields.customField(FIELD_DATE_PICKER_ID,DATE_FORMAT.format(dayOffset(new Date(),7)));
+        issueFields.customField(FIELD_DATE_PICKER_ID,DATE_FORMAT.format(DateUtils.addDays(new Date(),7)));
         issueUpdateRequest.fields(issueFields);
         final Response updateReponse = issueClient.updateResponse(ISSUE_V13_PASS, issueUpdateRequest);
         assertEquals(204, updateReponse.statusCode);
@@ -193,7 +195,7 @@ public class ValidatorTest extends AbstractTestBase {
 
         IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
         IssueFields issueFields = new IssueFields();
-        issueFields.customField(FIELD_DATE_PICKER_ID,DATE_FORMAT.format(dayOffset(new Date(),6)));
+        issueFields.customField(FIELD_DATE_PICKER_ID,DATE_FORMAT.format(DateUtils.addDays(new Date(),6)));
         issueUpdateRequest.fields(issueFields);
         final Response updateReponse = issueClient.updateResponse(ISSUE_V13_FAIL, issueUpdateRequest);
         assertEquals(204, updateReponse.statusCode);
@@ -215,7 +217,7 @@ public class ValidatorTest extends AbstractTestBase {
 
         IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
         IssueFields issueFields = new IssueFields();
-        issueFields.customField(FIELD_DATE_PICKER_ID,DATE_FORMAT.format(dayOffset(new Date(),1)));
+        issueFields.customField(FIELD_DATE_PICKER_ID,DATE_FORMAT.format(DateUtils.addDays(new Date(),1)));
         issueUpdateRequest.fields(issueFields);
         final Response updateReponse = issueClient.updateResponse(ISSUE_V14_PASS, issueUpdateRequest);
         assertEquals(204, updateReponse.statusCode);
@@ -259,7 +261,7 @@ public class ValidatorTest extends AbstractTestBase {
 
         IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
         IssueFields issueFields = new IssueFields();
-        issueFields.customField(FIELD_DATE_PICKER_ID,DATE_FORMAT.format(dayOffset(new Date(),370)));
+        issueFields.customField(FIELD_DATE_PICKER_ID,DATE_FORMAT.format(DateUtils.addDays(new Date(),370)));
         issueUpdateRequest.fields(issueFields);
         final Response updateReponse = issueClient.updateResponse(ISSUE_V15_PASS, issueUpdateRequest);
         assertEquals(204, updateReponse.statusCode);
@@ -281,7 +283,7 @@ public class ValidatorTest extends AbstractTestBase {
 
         IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
         IssueFields issueFields = new IssueFields();
-        issueFields.customField(FIELD_DATE_PICKER_ID,DATE_FORMAT.format(dayOffset(new Date(),350)));
+        issueFields.customField(FIELD_DATE_PICKER_ID,DATE_FORMAT.format(DateUtils.addDays(new Date(),350)));
         issueUpdateRequest.fields(issueFields);
         final Response updateReponse = issueClient.updateResponse(ISSUE_V15_FAIL, issueUpdateRequest);
         assertEquals(204, updateReponse.statusCode);
@@ -294,12 +296,5 @@ public class ValidatorTest extends AbstractTestBase {
 
         issue = issueClient.get(ISSUE_V15_FAIL);
         assertEquals(STATUS_IN_PROGRESS,issue.fields.status.name());
-    }
-
-    private Date dayOffset(Date date, int days) {
-        GregorianCalendar calendar = new GregorianCalendar();
-        calendar.setTime(date);
-        calendar.add(Calendar.DAY_OF_YEAR,days);
-        return calendar.getTime();
     }
 }
