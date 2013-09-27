@@ -87,10 +87,6 @@ public class WorkflowFieldsRequiredValidatorPluginFactory
         Map<String, String> params = new HashMap<String, String>();
         String strFieldsSelected = extractSingleParam(validatorParams, SELECTED_FIELDS);
 
-        if ("".equals(strFieldsSelected)) {
-            throw new IllegalArgumentException("At least one field must be selected");
-        }
-
         params.put(SELECTED_FIELDS, strFieldsSelected);
 
         return params;
