@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 
 import com.atlassian.jira.ComponentManager;
 import com.atlassian.jira.issue.status.Status;
+import com.atlassian.jira.util.I18nHelper;
 
 /**
  * @author Gustavo Martin
@@ -13,7 +14,7 @@ import com.atlassian.jira.issue.status.Status;
  *
  */
 public class Transition {
-    private final Status removedStatus = new RemovedStatusImpl();
+    private final Status removedStatus;
 
     private String changedBy;
     private Timestamp changedAt;
@@ -22,8 +23,9 @@ public class Transition {
     private Timestamp startAt;
     private Long duration;
 
-    public Transition () {
+    public Transition (final I18nHelper i18nHelper) {
         this.startAt = null;
+        this.removedStatus = new RemovedStatusImpl(i18nHelper);
     }
 
     public Long getDurationInMillis(){

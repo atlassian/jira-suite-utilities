@@ -5,6 +5,7 @@ import com.atlassian.jira.datetime.DateTimeFormatter;
 import com.atlassian.jira.datetime.DateTimeFormatterFactory;
 import com.atlassian.jira.issue.Issue;
 import com.atlassian.jira.ofbiz.OfBizDelegator;
+import com.atlassian.jira.util.I18nHelper;
 import org.ofbiz.core.entity.GenericValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,11 +24,14 @@ public class TransitionsManager {
 
     private final OfBizDelegator ofBizDelegator;
     private final DateTimeFormatter userFormatter;
+    private final I18nHelper i18nHelper;
 
     public TransitionsManager(OfBizDelegator ofBizDelegator,
-                              DateTimeFormatterFactory dateTimeFormatterFactory) {
+                              DateTimeFormatterFactory dateTimeFormatterFactory,
+                              I18nHelper i18nHelper) {
         this.ofBizDelegator = ofBizDelegator;
         this.userFormatter = dateTimeFormatterFactory.formatter().forLoggedInUser();
+        this.i18nHelper = i18nHelper;
     }
 
     /**
@@ -114,7 +118,7 @@ public class TransitionsManager {
 
             for (GenericValue changeItem : changeItems) {
                 // And it creates the corresponding Transition.
-                Transition tran = new Transition();
+                Transition tran = new Transition(i18nHelper);
 
                 tran.setChangedBy(changeGroup.getString("author"));
                 tran.setChangedAt(changeGroup.getTimestamp("created"));

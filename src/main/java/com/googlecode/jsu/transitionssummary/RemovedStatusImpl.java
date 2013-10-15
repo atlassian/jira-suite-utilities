@@ -9,12 +9,18 @@ import com.atlassian.jira.util.I18nHelper;
 import com.opensymphony.module.propertyset.PropertySet;
 
 public class RemovedStatusImpl implements Status {
+
+    private final I18nHelper i18nHelper;
+
+    public RemovedStatusImpl(I18nHelper i18nHelper) {
+        this.i18nHelper = i18nHelper;
+    }
+
     public void deleteTranslation(String issueConstantPrefix, Locale locale) {
     }
 
     public String getDescription() {
-      //TODO i18n
-        return "Status representing an old Status removed from Database";
+        return i18nHelper.getText("transitions-summary-view.removed-status.description");
     }
 
     public String getDescTranslation() {
@@ -42,8 +48,7 @@ public class RemovedStatusImpl implements Status {
     }
 
     public String getName() {
-      //TODO i18n
-        return "Removed Status";
+        return i18nHelper.getText("transitions-summary-view.removed-status.name");
     }
 
     public String getNameTranslation() {
