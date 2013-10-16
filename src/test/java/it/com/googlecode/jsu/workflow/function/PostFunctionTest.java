@@ -17,7 +17,7 @@ public class PostFunctionTest extends AbstractTestBase {
     private static final String FIRST_ISSUE_KEY = "TJP-1"; // empty one, resolved
     private static final String SECOND_ISSUE_KEY = "TJP-2"; // with all field data set, resolved
     private static final String SUBTASK_ISSUE_KEY = "TJP-3"; // empty one, resolved
-    private static final String ISSUE_PF31 = "TJP-24";
+    private static final String ISSUE_PF31 = "TJP-29";
 
     private static final String TRANSITION_PF31 = "1311";
 

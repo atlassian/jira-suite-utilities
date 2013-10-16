@@ -10,6 +10,11 @@ import com.atlassian.jira.testkit.client.restclient.Response;
 
 @WebTest({ Category.FUNC_TEST, Category.REST })
 public class ConditionTest extends AbstractTestBase {
+    private static final String ISSUE_C9_PASS = "TJP-24";
+    private static final String ISSUE_C9_FAIL = "TJP-25";
+    private static final String ISSUE_C10_PASS = "TJP-26";
+    private static final String ISSUE_C10_PASS_1 = "TJP-28";
+    private static final String ISSUE_C10_FAIL = "TJP-27";
     private static final String ISSUE_C11_PASS = "TJP-4";
     private static final String ISSUE_C11_FAIL = "TJP-5";
     private static final String ISSUE_C12_PASS = "TJP-6";
@@ -19,10 +24,89 @@ public class ConditionTest extends AbstractTestBase {
     private static final String ISSUE_C14_PASS = "TJP-10";
     private static final String ISSUE_C14_FAIL = "TJP-11";
 
+    private static final String TRANSITION_C9 = "1181";
+    private static final String TRANSITION_C10 = "1191";
     private static final String TRANSITION_C11 = "1211";
     private static final String TRANSITION_C12 = "1221";
     private static final String TRANSITION_C13 = "1231";
     private static final String TRANSITION_C14 = "1241";
+
+    public void testC9Pass() throws Exception {
+        userClient.loginAs("superuser");
+
+        getTester().getTestContext().getUser();
+
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId(TRANSITION_C9));
+
+        final Response response = transitionsClient.postResponse(ISSUE_C9_PASS, issueUpdateRequest);
+
+        assertEquals(204, response.statusCode);
+
+        Issue issue = issueClient.get(ISSUE_C9_PASS);
+        assertEquals(STATUS_IN_PROGRESS,issue.fields.status.name());
+    }
+
+    public void testC9Fail() throws Exception {
+        userClient.loginAs("admin");
+
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId(TRANSITION_C9));
+
+        final Response response = transitionsClient.postResponse(ISSUE_C9_FAIL, issueUpdateRequest);
+
+        assertEquals(400, response.statusCode);
+
+        Issue issue = issueClient.get(ISSUE_C9_FAIL);
+        assertEquals(STATUS_OPEN,issue.fields.status.name());
+    }
+
+    public void testC10Pass() throws Exception {
+        userClient.loginAs("user");
+
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId(TRANSITION_C10));
+
+        final Response response = transitionsClient.postResponse(ISSUE_C10_PASS, issueUpdateRequest);
+
+        assertEquals(204, response.statusCode);
+
+        Issue issue = issueClient.get(ISSUE_C10_PASS);
+        assertEquals(STATUS_IN_PROGRESS,issue.fields.status.name());
+    }
+
+    public void testC10Pass1() throws Exception {
+        userClient.loginAs("marketing");
+
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId(TRANSITION_C10));
+
+        final Response response = transitionsClient.postResponse(ISSUE_C10_PASS_1, issueUpdateRequest);
+
+        assertEquals(204, response.statusCode);
+
+        Issue issue = issueClient.get(ISSUE_C10_PASS_1);
+        assertEquals(STATUS_IN_PROGRESS,issue.fields.status.name());
+    }
+
+    public void testC10Fail() throws Exception {
+        userClient.loginAs("admin");
+
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId(TRANSITION_C10));
+
+        final Response response = transitionsClient.postResponse(ISSUE_C10_FAIL, issueUpdateRequest);
+
+        assertEquals(400, response.statusCode);
+
+        Issue issue = issueClient.get(ISSUE_C10_FAIL);
+        assertEquals(STATUS_OPEN,issue.fields.status.name());
+    }
 
     public void testC11Pass() throws Exception {
         IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
