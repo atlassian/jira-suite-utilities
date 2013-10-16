@@ -3,8 +3,8 @@ package it.com.googlecode.jsu.workflow.function;
 import com.atlassian.jira.functest.framework.suite.Category;
 import com.atlassian.jira.functest.framework.suite.WebTest;
 import com.atlassian.jira.testkit.client.restclient.IssueClient;
+import com.atlassian.jira.testkit.client.restclient.IssueTransitionsMeta;
 import com.atlassian.jira.testkit.client.restclient.TransitionsClient;
-import com.atlassian.jira.testkit.client.restclient.UserClient;
 import com.atlassian.jira.testkit.client.util.TimeBombLicence;
 import com.atlassian.jira.webtests.ztests.bundledplugins2.rest.RestFuncTest;
 
@@ -14,7 +14,6 @@ import java.text.SimpleDateFormat;
 public abstract class AbstractTestBase extends RestFuncTest {
     protected IssueClient issueClient;
     protected TransitionsClient transitionsClient;
-    protected UserClient userClient;
 
     protected static final String STATUS_IN_PROGRESS = "In Progress";
     protected static final String STATUS_RESOLVED = "Resolved";
@@ -48,6 +47,20 @@ public abstract class AbstractTestBase extends RestFuncTest {
         administration.restoreDataWithLicense("test1.xml", TimeBombLicence.LICENCE_FOR_TESTING);
         issueClient = new IssueClient(getEnvironmentData());
         transitionsClient = new TransitionsClient(getEnvironmentData());
-        userClient = new UserClient(getEnvironmentData());
+    }
+
+    protected boolean hasTransition(String issueKey, String transitionId, String user) {
+        transitionsClient.loginAs(user);
+        return hasTransition(issueKey, transitionId);
+    }
+
+    protected boolean hasTransition(String issueKey, String transitionId) {
+        IssueTransitionsMeta meta = transitionsClient.get(issueKey);
+        for(IssueTransitionsMeta.Transition transition:meta.transitions) {
+            if(transition.id==Integer.parseInt(transitionId)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
