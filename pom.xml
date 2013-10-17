@@ -188,9 +188,9 @@
 
         <jira.version>6.0</jira.version>
         <jira.data.version>6.0</jira.data.version>
-        <jira.plugin.version>4.2.0</jira.plugin.version>
+        <jira.plugin.version>4.2.9</jira.plugin.version>
         
-        <testkit.version>6.0.26</testkit.version>
+        <testkit.version>6.0.51</testkit.version>
 
         <scm.connection>scm:git:git://github.com/atlassian/jira-suite-utilities.git</scm.connection>
     </properties>

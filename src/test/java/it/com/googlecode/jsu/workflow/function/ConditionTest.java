@@ -18,6 +18,8 @@ public class ConditionTest extends AbstractTestBase {
     private static final String ISSUE_C13_FAIL = "TJP-9";
     private static final String ISSUE_C14_PASS = "TJP-10";
     private static final String ISSUE_C14_FAIL = "TJP-11";
+    private static final String ISSUE_C15_PASS = "TJP-30";
+    private static final String ISSUE_C15_FAIL = "TJP-31";
 
     private static final String TRANSITION_C9 = "1181";
     private static final String TRANSITION_C10 = "1191";
@@ -25,7 +27,8 @@ public class ConditionTest extends AbstractTestBase {
     private static final String TRANSITION_C12 = "1221";
     private static final String TRANSITION_C13 = "1231";
     private static final String TRANSITION_C14 = "1241";
-//TODO C1 - C8 simply only hasTransition check necessary for given users, no transition needs to be executed, same for most in here too
+    private static final String TRANSITION_C15 = "1321";
+
     public void testC9Pass() throws Exception {
         assertTrue(hasTransition(ISSUE_C9_PASS,TRANSITION_C9,"superuser"));
     }
@@ -76,5 +79,13 @@ public class ConditionTest extends AbstractTestBase {
 
     public void testC14Fail() throws Exception {
         assertTrue(!hasTransition(ISSUE_C14_FAIL,TRANSITION_C14));
+    }
+
+    public void testC15Pass() throws Exception {
+        assertTrue(hasTransition(ISSUE_C15_PASS,TRANSITION_C15,"renamed.will"));
+    }
+
+    public void testC15Fail() throws Exception {
+        assertTrue(!hasTransition(ISSUE_C15_FAIL,TRANSITION_C15,"admin"));
     }
 }
