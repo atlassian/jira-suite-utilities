@@ -4,7 +4,8 @@ import com.atlassian.jira.issue.status.Status;
 import com.atlassian.jira.util.I18nHelper;
 
 /**
- * TODO docme
+ * Simple delegate to encapsulate the data we need from a status, to be
+ * independent of API changes, mostly from JIRA 6.0 to 6.1
  *
  * @author Stephan Bielmann
  */
