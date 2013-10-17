@@ -8,10 +8,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import com.atlassian.jira.ComponentManager;
+import com.atlassian.jira.component.ComponentAccessor;
 import com.atlassian.jira.issue.IssueFieldConstants;
 import com.atlassian.jira.issue.MutableIssue;
-import com.atlassian.jira.issue.fields.AffectedVersionsSystemField;
 import com.atlassian.jira.project.version.Version;
 import com.atlassian.jira.project.version.VersionManager;
 import com.atlassian.jira.util.I18nHelper;
@@ -117,7 +116,7 @@ public class FieldsRequiredValidator extends GenericValidator {
 
                 if (checker.checkValues(fieldValue, null)) {
                     I18nHelper i18nh = this.beanFactory.getInstance(
-                        ComponentManager.getInstance().getJiraAuthenticationContext().getLoggedInUser());
+                            ComponentAccessor.getJiraAuthenticationContext().getUser().getDirectoryUser());
                     String msg1 = i18nh.getText("fieldsrequired-validator-view.is_required",field.getName());
                     String msg2 = i18nh.getText("fieldsrequired-validator-view.is_required_not_present",field.getName());
                     // Sets Exception message.

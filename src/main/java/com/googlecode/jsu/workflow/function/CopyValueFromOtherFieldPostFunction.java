@@ -7,7 +7,7 @@ import static com.googlecode.jsu.workflow.WorkflowCopyValueFromOtherFieldPostFun
 
 import java.util.Map;
 
-import com.atlassian.jira.ComponentManager;
+import com.atlassian.jira.component.ComponentAccessor;
 import com.atlassian.jira.issue.MutableIssue;
 import com.atlassian.jira.issue.fields.Field;
 import com.atlassian.jira.issue.util.IssueChangeHolder;
@@ -91,7 +91,7 @@ public class CopyValueFromOtherFieldPostFunction extends AbstractPreserveChanges
             }
         } catch (Exception e) {
             I18nHelper i18nh = this.beanFactory.getInstance(
-                ComponentManager.getInstance().getJiraAuthenticationContext().getLoggedInUser());
+                    ComponentAccessor.getJiraAuthenticationContext().getUser().getDirectoryUser());
             String message = i18nh.getText("copyvaluefromfield-function-view.unable_to_copy",fieldFromName,fieldToName);
 
             log.error(message, e);

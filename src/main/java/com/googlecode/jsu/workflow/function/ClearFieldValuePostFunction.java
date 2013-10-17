@@ -2,7 +2,7 @@ package com.googlecode.jsu.workflow.function;
 
 import java.util.Map;
 
-import com.atlassian.jira.ComponentManager;
+import com.atlassian.jira.component.ComponentAccessor;
 import com.atlassian.jira.issue.MutableIssue;
 import com.atlassian.jira.issue.fields.Field;
 import com.atlassian.jira.issue.util.IssueChangeHolder;
@@ -55,7 +55,7 @@ public class ClearFieldValuePostFunction extends AbstractPreserveChangesPostFunc
             workflowUtils.setFieldValue(currentUser, issue, fieldKey, null, holder);
         } catch (Exception e) {
             I18nHelper i18nh = this.beanFactory.getInstance(
-                ComponentManager.getInstance().getJiraAuthenticationContext().getLoggedInUser());
+                    ComponentAccessor.getJiraAuthenticationContext().getUser().getDirectoryUser());
             String message = i18nh.getText("clearfieldvalue-function-view.unable_to_purge",fieldKey,fieldName);
 
             log.error(message, e);

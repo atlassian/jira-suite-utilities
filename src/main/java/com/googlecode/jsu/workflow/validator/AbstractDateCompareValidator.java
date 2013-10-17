@@ -1,6 +1,6 @@
 package com.googlecode.jsu.workflow.validator;
 
-import com.atlassian.jira.ComponentManager;
+import com.atlassian.jira.component.ComponentAccessor;
 import com.atlassian.jira.config.properties.APKeys;
 import com.atlassian.jira.config.properties.ApplicationProperties;
 import com.atlassian.jira.issue.Issue;
@@ -46,7 +46,7 @@ public abstract class AbstractDateCompareValidator extends GenericValidator {
 
         if (fieldCollectionsUtils.isFieldRequired(issue, fldDate)) {
             String msg = this.beanFactory.getInstance(
-                    ComponentManager.getInstance().getJiraAuthenticationContext().getLoggedInUser())
+                    ComponentAccessor.getJiraAuthenticationContext().getUser().getDirectoryUser())
                     .getText("datecompare-validator-view.is_required", fldDate.getName());
             this.setExceptionMessage(
                     fldDate,
@@ -64,7 +64,7 @@ public abstract class AbstractDateCompareValidator extends GenericValidator {
      */
     protected void invalidExpression(Field dateField, String expression) {
         String msg = this.beanFactory.getInstance(
-                ComponentManager.getInstance().getJiraAuthenticationContext().getLoggedInUser())
+                ComponentAccessor.getJiraAuthenticationContext().getUser().getDirectoryUser())
                 .getText("dateexpressioncompare-validator-view.is_invalid", expression);
         this.setExceptionMessage(
                 dateField,
@@ -77,7 +77,7 @@ public abstract class AbstractDateCompareValidator extends GenericValidator {
             Field field, Object fieldValue
     ) {
         String msg = this.beanFactory.getInstance(
-                ComponentManager.getInstance().getJiraAuthenticationContext().getLoggedInUser())
+                ComponentAccessor.getJiraAuthenticationContext().getUser().getDirectoryUser())
                 .getText("datecompare-validator-view.not_a_date",field.getName(),fieldValue.toString());
         this.setExceptionMessage(
                 field,
@@ -126,7 +126,7 @@ public abstract class AbstractDateCompareValidator extends GenericValidator {
         }
 
         I18nHelper i18nh = this.beanFactory.getInstance(
-                ComponentManager.getInstance().getJiraAuthenticationContext().getLoggedInUser());
+                ComponentAccessor.getJiraAuthenticationContext().getUser().getDirectoryUser());
         String msg = i18nh.getText("datecompare-validator-view.is_not",
                 field1.getName(),i18nh.getText(condition.getDisplayTextKey()),nameOrValue==null?"":nameOrValue,errorMsg);
 

@@ -5,7 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import com.atlassian.jira.ComponentManager;
+import com.atlassian.jira.component.ComponentAccessor;
 import com.atlassian.jira.config.properties.APKeys;
 import com.atlassian.jira.config.properties.ApplicationProperties;
 import com.atlassian.jira.issue.fields.Field;
@@ -72,7 +72,7 @@ public class WindowsDateValidator extends GenericValidator {
         Object objDate2 = workflowUtils.getFieldValueFromIssue(getIssue(), fldDate2);
 
         I18nHelper i18nh = this.beanFactory.getInstance(
-            ComponentManager.getInstance().getJiraAuthenticationContext().getLoggedInUser());
+                ComponentAccessor.getJiraAuthenticationContext().getUser().getDirectoryUser());
 
         if ((objDate1 != null) && (objDate2 != null)) {
             // It Takes the Locale for inicialize dates.

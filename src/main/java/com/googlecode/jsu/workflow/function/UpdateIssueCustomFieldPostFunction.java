@@ -6,7 +6,7 @@ import static com.googlecode.jsu.workflow.WorkflowUpdateIssueCustomFieldFunction
 import java.sql.Timestamp;
 import java.util.Map;
 
-import com.atlassian.jira.ComponentManager;
+import com.atlassian.jira.component.ComponentAccessor;
 import com.atlassian.jira.issue.MutableIssue;
 import com.atlassian.jira.issue.fields.Field;
 import com.atlassian.jira.issue.util.IssueChangeHolder;
@@ -90,7 +90,7 @@ public class UpdateIssueCustomFieldPostFunction extends AbstractPreserveChangesP
             workflowUtils.setFieldValue(currentUser, issue, fieldKey, newValue, holder);
         } catch (Exception e) {
             I18nHelper i18nh = this.beanFactory.getInstance(
-                ComponentManager.getInstance().getJiraAuthenticationContext().getLoggedInUser());
+                    ComponentAccessor.getJiraAuthenticationContext().getUser().getDirectoryUser());
             String message = i18nh.getText("updateissuefield-function-view.unable_to_update",fieldKey,fieldName,issueToString(issue));
 
             log.error(message, e);
