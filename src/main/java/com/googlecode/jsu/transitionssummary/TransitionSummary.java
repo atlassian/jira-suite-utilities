@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.atlassian.jira.datetime.DateTimeFormatter;
-import com.atlassian.jira.issue.status.Status;
 
 /**
  * @author Gustavo Martin
@@ -18,8 +17,8 @@ import com.atlassian.jira.issue.status.Status;
  */
 public class TransitionSummary {
     private String id;
-    private Status fromStatus;
-    private Status toStatus;
+    private StatusDelegate fromStatus;
+    private StatusDelegate toStatus;
     private Long duration;
     private String lastUpdater;
     private Timestamp lastUpdate;
@@ -31,8 +30,8 @@ public class TransitionSummary {
      */
     public TransitionSummary(
             String id,
-            Status fromStatus,
-            Status toStatus,
+            StatusDelegate fromStatus,
+            StatusDelegate toStatus,
             DateTimeFormatter userFormatter
     ) {
         setId(id);
@@ -102,11 +101,11 @@ public class TransitionSummary {
         return id;
     }
 
-    public Status getFromStatus() {
+    public StatusDelegate getFromStatus() {
         return fromStatus;
     }
 
-    public Status getToStatus() {
+    public StatusDelegate getToStatus() {
         return toStatus;
     }
 
@@ -136,11 +135,11 @@ public class TransitionSummary {
         return duration;
     }
 
-    private void setFromStatus(Status fromStatus) {
+    private void setFromStatus(StatusDelegate fromStatus) {
         this.fromStatus = fromStatus;
     }
 
-    private void setToStatus(Status toStatus) {
+    private void setToStatus(StatusDelegate toStatus) {
         this.toStatus = toStatus;
     }
 

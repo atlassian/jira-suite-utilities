@@ -14,18 +14,18 @@ import com.atlassian.jira.util.I18nHelper;
  *
  */
 public class Transition {
-    private final Status removedStatus;
+    private final I18nHelper i18nHelper;
 
     private String changedBy;
     private Timestamp changedAt;
-    private Status fromStatus;
-    private Status toStatus;
+    private StatusDelegate fromStatus;
+    private StatusDelegate toStatus;
     private Timestamp startAt;
     private Long duration;
 
     public Transition (final I18nHelper i18nHelper) {
         this.startAt = null;
-        this.removedStatus = new RemovedStatusImpl(i18nHelper);
+        this.i18nHelper = i18nHelper;
     }
 
     public Long getDurationInMillis(){
@@ -55,17 +55,17 @@ public class Transition {
     public void setChangedBy(String changedBy) {
         this.changedBy = changedBy;
     }
-    public Status getFromStatus() {
-        return (fromStatus == null ? removedStatus : fromStatus);
+    public StatusDelegate getFromStatus() {
+        return fromStatus;
     }
     public void setFromStatus(Long fromStatus) {
-        this.fromStatus = ComponentManager.getInstance().getConstantsManager().getStatusObject(String.valueOf(fromStatus));
+        this.fromStatus = new StatusDelegate(ComponentManager.getInstance().getConstantsManager().getStatusObject(String.valueOf(fromStatus)),i18nHelper);
     }
-    public Status getToStatus() {
-        return (toStatus == null ? removedStatus : toStatus);
+    public StatusDelegate getToStatus() {
+        return toStatus;
     }
     public void setToStatus(Long toStatus) {
-        this.toStatus = ComponentManager.getInstance().getConstantsManager().getStatusObject(String.valueOf(toStatus));
+        this.toStatus = new StatusDelegate(ComponentManager.getInstance().getConstantsManager().getStatusObject(String.valueOf(toStatus)),i18nHelper);
     }
     public Timestamp getStartAt() {
         return startAt;
