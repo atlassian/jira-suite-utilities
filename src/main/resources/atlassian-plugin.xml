@@ -190,6 +190,23 @@
                   location="templates/jira/workflow/validator/fieldsrequired-validator-edit.vm"/>
     </workflow-validator>
 
+    <workflow-validator key="regexpField-validator"
+                        i18n-name-key="workflow-validator.regexpfield-validator.name"
+                        class="com.googlecode.jsu.workflow.WorkflowRegexpFieldValidatorPluginFactory">
+        <description key="workflow-validator.regexpfield-validator.description"/>
+
+        <validator-class>
+            com.googlecode.jsu.workflow.validator.RegexpFieldValidator
+        </validator-class>
+
+        <resource type="velocity" name="view"
+                  location="templates/jira/workflow/validator/regexpfield-validator-view.vm"/>
+        <resource type="velocity" name="input-parameters"
+                  location="templates/jira/workflow/validator/regexpfield-validator-edit.vm"/>
+        <resource type="velocity" name="edit-parameters"
+                  location="templates/jira/workflow/validator/regexpfield-validator-edit.vm"/>
+    </workflow-validator>
+
     <workflow-validator key="windowsDate-validator"
                         i18n-name-key="workflow-validator.windowsdate-validator.name"
                         class="com.googlecode.jsu.workflow.WorkflowWindowsDateValidatorPluginFactory">

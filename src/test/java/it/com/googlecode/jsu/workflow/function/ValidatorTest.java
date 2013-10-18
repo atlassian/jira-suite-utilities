@@ -25,6 +25,12 @@ public class ValidatorTest extends AbstractTestBase {
     private static final String ISSUE_V14_FAIL = "TJP-22";
     private static final String ISSUE_V15_PASS = "TJP-23";
     private static final String ISSUE_V15_FAIL = "TJP-21";
+    private static final String ISSUE_V16_PASS = "TJP-33";
+    private static final String ISSUE_V16_FAIL = "TJP-34";
+    private static final String ISSUE_V17_PASS = "TJP-35";
+    private static final String ISSUE_V17_FAIL = "TJP-36";
+    private static final String ISSUE_V18_PASS = "TJP-37";
+    private static final String ISSUE_V18_FAIL = "TJP-38";
 
     private static final String TRANSITION_V10 = "1251";
     private static final String TRANSITION_V11 = "1261";
@@ -32,6 +38,9 @@ public class ValidatorTest extends AbstractTestBase {
     private static final String TRANSITION_V13 = "1281";
     private static final String TRANSITION_V14 = "1291";
     private static final String TRANSITION_V15 = "1301";
+    private static final String TRANSITION_V16 = "1341";
+    private static final String TRANSITION_V17 = "1351";
+    private static final String TRANSITION_V18 = "1361";
 
     //Verifies that field DatePicker is less than value of now. Only date part.
     public void testV10Pass() throws Exception {
@@ -254,7 +263,7 @@ public class ValidatorTest extends AbstractTestBase {
     }
 
     //Verifies that field DatePicker is greater than value of 1y. Only date part.
-    public void testV15ass() throws Exception {
+    public void testV15pass() throws Exception {
         Issue issue = issueClient.get(ISSUE_V15_PASS);
         assertNotNull(issue);
 
@@ -294,6 +303,102 @@ public class ValidatorTest extends AbstractTestBase {
         assertEquals(204, response.statusCode);
 
         issue = issueClient.get(ISSUE_V15_FAIL);
+        assertEquals(STATUS_IN_PROGRESS,issue.fields.status.name());
+    }
+
+    //The field TextField its contents must match against the regular expression ^[ABC][qwer]+[0-9]{3}
+    public void testV16pass() throws Exception {
+        Issue issue = issueClient.get(ISSUE_V16_PASS);
+        assertNotNull(issue);
+
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId(TRANSITION_V16));
+
+        final Response reponse = transitionsClient.postResponse(ISSUE_V16_PASS, issueUpdateRequest);
+        assertEquals(204, reponse.statusCode);
+
+        issue = issueClient.get(ISSUE_V16_PASS);
+        assertEquals(STATUS_RESOLVED,issue.fields.status.name());
+    }
+
+    //The field TextField its contents must match against the regular expression ^[ABC][qwer]+[0-9]{3}
+    public void testV16fail() throws Exception {
+        Issue issue = issueClient.get(ISSUE_V16_FAIL);
+        assertNotNull(issue);
+
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId(TRANSITION_V16));
+
+        final Response reponse = transitionsClient.postResponse(ISSUE_V16_FAIL, issueUpdateRequest);
+        assertEquals(204, reponse.statusCode);
+
+        issue = issueClient.get(ISSUE_V16_FAIL);
+        assertEquals(STATUS_IN_PROGRESS,issue.fields.status.name());
+    }
+
+    //The field NumberField its contents must match against the regular expression [0-4]{5}\.0
+    public void testV17pass() throws Exception {
+        Issue issue = issueClient.get(ISSUE_V17_PASS);
+        assertNotNull(issue);
+
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId(TRANSITION_V17));
+
+        final Response reponse = transitionsClient.postResponse(ISSUE_V17_PASS, issueUpdateRequest);
+        assertEquals(204, reponse.statusCode);
+
+        issue = issueClient.get(ISSUE_V17_PASS);
+        assertEquals(STATUS_RESOLVED,issue.fields.status.name());
+    }
+
+    //The field NumberField its contents must match against the regular expression [0-4]{5}\.0
+    public void testV17fail() throws Exception {
+        Issue issue = issueClient.get(ISSUE_V17_FAIL);
+        assertNotNull(issue);
+
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId(TRANSITION_V17));
+
+        final Response reponse = transitionsClient.postResponse(ISSUE_V17_FAIL, issueUpdateRequest);
+        assertEquals(204, reponse.statusCode);
+
+        issue = issueClient.get(ISSUE_V17_FAIL);
+        assertEquals(STATUS_IN_PROGRESS,issue.fields.status.name());
+    }
+
+    //The field URLField its contents must match against the regular expression http://[w]{3}\.[a-z]*\.ch
+    public void testV18pass() throws Exception {
+        Issue issue = issueClient.get(ISSUE_V18_PASS);
+        assertNotNull(issue);
+
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId(TRANSITION_V18));
+
+        final Response reponse = transitionsClient.postResponse(ISSUE_V18_PASS, issueUpdateRequest);
+        assertEquals(204, reponse.statusCode);
+
+        issue = issueClient.get(ISSUE_V18_PASS);
+        assertEquals(STATUS_RESOLVED,issue.fields.status.name());
+    }
+
+    //The field URLField its contents must match against the regular expression http://[w]{3}\.[a-z]*\.ch
+    public void testV18fail() throws Exception {
+        Issue issue = issueClient.get(ISSUE_V18_FAIL);
+        assertNotNull(issue);
+
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId(TRANSITION_V18));
+
+        final Response reponse = transitionsClient.postResponse(ISSUE_V18_FAIL, issueUpdateRequest);
+        assertEquals(204, reponse.statusCode);
+
+        issue = issueClient.get(ISSUE_V18_FAIL);
         assertEquals(STATUS_IN_PROGRESS,issue.fields.status.name());
     }
 }

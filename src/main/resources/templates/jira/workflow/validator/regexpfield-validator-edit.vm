@@ -1,0 +1,31 @@
+<tr bgcolor="#ffffff">
+    <td align="right" valign="top" bgcolor="#fffff0">
+        <span class="label">$i18n.getText("regexpfield-validator-edit.validate_field.label"):</span>
+    </td>
+    <td bgcolor="#ffffff" nowrap>
+        <select id="fieldList" name="fieldList">
+            #foreach ($val in ${val-fieldList})
+                <option value="${val.id}"
+                    #if(${val.id.equals($val-fieldSelected.id)})
+                        SELECTED
+                    #end
+                        >$textutils.htmlEncode(${val.name})</option>
+            #end
+        </select>
+        <br><span style="font-size: 1">$i18n.getText("regexpfield-validator-edit.validate_field.description")</span>
+    </td>
+</tr>
+<tr bgcolor="#ffffff">
+    <td align="right" valign="top" bgcolor="#fffff0">
+        <span class="label">$i18n.getText("regexpfield-validator-edit.regexp.label"):</span>
+    </td>
+    <td bgcolor="#ffffff" nowrap>
+        <input type="text" id="expression" name="expression" value="$textutils.htmlEncode($!{val-expressionSelected})"/>
+        <br><span style="font-size: 1">$i18n.getText("regexpfield-validator-edit.regexp.description")</span>
+    </td>
+</tr>
+<tr bgcolor="#ffffff">
+    <td colspan="2">
+        <div style="width: 60%;" class="infoBox centred">$i18n.getText("regexpfield-validator.infobox.text")</div>
+    </td>
+</tr>

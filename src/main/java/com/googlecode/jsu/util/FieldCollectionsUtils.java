@@ -6,10 +6,7 @@ import com.atlassian.jira.issue.CustomFieldManager;
 import com.atlassian.jira.issue.Issue;
 import com.atlassian.jira.issue.IssueFieldConstants;
 import com.atlassian.jira.issue.customfields.CustomFieldType;
-import com.atlassian.jira.issue.customfields.impl.DateCFType;
-import com.atlassian.jira.issue.customfields.impl.DateTimeCFType;
-import com.atlassian.jira.issue.customfields.impl.ImportIdLinkCFType;
-import com.atlassian.jira.issue.customfields.impl.ReadOnlyCFType;
+import com.atlassian.jira.issue.customfields.impl.*;
 import com.atlassian.jira.issue.fields.*;
 import com.atlassian.jira.issue.fields.config.FieldConfig;
 import com.atlassian.jira.issue.fields.layout.field.FieldLayout;
@@ -139,6 +136,29 @@ public class FieldCollectionsUtils {
                         fieldManager.getField(IssueFieldConstants.RESOLUTION_DATE)));
 
         return sortFields(allDateFields);
+    }
+
+    public List<Field> getAllTextFields() {
+        List<Field> allTextFields = new ArrayList<Field>();
+
+        List<CustomField> fields = customFieldManager.getCustomFieldObjects();
+
+        for (CustomField cf : fields) {
+            CustomFieldType customFieldType = cf.getCustomFieldType();
+
+            if (customFieldType instanceof TextAreaCFType
+                    || customFieldType instanceof RenderableTextCFType
+                    || customFieldType instanceof NumberCFType
+                    || customFieldType instanceof URLCFType){
+                allTextFields.add(cf);
+            }
+        }
+        allTextFields.addAll(
+                Arrays.asList(
+                        fieldManager.getField(IssueFieldConstants.SUMMARY),
+                        fieldManager.getField(IssueFieldConstants.DESCRIPTION)));
+
+        return sortFields(allTextFields);
     }
 
     /**

@@ -1,0 +1,7 @@
+#if (${val-fieldSelected} && ${val-expressionSelected})
+    $i18n.getText("regexpfield-validator-view.validation_text",
+    "<b>${val-fieldSelected.name}</b>",
+    "<b>${val-expressionSelected}</b>")
+#else
+    $i18n.getText("regexpfield-validator-view.wrong_selection")
+#end
