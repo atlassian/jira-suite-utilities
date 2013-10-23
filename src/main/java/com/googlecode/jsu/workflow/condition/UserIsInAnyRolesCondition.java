@@ -40,7 +40,7 @@ public class UserIsInAnyRolesCondition extends AbstractJiraCondition {
         String caller = getCallerKey(transientVars,args);
 
         if (caller != null) { // null -> User not logged in
-            ApplicationUser userLogged = userManager.getUserByKey(caller);
+            ApplicationUser userLogged = workflowUtils.getApplicationUser(caller);
 
             // If there aren't roles selected, hidRolesList is equal to "".
             // And rolesSelected will be an empty collection.

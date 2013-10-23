@@ -814,11 +814,26 @@ public class WorkflowUtils {
         if (value == null || value instanceof ApplicationUser) {
             return (ApplicationUser)value;
         } else {
-            ApplicationUser user = userManager.getUserByKey(convertToString(value));
+            ApplicationUser user = getApplicationUser(convertToString(value));
             if (user != null) {
                 return user;
             }
             throw new IllegalArgumentException("User '" + value + "' not found.");
+        }
+    }
+
+    /**
+     * @param userKeyOrName The string representation of the user, like "admin:1"
+     * @return The application user, either found by key in JIRA internal directory or
+     * by name in an other external one, or null if not found.
+     */
+    public ApplicationUser getApplicationUser(String userKeyOrName) {
+        ApplicationUser user = userManager.getUserByKey(userKeyOrName);
+        if (user != null) {
+            return user;
+        } else {
+            user = userManager.getUserByName(userKeyOrName);
+            return user;
         }
     }
 

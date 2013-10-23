@@ -19,9 +19,11 @@ public class PostFunctionTest extends AbstractTestBase {
     private static final String SUBTASK_ISSUE_KEY = "TJP-3"; // empty one, resolved
     private static final String ISSUE_PF31 = "TJP-29";
     private static final String ISSUE_PF32 = "TJP-39";
+    private static final String ISSUE_PF33 = "TJP-40";
 
     private static final String TRANSITION_PF31 = "1311";
     private static final String TRANSITION_PF32 = "1371";
+    private static final String TRANSITION_PF33 = "1381";
 
     /**
      * Single test using transition.
@@ -954,6 +956,25 @@ public class PostFunctionTest extends AbstractTestBase {
         assertTrue(issue.fields.watches.watchCount==0);
     }
 
+    //The field UserPicker will take the value from Assignee. Source and destination issue are the same.
+    public void testPF33() throws Exception {
+        Issue issue = issueClient.get(ISSUE_PF33);
+        Map single = issue.fields.get(FIELD_USER_PICKER);
+        assertNotSame(issue.fields.assignee.name,getSingleAsString(single,"name"));
+
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId(TRANSITION_PF33));
+
+        final Response response = transitionsClient.postResponse(ISSUE_PF33, issueUpdateRequest);
+
+        assertEquals(204, response.statusCode);
+
+        issue = issueClient.get(ISSUE_PF33);
+        single = issue.fields.get(FIELD_USER_PICKER);
+        assertEquals(issue.fields.assignee.name,getSingleAsString(single,"name"));
+    }
+
     // all PostFunction transitions made out of resolved state
     private void ensureResolved(String issueKey) throws Exception {
         Issue issue = issueClient.get(issueKey);
@@ -980,12 +1001,13 @@ public class PostFunctionTest extends AbstractTestBase {
 
     // get string out of field, stored as map
     private String getSingleAsString(Map singleContent, String key) {
-        Object value = singleContent.get(key);
-        if(value!=null) {
-            return value.toString();
-        } else {
-            return null;
+        if(singleContent!=null) {
+            Object value = singleContent.get(key);
+            if(value!=null) {
+                return value.toString();
+            }
         }
+        return null;
     }
 
     // get value of selected cascading select its child
