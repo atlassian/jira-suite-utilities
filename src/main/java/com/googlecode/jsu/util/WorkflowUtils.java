@@ -33,6 +33,7 @@ import com.atlassian.jira.issue.security.IssueSecurityLevel;
 import com.atlassian.jira.issue.security.IssueSecurityLevelManager;
 import com.atlassian.jira.issue.status.Status;
 import com.atlassian.jira.issue.util.IssueChangeHolder;
+import com.atlassian.jira.issue.watchers.WatcherManager;
 import com.atlassian.jira.issue.worklog.WorkRatio;
 import com.atlassian.jira.project.Project;
 import com.atlassian.jira.project.ProjectManager;
@@ -91,6 +92,7 @@ public class WorkflowUtils {
     private final PriorityManager priorityManager;
     private final LabelManager labelManager;
     private final ProjectRoleManager projectRoleManager;
+    private final WatcherManager watcherManager;
 
     public WorkflowUtils(
             FieldManager fieldManager, IssueManager issueManager,
@@ -99,7 +101,7 @@ public class WorkflowUtils {
             FieldCollectionsUtils fieldCollectionsUtils, IssueLinkManager issueLinkManager,
             UserManager userManager, CrowdService crowdService, OptionsManager optionsManager,
             ProjectManager projectManager, PriorityManager priorityManager, LabelManager labelManager,
-            ProjectRoleManager projectRoleManager) {
+            ProjectRoleManager projectRoleManager, WatcherManager watcherManager) {
         this.fieldManager = fieldManager;
         this.issueManager = issueManager;
         this.projectComponentManager = projectComponentManager;
@@ -115,6 +117,7 @@ public class WorkflowUtils {
         this.priorityManager = priorityManager;
         this.labelManager = labelManager;
         this.projectRoleManager = projectRoleManager;
+        this.watcherManager = watcherManager;
     }
 
     /**
@@ -710,6 +713,16 @@ public class WorkflowUtils {
                 } else {
                     issue.setEnvironment(value.toString());
                 }
+            } else if (fieldId.equals(IssueFieldConstants.WATCHES)) {
+                if ((value == null)) {
+                    List<ApplicationUser> watches = watcherManager.getWatchers(issue,Locale.getDefault());
+                    for(ApplicationUser appUser:watches) {
+                        watcherManager.stopWatching(appUser,issue);
+                    }
+                } else {
+                    throw new UnsupportedOperationException("Not implemented");
+                }
+
             } else {
                 log.error("Issue field \"" + fieldId + "\" is not supported for setting.");
             }

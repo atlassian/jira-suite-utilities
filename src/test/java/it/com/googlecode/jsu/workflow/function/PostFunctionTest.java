@@ -18,8 +18,10 @@ public class PostFunctionTest extends AbstractTestBase {
     private static final String SECOND_ISSUE_KEY = "TJP-2"; // with all field data set, resolved
     private static final String SUBTASK_ISSUE_KEY = "TJP-3"; // empty one, resolved
     private static final String ISSUE_PF31 = "TJP-29";
+    private static final String ISSUE_PF32 = "TJP-39";
 
     private static final String TRANSITION_PF31 = "1311";
+    private static final String TRANSITION_PF32 = "1371";
 
     /**
      * Single test using transition.
@@ -933,6 +935,23 @@ public class PostFunctionTest extends AbstractTestBase {
         Issue issue = issueClient.get(ISSUE_PF31);
         List<Map> multi = issue.fields.get(FIELD_MULTI_USER);
         assertEquals("admin,user",getMultiAsString(multi,"name"));
+    }
+
+    //The contents of the field Watchers will be purged.
+    public void testPF32() throws Exception {
+        Issue issue = issueClient.get(ISSUE_PF32);
+        assertTrue(issue.fields.watches.watchCount>0);
+
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId(TRANSITION_PF32));
+
+        final Response response = transitionsClient.postResponse(ISSUE_PF32, issueUpdateRequest);
+
+        assertEquals(204, response.statusCode);
+
+        issue = issueClient.get(ISSUE_PF32);
+        assertTrue(issue.fields.watches.watchCount==0);
     }
 
     // all PostFunction transitions made out of resolved state
