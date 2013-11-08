@@ -1,6 +1,5 @@
 package com.googlecode.jsu.transitionssummary;
 
-import com.atlassian.core.util.map.EasyMap;
 import com.atlassian.jira.datetime.DateTimeFormatter;
 import com.atlassian.jira.datetime.DateTimeFormatterFactory;
 import com.atlassian.jira.issue.Issue;
@@ -90,8 +89,10 @@ public class TransitionsManager {
      */
     private List<Transition> getStatusChanges(Issue issue, Timestamp tsCreated){
         @SuppressWarnings("unchecked")
-        Map<String, Object> params = EasyMap.build("issue", issue.getId());
+        Map<String, Object> params = new HashMap<String, Object>();
         List<GenericValue> changeGroups = ofBizDelegator.findByAnd("ChangeGroup", params);
+
+        params.put("issue",issue.getId());
 
         // Added by caisd_1998 at hotmail dot com
         Collections.sort(changeGroups,
@@ -107,12 +108,10 @@ public class TransitionsManager {
 
         for (GenericValue changeGroup : changeGroups) {
             // Obtains all ChangeItems that contains an status change.
-            @SuppressWarnings("unchecked")
-            Map<String, Object> paramsItem = EasyMap.build(
-                    "group", changeGroup.getLong("id"),
-                    "field", "status",
-                    "fieldtype", "jira"
-            );
+            Map<String, Object> paramsItem = new HashMap<String, Object>();
+            paramsItem.put("group", changeGroup.getLong("id"));
+            paramsItem.put("field", "status");
+            paramsItem.put("fieldtype", "jira");
 
             List<GenericValue> changeItems = ofBizDelegator.findByAnd("ChangeItem", paramsItem);
 
