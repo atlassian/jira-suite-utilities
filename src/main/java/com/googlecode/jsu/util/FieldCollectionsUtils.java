@@ -366,9 +366,9 @@ public class FieldCollectionsUtils {
                 UPDATED,
                 VOTES,
                 WORKRATIO,
-                "worklog",
-                "aggregatetimeestimate",
-                "aggregatetimespent"
+                WORKLOG,
+                AGGREGATE_TIME_ESTIMATE,
+                AGGREGATE_TIME_SPENT
         );
     }
 
