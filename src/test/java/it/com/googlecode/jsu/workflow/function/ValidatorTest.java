@@ -31,6 +31,8 @@ public class ValidatorTest extends AbstractTestBase {
     private static final String ISSUE_V17_FAIL = "TJP-36";
     private static final String ISSUE_V18_PASS = "TJP-37";
     private static final String ISSUE_V18_FAIL = "TJP-38";
+    private static final String ISSUE_V19_PASS = "TJP-41";
+    private static final String ISSUE_V19_FAIL = "TJP-42";
 
     private static final String TRANSITION_V10 = "1251";
     private static final String TRANSITION_V11 = "1261";
@@ -41,6 +43,7 @@ public class ValidatorTest extends AbstractTestBase {
     private static final String TRANSITION_V16 = "1341";
     private static final String TRANSITION_V17 = "1351";
     private static final String TRANSITION_V18 = "1361";
+    private static final String TRANSITION_V19 = "1391";
 
     //Verifies that field DatePicker is less than value of now. Only date part.
     public void testV10Pass() throws Exception {
@@ -399,6 +402,38 @@ public class ValidatorTest extends AbstractTestBase {
         assertEquals(204, reponse.statusCode);
 
         issue = issueClient.get(ISSUE_V18_FAIL);
+        assertEquals(STATUS_IN_PROGRESS,issue.fields.status.name());
+    }
+
+    //Required fields: Σ Time Spent
+    public void testV19pass() throws Exception {
+        Issue issue = issueClient.get(ISSUE_V19_PASS);
+        assertNotNull(issue);
+
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId(TRANSITION_V19));
+
+        final Response reponse = transitionsClient.postResponse(ISSUE_V19_PASS, issueUpdateRequest);
+        assertEquals(204, reponse.statusCode);
+
+        issue = issueClient.get(ISSUE_V19_PASS);
+        assertEquals(STATUS_RESOLVED,issue.fields.status.name());
+    }
+
+    //Required fields: Σ Time Spent
+    public void testV19fail() throws Exception {
+        Issue issue = issueClient.get(ISSUE_V19_FAIL);
+        assertNotNull(issue);
+
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId(TRANSITION_V19));
+
+        final Response reponse = transitionsClient.postResponse(ISSUE_V19_FAIL, issueUpdateRequest);
+        assertEquals(204, reponse.statusCode);
+
+        issue = issueClient.get(ISSUE_V19_FAIL);
         assertEquals(STATUS_IN_PROGRESS,issue.fields.status.name());
     }
 }
