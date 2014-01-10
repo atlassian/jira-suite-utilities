@@ -317,6 +317,8 @@ public class WorkflowUtils {
                     retVal = issue.getEstimate();
                 } else if (fieldId.equals(IssueFieldConstants.TIME_SPENT)) {
                     retVal = issue.getTimeSpent();
+                } else if (fieldId.equals(IssueFieldConstants.AGGREGATE_TIME_SPENT)) {
+                    retVal = issue.getTimeSpent();
                 } else if (fieldId.equals(IssueFieldConstants.ASSIGNEE)) {
                     retVal = issue.getAssigneeUser();
                 } else if (fieldId.equals(IssueFieldConstants.REPORTER)) {

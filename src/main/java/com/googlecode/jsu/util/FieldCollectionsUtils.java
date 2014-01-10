@@ -367,8 +367,7 @@ public class FieldCollectionsUtils {
                 VOTES,
                 WORKRATIO,
                 WORKLOG,
-                AGGREGATE_TIME_ESTIMATE,
-                AGGREGATE_TIME_SPENT
+                AGGREGATE_TIME_ESTIMATE
         );
     }
 

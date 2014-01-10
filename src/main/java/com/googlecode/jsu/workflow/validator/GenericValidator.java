@@ -1,6 +1,7 @@
 package com.googlecode.jsu.workflow.validator;
 
 import com.atlassian.jira.issue.Issue;
+import com.atlassian.jira.issue.IssueFieldConstants;
 import com.atlassian.jira.issue.fields.Field;
 import com.atlassian.jira.issue.fields.screen.FieldScreen;
 import com.googlecode.jsu.annotation.AnnotationProcessor;
@@ -129,7 +130,12 @@ public abstract class GenericValidator implements Validator {
                     this.errorBuilder.addError(field, messageIfOnScreen);
                 }
             } else {
-                this.errorBuilder.addError(messageIfHidden);
+                //some fields can not be shown at all on a screen, but validated anyway
+                if(IssueFieldConstants.AGGREGATE_TIME_SPENT.equals(field.getId())) {
+                    this.errorBuilder.addError(messageIfOnScreen);
+                } else {
+                    this.errorBuilder.addError(messageIfHidden);
+                }
             }
         } else {
             this.errorBuilder.addError(messageIfOnScreen);
