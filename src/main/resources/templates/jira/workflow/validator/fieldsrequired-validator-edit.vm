@@ -40,6 +40,24 @@
 			    	        </tr>
     	    </table>
     </td>
+    <tr bgcolor="#ffffff">
+        <td align="right" valign="top" bgcolor="#fffff0">$i18n.getText("fieldsrequired-validator-edit.ignore_context"):</td>
+        <td bgcolor="#ffffff" nowrap>
+            <input type="checkbox" id="contextHandling" name="contextHandling" value="ignore"
+                #if(${val-contextHandling.equals('ignore')})
+                   checked="checked"
+                #end
+                >
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="2">
+            <div style="width: 70%;" class="infoBox centred">
+                $i18n.getText("fieldsrequired-validator-edit.infobox.text")
+            </div>
+        </td>
+    </tr>
 </tr>
 
 <script type="text/javascript">

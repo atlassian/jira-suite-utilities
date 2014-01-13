@@ -33,6 +33,12 @@ public class ValidatorTest extends AbstractTestBase {
     private static final String ISSUE_V18_FAIL = "TJP-38";
     private static final String ISSUE_V19_PASS = "TJP-41";
     private static final String ISSUE_V19_FAIL = "TJP-42";
+    private static final String ISSUE_V20_PASS = "TJP-43";
+    private static final String ISSUE_V21_PASS = "STJP-1";
+    private static final String ISSUE_V21_FAIL = "STJP-2";
+    private static final String ISSUE_V22_FAIL = "TJP-44";
+    private static final String ISSUE_V23_PASS = "STJP-3";
+    private static final String ISSUE_V23_FAIL = "STJP-4";
 
     private static final String TRANSITION_V10 = "1251";
     private static final String TRANSITION_V11 = "1261";
@@ -44,6 +50,10 @@ public class ValidatorTest extends AbstractTestBase {
     private static final String TRANSITION_V17 = "1351";
     private static final String TRANSITION_V18 = "1361";
     private static final String TRANSITION_V19 = "1391";
+    private static final String TRANSITION_V20 = "1401";
+    private static final String TRANSITION_V21 = "1401";
+    private static final String TRANSITION_V22 = "1411";
+    private static final String TRANSITION_V23 = "1411";
 
     //Verifies that field DatePicker is less than value of now. Only date part.
     public void testV10Pass() throws Exception {
@@ -434,6 +444,102 @@ public class ValidatorTest extends AbstractTestBase {
         assertEquals(204, reponse.statusCode);
 
         issue = issueClient.get(ISSUE_V19_FAIL);
+        assertEquals(STATUS_IN_PROGRESS,issue.fields.status.name());
+    }
+
+    //Required fields: Textfield2
+    public void testV20pass() throws Exception {
+        Issue issue = issueClient.get(ISSUE_V20_PASS);
+        assertNotNull(issue);
+
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId(TRANSITION_V20));
+
+        final Response reponse = transitionsClient.postResponse(ISSUE_V20_PASS, issueUpdateRequest);
+        assertEquals(204, reponse.statusCode);
+
+        issue = issueClient.get(ISSUE_V20_PASS);
+        assertEquals(STATUS_RESOLVED,issue.fields.status.name());
+    }
+
+    //Required fields: Textfield2
+    public void testV21pass() throws Exception {
+        Issue issue = issueClient.get(ISSUE_V21_PASS);
+        assertNotNull(issue);
+
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId(TRANSITION_V21));
+
+        final Response reponse = transitionsClient.postResponse(ISSUE_V21_PASS, issueUpdateRequest);
+        assertEquals(204, reponse.statusCode);
+
+        issue = issueClient.get(ISSUE_V21_PASS);
+        assertEquals(STATUS_RESOLVED,issue.fields.status.name());
+    }
+
+    //Required fields: Textfield2
+    public void testV21fail() throws Exception {
+        Issue issue = issueClient.get(ISSUE_V21_FAIL);
+        assertNotNull(issue);
+
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId(TRANSITION_V21));
+
+        final Response reponse = transitionsClient.postResponse(ISSUE_V21_FAIL, issueUpdateRequest);
+        assertEquals(204, reponse.statusCode);
+
+        issue = issueClient.get(ISSUE_V21_FAIL);
+        assertEquals(STATUS_IN_PROGRESS,issue.fields.status.name());
+    }
+
+    //Required fields (ignoring context): Textfield2
+    public void testV22fail() throws Exception {
+        Issue issue = issueClient.get(ISSUE_V22_FAIL);
+        assertNotNull(issue);
+
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId(TRANSITION_V22));
+
+        final Response reponse = transitionsClient.postResponse(ISSUE_V22_FAIL, issueUpdateRequest);
+        assertEquals(204, reponse.statusCode);
+
+        issue = issueClient.get(ISSUE_V22_FAIL);
+        assertEquals(STATUS_IN_PROGRESS,issue.fields.status.name());
+    }
+
+    //Required fields (ignoring context): Textfield2
+    public void testV23pass() throws Exception {
+        Issue issue = issueClient.get(ISSUE_V23_PASS);
+        assertNotNull(issue);
+
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId(TRANSITION_V23));
+
+        final Response reponse = transitionsClient.postResponse(ISSUE_V23_PASS, issueUpdateRequest);
+        assertEquals(204, reponse.statusCode);
+
+        issue = issueClient.get(ISSUE_V23_PASS);
+        assertEquals(STATUS_RESOLVED,issue.fields.status.name());
+    }
+
+    //Required fields (ignoring context): Textfield2
+    public void testV23fail() throws Exception {
+        Issue issue = issueClient.get(ISSUE_V23_FAIL);
+        assertNotNull(issue);
+
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId(TRANSITION_V23));
+
+        final Response reponse = transitionsClient.postResponse(ISSUE_V23_FAIL, issueUpdateRequest);
+        assertEquals(204, reponse.statusCode);
+
+        issue = issueClient.get(ISSUE_V23_FAIL);
         assertEquals(STATUS_IN_PROGRESS,issue.fields.status.name());
     }
 }

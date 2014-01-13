@@ -213,9 +213,10 @@ public class FieldCollectionsUtils {
      *
      * @param issue: issue to which the field belongs
      * @param field: wished field
+     * @param ignoreContext, if true ignore context settings
      * @return if a field is available.
      */
-    public boolean isIssueHasField(Issue issue, Field field) {
+    public boolean isIssueHasField(Issue issue, Field field, boolean ignoreContext) {
         final String fieldId = field.getId();
 
         boolean isHidden;
@@ -234,11 +235,14 @@ public class FieldCollectionsUtils {
         if (fieldManager.isCustomField(field)) {
             CustomField customField = (CustomField) field;
             FieldConfig config = customField.getRelevantConfig(issue);
-
-            return (config != null);
+            return (ignoreContext || config != null);
         }
 
         return true;
+    }
+
+    public boolean isIssueHasField(Issue issue, Field field) {
+        return isIssueHasField(issue,field,false);
     }
 
     public FieldLayoutItem getFieldLayoutItem(Issue issue, Field field) {

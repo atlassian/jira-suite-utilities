@@ -1,4 +1,9 @@
-$i18n.getText("fieldsrequired-validator-edit.required_fields"):
+#if (${val-contextHandling} && ${val-contextHandling} == "ignore")
+    $i18n.getText("fieldsrequired-validator-edit.required_fields_ignoring_context"):
+#else
+    $i18n.getText("fieldsrequired-validator-edit.required_fields"):
+#end
+
 #if (${val-fieldsListSelected})
     #foreach ($singleValue in ${val-fieldsListSelected})
       <b>$!singleValue.getName()</b>#if ($velocityCount != ${val-fieldsListSelected.size()}), #end

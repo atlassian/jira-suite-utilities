@@ -12,6 +12,7 @@ import com.googlecode.jsu.util.FieldCollectionsUtils;
 import com.googlecode.jsu.util.WorkflowUtils;
 import com.opensymphony.workflow.loader.AbstractDescriptor;
 import com.opensymphony.workflow.loader.ValidatorDescriptor;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * This class defines the parameters available for Fields Required Validator.
@@ -23,6 +24,7 @@ public class WorkflowFieldsRequiredValidatorPluginFactory
         implements WorkflowPluginValidatorFactory {
 
     public static final String SELECTED_FIELDS = "hidFieldsList";
+    public static final String CONTEXT_HANDLING = "contextHandling";
 
     private final FieldCollectionsUtils fieldCollectionsUtils;
     private final WorkflowUtils workflowUtils;
@@ -61,11 +63,14 @@ public class WorkflowFieldsRequiredValidatorPluginFactory
         Collection<Field> fieldsSelected = getSelectedFields(args);
         List<Field> allFields = fieldCollectionsUtils.getRequirableFields();
 
+        String contextHandling = (String) args.get(CONTEXT_HANDLING);
+
         allFields.removeAll(fieldsSelected);
 
         velocityParams.put("val-fieldsListSelected", fieldsSelected);
         velocityParams.put("val-hidFieldsList", workflowUtils.getStringField(fieldsSelected, WorkflowUtils.SPLITTER));
         velocityParams.put("val-fieldsList", allFields);
+        velocityParams.put("val-contextHandling", contextHandling);
     }
 
     /* (non-Javadoc)
@@ -78,6 +83,7 @@ public class WorkflowFieldsRequiredValidatorPluginFactory
         Map<String, Object> args = validatorDescriptor.getArgs();
 
         velocityParams.put("val-fieldsListSelected", getSelectedFields(args));
+        velocityParams.put("val-contextHandling", args.get(CONTEXT_HANDLING));
     }
 
     /* (non-Javadoc)
@@ -86,8 +92,13 @@ public class WorkflowFieldsRequiredValidatorPluginFactory
     public Map<String, ?> getDescriptorParams(Map<String, Object> validatorParams) {
         Map<String, String> params = new HashMap<String, String>();
         String strFieldsSelected = extractSingleParam(validatorParams, SELECTED_FIELDS);
+        String contextHandling = null;
+        if(validatorParams.containsKey(CONTEXT_HANDLING)) {
+            contextHandling = extractSingleParam(validatorParams, CONTEXT_HANDLING);
+        }
 
         params.put(SELECTED_FIELDS, strFieldsSelected);
+        params.put(CONTEXT_HANDLING, contextHandling);
 
         return params;
     }

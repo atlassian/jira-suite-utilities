@@ -2,6 +2,7 @@ package com.googlecode.jsu.workflow.validator;
 
 import static com.googlecode.jsu.helpers.ConditionCheckerFactory.EQUAL;
 import static com.googlecode.jsu.helpers.ConditionCheckerFactory.STRING;
+import static com.googlecode.jsu.workflow.WorkflowFieldsRequiredValidatorPluginFactory.CONTEXT_HANDLING;
 import static com.googlecode.jsu.workflow.WorkflowFieldsRequiredValidatorPluginFactory.SELECTED_FIELDS;
 
 import java.util.ArrayList;
@@ -37,6 +38,9 @@ public class FieldsRequiredValidator extends GenericValidator {
 
     @Argument(SELECTED_FIELDS)
     private String fieldList;
+
+    @Argument(CONTEXT_HANDLING)
+    private String contextHandling;
 
     private final ConditionCheckerFactory conditionCheckerFactory;
     private final I18nHelper.BeanFactory beanFactory;
@@ -77,7 +81,7 @@ public class FieldsRequiredValidator extends GenericValidator {
         }
 
         for (Field field : fieldsSelected) {
-            if (fieldCollectionsUtils.isIssueHasField(issue, field)) {
+            if (fieldCollectionsUtils.isIssueHasField(issue, field, "ignore".equals(contextHandling))) {
                 Object fieldValue;
                 if (IssueFieldConstants.COMMENT.equals(field.getId())) {
                     fieldValue = getTransitionComment();
