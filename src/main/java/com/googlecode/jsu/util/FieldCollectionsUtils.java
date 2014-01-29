@@ -138,6 +138,32 @@ public class FieldCollectionsUtils {
         return sortFields(allDateFields);
     }
 
+    public List<Field> getAllRegexpFields() {
+        List<Field> allRegexpFields = new ArrayList<Field>();
+
+        allRegexpFields.addAll(getAllTextFields());
+        allRegexpFields.addAll(getAllSelectFields());
+
+        return sortFields(allRegexpFields);
+    }
+
+    public List<Field> getAllSelectFields() {
+        List<Field> allSelectFields = new ArrayList<Field>();
+
+        List<CustomField> fields = customFieldManager.getCustomFieldObjects();
+
+        for (CustomField cf : fields) {
+            CustomFieldType customFieldType = cf.getCustomFieldType();
+
+            if (customFieldType instanceof SelectCFType
+                    || customFieldType instanceof MultiSelectCFType){
+                allSelectFields.add(cf);
+            }
+        }
+
+        return sortFields(allSelectFields);
+    }
+
     public List<Field> getAllTextFields() {
         List<Field> allTextFields = new ArrayList<Field>();
 

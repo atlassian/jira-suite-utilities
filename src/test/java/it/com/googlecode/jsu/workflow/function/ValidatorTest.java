@@ -39,6 +39,14 @@ public class ValidatorTest extends AbstractTestBase {
     private static final String ISSUE_V22_FAIL = "TJP-44";
     private static final String ISSUE_V23_PASS = "STJP-3";
     private static final String ISSUE_V23_FAIL = "STJP-4";
+    private static final String ISSUE_V24_PASS = "TJP-45";
+    private static final String ISSUE_V24_FAIL = "TJP-46";
+    private static final String ISSUE_V25_PASS = "TJP-47";
+    private static final String ISSUE_V25_FAIL = "TJP-48";
+    private static final String ISSUE_V26_PASS = "TJP-49";
+    private static final String ISSUE_V26_FAIL = "TJP-50";
+    private static final String ISSUE_V27_PASS = "TJP-51";
+    private static final String ISSUE_V27_FAIL = "TJP-52";
 
     private static final String TRANSITION_V10 = "1251";
     private static final String TRANSITION_V11 = "1261";
@@ -54,6 +62,11 @@ public class ValidatorTest extends AbstractTestBase {
     private static final String TRANSITION_V21 = "1401";
     private static final String TRANSITION_V22 = "1411";
     private static final String TRANSITION_V23 = "1411";
+    private static final String TRANSITION_V24 = "1421";
+    private static final String TRANSITION_V25 = "1431";
+    private static final String TRANSITION_V26 = "1441";
+    private static final String TRANSITION_V27 = "1451";
+
 
     //Verifies that field DatePicker is less than value of now. Only date part.
     public void testV10Pass() throws Exception {
@@ -540,6 +553,134 @@ public class ValidatorTest extends AbstractTestBase {
         assertEquals(204, reponse.statusCode);
 
         issue = issueClient.get(ISSUE_V23_FAIL);
+        assertEquals(STATUS_IN_PROGRESS,issue.fields.status.name());
+    }
+
+    //The field SelectList its contents must match against the regular expression Option B
+    public void testV24pass() throws Exception {
+        Issue issue = issueClient.get(ISSUE_V24_PASS);
+        assertNotNull(issue);
+
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId(TRANSITION_V24));
+
+        final Response reponse = transitionsClient.postResponse(ISSUE_V24_PASS, issueUpdateRequest);
+        assertEquals(204, reponse.statusCode);
+
+        issue = issueClient.get(ISSUE_V24_PASS);
+        assertEquals(STATUS_RESOLVED,issue.fields.status.name());
+    }
+
+    //The field SelectList its contents must match against the regular expression Option B
+    public void testV24fail() throws Exception {
+        Issue issue = issueClient.get(ISSUE_V24_FAIL);
+        assertNotNull(issue);
+
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId(TRANSITION_V24));
+
+        final Response reponse = transitionsClient.postResponse(ISSUE_V24_FAIL, issueUpdateRequest);
+        assertEquals(204, reponse.statusCode);
+
+        issue = issueClient.get(ISSUE_V24_FAIL);
+        assertEquals(STATUS_IN_PROGRESS,issue.fields.status.name());
+    }
+
+    //The field RadioButtons its contents must match against the regular expression Option C
+    public void testV25pass() throws Exception {
+        Issue issue = issueClient.get(ISSUE_V25_PASS);
+        assertNotNull(issue);
+
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId(TRANSITION_V25));
+
+        final Response reponse = transitionsClient.postResponse(ISSUE_V25_PASS, issueUpdateRequest);
+        assertEquals(204, reponse.statusCode);
+
+        issue = issueClient.get(ISSUE_V25_PASS);
+        assertEquals(STATUS_RESOLVED,issue.fields.status.name());
+    }
+
+    //The field RadioButtons its contents must match against the regular expression Option C
+    public void testV25fail() throws Exception {
+        Issue issue = issueClient.get(ISSUE_V25_FAIL);
+        assertNotNull(issue);
+
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId(TRANSITION_V25));
+
+        final Response reponse = transitionsClient.postResponse(ISSUE_V25_FAIL, issueUpdateRequest);
+        assertEquals(204, reponse.statusCode);
+
+        issue = issueClient.get(ISSUE_V25_FAIL);
+        assertEquals(STATUS_IN_PROGRESS,issue.fields.status.name());
+    }
+
+    //The field MultiCheckboxes its contents must match against the regular expression Option [B,C]
+    public void testV26pass() throws Exception {
+        Issue issue = issueClient.get(ISSUE_V26_PASS);
+        assertNotNull(issue);
+
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId(TRANSITION_V26));
+
+        final Response reponse = transitionsClient.postResponse(ISSUE_V26_PASS, issueUpdateRequest);
+        assertEquals(204, reponse.statusCode);
+
+        issue = issueClient.get(ISSUE_V26_PASS);
+        assertEquals(STATUS_RESOLVED,issue.fields.status.name());
+    }
+
+    //The field MultiCheckboxes its contents must match against the regular expression Option [B,C]
+    public void testV26fail() throws Exception {
+        Issue issue = issueClient.get(ISSUE_V26_FAIL);
+        assertNotNull(issue);
+
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId(TRANSITION_V26));
+
+        final Response reponse = transitionsClient.postResponse(ISSUE_V26_FAIL, issueUpdateRequest);
+        assertEquals(204, reponse.statusCode);
+
+        issue = issueClient.get(ISSUE_V26_FAIL);
+        assertEquals(STATUS_IN_PROGRESS,issue.fields.status.name());
+    }
+
+    //The field MultiSelect its contents must match against the regular expression Option [A,B]
+    public void testV27pass() throws Exception {
+        Issue issue = issueClient.get(ISSUE_V27_PASS);
+        assertNotNull(issue);
+
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId(TRANSITION_V27));
+
+        final Response reponse = transitionsClient.postResponse(ISSUE_V27_PASS, issueUpdateRequest);
+        assertEquals(204, reponse.statusCode);
+
+        issue = issueClient.get(ISSUE_V27_PASS);
+        assertEquals(STATUS_RESOLVED,issue.fields.status.name());
+    }
+
+    //The field MultiSelect its contents must match against the regular expression Option [A,B]
+    public void testV27fail() throws Exception {
+        Issue issue = issueClient.get(ISSUE_V27_FAIL);
+        assertNotNull(issue);
+
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId(TRANSITION_V27));
+
+        final Response reponse = transitionsClient.postResponse(ISSUE_V27_FAIL, issueUpdateRequest);
+        assertEquals(204, reponse.statusCode);
+
+        issue = issueClient.get(ISSUE_V27_FAIL);
         assertEquals(STATUS_IN_PROGRESS,issue.fields.status.name());
     }
 }

@@ -37,7 +37,7 @@ public class WorkflowRegexpFieldValidatorPluginFactory
      * @see com.googlecode.jsu.workflow.AbstractWorkflowPluginFactory#getVelocityParamsForInput(java.util.Map)
      */
     protected void getVelocityParamsForInput(Map<String, Object> velocityParams) {
-        List<Field> allTextFields = fieldCollectionsUtils.getAllTextFields();
+        List<Field> allTextFields = fieldCollectionsUtils.getAllRegexpFields();
 
         velocityParams.put("val-fieldList", allTextFields);
     }
