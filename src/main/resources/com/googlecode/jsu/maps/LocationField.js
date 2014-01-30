@@ -79,6 +79,10 @@
         jsuMapField.removeClass("notFound");
     }
 
+    function isNumber(n) {
+        return !isNaN(parseFloat(n)) && isFinite(n);
+    }
+
     function displayMap(jsuMapField) {
         var location = jsuMapField.find("a.location").text(),
             mapDiv = jsuMapField.find(".jsuMap");
@@ -92,11 +96,22 @@
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 });
 
-                new google.maps.Marker({
-                    map: map,
-                    position: results[0].geometry.location,
-                    title: location
-                });
+                /* did we get GPS coordinates as location, then point marker to it instead of geocoded location */
+                var coords = location.split(",");
+                if(coords.length==2 && isNumber(coords[0]) && isNumber(coords[1])) {
+                    var latlng = new google.maps.LatLng(coords[0],coords[1]);
+                    new google.maps.Marker({
+                        position: latlng,
+                        map: map,
+                        title: location
+                    });
+                } else {
+                    new google.maps.Marker({
+                        map: map,
+                        position: results[0].geometry.location,
+                        title: location
+                    });
+                }
             } else {
                 jsuMapField.addClass("notFound");
             }
@@ -121,38 +136,4 @@
         JIRA.Issues.InlineEdit.BlurTriggerMapping.custom.locationselect = JIRA.Issues.InlineEdit.BlurTriggers.Default;
         JIRA.Issues.InlineEdit.BlurTriggerMapping.custom.locationtextfield = JIRA.Issues.InlineEdit.BlurTriggers.Default;
     });
-    /*
-
-    function addAddressToMap_${customField.id}(results, status) {
-     field = '${customField.id}';
-
-     if (status == google.maps.GeocoderStatus.OK) {
-     var mapDiv = document.getElementById(field + "-map");
-     var buttonDiv = document.getElementById(field + "-hide-button");
-
-     mapDiv.style.display = "";
-     buttonDiv.style.display = "";
-
-     if (mapDiv.getAttribute("gmapLoaded") == null) {
-     var map = new google.maps.Map(mapDiv, {
-     zoom: 8,
-     center: results[0].geometry.location,
-     mapTypeId: google.maps.MapTypeId.ROADMAP
-     });
-
-     var marker = new google.maps.Marker({
-     position: results[0].geometry.location,
-     map: map,
-     title: "$!value.toString()"
-     });
-
-     mapDiv.setAttribute("gmapLoaded", "loaded");
-     }
-     } else {
-     var label = document.getElementById(field + "-not-found");
-
-     label.style.display = "";
-     }
-     }
-     */
 })(AJS.$);
