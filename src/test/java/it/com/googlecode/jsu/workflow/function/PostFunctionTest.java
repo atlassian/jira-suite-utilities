@@ -20,10 +20,24 @@ public class PostFunctionTest extends AbstractTestBase {
     private static final String ISSUE_PF31 = "TJP-29";
     private static final String ISSUE_PF32 = "TJP-39";
     private static final String ISSUE_PF33 = "TJP-40";
+    private static final String ISSUE_PF34 = "TJP-53";
+    private static final String ISSUE_PF35 = "TJP-54";
+    private static final String ISSUE_PF36 = "TJP-55";
+    private static final String ISSUE_PF37 = "TJP-56";
+    private static final String ISSUE_PF38 = "TJP-57";
+    private static final String ISSUE_PF39 = "TJP-58";
+    private static final String ISSUE_PF40 = "TJP-59";
 
     private static final String TRANSITION_PF31 = "1311";
     private static final String TRANSITION_PF32 = "1371";
     private static final String TRANSITION_PF33 = "1381";
+    private static final String TRANSITION_PF34 = "1461";
+    private static final String TRANSITION_PF35 = "1471";
+    private static final String TRANSITION_PF36 = "1481";
+    private static final String TRANSITION_PF37 = "1491";
+    private static final String TRANSITION_PF38 = "1501";
+    private static final String TRANSITION_PF39 = "1511";
+    private static final String TRANSITION_PF40 = "1521";
 
     /**
      * Single test using transition.
@@ -924,6 +938,7 @@ public class PostFunctionTest extends AbstractTestBase {
         assertNotSame(issue.fields.get(FIELD_TEXT_FIELD),issue.fields.assignee.name);
     }
 
+    //TODO obsolete since JSUTIL-202, but need to stay for backwards compatibility for a while
     //The MultiUser of the issue will be set to %%ADD_CURRENT_USER%%.
     public void testPF31() throws Exception {
         IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
@@ -975,6 +990,112 @@ public class PostFunctionTest extends AbstractTestBase {
         assertEquals(issue.fields.assignee.name,getSingleAsString(single,"name"));
     }
 
+    //The value %%CURRENT_USER%% will be appended, or set in multi fields, to field FreeText.
+    public void testPF34() throws Exception {
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId(TRANSITION_PF34));
+
+        final Response response = transitionsClient.postResponse(ISSUE_PF34, issueUpdateRequest);
+
+        assertEquals(204, response.statusCode);
+
+        Issue issue = issueClient.get(ISSUE_PF34);
+        assertEquals("Yesterday, admin",issue.fields.get(FIELD_FREE_TEXT));
+    }
+
+    //The value Option C will be appended, or set in multi fields, to field MultiSelect.
+    public void testPF35() throws Exception {
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId(TRANSITION_PF35));
+
+        final Response response = transitionsClient.postResponse(ISSUE_PF35, issueUpdateRequest);
+
+        assertEquals(204, response.statusCode);
+
+        Issue issue = issueClient.get(ISSUE_PF35);
+        List<Map> multi = issue.fields.get(FIELD_MULTI_SELECT);
+
+        assertEquals("Option A,Option C",getMultiAsString(multi,"value"));
+    }
+
+    //The value Option A will be appended, or set in multi fields, to field RadioButtons.
+    public void testPF36() throws Exception {
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId(TRANSITION_PF36));
+
+        final Response response = transitionsClient.postResponse(ISSUE_PF36, issueUpdateRequest);
+
+        assertEquals(204, response.statusCode);
+
+        Issue issue = issueClient.get(ISSUE_PF36);
+        Map radio = issue.fields.get(FIELD_RADIO_BUTTONS);
+        //RadioButtons is a single selection field, thus even though appending, only the new option must be present
+        assertEquals("Option A", getSingleAsString(radio, "value"));
+    }
+
+    //The value %%CURRENT_USER%% will be appended, or set in multi fields, to field MultiUser.
+    public void testPF37() throws Exception {
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId(TRANSITION_PF37));
+
+        final Response response = transitionsClient.postResponse(ISSUE_PF37, issueUpdateRequest);
+
+        assertEquals(204, response.statusCode);
+
+        Issue issue = issueClient.get(ISSUE_PF37);
+        List<Map> multi = issue.fields.get(FIELD_MULTI_USER);
+        assertEquals("admin,developer",getMultiAsString(multi, "name"));
+    }
+
+    //The value two will be appended, or set in multi fields, to field Labels.
+    public void testPF38() throws Exception {
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId(TRANSITION_PF38));
+
+        final Response response = transitionsClient.postResponse(ISSUE_PF38, issueUpdateRequest);
+
+        assertEquals(204, response.statusCode);
+
+        Issue issue = issueClient.get(ISSUE_PF38);
+        List<Map> multi = issue.fields.get(FIELD_LABELS);
+        assertEquals("[one, two]",multi.toString());
+    }
+
+    //The value Option D will be appended, or set in multi fields, to field MultiCheckboxes.
+    public void testPF39() throws Exception {
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId(TRANSITION_PF39));
+
+        final Response response = transitionsClient.postResponse(ISSUE_PF39, issueUpdateRequest);
+
+        assertEquals(204, response.statusCode);
+
+        Issue issue = issueClient.get(ISSUE_PF39);
+        List<Map> multi = issue.fields.get(FIELD_MULTI_CHECKBOXES);
+        assertEquals("Option B,Option D",getMultiAsString(multi,"value"));
+    }
+
+    //The value 3.0 will be appended, or set in multi fields, to field VersionPicker.
+    public void testPF40() throws Exception {
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId(TRANSITION_PF40));
+
+        final Response response = transitionsClient.postResponse(ISSUE_PF40, issueUpdateRequest);
+
+        assertEquals(204, response.statusCode);
+
+        Issue issue = issueClient.get(ISSUE_PF40);
+        List<Map> multi = issue.fields.get(FIELD_VERSION_PICKER);
+        assertEquals("2.0,3.0",getMultiAsString(multi,"name"));
+    }
+      
     // all PostFunction transitions made out of resolved state
     private void ensureResolved(String issueKey) throws Exception {
         Issue issue = issueClient.get(issueKey);

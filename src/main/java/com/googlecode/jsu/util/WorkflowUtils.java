@@ -755,7 +755,7 @@ public class WorkflowUtils {
         }
     }
 
-    private Option convertStringToOption(Issue issue, CustomField customField, String value) {
+    public Option convertStringToOption(Issue issue, CustomField customField, String value) {
         FieldConfig relevantConfig = customField.getRelevantConfig(issue);
         List<Option> options = optionsManager.findByOptionValue(value);
         if (options.size() == 0) {
@@ -793,7 +793,7 @@ public class WorkflowUtils {
         }
     }
 
-    private Collection<Version> convertValueToVersions(Issue issue, Object value) {
+    public Collection<Version> convertValueToVersions(Issue issue, Object value) {
         if (value == null) {
             return Collections.emptySet();
         } else if (value instanceof Version) {

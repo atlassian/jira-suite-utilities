@@ -10,6 +10,7 @@ import com.atlassian.jira.plugin.workflow.AbstractWorkflowPluginFactory;
 import com.atlassian.jira.plugin.workflow.WorkflowPluginFunctionFactory;
 import com.opensymphony.workflow.loader.AbstractDescriptor;
 import com.opensymphony.workflow.loader.FunctionDescriptor;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Class responsible for setting up all that is necessary for the execution of
@@ -25,6 +26,8 @@ public class WorkflowUpdateIssueCustomFieldFunctionPluginFactory extends
     public static final String PARAM_FIELD_VALUE = "fieldValue";
     public static final String TARGET_FIELD_NAME = "field.name";
     public static final String TARGET_FIELD_VALUE = "field.value";
+    public static final String PARAM_APPEND_VALUE = "appendValue";
+    public static final String TARGET_APPEND_VALUE = "append.value";
 
     private final CustomFieldManager customFieldManager;
 
@@ -40,6 +43,13 @@ public class WorkflowUpdateIssueCustomFieldFunctionPluginFactory extends
 
         String fieldValue = extractSingleParam(conditionParams, PARAM_FIELD_VALUE);
         params.put(TARGET_FIELD_VALUE, fieldValue.trim());
+
+        if(conditionParams.containsKey(PARAM_APPEND_VALUE)) {
+            String appendValue = extractSingleParam(conditionParams, PARAM_APPEND_VALUE);
+            if(!StringUtils.isBlank(appendValue)) {
+                params.put(TARGET_APPEND_VALUE, appendValue.trim());
+            }
+        }
 
         return params;
     }
@@ -61,6 +71,14 @@ public class WorkflowUpdateIssueCustomFieldFunctionPluginFactory extends
             velocityParams.put(PARAM_FIELD_VALUE, null);
         } else {
             velocityParams.put(PARAM_FIELD_VALUE, value.trim());
+        }
+
+        String appendValue = (String) functionDescriptor.getArgs().get(TARGET_APPEND_VALUE);
+
+        if (appendValue == null) {
+            velocityParams.put(PARAM_APPEND_VALUE, null);
+        } else {
+            velocityParams.put(PARAM_APPEND_VALUE, appendValue.trim());
         }
     }
 
@@ -86,6 +104,12 @@ public class WorkflowUpdateIssueCustomFieldFunctionPluginFactory extends
                     PARAM_FIELD_VALUE,
                     functionDescriptor.getArgs().get(TARGET_FIELD_VALUE)
             );
+
+            String appendValue = (String) functionDescriptor.getArgs().get(TARGET_APPEND_VALUE);
+            if(!StringUtils.isBlank(appendValue)) {
+                velocityParams.put(PARAM_APPEND_VALUE, appendValue.trim());
+            }
+
         }
     }
 }

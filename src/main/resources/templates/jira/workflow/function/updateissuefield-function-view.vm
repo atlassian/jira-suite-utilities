@@ -1,5 +1,9 @@
 #if (${fieldValue}  && $fieldValue.length() != 0 && ${fieldValue} != 'null')
-    $i18n.getText("admin.workflow.function.update-issue-field.view.1", "<b>", "$textutils.htmlEncode(${descriptor.getText($fieldId)})", "</b>", "$textutils.htmlEncode(${fieldValue})")
+    #if (${appendValue} && 'true' == ${appendValue})
+        $i18n.getText("updateissuefield-function-view.append", "$textutils.htmlEncode(${fieldValue})", "$textutils.htmlEncode(${descriptor.getText($fieldId)})")
+    #else
+        $i18n.getText("admin.workflow.function.update-issue-field.view.1", "<b>", "$textutils.htmlEncode(${descriptor.getText($fieldId)})", "</b>", "$textutils.htmlEncode(${fieldValue})")
+    #end
 #else
     $i18n.getText("admin.workflow.function.update-issue-field.view.2", "<b>", "$textutils.htmlEncode(${descriptor.getText($fieldId)})", "</b>", "")
 #end

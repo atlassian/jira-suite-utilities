@@ -37,6 +37,9 @@ public abstract class AbstractTestBase extends FuncTestCase {
     protected static final String FIELD_RADIO_BUTTONS = "customfield_10105";
     protected static final String FIELD_DATE_PICKER = "customfield_" + FIELD_DATE_PICKER_ID;
     protected static final String FIELD_TEXT_FIELD = "customfield_10107";
+    protected static final String FIELD_LABELS = "customfield_10111";
+    protected static final String FIELD_MULTI_CHECKBOXES = "customfield_10102";
+    protected static final String FIELD_VERSION_PICKER = "customfield_10118";
 
     protected static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
     protected static final SimpleDateFormat DATE_TIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");

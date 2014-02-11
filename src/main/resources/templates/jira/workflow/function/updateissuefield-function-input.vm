@@ -47,7 +47,6 @@
     </td>
 </tr>
 
-
 <tr bgcolor="#ffffff">
     <td class="fieldLabelArea" bgcolor="#fffff0">
         $i18n.getText("updateissuefield-function-input.value.label"):
@@ -55,11 +54,24 @@
         #foreach ($field in ${fields})
             <td nowrap id="${field.id}_container" bgcolor="#ffffff">
                 <textarea rows="10" cols="35" type="text" name="${field.id}" id="${field.id}">$!{fieldValue}</textarea>
-                <br /><span class="subText">$i18n.getText("updateissuefield-function-input.description.label")</span>
+                <br /><span class="subText">$i18n.getText("updateissuefield-function-input.value.description")</span>
             </td>
         #end
-     
 </tr>
+
+<tr bgcolor="#ffffff">
+    <td align="right" valign="top" bgcolor="#fffff0">$i18n.getText("updateissuefield-function-input.append.label"):</td>
+    <td bgcolor="#ffffff" nowrap>
+        <input type="checkbox" id="appendValue" name="appendValue" value="true"
+            #if(${appendValue.equals('true')})
+               checked="checked"
+            #end
+                >
+        <br /><span class="subText">$i18n.getText("updateissuefield-function-input.append.description")</span>
+    </td>
+</tr>
+
+
 <script language="JavaScript" type="text/javascript">
 <!--
     retoreFieldValue();
