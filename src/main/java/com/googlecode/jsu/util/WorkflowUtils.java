@@ -416,6 +416,14 @@ public class WorkflowUtils {
                     SelectCFType selectCFType = (SelectCFType)cfType;
                     Options options = selectCFType.getOptions(customField.getRelevantConfig(issue),null);
                     newValue = options.getOptionForValue(newValue.toString(),null);
+                    if(newValue==null) {
+                        //try again, by assuming value is an option id
+                        try {
+                            newValue = options.getOptionById(Long.parseLong(value.toString()));
+                        } catch(Exception e) {
+                            //ignore
+                        }
+                    }
                 }
             } else if (newValue instanceof String) {
                 if (cfType instanceof MultipleSettableCustomFieldType) {

@@ -27,6 +27,9 @@ public class PostFunctionTest extends AbstractTestBase {
     private static final String ISSUE_PF38 = "TJP-57";
     private static final String ISSUE_PF39 = "TJP-58";
     private static final String ISSUE_PF40 = "TJP-59";
+    private static final String ISSUE_PF41 = "TJP-60";
+    private static final String ISSUE_PF42 = "TJP-61";
+    private static final String ISSUE_PF43 = "TJP-62";
 
     private static final String TRANSITION_PF31 = "1311";
     private static final String TRANSITION_PF32 = "1371";
@@ -38,6 +41,9 @@ public class PostFunctionTest extends AbstractTestBase {
     private static final String TRANSITION_PF38 = "1501";
     private static final String TRANSITION_PF39 = "1511";
     private static final String TRANSITION_PF40 = "1521";
+    private static final String TRANSITION_PF41 = "1531";
+    private static final String TRANSITION_PF42 = "1541";
+    private static final String TRANSITION_PF43 = "1551";
 
     /**
      * Single test using transition.
@@ -1094,6 +1100,51 @@ public class PostFunctionTest extends AbstractTestBase {
         Issue issue = issueClient.get(ISSUE_PF40);
         List<Map> multi = issue.fields.get(FIELD_VERSION_PICKER);
         assertEquals("2.0,3.0",getMultiAsString(multi,"name"));
+    }
+
+    //The SelectList of the issue will be set to 10102.
+    public void testPF41() throws Exception {
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId(TRANSITION_PF41));
+
+        final Response response = transitionsClient.postResponse(ISSUE_PF41, issueUpdateRequest);
+
+        assertEquals(204, response.statusCode);
+
+        Issue issue = issueClient.get(ISSUE_PF41);
+        Map listContent = issue.fields.get(FIELD_SELECT_LIST);
+        assertEquals("Option C",getSingleAsString(listContent,"value"));
+    }
+
+    //The MultiSelect of the issue will be set to 10023.
+    public void testPF42() throws Exception {
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId(TRANSITION_PF42));
+
+        final Response response = transitionsClient.postResponse(ISSUE_PF42, issueUpdateRequest);
+
+        assertEquals(204, response.statusCode);
+
+        Issue issue = issueClient.get(ISSUE_PF42);
+        List<Map> multi = issue.fields.get(FIELD_MULTI_SELECT);
+        assertEquals("Option C",getMultiAsString(multi,"value"));
+    }
+
+    //The value 10023 will be appended to field MultiSelect, or set if it is a multi field.
+    public void testPF43() throws Exception {
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId(TRANSITION_PF43));
+
+        final Response response = transitionsClient.postResponse(ISSUE_PF43, issueUpdateRequest);
+
+        assertEquals(204, response.statusCode);
+
+        Issue issue = issueClient.get(ISSUE_PF43);
+        List<Map> multi = issue.fields.get(FIELD_MULTI_SELECT);
+        assertEquals("Option A,Option C",getMultiAsString(multi,"value"));
     }
       
     // all PostFunction transitions made out of resolved state
