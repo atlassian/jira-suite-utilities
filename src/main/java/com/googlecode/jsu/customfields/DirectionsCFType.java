@@ -8,28 +8,24 @@ import com.atlassian.jira.issue.customfields.persistence.CustomFieldValuePersist
 import com.atlassian.jira.util.I18nHelper;
 
 /**
- * Wrapper on Jira RenderableTextCFType for using inside plugins v2.
- *
- * @author <A href="mailto:abashev at gmail dot com">Alexey Abashev</A>
+ * Google Directions custom field, uses =&gt; as separator between origin
+ * and destination location.
  */
-//TODO Can we remove dependencies to jira-core (instead only jira-api) by using interfaces (instead of classes) of referenced custom field types?
-public class LocationTextCFType extends RenderableTextCFType {
+public class DirectionsCFType extends RenderableTextCFType {
     protected final I18nHelper.BeanFactory beanFactory;
 
-    public LocationTextCFType(
-            CustomFieldValuePersister customFieldValuePersister,
-            GenericConfigManager genericConfigManager,
-            final I18nHelper.BeanFactory beanFactory
-    ) {
+    public DirectionsCFType(CustomFieldValuePersister customFieldValuePersister,
+                            GenericConfigManager genericConfigManager,
+                            final I18nHelper.BeanFactory beanFactory) {
         super(customFieldValuePersister, genericConfigManager);
         this.beanFactory = beanFactory;
     }
 
     public String getSingularObjectFromString(final String string) throws FieldValidationException {
-        if(string!=null && string.contains("=>")) {
+        if(string!=null && !string.contains("=>")) {
             I18nHelper i18nh = this.beanFactory.getInstance(
                     ComponentAccessor.getJiraAuthenticationContext().getUser().getDirectoryUser());
-            String message = i18nh.getText("edit-location.invalid_location");
+            String message = i18nh.getText("edit-directions.invalid_directions");
             throw new FieldValidationException(message);
         }
         return string;

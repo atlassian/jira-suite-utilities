@@ -19,6 +19,6 @@
     display: block
 }
 
-.type-locationtextfield, .type-locationselect{
+.type-locationtextfield, .type-locationselect , .type-directionsfield {
     display: block !important;
 }

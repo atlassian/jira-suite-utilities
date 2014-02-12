@@ -45,6 +45,17 @@
         <resource type="velocity" name="column-view" location="templates/plugins/fields/view/view-basictext.vm"/>
     </customfield-type>
 
+    <customfield-type key="directionsfield"
+                      class="com.googlecode.jsu.customfields.DirectionsCFType"
+                      i18n-name-key="customfield-type.directionsfield.name">
+        <description key="customfield-type.directionsfield.description"/>
+
+        <resource type="velocity" name="view" location="templates/jira/fields/view/view-directions.vm"/>
+        <resource type="velocity" name="edit" location="templates/plugins/fields/edit/edit-maxlengthtext.vm"/>
+        <resource type="velocity" name="xml" location="templates/plugins/fields/xml/xml-basictext.vm"/>
+        <resource type="velocity" name="column-view" location="templates/plugins/fields/view/view-basictext.vm"/>
+    </customfield-type>
+
     <!-- Searchers -->
     <customfield-searcher key="textsearcher" name="Free Text Searcher"
                           i18n-name-key="admin.customfield.searcher.textsearcher.name"

@@ -4,7 +4,7 @@
 
 ___ Exported on _____________________________
 
-     on                                            : Tuesday, 11 February 2014 13:23:15 o'clock CET
+     on                                            : Wednesday, 12 February 2014 16:10:11 o'clock CET
      by                                            : admin ( admin )
 
 ___ Environment ____________________________
@@ -14,15 +14,15 @@ ___ Environment ____________________________
      JIRA Installation Type                        : unknown
      Java Version                                  : 1.6.0_32 - Sun Microsystems Inc.
      Current Working Directory                     : /home/stephan.bielmann/workspace/jira-suite-utilities/target/container/tomcat7x/cargo-jira-home
-     Maximum Allowable Memory                      : 496MB
-     Total Memory                                  : 496MB
-     Free Memory                                   : 234MB
-     Used Memory                                   : 262MB
-     Memory Pool: Code Cache                       : Code Cache: init = 2555904(2496K) used = 26437504(25817K) committed = 26673152(26048K) max = 50331648(49152K)
-     Memory Pool: PS Eden Space                    : PS Eden Space: init = 33554432(32768K) used = 23343016(22795K) committed = 148242432(144768K) max = 150274048(146752K)
-     Memory Pool: PS Survivor Space                : PS Survivor Space: init = 5570560(5440K) used = 311312(304K) committed = 14483456(14144K) max = 14483456(14144K)
-     Memory Pool: PS Old Gen                       : PS Old Gen: init = 89522176(87424K) used = 251287808(245398K) committed = 357957632(349568K) max = 357957632(349568K)
-     Memory Pool: PS Perm Gen                      : PS Perm Gen: init = 50331648(49152K) used = 193441720(188907K) committed = 268435456(262144K) max = 268435456(262144K)
+     Maximum Allowable Memory                      : 455MB
+     Total Memory                                  : 426MB
+     Free Memory                                   : 117MB
+     Used Memory                                   : 309MB
+     Memory Pool: Code Cache                       : Code Cache: init = 2555904(2496K) used = 23732288(23176K) committed = 23986176(23424K) max = 50331648(49152K)
+     Memory Pool: PS Eden Space                    : PS Eden Space: init = 33554432(32768K) used = 57085696(55747K) committed = 133038080(129920K) max = 133234688(130112K)
+     Memory Pool: PS Survivor Space                : PS Survivor Space: init = 5570560(5440K) used = 15241160(14883K) committed = 22740992(22208K) max = 22740992(22208K)
+     Memory Pool: PS Old Gen                       : PS Old Gen: init = 89522176(87424K) used = 251247232(245358K) committed = 291307520(284480K) max = 357957632(349568K)
+     Memory Pool: PS Perm Gen                      : PS Perm Gen: init = 50331648(49152K) used = 188824192(184398K) committed = 266731520(260480K) max = 268435456(262144K)
      JVM Input Arguments                           : -Xmx512m -XX:MaxPermSize=256m -Xms128m -XX:PermSize=48m -Datlassian.dev.mode=true -Dplugin.resource.directories=/home/stephan.bielmann/workspace/jira-suite-utilities/src/main/resources -Dcargo.datasource.datasource=cargo.datasource.url=jdbc:hsqldb:/home/stephan.bielmann/workspace/jira-suite-utilities/target/jira/home/database|cargo.datasource.driver=org.hsqldb.jdbcDriver|cargo.datasource.username=sa|cargo.datasource.password=|cargo.datasource.jndi=jdbc/JiraDS|cargo.datasource.type=javax.sql.DataSource -Djira.home=/home/stephan.bielmann/workspace/jira-suite-utilities/target/jira/home -Dplugin.root.directories=/home/stephan.bielmann/workspace/jira-suite-utilities -Djava.awt.headless=true -Dbaseurl=http://beedevsb:2990/jira -Datlassian.sdk.version=4.2.9 -Dcargo.servlet.uriencoding=UTF-8 -Dcatalina.home=/home/stephan.bielmann/workspace/jira-suite-utilities/target/container/tomcat7x/apache-tomcat-7.0.40 -Dcatalina.base=/home/stephan.bielmann/workspace/jira-suite-utilities/target/container/tomcat7x/cargo-jira-home -Djava.io.tmpdir=/home/stephan.bielmann/workspace/jira-suite-utilities/target/container/tomcat7x/cargo-jira-home/temp -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager -Djava.util.logging.config.file=/home/stephan.bielmann/workspace/jira-suite-utilities/target/container/tomcat7x/cargo-jira-home/conf/logging.properties
      Java Compatibility Information                : JIRA version = 6.0, Java Version = 1.6.0_32
 
@@ -42,7 +42,7 @@ ___ Core Application Properties ____________
      Build #                                       : 6095
      Build Date                                    : Sun May 19 00:00:00 CEST 2013
      Installation Type                             : unknown
-     Server ID                                     : BN9K-NJ5G-ZKDX-UYII
+     Server ID                                     : BOXN-FBMC-U8Z8-KYJZ
      Base URL                                      : http://beedevsb:2990/jira
      Default Language                              : English (United Kingdom)
      External User Management                      : OFF
@@ -339,7 +339,7 @@ ___ Database Statistics ____________________
 
      Issues                                        : 66
      Projects                                      : 2
-     Custom Fields                                 : 24
+     Custom Fields                                 : 25
      Workflows                                     : 1
      Users                                         : 9
      Groups                                        : 5
@@ -441,7 +441,7 @@ ___ User Plugins ____________________________
      jira-suite-utilities-1.4.10-SNAPSHOT-tests.jar : jira-suite-utilities-1.4.10-SNAPSHOT-tests.jar
           Version                                       : 0.0
           Status                                        : disabled
-          Unloadable Reason                             : No plugin factories found for plugin file Unit: /home/stephan.bielmann/workspace/jira-suite-utilities/target/jira/home/plugins/installed-plugins/jira-suite-utilities-1.4.10-SNAPSHOT-tests.jar (1392120863000)
+          Unloadable Reason                             : No plugin factories found for plugin file Unit: /home/stephan.bielmann/workspace/jira-suite-utilities/target/jira/home/plugins/installed-plugins/jira-suite-utilities-1.4.10-SNAPSHOT-tests.jar (1392217404000)
           Vendor                                        : (unknown)
           Description                                   : 
 
@@ -1186,44 +1186,44 @@ ___ Services _______________________________
 
      AddOnLicensingEmailNotificationsPluginJob-job : com.atlassian.sal.jira.scheduling.JiraPluginSchedulerService
           Service Delay                                 : 14400000ms
-     Last Run                                      : 11/02/14 13:17
+     Last Run                                      : 12/02/14 16:06
           pluginJobName                                 : AddOnLicensingEmailNotificationsPluginJob-job
           repeatInterval                                : 14400000
           initiallyFired                                : true
      Backup Service                                : com.atlassian.jira.service.services.export.ExportService
           Service Delay                                 : 43200000ms
-     Last Run                                      : 11/02/14 13:15
+     Last Run                                      : 12/02/14 16:04
           USE_DEFAULT_DIRECTORY                         : true
      LocalPluginLicenseNotificationPluginJob-job   : com.atlassian.sal.jira.scheduling.JiraPluginSchedulerService
           Service Delay                                 : 86400000ms
-     Last Run                                      : 11/02/14 13:16
+     Last Run                                      : 12/02/14 16:05
           pluginJobName                                 : LocalPluginLicenseNotificationPluginJob-job
           repeatInterval                                : 86400000
           initiallyFired                                : true
      Mail Queue Service                            : com.atlassian.jira.service.services.mail.MailQueueService
           Service Delay                                 : 60000ms
-     Last Run                                      : 11/02/14 13:21
+     Last Run                                      : 12/02/14 16:08
      PluginRequestCheckPluginJob-job               : com.atlassian.sal.jira.scheduling.JiraPluginSchedulerService
           Service Delay                                 : 3600000ms
-     Last Run                                      : 11/02/14 13:16
+     Last Run                                      : 12/02/14 16:05
           pluginJobName                                 : PluginRequestCheckPluginJob-job
           repeatInterval                                : 3600000
           initiallyFired                                : true
      PluginUpdateCheckPluginJob-job                : com.atlassian.sal.jira.scheduling.JiraPluginSchedulerService
-          Service Delay                                 : 45676363ms
-     Last Run                                      : 11/02/14 13:15
+          Service Delay                                 : 32475127ms
+     Last Run                                      : 12/02/14 16:04
           pluginJobName                                 : PluginUpdateCheckPluginJob-job
           repeatInterval                                : 86400000
           initiallyFired                                : false
      RemotePluginLicenseNotificationPluginJob-job  : com.atlassian.sal.jira.scheduling.JiraPluginSchedulerService
           Service Delay                                 : 3600000ms
-     Last Run                                      : 11/02/14 13:16
+     Last Run                                      : 12/02/14 16:05
           pluginJobName                                 : RemotePluginLicenseNotificationPluginJob-job
           repeatInterval                                : 3600000
           initiallyFired                                : true
      Service Provider Session Remover              : com.atlassian.sal.jira.scheduling.JiraPluginSchedulerService
           Service Delay                                 : 28800000ms
-     Last Run                                      : 11/02/14 13:15
+     Last Run                                      : 12/02/14 16:04
           pluginJobName                                 : Service Provider Session Remover
           repeatInterval                                : 28800000
           initiallyFired                                : false
@@ -1231,16 +1231,16 @@ ___ Services _______________________________
           Service Delay                                 : 28800000ms
      com.atlassian.jira.plugin.ext.bamboo.service.PlanStatusUpdateServiceImpl:job : com.atlassian.sal.jira.scheduling.JiraPluginSchedulerService
           Service Delay                                 : 60000ms
-     Last Run                                      : 11/02/14 13:21
+     Last Run                                      : 12/02/14 16:09
           pluginJobName                                 : com.atlassian.jira.plugin.ext.bamboo.service.PlanStatusUpdateServiceImpl:job
           repeatInterval                                : 60000
           initiallyFired                                : true
      com.atlassian.jira.plugins.dvcs.scheduler.DvcsScheduler:job : com.atlassian.sal.jira.scheduling.JiraPluginSchedulerService
-          Service Delay                                 : 2171669ms
-     Last Run                                      : 11/02/14 13:15
+          Service Delay                                 : 3600000ms
+     Last Run                                      : 12/02/14 16:08
           pluginJobName                                 : com.atlassian.jira.plugins.dvcs.scheduler.DvcsScheduler:job
           repeatInterval                                : 3600000
-          initiallyFired                                : false
+          initiallyFired                                : true
 
 ___ Trusted Applications ___________________
 
@@ -1459,6 +1459,7 @@ ___ Trusted Applications ___________________
     <ChangeGroup id="12401" issue="11901" author="admin" created="2014-02-11 13:22:39.668"/>
     <ChangeGroup id="12402" issue="11902" author="admin" created="2014-02-11 13:22:42.947"/>
     <ChangeGroup id="12403" issue="11902" author="admin" created="2014-02-11 13:23:01.488"/>
+    <ChangeGroup id="12500" issue="10100" author="admin" created="2014-02-12 16:08:42.258"/>
     <ChangeItem id="10000" group="10000" fieldtype="jira" field="status" oldvalue="1" oldstring="Open" newvalue="5" newstring="Resolved"/>
     <ChangeItem id="10001" group="10000" fieldtype="jira" field="resolution" newvalue="1" newstring="Fixed"/>
     <ChangeItem id="10100" group="10100" fieldtype="custom" field="FreeText" newstring="admin"/>
@@ -1645,6 +1646,7 @@ ___ Trusted Applications ___________________
     <ChangeItem id="12404" group="12402" fieldtype="jira" field="status" oldvalue="1" oldstring="Open" newvalue="5" newstring="Resolved"/>
     <ChangeItem id="12405" group="12402" fieldtype="jira" field="resolution" newvalue="1" newstring="Fixed"/>
     <ChangeItem id="12406" group="12403" fieldtype="custom" field="MultiSelect" newvalue="[10021]" newstring="Option A"/>
+    <ChangeItem id="12500" group="12500" fieldtype="custom" field="Directions" newstring="Fribourg =&gt; Bulle"/>
     <Component id="10000" project="10000" name="Mobile" assigneetype="0"/>
     <Component id="10001" project="10000" name="Server" assigneetype="0"/>
     <Component id="10002" project="10000" name="Desktop" assigneetype="0"/>
@@ -1673,6 +1675,7 @@ ___ Trusted Applications ___________________
     <ConfigurationContext id="10218" key="customfield_10118" fieldconfigscheme="10218"/>
     <ConfigurationContext id="10300" key="customfield_10200" fieldconfigscheme="10300"/>
     <ConfigurationContext id="10400" project="10100" key="customfield_10300" fieldconfigscheme="10400"/>
+    <ConfigurationContext id="10500" key="customfield_10400" fieldconfigscheme="10500"/>
     <CustomField id="10000" customfieldtypekey="com.googlecode.jira-suite-utilities:locationselect" customfieldsearcherkey="com.googlecode.jira-suite-utilities:locationselectsearcher" name="LocationSelect" description="Test JSU"/>
     <CustomField id="10001" customfieldtypekey="com.googlecode.jira-suite-utilities:locationtextfield" customfieldsearcherkey="com.googlecode.jira-suite-utilities:textsearcher" name="LocationText" description="Test JSU"/>
     <CustomField id="10002" customfieldtypekey="com.atlassian.jira.plugin.system.customfieldtypes:userpicker" customfieldsearcherkey="com.atlassian.jira.plugin.system.customfieldtypes:userpickergroupsearcher" name="UserPicker" description="Test JSU"/>
@@ -1697,6 +1700,7 @@ ___ Trusted Applications ___________________
     <CustomField id="10118" customfieldtypekey="com.atlassian.jira.plugin.system.customfieldtypes:multiversion" customfieldsearcherkey="com.atlassian.jira.plugin.system.customfieldtypes:versionsearcher" name="VersionPicker" description="Test JSU"/>
     <CustomField id="10200" customfieldtypekey="com.atlassian.jira.plugin.system.customfieldtypes:multiuserpicker" customfieldsearcherkey="com.atlassian.jira.plugin.system.customfieldtypes:userpickergroupsearcher" name="MultiUser1"/>
     <CustomField id="10300" customfieldtypekey="com.atlassian.jira.plugin.system.customfieldtypes:textfield" customfieldsearcherkey="com.atlassian.jira.plugin.system.customfieldtypes:textsearcher" name="Textfield2"/>
+    <CustomField id="10400" customfieldtypekey="com.googlecode.jira-suite-utilities:directionsfield" name="Directions"/>
     <CustomFieldOption id="10000" customfield="10108" customfieldconfig="10208" sequence="0" value="Option A" disabled="N"/>
     <CustomFieldOption id="10001" customfield="10108" customfieldconfig="10208" sequence="1" value="Option B" disabled="N"/>
     <CustomFieldOption id="10002" customfield="10108" customfieldconfig="10208" sequence="2" value="Option C" disabled="N"/>
@@ -1792,14 +1796,15 @@ ___ Trusted Applications ___________________
     <CustomFieldValue id="11100" issue="11801" customfield="10102" stringvalue="10018"/>
     <CustomFieldValue id="11101" issue="11802" customfield="10118" numbervalue="10001.0"/>
     <CustomFieldValue id="11200" issue="11902" customfield="10103" stringvalue="10021"/>
+    <CustomFieldValue id="11300" issue="10100" customfield="10400" stringvalue="Fribourg =&gt; Bulle"/>
     <Directory id="1" directoryName="JIRA Internal Directory" lowerDirectoryName="jira internal directory" createdDate="2011-07-01 12:23:16.795" updatedDate="2011-07-01 12:23:16.795" active="1" description="JIRA default internal directory" implementationClass="com.atlassian.crowd.directory.InternalDirectory" lowerImplementationClass="com.atlassian.crowd.directory.internaldirectory" type="INTERNAL" position="0"/>
-    <Directory id="10000" directoryName="OpenLDAP Readonly" lowerDirectoryName="openldap readonly" createdDate="2013-10-23 13:07:23.213" updatedDate="2014-02-11 13:15:55.912" active="1" implementationClass="com.atlassian.crowd.directory.OpenLDAP" lowerImplementationClass="com.atlassian.crowd.directory.openldap" type="CONNECTOR" position="1"/>
+    <Directory id="10000" directoryName="OpenLDAP Readonly" lowerDirectoryName="openldap readonly" createdDate="2013-10-23 13:07:23.213" updatedDate="2014-02-12 16:04:57.551" active="1" implementationClass="com.atlassian.crowd.directory.OpenLDAP" lowerImplementationClass="com.atlassian.crowd.directory.openldap" type="CONNECTOR" position="1"/>
     <DirectoryAttribute directoryId="1" name="user_encryption_method" value="atlassian-security"/>
     <DirectoryAttribute directoryId="10000" name="autoAddGroups" value=""/>
     <DirectoryAttribute directoryId="10000" name="com.atlassian.crowd.directory.sync.currentstartsynctime"/>
     <DirectoryAttribute directoryId="10000" name="com.atlassian.crowd.directory.sync.issynchronising" value="false"/>
-    <DirectoryAttribute directoryId="10000" name="com.atlassian.crowd.directory.sync.lastdurationms" value="5067"/>
-    <DirectoryAttribute directoryId="10000" name="com.atlassian.crowd.directory.sync.laststartsynctime" value="1392120950845"/>
+    <DirectoryAttribute directoryId="10000" name="com.atlassian.crowd.directory.sync.lastdurationms" value="5089"/>
+    <DirectoryAttribute directoryId="10000" name="com.atlassian.crowd.directory.sync.laststartsynctime" value="1392217492461"/>
     <DirectoryAttribute directoryId="10000" name="crowd.sync.incremental.enabled" value="true"/>
     <DirectoryAttribute directoryId="10000" name="directory.cache.synchronise.interval" value="3600"/>
     <DirectoryAttribute directoryId="10000" name="ldap.basedn" value="dc=beecom,dc=local"/>
@@ -1903,6 +1908,7 @@ ___ Trusted Applications ___________________
     <FieldConfigScheme id="10218" name="Default Configuration Scheme for VersionPicker" description="Default configuration scheme generated by JIRA" fieldid="customfield_10118"/>
     <FieldConfigScheme id="10300" name="Default Configuration Scheme for MultiUser1" description="Default configuration scheme generated by JIRA" fieldid="customfield_10200"/>
     <FieldConfigScheme id="10400" name="Default Configuration Scheme for Textfield2" description="Default configuration scheme generated by JIRA" fieldid="customfield_10300"/>
+    <FieldConfigScheme id="10500" name="Default Configuration Scheme for Directions" description="Default configuration scheme generated by JIRA" fieldid="customfield_10400"/>
     <FieldConfigSchemeIssueType id="10100" fieldconfigscheme="10000" fieldconfiguration="10000"/>
     <FieldConfigSchemeIssueType id="10200" fieldconfigscheme="10100" fieldconfiguration="10100"/>
     <FieldConfigSchemeIssueType id="10201" fieldconfigscheme="10101" fieldconfiguration="10101"/>
@@ -1928,6 +1934,7 @@ ___ Trusted Applications ___________________
     <FieldConfigSchemeIssueType id="10318" fieldconfigscheme="10218" fieldconfiguration="10218"/>
     <FieldConfigSchemeIssueType id="10400" fieldconfigscheme="10300" fieldconfiguration="10300"/>
     <FieldConfigSchemeIssueType id="10500" fieldconfigscheme="10400" fieldconfiguration="10400"/>
+    <FieldConfigSchemeIssueType id="10600" fieldconfigscheme="10500" fieldconfiguration="10500"/>
     <FieldConfiguration id="10000" name="Default Configuration for Issue Type" description="Default configuration generated by JIRA" fieldid="issuetype"/>
     <FieldConfiguration id="10100" name="Default Configuration for LocationSelect" description="Default configuration generated by JIRA" fieldid="customfield_10000"/>
     <FieldConfiguration id="10101" name="Default Configuration for LocationText" description="Default configuration generated by JIRA" fieldid="customfield_10001"/>
@@ -1953,6 +1960,7 @@ ___ Trusted Applications ___________________
     <FieldConfiguration id="10218" name="Default Configuration for VersionPicker" description="Default configuration generated by JIRA" fieldid="customfield_10118"/>
     <FieldConfiguration id="10300" name="Default Configuration for MultiUser1" description="Default configuration generated by JIRA" fieldid="customfield_10200"/>
     <FieldConfiguration id="10400" name="Default Configuration for Textfield2" description="Default configuration generated by JIRA" fieldid="customfield_10300"/>
+    <FieldConfiguration id="10500" name="Default Configuration for Directions" description="Default configuration generated by JIRA" fieldid="customfield_10400"/>
     <FieldLayout id="10000" name="Default Field Configuration" description="The default field configuration" type="default"/>
     <FieldLayoutItem id="10000" fieldlayout="10000" fieldidentifier="summary" ishidden="false" isrequired="true" renderertype="jira-text-renderer"/>
     <FieldLayoutItem id="10001" fieldlayout="10000" fieldidentifier="issuetype" ishidden="false" isrequired="true" renderertype="jira-text-renderer"/>
@@ -2068,6 +2076,9 @@ ___ Trusted Applications ___________________
     <FieldScreenLayoutItem id="10500" fieldidentifier="customfield_10300" sequence="38" fieldscreentab="10000"/>
     <FieldScreenLayoutItem id="10501" fieldidentifier="customfield_10300" sequence="27" fieldscreentab="10002"/>
     <FieldScreenLayoutItem id="10502" fieldidentifier="customfield_10300" sequence="24" fieldscreentab="10001"/>
+    <FieldScreenLayoutItem id="10600" fieldidentifier="customfield_10400" sequence="39" fieldscreentab="10000"/>
+    <FieldScreenLayoutItem id="10601" fieldidentifier="customfield_10400" sequence="28" fieldscreentab="10002"/>
+    <FieldScreenLayoutItem id="10602" fieldidentifier="customfield_10400" sequence="25" fieldscreentab="10001"/>
     <FieldScreenScheme id="1" name="Default Screen Scheme" description="Default Screen Scheme"/>
     <FieldScreenSchemeItem id="10000" fieldscreen="1" fieldscreenscheme="1"/>
     <FieldScreenTab id="10000" name="Field Tab" sequence="0" fieldscreen="1"/>
@@ -2086,7 +2097,7 @@ ___ Trusted Applications ___________________
     <Group id="10010" groupName="testgroup1" lowerGroupName="testgroup1" active="1" local="0" createdDate="2013-10-16 17:15:18.105" updatedDate="2013-10-16 17:15:18.105" type="GROUP" directoryId="1"/>
     <Group id="10110" groupName="group1" lowerGroupName="group1" active="1" local="0" createdDate="2013-10-23 13:07:28.937" updatedDate="2013-10-23 13:07:28.937" type="GROUP" directoryId="10000"/>
     <Issue id="10000" key="TJP-1" project="10000" reporter="admin" assignee="admin" type="1" summary="PF28" priority="3" resolution="1" status="1" created="2013-03-06 11:15:17.864" updated="2013-07-12 14:56:24.778" duedate="2013-03-26 00:00:00.0" resolutiondate="2013-03-06 11:15:38.404" votes="0" watches="1" workflowId="10832"/>
-    <Issue id="10100" key="TJP-2" project="10000" reporter="admin" assignee="admin" type="1" summary="Issue With Fields Set" description="This is the description" environment="Mobile and Server" priority="3" resolution="1" status="5" created="2013-07-08 10:50:35.632" updated="2013-07-09 07:52:53.123" duedate="2013-07-09 00:00:00.0" resolutiondate="2013-07-08 14:54:37.32" votes="0" watches="1" timeoriginalestimate="10800" timeestimate="10800" workflowId="10860"/>
+    <Issue id="10100" key="TJP-2" project="10000" reporter="admin" assignee="admin" type="1" summary="Issue With Fields Set" description="This is the description" environment="Mobile and Server" priority="3" resolution="1" status="5" created="2013-07-08 10:50:35.632" updated="2014-02-12 16:08:42.243" duedate="2013-07-09 00:00:00.0" resolutiondate="2013-07-08 14:54:37.32" votes="0" watches="1" timeoriginalestimate="10800" timeestimate="10800" workflowId="10860"/>
     <Issue id="10200" key="TJP-3" project="10000" reporter="admin" assignee="developer" type="5" summary="Subtask" priority="3" resolution="1" status="5" created="2013-07-15 14:31:37.722" updated="2013-07-15 16:13:39.201" resolutiondate="2013-07-15 14:31:45.654" votes="0" watches="1" workflowId="10861"/>
     <Issue id="10300" key="TJP-4" project="10000" reporter="admin" assignee="admin" type="1" summary="C11 pass" priority="3" status="1" created="2013-09-20 14:03:43.718" updated="2013-09-20 14:03:43.718" votes="0" watches="1" workflowId="10833"/>
     <Issue id="10301" key="TJP-5" project="10000" reporter="admin" assignee="admin" type="1" summary="C11 fail" priority="3" status="1" created="2013-09-20 14:04:15.576" updated="2013-09-20 14:04:15.576" votes="0" watches="1" workflowId="10834"/>
@@ -2541,6 +2552,7 @@ ___ Trusted Applications ___________________
     <OSHistoryStepPrev id="11334" previousId="11333"/>
     <OSHistoryStepPrev id="11502" previousId="11500"/>
     <OSHistoryStepPrev id="11503" previousId="11502"/>
+    <OSPropertyDate id="15250" value="2014-02-12 16:08:08.452"/>
     <OSPropertyEntry id="10000" entityName="jira.properties" entityId="1" propertyKey="webwork.i18n.encoding" type="5"/>
     <OSPropertyEntry id="10001" entityName="BambooServerProperties" entityId="1" propertyKey="bamboo.config.version" type="2"/>
     <OSPropertyEntry id="10002" entityName="jira.properties" entityId="1" propertyKey="jira.i18n.language.index" type="5"/>
@@ -2677,39 +2689,42 @@ ___ Trusted Applications ___________________
     <OSPropertyEntry id="12948" entityName="ApplicationUser" entityId="10000" propertyKey="user.search.mode" type="5"/>
     <OSPropertyEntry id="13059" entityName="jira.properties" entityId="1" propertyKey="com.atlassian.upm:notifications:notification-update" type="5"/>
     <OSPropertyEntry id="13548" entityName="user.format.mapping" entityId="1" propertyKey="profileLinkExternal" type="5"/>
-    <OSPropertyEntry id="15105" entityName="jira.properties" entityId="1" propertyKey="com.atlassian.activeobjects.admin.ActiveObjectsPluginToTablesMapping" type="6"/>
-    <OSPropertyEntry id="15106" entityName="ServiceConfig" entityId="14700" propertyKey="pluginJobName" type="5"/>
-    <OSPropertyEntry id="15107" entityName="ServiceConfig" entityId="14700" propertyKey="repeatInterval" type="5"/>
-    <OSPropertyEntry id="15108" entityName="ServiceConfig" entityId="14700" propertyKey="initiallyFired" type="5"/>
-    <OSPropertyEntry id="15109" entityName="ServiceConfig" entityId="14701" propertyKey="pluginJobName" type="5"/>
-    <OSPropertyEntry id="15110" entityName="ServiceConfig" entityId="14701" propertyKey="repeatInterval" type="5"/>
-    <OSPropertyEntry id="15111" entityName="ServiceConfig" entityId="14701" propertyKey="initiallyFired" type="5"/>
-    <OSPropertyEntry id="15112" entityName="ServiceConfig" entityId="14702" propertyKey="pluginJobName" type="5"/>
-    <OSPropertyEntry id="15113" entityName="ServiceConfig" entityId="14702" propertyKey="repeatInterval" type="5"/>
-    <OSPropertyEntry id="15114" entityName="ServiceConfig" entityId="14702" propertyKey="initiallyFired" type="5"/>
-    <OSPropertyEntry id="15115" entityName="ServiceConfig" entityId="14703" propertyKey="pluginJobName" type="5"/>
-    <OSPropertyEntry id="15116" entityName="ServiceConfig" entityId="14703" propertyKey="repeatInterval" type="5"/>
-    <OSPropertyEntry id="15117" entityName="ServiceConfig" entityId="14703" propertyKey="initiallyFired" type="5"/>
-    <OSPropertyEntry id="15118" entityName="ServiceConfig" entityId="14704" propertyKey="pluginJobName" type="5"/>
-    <OSPropertyEntry id="15119" entityName="ServiceConfig" entityId="14704" propertyKey="repeatInterval" type="5"/>
-    <OSPropertyEntry id="15120" entityName="ServiceConfig" entityId="14704" propertyKey="initiallyFired" type="5"/>
-    <OSPropertyEntry id="15121" entityName="ServiceConfig" entityId="14705" propertyKey="pluginJobName" type="5"/>
-    <OSPropertyEntry id="15122" entityName="ServiceConfig" entityId="14705" propertyKey="repeatInterval" type="5"/>
-    <OSPropertyEntry id="15123" entityName="ServiceConfig" entityId="14705" propertyKey="initiallyFired" type="5"/>
-    <OSPropertyEntry id="15124" entityName="ServiceConfig" entityId="14706" propertyKey="pluginJobName" type="5"/>
-    <OSPropertyEntry id="15125" entityName="ServiceConfig" entityId="14706" propertyKey="repeatInterval" type="5"/>
-    <OSPropertyEntry id="15126" entityName="ServiceConfig" entityId="14706" propertyKey="initiallyFired" type="5"/>
-    <OSPropertyEntry id="15127" entityName="jira.properties" entityId="1" propertyKey="com.atlassian.upm.log.PluginSettingsAuditLogService:log:upm_audit_log_v3" type="6"/>
-    <OSPropertyEntry id="15128" entityName="ServiceConfig" entityId="14707" propertyKey="pluginJobName" type="5"/>
-    <OSPropertyEntry id="15129" entityName="ServiceConfig" entityId="14707" propertyKey="repeatInterval" type="5"/>
-    <OSPropertyEntry id="15130" entityName="ServiceConfig" entityId="14707" propertyKey="initiallyFired" type="5"/>
-    <OSPropertyEntry id="15141" entityName="jira.properties" entityId="1" propertyKey="com.atlassian.upm:notifications:notification-plugin.request" type="5"/>
-    <OSPropertyEntry id="15142" entityName="jira.properties" entityId="1" propertyKey="com.atlassian.upm:notifications:notification-edition.mismatch" type="5"/>
-    <OSPropertyEntry id="15143" entityName="jira.properties" entityId="1" propertyKey="com.atlassian.upm:notifications:notification-evaluation.expired" type="5"/>
-    <OSPropertyEntry id="15144" entityName="jira.properties" entityId="1" propertyKey="com.atlassian.upm:notifications:notification-evaluation.nearlyexpired" type="5"/>
-    <OSPropertyEntry id="15145" entityName="jira.properties" entityId="1" propertyKey="com.atlassian.upm:notifications:notification-maintenance.expired" type="5"/>
-    <OSPropertyEntry id="15146" entityName="jira.properties" entityId="1" propertyKey="com.atlassian.upm:notifications:notification-maintenance.nearlyexpired" type="5"/>
-    <OSPropertyEntry id="15147" entityName="jira.properties" entityId="1" propertyKey="com.atlassian.upm.mail.impl.PluginSettingsLicenseEmailStorelicense-emails_v2" type="5"/>
+    <OSPropertyEntry id="15205" entityName="jira.properties" entityId="1" propertyKey="com.atlassian.activeobjects.admin.ActiveObjectsPluginToTablesMapping" type="6"/>
+    <OSPropertyEntry id="15206" entityName="ServiceConfig" entityId="14800" propertyKey="pluginJobName" type="5"/>
+    <OSPropertyEntry id="15207" entityName="ServiceConfig" entityId="14800" propertyKey="repeatInterval" type="5"/>
+    <OSPropertyEntry id="15208" entityName="ServiceConfig" entityId="14800" propertyKey="initiallyFired" type="5"/>
+    <OSPropertyEntry id="15209" entityName="ServiceConfig" entityId="14801" propertyKey="pluginJobName" type="5"/>
+    <OSPropertyEntry id="15210" entityName="ServiceConfig" entityId="14801" propertyKey="repeatInterval" type="5"/>
+    <OSPropertyEntry id="15211" entityName="ServiceConfig" entityId="14801" propertyKey="initiallyFired" type="5"/>
+    <OSPropertyEntry id="15212" entityName="ServiceConfig" entityId="14802" propertyKey="pluginJobName" type="5"/>
+    <OSPropertyEntry id="15213" entityName="ServiceConfig" entityId="14802" propertyKey="repeatInterval" type="5"/>
+    <OSPropertyEntry id="15214" entityName="ServiceConfig" entityId="14802" propertyKey="initiallyFired" type="5"/>
+    <OSPropertyEntry id="15215" entityName="ServiceConfig" entityId="14803" propertyKey="pluginJobName" type="5"/>
+    <OSPropertyEntry id="15216" entityName="ServiceConfig" entityId="14803" propertyKey="repeatInterval" type="5"/>
+    <OSPropertyEntry id="15217" entityName="ServiceConfig" entityId="14803" propertyKey="initiallyFired" type="5"/>
+    <OSPropertyEntry id="15218" entityName="ServiceConfig" entityId="14804" propertyKey="pluginJobName" type="5"/>
+    <OSPropertyEntry id="15219" entityName="ServiceConfig" entityId="14804" propertyKey="repeatInterval" type="5"/>
+    <OSPropertyEntry id="15220" entityName="ServiceConfig" entityId="14804" propertyKey="initiallyFired" type="5"/>
+    <OSPropertyEntry id="15221" entityName="ServiceConfig" entityId="14805" propertyKey="pluginJobName" type="5"/>
+    <OSPropertyEntry id="15222" entityName="ServiceConfig" entityId="14805" propertyKey="repeatInterval" type="5"/>
+    <OSPropertyEntry id="15223" entityName="ServiceConfig" entityId="14805" propertyKey="initiallyFired" type="5"/>
+    <OSPropertyEntry id="15224" entityName="ServiceConfig" entityId="14806" propertyKey="pluginJobName" type="5"/>
+    <OSPropertyEntry id="15225" entityName="ServiceConfig" entityId="14806" propertyKey="repeatInterval" type="5"/>
+    <OSPropertyEntry id="15226" entityName="ServiceConfig" entityId="14806" propertyKey="initiallyFired" type="5"/>
+    <OSPropertyEntry id="15227" entityName="jira.properties" entityId="1" propertyKey="com.atlassian.upm.log.PluginSettingsAuditLogService:log:upm_audit_log_v3" type="6"/>
+    <OSPropertyEntry id="15228" entityName="ServiceConfig" entityId="14807" propertyKey="pluginJobName" type="5"/>
+    <OSPropertyEntry id="15229" entityName="ServiceConfig" entityId="14807" propertyKey="repeatInterval" type="5"/>
+    <OSPropertyEntry id="15230" entityName="ServiceConfig" entityId="14807" propertyKey="initiallyFired" type="5"/>
+    <OSPropertyEntry id="15240" entityName="jira.properties" entityId="1" propertyKey="com.atlassian.upm:notifications:notification-plugin.request" type="5"/>
+    <OSPropertyEntry id="15242" entityName="jira.properties" entityId="1" propertyKey="com.atlassian.upm:notifications:notification-edition.mismatch" type="5"/>
+    <OSPropertyEntry id="15243" entityName="jira.properties" entityId="1" propertyKey="com.atlassian.upm:notifications:notification-evaluation.expired" type="5"/>
+    <OSPropertyEntry id="15244" entityName="jira.properties" entityId="1" propertyKey="com.atlassian.upm:notifications:notification-evaluation.nearlyexpired" type="5"/>
+    <OSPropertyEntry id="15245" entityName="jira.properties" entityId="1" propertyKey="com.atlassian.upm:notifications:notification-maintenance.expired" type="5"/>
+    <OSPropertyEntry id="15246" entityName="jira.properties" entityId="1" propertyKey="com.atlassian.upm:notifications:notification-maintenance.nearlyexpired" type="5"/>
+    <OSPropertyEntry id="15247" entityName="jira.properties" entityId="1" propertyKey="com.atlassian.upm.mail.impl.PluginSettingsLicenseEmailStorelicense-emails_v2" type="5"/>
+    <OSPropertyEntry id="15248" entityName="admin.message.manager" entityId="1" propertyKey="user" type="5"/>
+    <OSPropertyEntry id="15249" entityName="admin.message.manager" entityId="1" propertyKey="task" type="5"/>
+    <OSPropertyEntry id="15250" entityName="admin.message.manager" entityId="1" propertyKey="time" type="7"/>
     <OSPropertyNumber id="10001" value="22"/>
     <OSPropertyNumber id="10007" value="1"/>
     <OSPropertyNumber id="10008" value="1"/>
@@ -2749,7 +2764,7 @@ ___ Trusted Applications ___________________
     <OSPropertyNumber id="11658" value="0"/>
     <OSPropertyString id="10000" value="UTF-8"/>
     <OSPropertyString id="10002" value="english"/>
-    <OSPropertyString id="10003" value="BN9K-NJ5G-ZKDX-UYII"/>
+    <OSPropertyString id="10003" value="BOXN-FBMC-U8Z8-KYJZ"/>
     <OSPropertyString id="10004" value="Your Company JIRA"/>
     <OSPropertyString id="10005" value="http://beedevsb:2990/jira"/>
     <OSPropertyString id="10006" value="public"/>
@@ -2880,58 +2895,60 @@ com.atlassian.jira.plugin.ext.bamboo
 com.atlassian.jira.plugins.jira-importers-plugin]]></value>
     </OSPropertyString>
     <OSPropertyString id="13548" value="jira.user.format:profile-link-external-user-format"/>
-    <OSPropertyString id="15106" value="Service Provider Session Remover"/>
-    <OSPropertyString id="15107" value="28800000"/>
-    <OSPropertyString id="15108" value="false"/>
-    <OSPropertyString id="15109" value="com.atlassian.jira.plugin.ext.bamboo.service.PlanStatusUpdateServiceImpl:job"/>
-    <OSPropertyString id="15110" value="60000"/>
-    <OSPropertyString id="15111" value="true"/>
-    <OSPropertyString id="15112" value="LocalPluginLicenseNotificationPluginJob-job"/>
-    <OSPropertyString id="15113" value="86400000"/>
-    <OSPropertyString id="15114" value="true"/>
-    <OSPropertyString id="15115" value="RemotePluginLicenseNotificationPluginJob-job"/>
-    <OSPropertyString id="15116" value="3600000"/>
-    <OSPropertyString id="15117" value="true"/>
-    <OSPropertyString id="15118" value="PluginRequestCheckPluginJob-job"/>
-    <OSPropertyString id="15119" value="3600000"/>
-    <OSPropertyString id="15120" value="true"/>
-    <OSPropertyString id="15121" value="PluginUpdateCheckPluginJob-job"/>
-    <OSPropertyString id="15122" value="86400000"/>
-    <OSPropertyString id="15123" value="false"/>
-    <OSPropertyString id="15124" value="AddOnLicensingEmailNotificationsPluginJob-job"/>
-    <OSPropertyString id="15125" value="14400000"/>
-    <OSPropertyString id="15126" value="true"/>
-    <OSPropertyString id="15128" value="com.atlassian.jira.plugins.dvcs.scheduler.DvcsScheduler:job"/>
-    <OSPropertyString id="15129" value="3600000"/>
-    <OSPropertyString id="15130" value="false"/>
-    <OSPropertyString id="15141">
+    <OSPropertyString id="15206" value="Service Provider Session Remover"/>
+    <OSPropertyString id="15207" value="28800000"/>
+    <OSPropertyString id="15208" value="false"/>
+    <OSPropertyString id="15209" value="com.atlassian.jira.plugin.ext.bamboo.service.PlanStatusUpdateServiceImpl:job"/>
+    <OSPropertyString id="15210" value="60000"/>
+    <OSPropertyString id="15211" value="true"/>
+    <OSPropertyString id="15212" value="LocalPluginLicenseNotificationPluginJob-job"/>
+    <OSPropertyString id="15213" value="86400000"/>
+    <OSPropertyString id="15214" value="true"/>
+    <OSPropertyString id="15215" value="RemotePluginLicenseNotificationPluginJob-job"/>
+    <OSPropertyString id="15216" value="3600000"/>
+    <OSPropertyString id="15217" value="true"/>
+    <OSPropertyString id="15218" value="PluginRequestCheckPluginJob-job"/>
+    <OSPropertyString id="15219" value="3600000"/>
+    <OSPropertyString id="15220" value="true"/>
+    <OSPropertyString id="15221" value="PluginUpdateCheckPluginJob-job"/>
+    <OSPropertyString id="15222" value="86400000"/>
+    <OSPropertyString id="15223" value="false"/>
+    <OSPropertyString id="15224" value="AddOnLicensingEmailNotificationsPluginJob-job"/>
+    <OSPropertyString id="15225" value="14400000"/>
+    <OSPropertyString id="15226" value="true"/>
+    <OSPropertyString id="15228" value="com.atlassian.jira.plugins.dvcs.scheduler.DvcsScheduler:job"/>
+    <OSPropertyString id="15229" value="3600000"/>
+    <OSPropertyString id="15230" value="true"/>
+    <OSPropertyString id="15240">
         <value><![CDATA[#java.util.List
 ]]></value>
     </OSPropertyString>
-    <OSPropertyString id="15142">
+    <OSPropertyString id="15242">
         <value><![CDATA[#java.util.List
 ]]></value>
     </OSPropertyString>
-    <OSPropertyString id="15143">
+    <OSPropertyString id="15243">
         <value><![CDATA[#java.util.List
 ]]></value>
     </OSPropertyString>
-    <OSPropertyString id="15144">
+    <OSPropertyString id="15244">
         <value><![CDATA[#java.util.List
 ]]></value>
     </OSPropertyString>
-    <OSPropertyString id="15145">
+    <OSPropertyString id="15245">
         <value><![CDATA[#java.util.List
 ]]></value>
     </OSPropertyString>
-    <OSPropertyString id="15146">
+    <OSPropertyString id="15246">
         <value><![CDATA[#java.util.List
 ]]></value>
     </OSPropertyString>
-    <OSPropertyString id="15147">
+    <OSPropertyString id="15247">
         <value><![CDATA[#java.util.List
 ]]></value>
     </OSPropertyString>
+    <OSPropertyString id="15248" value="admin"/>
+    <OSPropertyString id="15249" value="admin.notifications.task.custom.fields"/>
     <OSPropertyText id="10014" value="AAABiQ0ODAoPeNp1kk9TwjAQxe/9FJnxXKYpeoCZHqCtgsqfgaIO4yWELURD0tm0KN/eWOjYdvD68vbtb3dzM9GKTBgS2iOU9n3a7/pkHiXE96jvbNhho3XnWXBQBuKtyIVWQTxN4sV8MV7GTirMHk5QOZJTBsG91eITvPdJBEeQOgN0uNRHwIYtLKWGa1ocNoCzdGUATUA9h2uVdhjPxRGCHAtw5gXyPTMQsRwCn1Lf9XzXv3NqwVN2gGCZDBYWstLj70zgqSyad0fVWPXgJaClGUfB8KGXuG+rl1v3ab0euUOPvjofAlmD/XG8GJBY5YAZCtMa9Ze5MagVZAGKX/FVE4eyMDZtqrdgAq+19zJlWEr/Na0TXjkTx4KLjWzeKbyIjaAJE7aDYpa2tTSO+mvbCrBKo/ryate4Up9KfylnhjumhGEl0SCXzBjB1B9Q/QYhQulrH/fcue6svl1di8BwFFnZKAGTE3mGIalGksliJxTZVqTmvLF6fXxksjhzpkwaqP5s3fMDBMYhRDAtAhUAhcR3uL05YCxbclq7h1dNa+Nc+j4CFBrdN005oVlMN9yBlWeM4TlnrOhqX02j3"/>
     <OSPropertyText id="10201">
         <value><![CDATA[http://www.atlassian.com/*
@@ -2943,10 +2960,11 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
     <OSPropertyText id="11646" value=""/>
     <OSPropertyText id="11659" value="fixVersions,assignee,labels,components,priority,comment"/>
     <OSPropertyText id="12245"/>
-    <OSPropertyText id="12246" value=""/>
-    <OSPropertyText id="15105" value="{&quot;AO_38321B_CUSTOM_CONTENT_LINK&quot;:{&quot;key&quot;:&quot;com.atlassian.plugins.atlassian-nav-links-plugin&quot;,&quot;name&quot;:&quot;Atlassian Navigation Links Plugin&quot;,&quot;version&quot;:&quot;3.2.2&quot;,&quot;vendorName&quot;:&quot;Atlassian&quot;,&quot;vendorUrl&quot;:&quot;http://www.atlassian.com/&quot;},&quot;AO_B9A0F0_APPLIED_TEMPLATE&quot;:{&quot;key&quot;:&quot;com.atlassian.jira.project-templates-plugin&quot;,&quot;name&quot;:&quot;Project Templates Plugin&quot;,&quot;version&quot;:&quot;1.8.4&quot;,&quot;vendorName&quot;:&quot;Atlassian&quot;,&quot;vendorUrl&quot;:&quot;http://www.atlassian.com/&quot;},&quot;AO_563AEE_ACTIVITY_ENTITY&quot;:{&quot;key&quot;:&quot;com.atlassian.streams.streams-thirdparty-plugin&quot;,&quot;name&quot;:&quot;Streams Third Party Provider Plugin&quot;,&quot;version&quot;:&quot;5.3.0-m7&quot;,&quot;vendorName&quot;:&quot;Atlassian&quot;,&quot;vendorUrl&quot;:&quot;http://www.atlassian.com/&quot;},&quot;AO_563AEE_TARGET_ENTITY&quot;:{&quot;key&quot;:&quot;com.atlassian.streams.streams-thirdparty-plugin&quot;,&quot;name&quot;:&quot;Streams Third Party Provider Plugin&quot;,&quot;version&quot;:&quot;5.3.0-m7&quot;,&quot;vendorName&quot;:&quot;Atlassian&quot;,&quot;vendorUrl&quot;:&quot;http://www.atlassian.com/&quot;},&quot;AO_563AEE_MEDIA_LINK_ENTITY&quot;:{&quot;key&quot;:&quot;com.atlassian.streams.streams-thirdparty-plugin&quot;,&quot;name&quot;:&quot;Streams Third Party Provider Plugin&quot;,&quot;version&quot;:&quot;5.3.0-m7&quot;,&quot;vendorName&quot;:&quot;Atlassian&quot;,&quot;vendorUrl&quot;:&quot;http://www.atlassian.com/&quot;},&quot;AO_4AEACD_WEBHOOK_DAO&quot;:{&quot;key&quot;:&quot;com.atlassian.jira.plugins.webhooks.jira-webhooks-plugin&quot;,&quot;name&quot;:&quot;JIRA WebHooks Plugin&quot;,&quot;version&quot;:&quot;1.0.10&quot;,&quot;vendorName&quot;:&quot;Atlassian&quot;,&quot;vendorUrl&quot;:&quot;http://www.atlassian.com/&quot;},&quot;AO_E8B6CC_ORGANIZATION_MAPPING&quot;:{&quot;key&quot;:&quot;com.atlassian.jira.plugins.jira-bitbucket-connector-plugin&quot;,&quot;name&quot;:&quot;JIRA DVCS Connector Plugin&quot;,&quot;version&quot;:&quot;1.3.1&quot;,&quot;vendorName&quot;:&quot;Atlassian&quot;,&quot;vendorUrl&quot;:&quot;http://www.atlassian.com/&quot;},&quot;AO_563AEE_OBJECT_ENTITY&quot;:{&quot;key&quot;:&quot;com.atlassian.streams.streams-thirdparty-plugin&quot;,&quot;name&quot;:&quot;Streams Third Party Provider Plugin&quot;,&quot;version&quot;:&quot;5.3.0-m7&quot;,&quot;vendorName&quot;:&quot;Atlassian&quot;,&quot;vendorUrl&quot;:&quot;http://www.atlassian.com/&quot;},&quot;AO_563AEE_ACTOR_ENTITY&quot;:{&quot;key&quot;:&quot;com.atlassian.streams.streams-thirdparty-plugin&quot;,&quot;name&quot;:&quot;Streams Third Party Provider Plugin&quot;,&quot;version&quot;:&quot;5.3.0-m7&quot;,&quot;vendorName&quot;:&quot;Atlassian&quot;,&quot;vendorUrl&quot;:&quot;http://www.atlassian.com/&quot;},&quot;AO_97EDAB_USERINVITATION&quot;:{&quot;key&quot;:&quot;com.atlassian.jira.jira-invite-user-plugin&quot;,&quot;name&quot;:&quot;Atlassian JIRA - Plugins - Invite User&quot;,&quot;version&quot;:&quot;1.10&quot;,&quot;vendorName&quot;:&quot;Atlassian&quot;,&quot;vendorUrl&quot;:&quot;http://www.atlassian.com/&quot;},&quot;AO_E8B6CC_REPOSITORY_MAPPING&quot;:{&quot;key&quot;:&quot;com.atlassian.jira.plugins.jira-bitbucket-connector-plugin&quot;,&quot;name&quot;:&quot;JIRA DVCS Connector Plugin&quot;,&quot;version&quot;:&quot;1.3.1&quot;,&quot;vendorName&quot;:&quot;Atlassian&quot;,&quot;vendorUrl&quot;:&quot;http://www.atlassian.com/&quot;},&quot;AO_E8B6CC_CHANGESET_MAPPING&quot;:{&quot;key&quot;:&quot;com.atlassian.jira.plugins.jira-bitbucket-connector-plugin&quot;,&quot;name&quot;:&quot;JIRA DVCS Connector Plugin&quot;,&quot;version&quot;:&quot;1.3.1&quot;,&quot;vendorName&quot;:&quot;Atlassian&quot;,&quot;vendorUrl&quot;:&quot;http://www.atlassian.com/&quot;},&quot;AO_563AEE_ACTIVITY_OBJ_ENTITY&quot;:{&quot;key&quot;:&quot;com.atlassian.streams.streams-thirdparty-plugin&quot;,&quot;name&quot;:&quot;Streams Third Party Provider Plugin&quot;,&quot;version&quot;:&quot;5.3.0-m7&quot;,&quot;vendorName&quot;:&quot;Atlassian&quot;,&quot;vendorUrl&quot;:&quot;http://www.atlassian.com/&quot;}}"/>
-    <OSPropertyText id="15127">
+    <OSPropertyText id="12246" value="Locationselect is not EMPTY"/>
+    <OSPropertyText id="15205" value="{&quot;AO_38321B_CUSTOM_CONTENT_LINK&quot;:{&quot;key&quot;:&quot;com.atlassian.plugins.atlassian-nav-links-plugin&quot;,&quot;name&quot;:&quot;Atlassian Navigation Links Plugin&quot;,&quot;version&quot;:&quot;3.2.2&quot;,&quot;vendorName&quot;:&quot;Atlassian&quot;,&quot;vendorUrl&quot;:&quot;http://www.atlassian.com/&quot;},&quot;AO_B9A0F0_APPLIED_TEMPLATE&quot;:{&quot;key&quot;:&quot;com.atlassian.jira.project-templates-plugin&quot;,&quot;name&quot;:&quot;Project Templates Plugin&quot;,&quot;version&quot;:&quot;1.8.4&quot;,&quot;vendorName&quot;:&quot;Atlassian&quot;,&quot;vendorUrl&quot;:&quot;http://www.atlassian.com/&quot;},&quot;AO_563AEE_ACTIVITY_ENTITY&quot;:{&quot;key&quot;:&quot;com.atlassian.streams.streams-thirdparty-plugin&quot;,&quot;name&quot;:&quot;Streams Third Party Provider Plugin&quot;,&quot;version&quot;:&quot;5.3.0-m7&quot;,&quot;vendorName&quot;:&quot;Atlassian&quot;,&quot;vendorUrl&quot;:&quot;http://www.atlassian.com/&quot;},&quot;AO_563AEE_TARGET_ENTITY&quot;:{&quot;key&quot;:&quot;com.atlassian.streams.streams-thirdparty-plugin&quot;,&quot;name&quot;:&quot;Streams Third Party Provider Plugin&quot;,&quot;version&quot;:&quot;5.3.0-m7&quot;,&quot;vendorName&quot;:&quot;Atlassian&quot;,&quot;vendorUrl&quot;:&quot;http://www.atlassian.com/&quot;},&quot;AO_563AEE_MEDIA_LINK_ENTITY&quot;:{&quot;key&quot;:&quot;com.atlassian.streams.streams-thirdparty-plugin&quot;,&quot;name&quot;:&quot;Streams Third Party Provider Plugin&quot;,&quot;version&quot;:&quot;5.3.0-m7&quot;,&quot;vendorName&quot;:&quot;Atlassian&quot;,&quot;vendorUrl&quot;:&quot;http://www.atlassian.com/&quot;},&quot;AO_4AEACD_WEBHOOK_DAO&quot;:{&quot;key&quot;:&quot;com.atlassian.jira.plugins.webhooks.jira-webhooks-plugin&quot;,&quot;name&quot;:&quot;JIRA WebHooks Plugin&quot;,&quot;version&quot;:&quot;1.0.10&quot;,&quot;vendorName&quot;:&quot;Atlassian&quot;,&quot;vendorUrl&quot;:&quot;http://www.atlassian.com/&quot;},&quot;AO_E8B6CC_ORGANIZATION_MAPPING&quot;:{&quot;key&quot;:&quot;com.atlassian.jira.plugins.jira-bitbucket-connector-plugin&quot;,&quot;name&quot;:&quot;JIRA DVCS Connector Plugin&quot;,&quot;version&quot;:&quot;1.3.1&quot;,&quot;vendorName&quot;:&quot;Atlassian&quot;,&quot;vendorUrl&quot;:&quot;http://www.atlassian.com/&quot;},&quot;AO_563AEE_OBJECT_ENTITY&quot;:{&quot;key&quot;:&quot;com.atlassian.streams.streams-thirdparty-plugin&quot;,&quot;name&quot;:&quot;Streams Third Party Provider Plugin&quot;,&quot;version&quot;:&quot;5.3.0-m7&quot;,&quot;vendorName&quot;:&quot;Atlassian&quot;,&quot;vendorUrl&quot;:&quot;http://www.atlassian.com/&quot;},&quot;AO_563AEE_ACTOR_ENTITY&quot;:{&quot;key&quot;:&quot;com.atlassian.streams.streams-thirdparty-plugin&quot;,&quot;name&quot;:&quot;Streams Third Party Provider Plugin&quot;,&quot;version&quot;:&quot;5.3.0-m7&quot;,&quot;vendorName&quot;:&quot;Atlassian&quot;,&quot;vendorUrl&quot;:&quot;http://www.atlassian.com/&quot;},&quot;AO_97EDAB_USERINVITATION&quot;:{&quot;key&quot;:&quot;com.atlassian.jira.jira-invite-user-plugin&quot;,&quot;name&quot;:&quot;Atlassian JIRA - Plugins - Invite User&quot;,&quot;version&quot;:&quot;1.10&quot;,&quot;vendorName&quot;:&quot;Atlassian&quot;,&quot;vendorUrl&quot;:&quot;http://www.atlassian.com/&quot;},&quot;AO_E8B6CC_REPOSITORY_MAPPING&quot;:{&quot;key&quot;:&quot;com.atlassian.jira.plugins.jira-bitbucket-connector-plugin&quot;,&quot;name&quot;:&quot;JIRA DVCS Connector Plugin&quot;,&quot;version&quot;:&quot;1.3.1&quot;,&quot;vendorName&quot;:&quot;Atlassian&quot;,&quot;vendorUrl&quot;:&quot;http://www.atlassian.com/&quot;},&quot;AO_E8B6CC_CHANGESET_MAPPING&quot;:{&quot;key&quot;:&quot;com.atlassian.jira.plugins.jira-bitbucket-connector-plugin&quot;,&quot;name&quot;:&quot;JIRA DVCS Connector Plugin&quot;,&quot;version&quot;:&quot;1.3.1&quot;,&quot;vendorName&quot;:&quot;Atlassian&quot;,&quot;vendorUrl&quot;:&quot;http://www.atlassian.com/&quot;},&quot;AO_563AEE_ACTIVITY_OBJ_ENTITY&quot;:{&quot;key&quot;:&quot;com.atlassian.streams.streams-thirdparty-plugin&quot;,&quot;name&quot;:&quot;Streams Third Party Provider Plugin&quot;,&quot;version&quot;:&quot;5.3.0-m7&quot;,&quot;vendorName&quot;:&quot;Atlassian&quot;,&quot;vendorUrl&quot;:&quot;http://www.atlassian.com/&quot;}}"/>
+    <OSPropertyText id="15227">
         <value><![CDATA[#java.util.List
+{"userKey":"JIRA","date":1392217484894,"i18nKey":"upm.auditLog.upm.startup","entryType":"UPM_STARTUP","params":[]}
 {"userKey":"JIRA","date":1392120943651,"i18nKey":"upm.auditLog.upm.startup","entryType":"UPM_STARTUP","params":[]}
 {"userKey":"JIRA","date":1392112394362,"i18nKey":"upm.auditLog.upm.startup","entryType":"UPM_STARTUP","params":[]}
 {"userKey":"JIRA","date":1392107014755,"i18nKey":"upm.auditLog.upm.startup","entryType":"UPM_STARTUP","params":[]}
@@ -3245,7 +3263,7 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
     <PluginVersion id="10600" name="JIRA TestKit - Plugin" key="com.atlassian.jira.tests.jira-testkit-plugin" version="6.0.51" created="2013-07-08 10:45:27.597"/>
     <PluginVersion id="11800" name="Atlassian REST API Browser" key="com.atlassian.labs.rest-api-browser" version="3.0.4" created="2013-10-16 17:13:14.832"/>
     <PluginVersion id="12600" name="jira-suite-utilities-1.4.10-SNAPSHOT-tests.jar" key="jira-suite-utilities-1.4.10-SNAPSHOT-tests.jar" version="0.0" created="2014-01-10 13:31:25.495"/>
-    <PluginVersion id="13500" name="Remotable Plugins I18n plugin" key="remotable.plugins.i18n" version="1" created="2014-02-11 13:15:43.733"/>
+    <PluginVersion id="13600" name="Remotable Plugins I18n plugin" key="remotable.plugins.i18n" version="1" created="2014-02-12 16:04:45.001"/>
     <PortalPage id="10000" pagename="System Dashboard" sequence="0" favCount="0" layout="AA" version="0"/>
     <PortletConfiguration id="10000" portalpage="10000" columnNumber="0" position="0" gadgetXml="rest/gadgets/1.0/g/com.atlassian.jira.gadgets:introduction-gadget/gadgets/introduction-gadget.xml"/>
     <PortletConfiguration id="10001" portalpage="10000" columnNumber="0" position="1" gadgetXml="rest/gadgets/1.0/g/com.atlassian.streams.streams-jira-plugin:activitystream-gadget/gadgets/activitystream-gadget.xml"/>
@@ -3322,23 +3340,23 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
     <SchemePermissions id="10200" scheme="0" permission="45" type="projectrole" parameter="10000"/>
     <SequenceValueItem seqName="ApplicationUser" seqId="10500"/>
     <SequenceValueItem seqName="Avatar" seqId="10300"/>
-    <SequenceValueItem seqName="ChangeGroup" seqId="12500"/>
-    <SequenceValueItem seqName="ChangeItem" seqId="12500"/>
+    <SequenceValueItem seqName="ChangeGroup" seqId="12600"/>
+    <SequenceValueItem seqName="ChangeItem" seqId="12600"/>
     <SequenceValueItem seqName="Component" seqId="10100"/>
-    <SequenceValueItem seqName="ConfigurationContext" seqId="10500"/>
-    <SequenceValueItem seqName="CustomField" seqId="10400"/>
+    <SequenceValueItem seqName="ConfigurationContext" seqId="10600"/>
+    <SequenceValueItem seqName="CustomField" seqId="10500"/>
     <SequenceValueItem seqName="CustomFieldOption" seqId="10200"/>
-    <SequenceValueItem seqName="CustomFieldValue" seqId="11300"/>
+    <SequenceValueItem seqName="CustomFieldValue" seqId="11400"/>
     <SequenceValueItem seqName="Directory" seqId="10100"/>
     <SequenceValueItem seqName="DraftWorkflow" seqId="12100"/>
     <SequenceValueItem seqName="ExternalEntity" seqId="210"/>
-    <SequenceValueItem seqName="FieldConfigScheme" seqId="10500"/>
-    <SequenceValueItem seqName="FieldConfigSchemeIssueType" seqId="10600"/>
-    <SequenceValueItem seqName="FieldConfiguration" seqId="10500"/>
+    <SequenceValueItem seqName="FieldConfigScheme" seqId="10600"/>
+    <SequenceValueItem seqName="FieldConfigSchemeIssueType" seqId="10700"/>
+    <SequenceValueItem seqName="FieldConfiguration" seqId="10600"/>
     <SequenceValueItem seqName="FieldLayout" seqId="10100"/>
     <SequenceValueItem seqName="FieldLayoutItem" seqId="10100"/>
     <SequenceValueItem seqName="FieldScreen" seqId="10000"/>
-    <SequenceValueItem seqName="FieldScreenLayoutItem" seqId="10600"/>
+    <SequenceValueItem seqName="FieldScreenLayoutItem" seqId="10700"/>
     <SequenceValueItem seqName="FieldScreenScheme" seqId="10000"/>
     <SequenceValueItem seqName="FieldScreenSchemeItem" seqId="10100"/>
     <SequenceValueItem seqName="FieldScreenTab" seqId="10100"/>
@@ -3358,24 +3376,24 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
     <SequenceValueItem seqName="OSCurrentStep" seqId="12600"/>
     <SequenceValueItem seqName="OSGroup" seqId="10100"/>
     <SequenceValueItem seqName="OSMembership" seqId="10100"/>
-    <SequenceValueItem seqName="OSPropertyEntry" seqId="15200"/>
+    <SequenceValueItem seqName="OSPropertyEntry" seqId="15300"/>
     <SequenceValueItem seqName="OSUser" seqId="10100"/>
     <SequenceValueItem seqName="OSWorkflowEntry" seqId="12000"/>
     <SequenceValueItem seqName="OptionConfiguration" seqId="10200"/>
-    <SequenceValueItem seqName="PluginVersion" seqId="13600"/>
+    <SequenceValueItem seqName="PluginVersion" seqId="13700"/>
     <SequenceValueItem seqName="PortalPage" seqId="10100"/>
     <SequenceValueItem seqName="PortletConfiguration" seqId="10100"/>
     <SequenceValueItem seqName="Project" seqId="10200"/>
     <SequenceValueItem seqName="ProjectRole" seqId="10300"/>
     <SequenceValueItem seqName="ProjectRoleActor" seqId="10600"/>
     <SequenceValueItem seqName="SchemePermissions" seqId="10300"/>
-    <SequenceValueItem seqName="ServiceConfig" seqId="14800"/>
+    <SequenceValueItem seqName="ServiceConfig" seqId="14900"/>
     <SequenceValueItem seqName="SharePermissions" seqId="10100"/>
     <SequenceValueItem seqName="UpgradeHistory" seqId="10600"/>
     <SequenceValueItem seqName="UpgradeVersionHistory" seqId="10400"/>
     <SequenceValueItem seqName="User" seqId="10510"/>
     <SequenceValueItem seqName="UserAttribute" seqId="710"/>
-    <SequenceValueItem seqName="UserHistoryItem" seqId="12500"/>
+    <SequenceValueItem seqName="UserHistoryItem" seqId="12600"/>
     <SequenceValueItem seqName="Version" seqId="10100"/>
     <SequenceValueItem seqName="Workflow" seqId="10400"/>
     <SequenceValueItem seqName="WorkflowScheme" seqId="10200"/>
@@ -3384,14 +3402,14 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
     <ServiceConfig id="10000" time="60000" clazz="com.atlassian.jira.service.services.mail.MailQueueService" name="Mail Queue Service"/>
     <ServiceConfig id="10001" time="43200000" clazz="com.atlassian.jira.service.services.export.ExportService" name="Backup Service"/>
     <ServiceConfig id="10100" time="28800000" clazz="com.atlassian.sal.jira.scheduling.JiraPluginSchedulerService" name="Service Provider Token Remover"/>
-    <ServiceConfig id="14700" time="28800000" clazz="com.atlassian.sal.jira.scheduling.JiraPluginSchedulerService" name="Service Provider Session Remover"/>
-    <ServiceConfig id="14701" time="60000" clazz="com.atlassian.sal.jira.scheduling.JiraPluginSchedulerService" name="com.atlassian.jira.plugin.ext.bamboo.service.PlanStatusUpdateServiceImpl:job"/>
-    <ServiceConfig id="14702" time="86400000" clazz="com.atlassian.sal.jira.scheduling.JiraPluginSchedulerService" name="LocalPluginLicenseNotificationPluginJob-job"/>
-    <ServiceConfig id="14703" time="3600000" clazz="com.atlassian.sal.jira.scheduling.JiraPluginSchedulerService" name="RemotePluginLicenseNotificationPluginJob-job"/>
-    <ServiceConfig id="14704" time="3600000" clazz="com.atlassian.sal.jira.scheduling.JiraPluginSchedulerService" name="PluginRequestCheckPluginJob-job"/>
-    <ServiceConfig id="14705" time="45676363" clazz="com.atlassian.sal.jira.scheduling.JiraPluginSchedulerService" name="PluginUpdateCheckPluginJob-job"/>
-    <ServiceConfig id="14706" time="14400000" clazz="com.atlassian.sal.jira.scheduling.JiraPluginSchedulerService" name="AddOnLicensingEmailNotificationsPluginJob-job"/>
-    <ServiceConfig id="14707" time="2171669" clazz="com.atlassian.sal.jira.scheduling.JiraPluginSchedulerService" name="com.atlassian.jira.plugins.dvcs.scheduler.DvcsScheduler:job"/>
+    <ServiceConfig id="14800" time="28800000" clazz="com.atlassian.sal.jira.scheduling.JiraPluginSchedulerService" name="Service Provider Session Remover"/>
+    <ServiceConfig id="14801" time="60000" clazz="com.atlassian.sal.jira.scheduling.JiraPluginSchedulerService" name="com.atlassian.jira.plugin.ext.bamboo.service.PlanStatusUpdateServiceImpl:job"/>
+    <ServiceConfig id="14802" time="86400000" clazz="com.atlassian.sal.jira.scheduling.JiraPluginSchedulerService" name="LocalPluginLicenseNotificationPluginJob-job"/>
+    <ServiceConfig id="14803" time="3600000" clazz="com.atlassian.sal.jira.scheduling.JiraPluginSchedulerService" name="RemotePluginLicenseNotificationPluginJob-job"/>
+    <ServiceConfig id="14804" time="3600000" clazz="com.atlassian.sal.jira.scheduling.JiraPluginSchedulerService" name="PluginRequestCheckPluginJob-job"/>
+    <ServiceConfig id="14805" time="32475127" clazz="com.atlassian.sal.jira.scheduling.JiraPluginSchedulerService" name="PluginUpdateCheckPluginJob-job"/>
+    <ServiceConfig id="14806" time="14400000" clazz="com.atlassian.sal.jira.scheduling.JiraPluginSchedulerService" name="AddOnLicensingEmailNotificationsPluginJob-job"/>
+    <ServiceConfig id="14807" time="3600000" clazz="com.atlassian.sal.jira.scheduling.JiraPluginSchedulerService" name="com.atlassian.jira.plugins.dvcs.scheduler.DvcsScheduler:job"/>
     <SharePermissions id="10000" entityId="10000" entityType="PortalPage" type="global"/>
     <Status id="1" sequence="1" name="Open" description="The issue is open and ready for the assignee to start work on it." iconurl="/images/icons/statuses/open.png"/>
     <Status id="3" sequence="3" name="In Progress" description="This issue is being actively worked on at the moment by the assignee." iconurl="/images/icons/statuses/inprogress.png"/>
@@ -3493,11 +3511,11 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
     <UserAssociation sourceName="user" sinkNodeId="11100" sinkNodeEntity="Issue" associationType="WatchIssue" created="2013-10-22 17:31:24.815"/>
     <UserAttribute id="10" userId="10000" directoryId="1" name="invalidPasswordAttempts" value="0" lowerValue="0"/>
     <UserAttribute id="11" userId="10000" directoryId="1" name="requiresPasswordChange" value="false" lowerValue="false"/>
-    <UserAttribute id="12" userId="10000" directoryId="1" name="lastAuthenticated" value="1392121111599" lowerValue="1392121111599"/>
+    <UserAttribute id="12" userId="10000" directoryId="1" name="lastAuthenticated" value="1392217498358" lowerValue="1392217498358"/>
     <UserAttribute id="13" userId="10000" directoryId="1" name="login.currentFailedCount" value="0" lowerValue="0"/>
-    <UserAttribute id="14" userId="10000" directoryId="1" name="login.lastLoginMillis" value="1392121111611" lowerValue="1392121111611"/>
-    <UserAttribute id="15" userId="10000" directoryId="1" name="login.count" value="77" lowerValue="77"/>
-    <UserAttribute id="110" userId="10000" directoryId="1" name="login.previousLoginMillis" value="1392112406268" lowerValue="1392112406268"/>
+    <UserAttribute id="14" userId="10000" directoryId="1" name="login.lastLoginMillis" value="1392217498369" lowerValue="1392217498369"/>
+    <UserAttribute id="15" userId="10000" directoryId="1" name="login.count" value="78" lowerValue="78"/>
+    <UserAttribute id="110" userId="10000" directoryId="1" name="login.previousLoginMillis" value="1392121111611" lowerValue="1392121111611"/>
     <UserAttribute id="210" userId="10010" directoryId="1" name="requiresPasswordChange" value="false" lowerValue="false"/>
     <UserAttribute id="211" userId="10010" directoryId="1" name="passwordLastChanged" value="1360935294108" lowerValue="1360935294108"/>
     <UserAttribute id="212" userId="10010" directoryId="1" name="password.reset.request.expiry" value="1361021694451" lowerValue="1361021694451"/>
@@ -3548,15 +3566,15 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
     <UserAttribute id="617" userId="10010" directoryId="1" name="login.currentFailedCount" value="0" lowerValue="0"/>
     <UserAttribute id="618" userId="10010" directoryId="1" name="login.lastLoginMillis" value="1382455909933" lowerValue="1382455909933"/>
     <UserAttribute id="619" userId="10010" directoryId="1" name="login.count" value="1" lowerValue="1"/>
-    <UserHistoryItem id="10000" type="Dashboard" entityId="10000" username="admin" lastViewed="1392121295951"/>
+    <UserHistoryItem id="10000" type="Dashboard" entityId="10000" username="admin" lastViewed="1392217498407"/>
     <UserHistoryItem id="10001" type="Assignee" entityId="admin" username="admin" lastViewed="1360847761836"/>
     <UserHistoryItem id="10100" type="Project" entityId="10000" username="admin" lastViewed="1392121345264"/>
     <UserHistoryItem id="10201" type="Resolution" entityId="1" username="admin" lastViewed="1392121362939" data="Fixed"/>
     <UserHistoryItem id="10400" type="UsedUser" entityId="developer" username="admin" lastViewed="1373897619198"/>
-    <UserHistoryItem id="10500" type="Searcher" entityId="project" username="admin" lastViewed="1390997396768"/>
-    <UserHistoryItem id="10501" type="Searcher" entityId="issuetype" username="admin" lastViewed="1390997396788"/>
-    <UserHistoryItem id="10502" type="Searcher" entityId="assignee" username="admin" lastViewed="1390997396884"/>
-    <UserHistoryItem id="10503" type="Searcher" entityId="status" username="admin" lastViewed="1390997397001"/>
+    <UserHistoryItem id="10500" type="Searcher" entityId="project" username="admin" lastViewed="1392217506263"/>
+    <UserHistoryItem id="10501" type="Searcher" entityId="issuetype" username="admin" lastViewed="1392217506280"/>
+    <UserHistoryItem id="10502" type="Searcher" entityId="assignee" username="admin" lastViewed="1392217506307"/>
+    <UserHistoryItem id="10503" type="Searcher" entityId="status" username="admin" lastViewed="1392217506325"/>
     <UserHistoryItem id="10700" type="Issue" entityId="10300" username="admin" lastViewed="1389357352663"/>
     <UserHistoryItem id="10800" type="Issue" entityId="10400" username="admin" lastViewed="1379936338129"/>
     <UserHistoryItem id="10801" type="Issue" entityId="10401" username="admin" lastViewed="1379936337374"/>
@@ -3625,7 +3643,9 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
     <UserHistoryItem id="12302" type="Issue" entityId="11802" username="admin" lastViewed="1392112730263"/>
     <UserHistoryItem id="12400" type="Issue" entityId="11900" username="admin" lastViewed="1392121356217"/>
     <UserHistoryItem id="12401" type="Issue" entityId="11901" username="admin" lastViewed="1392121359723"/>
-    <UserHistoryItem id="12402" type="Issue" entityId="11902" username="admin" lastViewed="1392121381613"/>
+    <UserHistoryItem id="12402" type="Issue" entityId="11902" username="admin" lastViewed="1392217508807"/>
+    <UserHistoryItem id="12500" type="Issue" entityId="10100" username="admin" lastViewed="1392217722488"/>
+    <UserHistoryItem id="12501" type="Issue" entityId="10000" username="admin" lastViewed="1392217532234"/>
     <Version id="10000" project="10000" name="1.0" sequence="1"/>
     <Version id="10001" project="10000" name="2.0" sequence="2"/>
     <Version id="10002" project="10000" name="3.0" sequence="3"/>
@@ -6810,30 +6830,30 @@ com.atlassian.jira.plugins.jira-importers-plugin]]></value>
 
 ___ Entities ________________________________
 
-     Total                                         : 2312
+     Total                                         : 2331
 
      Application                                   : 1
      ApplicationUser                               : 10
      Avatar                                        : 48
-     ChangeGroup                                   : 151
-     ChangeItem                                    : 186
+     ChangeGroup                                   : 152
+     ChangeItem                                    : 187
      Component                                     : 3
-     ConfigurationContext                          : 25
-     CustomField                                   : 24
+     ConfigurationContext                          : 26
+     CustomField                                   : 25
      CustomFieldOption                             : 30
-     CustomFieldValue                              : 65
+     CustomFieldValue                              : 66
      Directory                                     : 2
      DirectoryAttribute                            : 48
      DirectoryOperation                            : 14
      EventType                                     : 17
      ExternalEntity                                : 5
-     FieldConfigScheme                             : 25
-     FieldConfigSchemeIssueType                    : 25
-     FieldConfiguration                            : 25
+     FieldConfigScheme                             : 26
+     FieldConfigSchemeIssueType                    : 26
+     FieldConfiguration                            : 26
      FieldLayout                                   : 1
      FieldLayoutItem                               : 19
      FieldScreen                                   : 3
-     FieldScreenLayoutItem                         : 92
+     FieldScreenLayoutItem                         : 95
      FieldScreenScheme                             : 1
      FieldScreenSchemeItem                         : 1
      FieldScreenTab                                : 3
@@ -6857,9 +6877,10 @@ ___ Entities ________________________________
      OSCurrentStepPrev                             : 65
      OSHistoryStep                                 : 128
      OSHistoryStepPrev                             : 31
-     OSPropertyEntry                               : 169
+     OSPropertyDate                                : 1
+     OSPropertyEntry                               : 172
      OSPropertyNumber                              : 37
-     OSPropertyString                              : 122
+     OSPropertyString                              : 124
      OSPropertyText                                : 11
      OSWorkflowEntry                               : 129
      OptionConfiguration                           : 5
@@ -6882,7 +6903,7 @@ ___ Entities ________________________________
      User                                          : 9
      UserAssociation                               : 68
      UserAttribute                                 : 57
-     UserHistoryItem                               : 78
+     UserHistoryItem                               : 80
      Version                                       : 4
      Workflow                                      : 1
      WorkflowScheme                                : 1

@@ -83,9 +83,20 @@
         return !isNaN(parseFloat(n)) && isFinite(n);
     }
 
+    function isEmpty(str) {
+        return (!str || 0 === str.length);
+    }
+
     function displayMap(jsuMapField) {
         var location = jsuMapField.find("a.location").text(),
+            destination = "",
             mapDiv = jsuMapField.find(".jsuMap");
+
+        var dirNames = location.split("=>");
+        if(dirNames.length==2) {
+            location = dirNames[0].trim();
+            destination = dirNames[1].trim();
+        }
 
         loadAndDisplayLocationOnMap(location, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
@@ -112,6 +123,24 @@
                         title: location
                     });
                 }
+
+                if(!isEmpty(destination)) {
+                    var directionsDisplay = new google.maps.DirectionsRenderer();
+                    var directionsService = new google.maps.DirectionsService();
+
+                    directionsDisplay.setMap(map);
+
+                    var request = {
+                        origin:location,
+                        destination:destination,
+                        travelMode: google.maps.TravelMode.DRIVING
+                    };
+                    directionsService.route(request, function(response, status) {
+                        if (status == google.maps.DirectionsStatus.OK) {
+                            directionsDisplay.setDirections(response);
+                        }
+                    });
+                }
             } else {
                 jsuMapField.addClass("notFound");
             }
@@ -135,5 +164,6 @@
     JIRA.bind(JIRA.Events.INLINE_EDIT_STARTED, function() {
         JIRA.Issues.InlineEdit.BlurTriggerMapping.custom.locationselect = JIRA.Issues.InlineEdit.BlurTriggers.Default;
         JIRA.Issues.InlineEdit.BlurTriggerMapping.custom.locationtextfield = JIRA.Issues.InlineEdit.BlurTriggers.Default;
+        JIRA.Issues.InlineEdit.BlurTriggerMapping.custom.directionsfield = JIRA.Issues.InlineEdit.BlurTriggers.Default;
     });
 })(AJS.$);
