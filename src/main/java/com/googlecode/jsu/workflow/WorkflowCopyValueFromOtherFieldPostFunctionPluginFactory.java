@@ -1,9 +1,6 @@
 package com.googlecode.jsu.workflow;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import com.atlassian.jira.issue.fields.Field;
 import com.atlassian.jira.plugin.workflow.AbstractWorkflowPluginFactory;
@@ -45,8 +42,8 @@ public class WorkflowCopyValueFromOtherFieldPostFunctionPluginFactory extends Ab
      * @see com.googlecode.jsu.workflow.AbstractWorkflowPluginFactory#getVelocityParamsForInput(java.util.Map)
      */
     protected void getVelocityParamsForInput(Map<String, Object> velocityParams) {
-        List<Field> sourceFields = fieldCollectionsUtils.getCopyFromFields();
-        List<Field> destinationFields = fieldCollectionsUtils.getCopyToFields();
+        List<FieldContainer> sourceFields = fieldCollectionsUtils.getFieldContainers(fieldCollectionsUtils.getCopyFromFields());
+        List<FieldContainer> destinationFields = fieldCollectionsUtils.getFieldContainers(fieldCollectionsUtils.getCopyToFields());
 
         velocityParams.put(VALUE_SOURCE_LIST, Collections.unmodifiableList(sourceFields));
         velocityParams.put(VALUE_DEST_LIST, Collections.unmodifiableList(destinationFields));

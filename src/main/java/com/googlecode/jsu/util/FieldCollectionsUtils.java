@@ -19,6 +19,7 @@ import com.atlassian.jira.util.I18nHelper;
 import com.atlassian.jira.util.I18nHelper.BeanFactory;
 import com.atlassian.jira.web.FieldVisibilityManager;
 import com.googlecode.jsu.helpers.NameComparatorEx;
+import com.googlecode.jsu.workflow.FieldContainer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -297,6 +298,19 @@ public class FieldCollectionsUtils {
             retVal = fieldLayoutItem.isRequired();
         }
         return retVal;
+    }
+
+    /**
+     * Transforms given list of fields into field containers.
+     */
+    public List<FieldContainer> getFieldContainers(List<Field> fields) {
+        ArrayList<FieldContainer> containers = new ArrayList<FieldContainer>();
+        if(fields!=null) {
+            for(Field field:fields) {
+                containers.add(new FieldContainer(field));
+            }
+        }
+        return containers;
     }
 
     /**
