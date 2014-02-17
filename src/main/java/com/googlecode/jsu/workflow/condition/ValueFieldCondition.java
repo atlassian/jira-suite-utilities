@@ -1,14 +1,12 @@
 package com.googlecode.jsu.workflow.condition;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import com.atlassian.jira.issue.customfields.option.LazyLoadedOption;
-import com.atlassian.jira.issue.fields.CustomField;
-import com.atlassian.jira.issue.fields.option.Option;
 import com.atlassian.jira.issue.status.Status;
+import org.apache.commons.lang3.StringUtils;
+import org.omg.CosTransactions._TerminatorImplBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,6 +26,9 @@ import com.opensymphony.module.propertyset.PropertySet;
  */
 public class ValueFieldCondition extends AbstractJiraCondition {
     private final Logger log = LoggerFactory.getLogger(ValueFieldCondition.class);
+
+    private final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+    private final SimpleDateFormat DATE_TIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
     private final ConditionCheckerFactory conditionCheckerFactory;
     private final WorkflowUtils workflowUtils;
@@ -49,6 +50,7 @@ public class ValueFieldCondition extends AbstractJiraCondition {
 
         String fieldId = (String) args.get("fieldsList");
         String valueForCompare = (String) args.get("fieldValue");
+        Object secondValue = valueForCompare;
 
         ComparisonType comparison = conditionCheckerFactory.findComparisonById((String) args.get("comparisonType"));
         ConditionType condition = conditionCheckerFactory.findConditionById((String) args.get("conditionList"));
@@ -65,6 +67,40 @@ public class ValueFieldCondition extends AbstractJiraCondition {
                 fieldValue = getOptionId(fieldValue);
             }
 
+            if(fieldValue instanceof java.sql.Timestamp) {
+                java.sql.Timestamp timestamp = (java.sql.Timestamp)fieldValue;
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTimeInMillis(timestamp.getTime());
+                fieldValue = calendar;
+            }
+
+            if(comparison.equals(ConditionCheckerFactory.DATE)) {
+                try {
+                    if(!StringUtils.isBlank(valueForCompare)) {
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.setTimeInMillis(DATE_TIME_FORMAT.parse(valueForCompare).getTime());
+                        secondValue = calendar;
+                    }
+                } catch(Exception e) {
+                    //ignore, will fail later
+                    log.warn("Unable to convert input date and time (" + valueForCompare + ")",e);
+                }
+            }
+
+            if(comparison.equals(ConditionCheckerFactory.DATE_WITHOUT_TIME)) {
+                try {
+                    if(!StringUtils.isBlank(valueForCompare)) {
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.setTimeInMillis(DATE_FORMAT.parse(valueForCompare).getTime());
+                        secondValue = calendar;
+                    }
+                } catch(Exception e) {
+                    //ignore, will fail later
+                    log.warn("Unable to convert input date without time (" + valueForCompare + ")",e);
+                }
+            }
+
+
             //multiple values slightly different, equal means contains, not equal means does not contain
             if (fieldValue instanceof Collection) {
                 if(condition.equals(ConditionCheckerFactory.NOT_EQUAL)) {
@@ -75,7 +111,7 @@ public class ValueFieldCondition extends AbstractJiraCondition {
             } else {
                 result = conditionCheckerFactory.
                     getChecker(comparison, condition).
-                    checkValues(fieldValue, valueForCompare);
+                    checkValues(fieldValue, secondValue);
             }
 
             if (log.isDebugEnabled()) {

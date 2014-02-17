@@ -11,7 +11,7 @@ class ConverterDateWithoutTime extends ConverterDate {
      */
     @Override
     public Comparable<?> getComparable(Object object) {
-        if (object == null) {
+        if (object == null || "".equals(object)) {
             return null;
         }
 

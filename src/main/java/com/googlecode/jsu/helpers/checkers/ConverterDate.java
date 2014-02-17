@@ -10,7 +10,7 @@ class ConverterDate implements ValueConverter {
      * @see com.googlecode.jsu.helpers.checkers.ValueConverter#getComparable(java.lang.Object)
      */
     public Comparable<?> getComparable(Object object) {
-        if (object == null) {
+        if (object == null || "".equals(object)) {
             return null;
         }
 

@@ -42,7 +42,7 @@ public class WorkflowValueFieldConditionPluginFactory extends
      * @see com.googlecode.jsu.workflow.AbstractWorkflowPluginFactory#getVelocityParamsForInput(java.util.Map)
      */
     protected void getVelocityParamsForInput(Map<String, Object> velocityParams) {
-        List<Field> fields = fieldCollectionsUtils.getValueFieldConditionFields();
+        List<FieldContainer> fields = fieldCollectionsUtils.getFieldContainers(fieldCollectionsUtils.getValueFieldConditionFields());
 
         List<ConditionType> conditionList = conditionCheckerFactory.getConditionTypes();
         List<ComparisonType> comparisonList = conditionCheckerFactory.getComparisonTypes();
