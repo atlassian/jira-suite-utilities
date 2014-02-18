@@ -725,17 +725,32 @@ public class WorkflowUtils {
                 }
             } else if (fieldId.equals(IssueFieldConstants.WATCHES)) {
                 if ((value == null)) {
-                    List<ApplicationUser> watches = watcherManager.getWatchers(issue,Locale.getDefault());
-                    for(ApplicationUser appUser:watches) {
-                        watcherManager.stopWatching(appUser,issue);
+                    clearWatchers(issue);
+                } else if(value instanceof ArrayList) {
+                    ArrayList list = (ArrayList)value;
+                    if(list.size()==0) {
+                        clearWatchers(issue);
+                    } else if(list.get(0) instanceof ApplicationUser) {
+                        clearWatchers(issue);
+                        for(Object o:list) {
+                            watcherManager.startWatching((ApplicationUser)o,issue);
+                        }
+                    } else {
+                        throw new UnsupportedOperationException("Data not supported for copy into watchers.");
                     }
                 } else {
                     throw new UnsupportedOperationException("Not implemented");
                 }
-
             } else {
                 log.error("Issue field \"" + fieldId + "\" is not supported for setting.");
             }
+        }
+    }
+
+    private void clearWatchers(MutableIssue issue) {
+        List<ApplicationUser> watches = watcherManager.getWatchers(issue,Locale.getDefault());
+        for(ApplicationUser appUser:watches) {
+            watcherManager.stopWatching(appUser,issue);
         }
     }
 

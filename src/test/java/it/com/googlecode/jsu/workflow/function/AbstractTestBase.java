@@ -6,6 +6,7 @@ import com.atlassian.jira.functest.framework.suite.WebTest;
 import com.atlassian.jira.testkit.client.restclient.IssueClient;
 import com.atlassian.jira.testkit.client.restclient.IssueTransitionsMeta;
 import com.atlassian.jira.testkit.client.restclient.TransitionsClient;
+import com.atlassian.jira.testkit.client.restclient.WatchersClient;
 import com.atlassian.jira.testkit.client.util.TimeBombLicence;
 
 import java.text.SimpleDateFormat;
@@ -14,6 +15,7 @@ import java.text.SimpleDateFormat;
 public abstract class AbstractTestBase extends FuncTestCase {
     protected IssueClient issueClient;
     protected TransitionsClient transitionsClient;
+    protected WatchersClient watchersClient;
 
     protected static final String STATUS_IN_PROGRESS = "In Progress";
     protected static final String STATUS_RESOLVED = "Resolved";
@@ -50,6 +52,7 @@ public abstract class AbstractTestBase extends FuncTestCase {
         administration.restoreDataWithLicense("test1.xml", TimeBombLicence.LICENCE_FOR_TESTING);
         issueClient = new IssueClient(getEnvironmentData());
         transitionsClient = new TransitionsClient(getEnvironmentData());
+        watchersClient = new WatchersClient(getEnvironmentData());
     }
 
     protected boolean hasTransition(String issueKey, String transitionId, String user) {

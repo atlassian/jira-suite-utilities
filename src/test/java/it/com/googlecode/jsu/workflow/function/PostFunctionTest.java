@@ -30,6 +30,9 @@ public class PostFunctionTest extends AbstractTestBase {
     private static final String ISSUE_PF41 = "TJP-60";
     private static final String ISSUE_PF42 = "TJP-61";
     private static final String ISSUE_PF43 = "TJP-62";
+    private static final String ISSUE_PF44 = "TJP-97";
+    private static final String ISSUE_PF45 = "TJP-98";
+
 
     private static final String TRANSITION_PF31 = "1311";
     private static final String TRANSITION_PF32 = "1371";
@@ -44,6 +47,7 @@ public class PostFunctionTest extends AbstractTestBase {
     private static final String TRANSITION_PF41 = "1531";
     private static final String TRANSITION_PF42 = "1541";
     private static final String TRANSITION_PF43 = "1551";
+    private static final String TRANSITION_PF44 = "1701";
 
     /**
      * Single test using transition.
@@ -1145,6 +1149,38 @@ public class PostFunctionTest extends AbstractTestBase {
         Issue issue = issueClient.get(ISSUE_PF43);
         List<Map> multi = issue.fields.get(FIELD_MULTI_SELECT);
         assertEquals("Option A,Option C",getMultiAsString(multi,"value"));
+    }
+
+    //The field Watchers will take the value from MultiUser. Source and destination issue are the same
+    public void testPF44() throws Exception {
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId(TRANSITION_PF44));
+
+        final Response response = transitionsClient.postResponse(ISSUE_PF44, issueUpdateRequest);
+
+        assertEquals(204, response.statusCode);
+
+        Issue issue = issueClient.get(ISSUE_PF44);
+        Watches watches = watchersClient.get(issue.key);
+        for(User user:watches.watchers) {
+            assertTrue("developer".equals(user.name) || "marketing".equals(user.name));
+        }
+    }
+
+    //The field Watchers will take the value from MultiUser. Source and destination issue are the same
+    public void testPF45() throws Exception {
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId(TRANSITION_PF44));
+
+        final Response response = transitionsClient.postResponse(ISSUE_PF45, issueUpdateRequest);
+
+        assertEquals(204, response.statusCode);
+
+        Issue issue = issueClient.get(ISSUE_PF45);
+        Watches watches = watchersClient.get(issue.key);
+        assertTrue(watches.watchCount==0);
     }
       
     // all PostFunction transitions made out of resolved state
