@@ -395,10 +395,16 @@ public class WorkflowUtils {
                 }
             } else if (value instanceof Option && ! (cfType instanceof MultipleSettableCustomFieldType)) {
                 newValue = ((Option) newValue).getValue();
-            } else  if (value instanceof Timestamp && ! fieldCollectionsUtils.getAllDateFields().contains(field)) {
+            } else if (value instanceof Timestamp && ! fieldCollectionsUtils.getAllDateFields().contains(field)) {
                 String format = applicationProperties.getDefaultBackedString(APKeys.JIRA_DATE_TIME_PICKER_JAVA_FORMAT);
                 DateFormat dateFormat = new SimpleDateFormat(format);
                 newValue = dateFormat.format(value);
+            } else if (value instanceof Option && cfType instanceof CascadingSelectCFType) {
+                Option option = (Option)value;
+                HashMap<String, Option> entries = new HashMap<String, Option>();
+                entries.put(null,option.getParentOption());
+                entries.put("1",option);
+                newValue = entries;
             }
 
             if (cfType instanceof VersionCFType) {

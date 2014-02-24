@@ -68,7 +68,7 @@ public class CopyValueFromOtherFieldPostFunction extends AbstractPreserveChanges
             }
 
             // It gives the value from the source field.
-            Object sourceValue = workflowUtils.getFieldValueFromIssue(sourceIssue, fieldFrom);
+            Object sourceValue = workflowUtils.getFieldValueFromIssue(sourceIssue, fieldFrom, true);
 
             if (log.isDebugEnabled()) {
                 log.debug(

@@ -32,6 +32,7 @@ public class PostFunctionTest extends AbstractTestBase {
     private static final String ISSUE_PF43 = "TJP-62";
     private static final String ISSUE_PF44 = "TJP-97";
     private static final String ISSUE_PF45 = "TJP-98";
+    private static final String ISSUE_PF46 = "TJP-100";
 
 
     private static final String TRANSITION_PF31 = "1311";
@@ -48,6 +49,7 @@ public class PostFunctionTest extends AbstractTestBase {
     private static final String TRANSITION_PF42 = "1541";
     private static final String TRANSITION_PF43 = "1551";
     private static final String TRANSITION_PF44 = "1701";
+    private static final String TRANSITION_PF46 = "1711";
 
     /**
      * Single test using transition.
@@ -1181,6 +1183,22 @@ public class PostFunctionTest extends AbstractTestBase {
         Issue issue = issueClient.get(ISSUE_PF45);
         Watches watches = watchersClient.get(issue.key);
         assertTrue(watches.watchCount==0);
+    }
+
+    //The field CascadingSelect will take the value from CascadingSelect. Source issue is the parent, destination the sub-task.
+    public void testPF46() throws Exception {
+        IssueUpdateRequest issueUpdateRequest = new IssueUpdateRequest();
+        issueUpdateRequest.fields(new IssueFields());
+        issueUpdateRequest.transition(ResourceRef.withId(TRANSITION_PF46));
+
+        final Response response = transitionsClient.postResponse(ISSUE_PF46, issueUpdateRequest);
+
+        assertEquals(204, response.statusCode);
+
+        Issue issue = issueClient.get(ISSUE_PF46);
+        Map cascadeContent = issue.fields.get(FIELD_CASCADING_SELECT);
+        assertEquals("Option C", cascadeContent.get("value"));
+        assertEquals("Same", ((Map) cascadeContent.get("child")).get("value"));
     }
       
     // all PostFunction transitions made out of resolved state
