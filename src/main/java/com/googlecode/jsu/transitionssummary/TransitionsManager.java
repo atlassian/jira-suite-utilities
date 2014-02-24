@@ -90,9 +90,8 @@ public class TransitionsManager {
     private List<Transition> getStatusChanges(Issue issue, Timestamp tsCreated){
         @SuppressWarnings("unchecked")
         Map<String, Object> params = new HashMap<String, Object>();
-        List<GenericValue> changeGroups = ofBizDelegator.findByAnd("ChangeGroup", params);
-
         params.put("issue",issue.getId());
+        List<GenericValue> changeGroups = ofBizDelegator.findByAnd("ChangeGroup", params);
 
         // Added by caisd_1998 at hotmail dot com
         Collections.sort(changeGroups,
