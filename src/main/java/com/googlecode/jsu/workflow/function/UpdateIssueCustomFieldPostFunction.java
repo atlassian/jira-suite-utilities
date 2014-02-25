@@ -21,7 +21,6 @@ import com.atlassian.jira.util.I18nHelper;
 import com.googlecode.jsu.util.WorkflowUtils;
 import com.opensymphony.module.propertyset.PropertySet;
 import com.opensymphony.workflow.WorkflowException;
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * Class related to the execution of the plugin.

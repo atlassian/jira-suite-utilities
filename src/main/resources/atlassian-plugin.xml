@@ -56,6 +56,17 @@
         <resource type="velocity" name="column-view" location="templates/plugins/fields/view/view-basictext.vm"/>
     </customfield-type>
 
+    <customfield-type key="timeinsourcestatus"
+                      class="com.googlecode.jsu.customfields.TimeInSourceStatusCFType"
+                      i18n-name-key="customfield-type.timeinsourcestatus.name">
+
+        <description key="customfield-type.timeinsourcestatus.description"/>
+
+        <resource type="velocity" name="view" location="templates/jira/fields/view/view-timeinsourcestatus.vm"/>
+        <resource type="velocity" name="xml" location="templates/plugins/fields/xml/xml-basictext.vm"/>
+        <resource type="velocity" name="column-view" location="templates/plugins/fields/view/view-basictext.vm"/>
+    </customfield-type>
+
     <!-- Searchers -->
     <customfield-searcher key="textsearcher" name="Free Text Searcher"
                           i18n-name-key="admin.customfield.searcher.textsearcher.name"
@@ -66,6 +77,8 @@
         <resource type="velocity" name="view" location="templates/plugins/fields/view-searcher/view-searcher-basictext.vm"/>
 
         <valid-customfield-type package="${project.groupId}.${project.artifactId}" key="locationtextfield"/>
+        <valid-customfield-type package="${project.groupId}.${project.artifactId}" key="directionsfield"/>
+        <valid-customfield-type package="${project.groupId}.${project.artifactId}" key="timeinsourcestatus"/>
     </customfield-searcher>
 
     <customfield-searcher key="locationselectsearcher" name="Select List Searcher"
