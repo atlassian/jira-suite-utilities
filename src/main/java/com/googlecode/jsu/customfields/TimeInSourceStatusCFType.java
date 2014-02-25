@@ -22,6 +22,14 @@ import java.util.List;
  * In the usual issue view, the time will be shown formatted in seconds, minutes and so on
  * depending its length in milliseconds, for issue navigator its list view or exports, milliseconds
  * will be taken instead, to be able to make computations with the field its value.
+ *
+ * NOTE: This does not properly work yet, this is why it is not enabled in atlassian-plugin.xml
+ * The {@link com.googlecode.jsu.helpers.FormattableDuration}, used to be able to have either the
+ * duration in millis and on the other hand properly formatted human readable, can not be handled
+ * by the restore functionality of JIRA. This means backup/restore fails and integration tests too.
+ *
+ * NOTE 2: Not yet clear and to be tested, performance. Does this really work well in large
+ * installations with workflows having lots of steps, and where transitions are used often?
  */
 public class TimeInSourceStatusCFType extends CalculatedCFType<FormattableDuration,FormattableDuration> {
 
