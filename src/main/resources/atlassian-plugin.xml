@@ -9,6 +9,7 @@
         <application-version min="5.1" max="5.1"/>
         <param name="plugin-icon">com/googlecode/jsu/images/pluginIcon.png</param>
         <param name="plugin-logo">com/googlecode/jsu/images/pluginLogo.png</param>
+        <param name="atlassian-data-center-compatible">true</param>
     </plugin-info>
 
     <resource type="i18n" name="i18n" location="com.googlecode.jsu.i18n"/>
