@@ -25,6 +25,7 @@ import com.atlassian.jira.issue.fields.FieldManager;
 import com.atlassian.jira.issue.fields.config.FieldConfig;
 import com.atlassian.jira.issue.fields.layout.field.FieldLayoutItem;
 import com.atlassian.jira.issue.fields.screen.FieldScreen;
+import com.atlassian.jira.issue.label.Label;
 import com.atlassian.jira.issue.label.LabelManager;
 import com.atlassian.jira.issue.link.IssueLinkManager;
 import com.atlassian.jira.issue.priority.Priority;
@@ -484,9 +485,7 @@ public class WorkflowUtils {
                 if (newValue == null) {
                     this.labelManager.setLabels(convertApplicationUserToCrowdEmbeddedUser(currentUser),issue.getId(),customField.getIdAsLong(),new HashSet<String>(),false,true);
               }else{
-                    String stringValue = convertToString(newValue);
-                    stringValue = stringValue.replaceAll(",", " ");
-                    Set<String> set = convertToSetForLabels(stringValue);
+                    Set<String> set = convertToSetForLabels(value);
                     this.labelManager.setLabels(convertApplicationUserToCrowdEmbeddedUser(currentUser),issue.getId(),customField.getIdAsLong(),set,false,true);
                 }
 
@@ -729,8 +728,8 @@ public class WorkflowUtils {
                 } else {
                     issue.setEnvironment(value.toString());
                 }
-            } else if (fieldId.equals(IssueFieldConstants.WATCHES)) {
-                if ((value == null)) {
+            } else if (fieldId.equals(IssueFieldConstants.WATCHES)) { //TODO IssueFieldConstants.WATCHERS ?
+                if (value == null) {
                     clearWatchers(issue);
                 } else if(value instanceof ArrayList) {
                     ArrayList list = (ArrayList)value;
@@ -747,6 +746,9 @@ public class WorkflowUtils {
                 } else {
                     throw new UnsupportedOperationException("Not implemented");
                 }
+            } else if (fieldId.equals(IssueFieldConstants.LABELS)) {
+                Set<String> set = convertToSetForLabels(value);
+                labelManager.setLabels(convertApplicationUserToCrowdEmbeddedUser(currentUser), issue.getId(), set,false,true);
             } else {
                 log.error("Issue field \"" + fieldId + "\" is not supported for setting.");
             }
@@ -760,11 +762,41 @@ public class WorkflowUtils {
         }
     }
 
+    private Set<String> convertToSetForLabels(Object newValue) {
+        Set<String> set;
+        if (newValue == null || (newValue instanceof Collection && ((Collection) newValue).isEmpty())) {
+            set = new HashSet<String>();
+        } else if (newValue instanceof Label) {
+            set = convertToSetForLabels((Label) newValue);
+        } else if (newValue instanceof Collection) {
+            set = convertToSetForLabels((Collection) newValue);
+        } else {
+            String stringValue = convertToString(newValue);
+            stringValue = stringValue.replaceAll(",", " ");
+            set = convertToSetForLabels(stringValue);
+        }
+        return set;
+    }
+
     private Set<String> convertToSetForLabels(String newValue) {
         Set<String> set = new HashSet<String>();
         StringTokenizer st = new StringTokenizer(newValue," ");
         while(st.hasMoreTokens()) {
             set.add(st.nextToken());
+        }
+        return set;
+    }
+
+    private Set<String> convertToSetForLabels(Label newValue) {
+        Set<String> set = new HashSet<String>();
+        set.add(newValue.getLabel());
+        return set;
+    }
+
+    private Set<String> convertToSetForLabels(Collection col) {
+        Set<String> set = new HashSet<String>();
+        for (Object o : col) {
+            set.add(o.toString());
         }
         return set;
     }
@@ -942,7 +974,7 @@ public class WorkflowUtils {
 
 
     /**
-     *This ist deprecated because Atlassian API is not working with ApplicationUser
+     *This is deprecated because Atlassian API is not working with ApplicationUser
      * As soon as this is working this method can be deleted
      */
     @Deprecated

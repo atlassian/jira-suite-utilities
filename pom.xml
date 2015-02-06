@@ -188,7 +188,7 @@
 
         <jira.version>6.0</jira.version>
         <jira.data.version>6.0</jira.data.version>
-        <jira.plugin.version>4.2.9</jira.plugin.version>
+        <jira.plugin.version>4.2.20</jira.plugin.version>
         
         <testkit.version>6.0.51</testkit.version>
 
