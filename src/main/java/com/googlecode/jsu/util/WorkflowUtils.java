@@ -340,6 +340,8 @@ public class WorkflowUtils {
                     retVal = issue.getResolutionDate();
                 } else if (fieldId.equals(IssueFieldConstants.LABELS)) {
                     retVal = issue.getLabels();
+                } else if (fieldId.equals(IssueFieldConstants.WATCHES)) {
+                    retVal = watcherManager.getWatchers(issue, Locale.getDefault());
                 } else {
                     log.warn("Issue field \"" + fieldId + "\" is not supported.");
 
@@ -728,21 +730,24 @@ public class WorkflowUtils {
                 } else {
                     issue.setEnvironment(value.toString());
                 }
-            } else if (fieldId.equals(IssueFieldConstants.WATCHES)) { //TODO IssueFieldConstants.WATCHERS ?
+            } else if (fieldId.equals(IssueFieldConstants.WATCHES)) {
                 if (value == null) {
                     clearWatchers(issue);
-                } else if(value instanceof ArrayList) {
-                    ArrayList list = (ArrayList)value;
-                    if(list.size()==0) {
+                } else if(value instanceof Collection) {
+                    Collection collection = (Collection)value;
+                    if(collection.size()==0) {
                         clearWatchers(issue);
-                    } else if(list.get(0) instanceof ApplicationUser) {
+                    } else if(collection.iterator().next() instanceof ApplicationUser) {
                         clearWatchers(issue);
-                        for(Object o:list) {
+                        for(Object o:collection) {
                             watcherManager.startWatching((ApplicationUser)o,issue);
                         }
                     } else {
                         throw new UnsupportedOperationException("Data not supported for copy into watchers.");
                     }
+                } else if(value instanceof ApplicationUser) {
+                    clearWatchers(issue);
+                    watcherManager.startWatching((ApplicationUser) value, issue);
                 } else {
                     throw new UnsupportedOperationException("Not implemented");
                 }
