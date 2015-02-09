@@ -2,8 +2,7 @@ package com.googlecode.jsu.transitionssummary;
 
 import java.sql.Timestamp;
 
-import com.atlassian.jira.ComponentManager;
-import com.atlassian.jira.issue.status.Status;
+import com.atlassian.jira.component.ComponentAccessor;
 import com.atlassian.jira.util.I18nHelper;
 
 /**
@@ -59,13 +58,13 @@ public class Transition {
         return fromStatus;
     }
     public void setFromStatus(Long fromStatus) {
-        this.fromStatus = new StatusDelegate(ComponentManager.getInstance().getConstantsManager().getStatusObject(String.valueOf(fromStatus)),i18nHelper);
+        this.fromStatus = new StatusDelegate(ComponentAccessor.getConstantsManager().getStatusObject(String.valueOf(fromStatus)),i18nHelper);
     }
     public StatusDelegate getToStatus() {
         return toStatus;
     }
     public void setToStatus(Long toStatus) {
-        this.toStatus = new StatusDelegate(ComponentManager.getInstance().getConstantsManager().getStatusObject(String.valueOf(toStatus)),i18nHelper);
+        this.toStatus = new StatusDelegate(ComponentAccessor.getConstantsManager().getStatusObject(String.valueOf(toStatus)),i18nHelper);
     }
     public Timestamp getStartAt() {
         return startAt;

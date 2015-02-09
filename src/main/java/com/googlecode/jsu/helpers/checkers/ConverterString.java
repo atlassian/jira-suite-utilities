@@ -1,6 +1,7 @@
 package com.googlecode.jsu.helpers.checkers;
 
 import com.atlassian.crowd.embedded.api.User;
+import com.atlassian.jira.issue.label.Label;
 import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.issue.customfields.option.Option;
 import org.apache.commons.lang.StringUtils;
@@ -53,8 +54,9 @@ public class ConverterString implements ValueConverter {
             //https://developer.atlassian.com/display/JIRADEV/Renamable+Users+in+JIRA+6.0
         } else if (value instanceof User) {
             return ((User) value).getName();
-        }
-        else if (value instanceof GenericEntity) {
+        } else if (value instanceof Label) {
+            return ((Label) value).getLabel();
+        } else if (value instanceof GenericEntity) {
             String s = ((GenericEntity) value).getString("name");
             if (StringUtils.isEmpty(s)) {
                 s = ((GenericEntity) value).getString("id");

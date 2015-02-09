@@ -1,21 +1,8 @@
 package com.googlecode.jsu.workflow.validator;
 
-import static com.googlecode.jsu.helpers.ConditionCheckerFactory.DATE;
-import static com.googlecode.jsu.helpers.ConditionCheckerFactory.DATE_WITHOUT_TIME;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
-import com.atlassian.jira.ComponentManager;
-import com.atlassian.jira.util.I18nHelper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.atlassian.jira.config.properties.APKeys;
 import com.atlassian.jira.config.properties.ApplicationProperties;
-import com.atlassian.jira.issue.Issue;
 import com.atlassian.jira.issue.fields.Field;
+import com.atlassian.jira.util.I18nHelper;
 import com.googlecode.jsu.annotation.Argument;
 import com.googlecode.jsu.helpers.ComparisonType;
 import com.googlecode.jsu.helpers.ConditionChecker;
@@ -25,6 +12,14 @@ import com.googlecode.jsu.util.FieldCollectionsUtils;
 import com.googlecode.jsu.util.WorkflowUtils;
 import com.opensymphony.workflow.InvalidInputException;
 import com.opensymphony.workflow.WorkflowException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.Calendar;
+import java.util.Date;
+
+import static com.googlecode.jsu.helpers.ConditionCheckerFactory.DATE;
+import static com.googlecode.jsu.helpers.ConditionCheckerFactory.DATE_WITHOUT_TIME;
 
 /**
  * This validator compare two datetime fields, using the given comparison type.

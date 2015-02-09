@@ -93,9 +93,7 @@ public class CopyValueFromOtherFieldPostFunction extends AbstractPreserveChanges
             I18nHelper i18nh = this.beanFactory.getInstance(
                     ComponentAccessor.getJiraAuthenticationContext().getUser().getDirectoryUser());
             String message = i18nh.getText("copyvaluefromfield-function-view.unable_to_copy",fieldFromName,fieldToName);
-
             log.error(message, e);
-
             throw new WorkflowException(message);
         }
     }

@@ -3,9 +3,9 @@ package com.googlecode.jsu.util;
 import com.atlassian.crowd.embedded.api.CrowdService;
 import com.atlassian.crowd.embedded.api.Group;
 import com.atlassian.crowd.embedded.api.User;
-import com.atlassian.jira.ComponentManager;
 import com.atlassian.jira.bc.project.component.ProjectComponent;
 import com.atlassian.jira.bc.project.component.ProjectComponentManager;
+import com.atlassian.jira.component.ComponentAccessor;
 import com.atlassian.jira.config.PriorityManager;
 import com.atlassian.jira.config.properties.APKeys;
 import com.atlassian.jira.config.properties.ApplicationProperties;
@@ -275,7 +275,7 @@ public class WorkflowUtils {
                         retVal = null;
                     }
                 } else if (fieldId.equals(IssueFieldConstants.COMPONENTS)) {
-                    retCollection = issue.getComponents();
+                    retCollection = issue.getComponentObjects();
 
                     if (retCollection != null && !retCollection.isEmpty()) {
                         retVal = retCollection;
@@ -595,7 +595,7 @@ public class WorkflowUtils {
             } else if (fieldId.equals(IssueFieldConstants.ISSUE_LINKS)) {
                 throw new UnsupportedOperationException("Not implemented");
                 //
-                //				retVal = ComponentManager.getInstance().getIssueLinkManager().getIssueLinks(issue.getId());
+                //				retVal = ComponentAccessor.getIssueLinkManager().getIssueLinks(issue.getId());
             } else if (fieldId.equals(IssueFieldConstants.WORKRATIO)) {
                 throw new UnsupportedOperationException("Not implemented");
                 //
@@ -628,7 +628,7 @@ public class WorkflowUtils {
                 } else if (value instanceof Resolution) {
                     issue.setResolutionId(((Resolution) value).getId());
                 } else {
-                    Collection<Resolution> resolutions = ComponentManager.getInstance().getConstantsManager().getResolutionObjects();
+                    Collection<Resolution> resolutions = ComponentAccessor.getConstantsManager().getResolutionObjects();
                     Resolution resolution = null;
                     String s = value.toString().trim();
 
@@ -652,7 +652,7 @@ public class WorkflowUtils {
                 } else if (value instanceof Status) {
                     issue.setStatusId(((Status) value).getId());
                 } else {
-                    Status status = ComponentManager.getInstance().getConstantsManager().getStatusByName(value.toString());
+                    Status status = ComponentAccessor.getConstantsManager().getStatusByName(value.toString());
 
                     if (status != null) {
                         issue.setStatusObject(status);
@@ -804,9 +804,9 @@ public class WorkflowUtils {
     private static final ConverterString CONVERTER_STRING = new ConverterString();
     public String convertToString(Object value) {
         if (value instanceof Collection) {
-            List list = (List) value;
+            Collection collection = (Collection) value;
             List<Object> resultList = new ArrayList<Object>();
-            for (Object object : list) {
+            for (Object object : collection) {
                 object = convertToString(object);
                 resultList.add(object);
             }
@@ -838,21 +838,43 @@ public class WorkflowUtils {
     private Collection<ProjectComponent> convertValueToComponents(Issue issue, Object value) {
         if (value == null) {
             return Collections.<ProjectComponent>emptySet();
-        } else if (value instanceof ProjectComponent) {
-            return Arrays.asList((ProjectComponent) value);
-        } else if (value instanceof Collection) {
-            return (Collection<ProjectComponent>) value;
         } else {
-            ProjectComponent v = projectComponentManager.findByComponentName(
-                    issue.getProjectObject().getId(), convertToString(value)
-            );
-
-            if (v != null) {
-                return Arrays.asList(v);
-            }
-            throw new IllegalArgumentException("Wrong component value '" + value + "'.");
+            return convertToTargetProjectComponent(issue.getProjectObject(), value);
         }
     }
+
+    private Collection<ProjectComponent> convertToTargetProjectComponent(Project project, Object value) {
+        Long projectId = project.getId();
+        Collection values;
+        if (value instanceof Collection) {
+            values = (Collection) value;
+        } else {
+            values = Collections.singleton(value);
+        }
+        Set<ProjectComponent> targetProjectComponents = new HashSet<ProjectComponent>();
+        for (Object val : values) {
+            ProjectComponent projectComponent;
+            if (val instanceof ProjectComponent) {
+                ProjectComponent sourceComponent = (ProjectComponent) val;
+                if (sourceComponent.getProjectId().equals(projectId)) {
+                    projectComponent = sourceComponent;
+                } else {
+                    projectComponent = projectComponentManager.findByComponentName(projectId, sourceComponent.getName());
+                    if (projectComponent == null) {
+                        throw new IllegalArgumentException("Wrong component value '" + val + "'.");
+                    }
+                }
+            } else {
+                projectComponent = projectComponentManager.findByComponentName(projectId, convertToString(val));
+                if (projectComponent == null) {
+                    throw new IllegalArgumentException("Wrong component value '" + val + "'.");
+                }
+            }
+            targetProjectComponents.add(projectComponent);
+        }
+        return targetProjectComponents;
+    }
+
 
     public Collection<Version> convertValueToVersions(Issue issue, Object value) {
         if (value == null) {

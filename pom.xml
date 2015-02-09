@@ -186,8 +186,8 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <jira.version>6.0</jira.version>
-        <jira.data.version>6.0</jira.data.version>
+        <jira.version>6.3.11</jira.version>
+        <jira.data.version>6.3</jira.data.version>
         <jira.plugin.version>4.2.20</jira.plugin.version>
         
         <testkit.version>6.0.51</testkit.version>

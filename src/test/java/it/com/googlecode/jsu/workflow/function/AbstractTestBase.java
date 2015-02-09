@@ -49,7 +49,7 @@ public abstract class AbstractTestBase extends FuncTestCase {
     @Override
     protected void setUpTest() {
         super.setUpTest();
-        administration.restoreDataWithLicense("test1.xml", TimeBombLicence.LICENCE_FOR_TESTING);
+        administration.restoreDataWithLicense("test1.zip", TimeBombLicence.LICENCE_FOR_TESTING);
         issueClient = new IssueClient(getEnvironmentData());
         transitionsClient = new TransitionsClient(getEnvironmentData());
         watchersClient = new WatchersClient(getEnvironmentData());

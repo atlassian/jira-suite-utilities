@@ -331,7 +331,6 @@ public class FieldCollectionsUtils {
         return asFields(
                 ATTACHMENT,
                 COMMENT,
-                COMPONENTS,
                 ISSUE_LINKS,
                 SUBTASKS,
                 THUMBNAIL,
@@ -352,13 +351,12 @@ public class FieldCollectionsUtils {
     }
 
     /**
-     * @return a list of fields that will be eliminated from getCopyFromFields().
+     * @return a list of fields that will be eliminated from getCopyToFields().
      */
     private List<Field> getNonCopyToFields(){
         return asFields(
                 ATTACHMENT,
                 COMMENT,
-                COMPONENTS,
                 CREATED,
                 TIMETRACKING,
                 TIME_ORIGINAL_ESTIMATE,
