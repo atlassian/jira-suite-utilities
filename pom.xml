@@ -173,15 +173,12 @@
 
     <distributionManagement>
         <repository>
-            <id>atlassian-contrib</id>
-            <name>Atlassian Contrib Repository</name>
-            <url>https://maven.atlassian.com/contrib</url>
+            <uniqueVersion>true</uniqueVersion>
+            <id>mvnrepo.beecom.ch</id>
+            <name>beecom mvn repo - releases</name>
+            <url>http://mvnrepo.beecom.ch/inhouse</url>
+            <layout>default</layout>
         </repository>
-        <snapshotRepository>
-            <id>atlassian-contrib-snapshot</id>
-            <name>Atlassian Contrib Snapshot Repository</name>
-            <url>https://maven.atlassian.com/contrib-snapshot</url>
-        </snapshotRepository>
     </distributionManagement>
 
     <properties>
