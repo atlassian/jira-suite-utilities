@@ -68,6 +68,10 @@ public class TransitionSummaryAction extends AbstractIssueAction {
 
 
     public boolean isUserExists(String username) {
-        return userManager.getUserObject(username) != null;
+        try {
+            return userManager.getUserByName(username) != null;
+        } catch (Throwable t) {
+            return false;
+        }
     }
 }

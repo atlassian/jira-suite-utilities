@@ -57,10 +57,10 @@
         <resource type="velocity" name="column-view" location="templates/plugins/fields/view/view-basictext.vm"/>
     </customfield-type>
 
-    <!--
     <customfield-type key="timeinsourcestatus"
                       class="com.googlecode.jsu.customfields.TimeInSourceStatusCFType"
-                      i18n-name-key="customfield-type.timeinsourcestatus.name">
+                      i18n-name-key="customfield-type.timeinsourcestatus.name"
+                      state="disabled">
 
         <description key="customfield-type.timeinsourcestatus.description"/>
 
@@ -68,7 +68,6 @@
         <resource type="velocity" name="xml" location="templates/plugins/fields/xml/xml-basictext.vm"/>
         <resource type="velocity" name="column-view" location="templates/plugins/fields/view/view-basictext.vm"/>
     </customfield-type>
-    -->
 
     <!-- Searchers -->
     <customfield-searcher key="textsearcher" name="Free Text Searcher"
