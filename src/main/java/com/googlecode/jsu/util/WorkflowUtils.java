@@ -1,5 +1,28 @@
 package com.googlecode.jsu.util;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
+import java.util.StringTokenizer;
+
+import org.apache.commons.lang.StringUtils;
+import org.ofbiz.core.entity.GenericEntityException;
+import org.ofbiz.core.entity.GenericValue;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.atlassian.crowd.embedded.api.CrowdService;
 import com.atlassian.crowd.embedded.api.Group;
 import com.atlassian.crowd.embedded.api.User;
@@ -9,11 +32,26 @@ import com.atlassian.jira.component.ComponentAccessor;
 import com.atlassian.jira.config.PriorityManager;
 import com.atlassian.jira.config.properties.APKeys;
 import com.atlassian.jira.config.properties.ApplicationProperties;
-import com.atlassian.jira.issue.*;
+import com.atlassian.jira.issue.Issue;
+import com.atlassian.jira.issue.IssueConstant;
+import com.atlassian.jira.issue.IssueFieldConstants;
+import com.atlassian.jira.issue.IssueManager;
+import com.atlassian.jira.issue.IssueRelationConstants;
+import com.atlassian.jira.issue.ModifiedValue;
+import com.atlassian.jira.issue.MutableIssue;
 import com.atlassian.jira.issue.customfields.CustomFieldType;
 import com.atlassian.jira.issue.customfields.MultipleCustomFieldType;
 import com.atlassian.jira.issue.customfields.MultipleSettableCustomFieldType;
-import com.atlassian.jira.issue.customfields.impl.*;
+import com.atlassian.jira.issue.customfields.impl.AbstractMultiCFType;
+import com.atlassian.jira.issue.customfields.impl.CascadingSelectCFType;
+import com.atlassian.jira.issue.customfields.impl.GenericTextCFType;
+import com.atlassian.jira.issue.customfields.impl.LabelsCFType;
+import com.atlassian.jira.issue.customfields.impl.MultiSelectCFType;
+import com.atlassian.jira.issue.customfields.impl.MultiUserCFType;
+import com.atlassian.jira.issue.customfields.impl.ProjectCFType;
+import com.atlassian.jira.issue.customfields.impl.SelectCFType;
+import com.atlassian.jira.issue.customfields.impl.UserCFType;
+import com.atlassian.jira.issue.customfields.impl.VersionCFType;
 import com.atlassian.jira.issue.customfields.manager.OptionsManager;
 import com.atlassian.jira.issue.customfields.option.Option;
 import com.atlassian.jira.issue.customfields.option.Options;
@@ -50,17 +88,6 @@ import com.googlecode.jsu.helpers.checkers.ConverterString;
 import com.opensymphony.workflow.loader.AbstractDescriptor;
 import com.opensymphony.workflow.loader.ActionDescriptor;
 import com.opensymphony.workflow.loader.FunctionDescriptor;
-import org.apache.commons.lang.StringUtils;
-import org.ofbiz.core.entity.GenericEntityException;
-import org.ofbiz.core.entity.GenericValue;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
 
 //import com.opensymphony.user.Entity;
 
@@ -364,7 +391,8 @@ public class WorkflowUtils {
     /**
      * Sets specified value to the field for the issue.
      */
-    public void setFieldValue(ApplicationUser currentUser, MutableIssue issue, Field field, Object value, IssueChangeHolder changeHolder) {
+    public void setFieldValue(ApplicationUser currentUser, MutableIssue issue, Field field, Object value, boolean append,
+            IssueChangeHolder changeHolder) {
         if (fieldManager.isCustomField(field)) {
             CustomField customField = (CustomField) field;
             Object oldValue = issue.getCustomFieldValue(customField);
@@ -458,8 +486,19 @@ public class WorkflowUtils {
                     }
                     newValue = userList;
                 } else if (cfType instanceof LabelsCFType) {
-                    Set<String> set = convertToSetForLabels((String) newValue);
-                    this.labelManager.setLabels(convertApplicationUserToCrowdEmbeddedUser(currentUser),issue.getId(),customField.getIdAsLong(),set,false,true);
+                    newValue = convertToSetForLabels((String) newValue);
+                } else if (oldValue instanceof List) {
+                    if (cfType instanceof VersionCFType) {
+                        newValue = convertValueToVersions(issue, newValue);
+                    } else {
+                        try {
+                            newValue = convertStringToOption(issue, customField, (String) newValue);
+                        } catch (IllegalArgumentException e) {
+                            // Generic approach
+                            CustomFieldParams fieldParams = new CustomFieldParamsImpl(customField, newValue);
+                            newValue = cfType.getValueFromCustomFieldParams(fieldParams);
+                        }
+                    }
                 } else {
                     //convert from string to Object
                     CustomFieldParams fieldParams = new CustomFieldParamsImpl(customField, newValue);
@@ -470,11 +509,7 @@ public class WorkflowUtils {
                         (cfType instanceof MultipleCustomFieldType)) {
                     // format already correct
                 } else if (cfType instanceof  LabelsCFType) {
-                    Set<String> set = new HashSet<String>();
-                    for(Object o:(Collection)newValue) {
-                        set.add(o.toString());
-                    }
-                    this.labelManager.setLabels(convertApplicationUserToCrowdEmbeddedUser(currentUser),issue.getId(),customField.getIdAsLong(),set,false,true);
+                    newValue = convertToSetForLabels((Collection<?>) newValue);
                 } else {
                     //convert from string to Object
                     CustomFieldParams fieldParams = new CustomFieldParamsImpl(customField,convertToString(newValue));
@@ -485,10 +520,9 @@ public class WorkflowUtils {
                 newValue = convertValueToUser(newValue);
             } else if (cfType instanceof LabelsCFType) {
                 if (newValue == null) {
-                    this.labelManager.setLabels(convertApplicationUserToCrowdEmbeddedUser(currentUser),issue.getId(),customField.getIdAsLong(),new HashSet<String>(),false,true);
-              }else{
-                    Set<String> set = convertToSetForLabels(value);
-                    this.labelManager.setLabels(convertApplicationUserToCrowdEmbeddedUser(currentUser),issue.getId(),customField.getIdAsLong(),set,false,true);
+                    newValue = new HashSet<String>();
+                } else {
+                    newValue = convertToSetForLabels(value);
                 }
 
             } else if (cfType instanceof AbstractMultiCFType) {
@@ -498,11 +532,43 @@ public class WorkflowUtils {
                 if (newValue != null) {
                     newValue = asArrayList(newValue);
                 }
-            } else if (newValue instanceof User && !(cfType instanceof UserCFType)) {
+            } else if (newValue instanceof User) {
+                // UserCFType and MultiUserCFType handled above
                 newValue = ((User)newValue).getName();
             } else if (cfType instanceof GenericTextCFType) {
                 if (newValue instanceof Project) {
                     newValue = ((Project)newValue).getKey();
+                }
+            }
+
+            if (append) {
+                if (oldValue instanceof Set) {
+                    HashSet set;
+                    if (cfType instanceof LabelsCFType) {
+                        set = new HashSet(convertToSetForLabels((Set) oldValue));
+                    } else {
+                        set = new HashSet((Set) oldValue);
+                    }
+                    if (newValue instanceof Collection) {
+                        set.addAll((Collection) newValue);
+                    } else {
+                        set.add(newValue);
+                    }
+                    newValue = set;
+                } else if (oldValue instanceof List) {
+                    ArrayList list = new ArrayList((List) oldValue);
+                    if (newValue instanceof Collection) {
+                        list.addAll((Collection) newValue);
+                    } else {
+                        list.add(newValue);
+                    }
+                    newValue = list;
+                } else if (oldValue instanceof String) {
+                    // This may not be a good idea, but we trust the user to try if the field supports this and otherwise not use
+                    // append
+                    newValue = oldValue + ", " + newValue;
+                } else if (newValue == null) {
+                    newValue = oldValue;
                 }
             }
 
@@ -515,8 +581,11 @@ public class WorkflowUtils {
                 );
             }
 
-            // Updating internal custom field value if it is not a label, which got handled before by the label manager
-            if(!(cfType instanceof LabelsCFType)) {
+            // Set the value
+            if (cfType instanceof LabelsCFType) {
+                this.labelManager.setLabels(convertApplicationUserToCrowdEmbeddedUser(currentUser), issue.getId(),
+                        customField.getIdAsLong(), (Set<String>) newValue, false, true);
+            } else {
                 issue.setCustomFieldValue(customField, newValue);
 
                 if(issue.getKey()!=null) {
@@ -559,6 +628,10 @@ public class WorkflowUtils {
                 //				}
             } else if (fieldId.equals(IssueFieldConstants.AFFECTED_VERSIONS)) {
                 Collection<Version> versions = convertValueToVersions(issue, value);
+                if (append) {
+                    versions = new ArrayList<Version>(versions);
+                    versions.addAll(issue.getAffectedVersions());
+                }
                 issue.setAffectedVersions(versions);
             } else if (fieldId.equals(IssueFieldConstants.COMMENT)) {
                 throw new UnsupportedOperationException("Not implemented");
@@ -576,9 +649,17 @@ public class WorkflowUtils {
                 //				}
             } else if (fieldId.equals(IssueFieldConstants.COMPONENTS)) {
                 Collection<ProjectComponent> components = convertValueToComponents(issue, value);
+                if (append) {
+                    components = new ArrayList<ProjectComponent>(components);
+                    components.addAll(issue.getComponentObjects());
+                }
                 issue.setComponentObjects(components);
             } else if (fieldId.equals(IssueFieldConstants.FIX_FOR_VERSIONS)) {
                 Collection<Version> versions = convertValueToVersions(issue, value);
+                if (append) {
+                    versions = new ArrayList<Version>(versions);
+                    versions.addAll(issue.getFixVersions());
+                }
                 issue.setFixVersions(versions);
             } else if (fieldId.equals(IssueFieldConstants.THUMBNAIL)) {
                 throw new UnsupportedOperationException("Not implemented");
@@ -712,33 +793,56 @@ public class WorkflowUtils {
                 User user =  convertApplicationUserToCrowdEmbeddedUser(convertValueToUser(value));
                 issue.setReporter(user);
             } else if (fieldId.equals(IssueFieldConstants.SUMMARY)) {
-                if ((value == null) || (value instanceof String)) {
-                    issue.setSummary((String) value);
+                if (append && issue.getSummary() != null) {
+                    if (value != null) {
+                        issue.setSummary(issue.getSummary() + ", " + value);
+                    }
                 } else {
-                    issue.setSummary(value.toString());
+                    if ((value == null) || (value instanceof String)) {
+                        issue.setSummary((String) value);
+                    } else {
+                        issue.setSummary(value.toString());
+                    }
                 }
             } else if (fieldId.equals(IssueFieldConstants.DESCRIPTION)) {
-                if ((value == null) || (value instanceof String)) {
-                    issue.setDescription((String) value);
+                if (append && issue.getDescription() != null) {
+                    if (value != null) {
+                        issue.setDescription(issue.getDescription() + "\n" + convertToString(value));
+                    }
                 } else {
-                    issue.setDescription(convertToString(value));
-//                    issue.setDescription(value.toString());
+                    if ((value == null) || (value instanceof String)) {
+                        issue.setDescription((String) value);
+                    } else {
+                        issue.setDescription(convertToString(value));
+                    }
                 }
             } else if (fieldId.equals(IssueFieldConstants.ENVIRONMENT)) {
-                if ((value == null) || (value instanceof String)) {
-                    issue.setEnvironment((String) value);
+                if (append && issue.getEnvironment() != null) {
+                    if (value != null) {
+                        issue.setEnvironment(issue.getEnvironment() + ", " + value);
+                    }
                 } else {
-                    issue.setEnvironment(value.toString());
+                    if ((value == null) || (value instanceof String)) {
+                        issue.setEnvironment((String) value);
+                    } else {
+                        issue.setEnvironment(value.toString());
+                    }
                 }
             } else if (fieldId.equals(IssueFieldConstants.WATCHES)) {
                 if (value == null) {
-                    clearWatchers(issue);
+                    if (!append) {
+                        clearWatchers(issue);
+                    }
                 } else if(value instanceof Collection) {
                     Collection collection = (Collection)value;
                     if(collection.size()==0) {
-                        clearWatchers(issue);
+                        if (!append) {
+                            clearWatchers(issue);
+                        }
                     } else if(collection.iterator().next() instanceof ApplicationUser) {
-                        clearWatchers(issue);
+                        if (!append) {
+                            clearWatchers(issue);
+                        }
                         for(Object o:collection) {
                             watcherManager.startWatching((ApplicationUser)o,issue);
                         }
@@ -746,13 +850,18 @@ public class WorkflowUtils {
                         throw new UnsupportedOperationException("Data not supported for copy into watchers.");
                     }
                 } else if(value instanceof ApplicationUser) {
-                    clearWatchers(issue);
+                    if (!append) {
+                        clearWatchers(issue);
+                    }
                     watcherManager.startWatching((ApplicationUser) value, issue);
                 } else {
                     throw new UnsupportedOperationException("Not implemented");
                 }
             } else if (fieldId.equals(IssueFieldConstants.LABELS)) {
                 Set<String> set = convertToSetForLabels(value);
+                if (append) {
+                    set.addAll(convertToSetForLabels(labelManager.getLabels(issue.getId())));
+                }
                 labelManager.setLabels(convertApplicationUserToCrowdEmbeddedUser(currentUser), issue.getId(), set,false,true);
             } else {
                 log.error("Issue field \"" + fieldId + "\" is not supported for setting.");
@@ -1025,27 +1134,6 @@ public class WorkflowUtils {
             }
             return col.iterator().next();
         }
-    }
-
-    /**
-     * Method sets value for issue field. Field was defined as string
-     *
-     * @param currentUser
-     *            Current user.
-     * @param issue
-     *            Muttable issue for changing
-     * @param fieldKey
-     *            Field name
-     * @param value
-     *            Value for setting
-     */
-    public void setFieldValue(
-            ApplicationUser currentUser, MutableIssue issue, String fieldKey, Object value,
-            IssueChangeHolder changeHolder
-    ) {
-        final Field field = getFieldFromKey(fieldKey);
-
-        setFieldValue(currentUser, issue, field, value, changeHolder);
     }
 
     /**

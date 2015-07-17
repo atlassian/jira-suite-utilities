@@ -2,6 +2,8 @@ package com.googlecode.jsu.workflow;
 
 import java.util.*;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.atlassian.jira.issue.fields.Field;
 import com.atlassian.jira.plugin.workflow.AbstractWorkflowPluginFactory;
 import com.atlassian.jira.plugin.workflow.WorkflowPluginFunctionFactory;
@@ -20,11 +22,13 @@ public class WorkflowCopyValueFromOtherFieldPostFunctionPluginFactory extends Ab
     public static final String PARAM_SOURCE_FIELD = "sourceField";
     public static final String PARAM_DEST_FIELD = "destinationField";
     public static final String PARAM_COPY_TYPE = "copyType";
+    public static final String PARAM_APPEND_VALUE = "append.value";
     private static final String VALUE_SOURCE_LIST = "val-sourceFieldsList";
     private static final String VALUE_DEST_LIST = "val-destinationFieldsList";
     private static final String VALUE_SOURCE_SELECTED = "val-sourceFieldSelected";
     private static final String VALUE_DEST_SELECTED = "val-destinationFieldSelected";
     private static final String VALUE_COPY_TYPE = "val-copyType";
+    private static final String VALUE_APPEND_VALUE = "appendValue";
 
 
     private final FieldCollectionsUtils fieldCollectionsUtils;
@@ -63,6 +67,9 @@ public class WorkflowCopyValueFromOtherFieldPostFunctionPluginFactory extends Ab
 
         FunctionDescriptor functionDescriptor = (FunctionDescriptor) descriptor;
         velocityParams.put(VALUE_COPY_TYPE,getCopyType(functionDescriptor));
+
+        String appendValue = (String) functionDescriptor.getArgs().get(PARAM_APPEND_VALUE);
+        velocityParams.put(VALUE_APPEND_VALUE, StringUtils.trim(appendValue));
     }
 
     /* (non-Javadoc)
@@ -77,6 +84,9 @@ public class WorkflowCopyValueFromOtherFieldPostFunctionPluginFactory extends Ab
 
         FunctionDescriptor functionDescriptor = (FunctionDescriptor) descriptor;
         velocityParams.put(VALUE_COPY_TYPE,getCopyType(functionDescriptor));
+
+        String appendValue = (String) functionDescriptor.getArgs().get(PARAM_APPEND_VALUE);
+        velocityParams.put(VALUE_APPEND_VALUE, StringUtils.trim(appendValue));
     }
 
     /* (non-Javadoc)
@@ -93,6 +103,13 @@ public class WorkflowCopyValueFromOtherFieldPostFunctionPluginFactory extends Ab
             params.put(PARAM_SOURCE_FIELD, sourceField);
             params.put(PARAM_DEST_FIELD, destinationField);
             params.put(PARAM_COPY_TYPE, copyType);
+
+            if(conditionParams.containsKey(VALUE_APPEND_VALUE)) {
+                String appendValue = extractSingleParam(conditionParams, VALUE_APPEND_VALUE);
+                if(!StringUtils.isBlank(appendValue)) {
+                    params.put(PARAM_APPEND_VALUE, appendValue.trim());
+                }
+            }
         } catch (IllegalArgumentException iae) {
             // Aggregate so that Transitions can be added.
         }

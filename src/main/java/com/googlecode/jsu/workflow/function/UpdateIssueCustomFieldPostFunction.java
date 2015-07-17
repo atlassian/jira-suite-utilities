@@ -5,15 +5,10 @@ import static com.googlecode.jsu.workflow.WorkflowUpdateIssueCustomFieldFunction
 import static com.googlecode.jsu.workflow.WorkflowUpdateIssueCustomFieldFunctionPluginFactory.TARGET_FIELD_VALUE;
 
 import java.sql.Timestamp;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import com.atlassian.jira.component.ComponentAccessor;
 import com.atlassian.jira.issue.MutableIssue;
-import com.atlassian.jira.issue.customfields.impl.VersionCFType;
-import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.issue.fields.Field;
 import com.atlassian.jira.issue.util.IssueChangeHolder;
 import com.atlassian.jira.user.ApplicationUser;
@@ -72,44 +67,13 @@ public class UpdateIssueCustomFieldPostFunction extends AbstractPreserveChangesP
             if ("null".equals(configuredValue)) {
                 newValue = null;
             } else if ("%%CURRENT_USER%%".equals(configuredValue)) {
-                if(append) {
-                    String s = workflowUtils.getFieldStringValue(issue,fieldKey);
-                    if(s!=null && s.length()>0) {
-                        newValue = s + ", " + currentUser.getUsername();
-                    } else {
-                        newValue = currentUser.getUsername();
-                    }
-                } else {
-                    newValue = currentUser.getUsername();
-                }
+                newValue = currentUser.getUsername();
             //TODO obsolete since JSUTIL-202, but need to stay for backwards compatibility for a while, after that could adapt the texts in updateissuefield-function-view.vm, to overwrite and append accordingly
             } else if ("%%ADD_CURRENT_USER%%".equals(configuredValue)) {
-                String s = workflowUtils.getFieldStringValue(issue,fieldKey);
-                if(s!=null && s.length()>0) {
-                    newValue = s + ", " + currentUser.getUsername();
-                } else {
-                    newValue = currentUser.getUsername();
-                }
+                append = true;
+                newValue = currentUser.getUsername();
             } else if ("%%CURRENT_DATETIME%%".equals(configuredValue)) {
                 newValue = new Timestamp(System.currentTimeMillis());
-            } else if (append) {
-                Object o = workflowUtils.getFieldValueFromIssue(issue,field);
-                if(o instanceof List) {
-                    CustomField cf = (CustomField)field;
-                    List l = (List)o;
-                    if(cf.getCustomFieldType() instanceof VersionCFType) {
-                        l.addAll(workflowUtils.convertValueToVersions(issue, configuredValue));
-                    } else {
-                        l.add(workflowUtils.convertStringToOption(issue,cf,configuredValue));
-                    }
-                    newValue = o;
-                } else if (o instanceof Set) {
-                    Set newSet  = new HashSet((Set)o);
-                    newSet.add(configuredValue);
-                    newValue = newSet;
-                } else {
-                    newValue = configuredValue;
-                }
             } else {
                 newValue = configuredValue;
             }
@@ -124,7 +88,7 @@ public class UpdateIssueCustomFieldPostFunction extends AbstractPreserveChangesP
                 ));
             }
 
-            workflowUtils.setFieldValue(currentUser, issue, fieldKey, newValue, holder);
+            workflowUtils.setFieldValue(currentUser, issue, field, newValue, append, holder);
         } catch (Exception e) {
             I18nHelper i18nh = this.beanFactory.getInstance(
                     ComponentAccessor.getJiraAuthenticationContext().getUser().getDirectoryUser());

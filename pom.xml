@@ -75,7 +75,9 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
                 <configuration>
                     <source>1.6</source>
                     <target>1.6</target>
@@ -101,7 +103,9 @@
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -112,7 +116,9 @@
                 </executions>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -186,7 +192,7 @@
 
         <jira.version>6.3.11</jira.version>
         <jira.data.version>6.3</jira.data.version>
-        <jira.plugin.version>4.2.20</jira.plugin.version>
+        <jira.plugin.version>5.0.13</jira.plugin.version>
         
         <testkit.version>6.0.51</testkit.version>
 

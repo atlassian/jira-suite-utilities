@@ -52,7 +52,7 @@ public class ClearFieldValuePostFunction extends AbstractPreserveChangesPostFunc
                 ));
             }
 
-            workflowUtils.setFieldValue(currentUser, issue, fieldKey, null, holder);
+            workflowUtils.setFieldValue(currentUser, issue, field, null, false, holder);
         } catch (Exception e) {
             I18nHelper i18nh = this.beanFactory.getInstance(
                     ComponentAccessor.getJiraAuthenticationContext().getUser().getDirectoryUser());
