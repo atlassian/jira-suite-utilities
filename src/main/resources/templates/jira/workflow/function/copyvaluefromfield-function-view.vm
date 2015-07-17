@@ -5,6 +5,9 @@
     #else
         $i18n.getText("copyvaluefromfield-function-view.function_within_same")
     #end
+    #if(${appendValue} && 'true' == ${appendValue})
+        $i18n.getText("copyvaluefromfield-function-view.append")
+    #end
 #else
     $i18n.getText("copyvaluefromfield-function-view.wrong_selection")
 #end

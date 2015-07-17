@@ -33,6 +33,17 @@
     </td>
 </tr>
 <tr bgcolor="#ffffff">
+    <td align="right" valign="top" bgcolor="#fffff0">$i18n.getText("copyvaluefromfield-function.append.label"):</td>
+    <td bgcolor="#ffffff" nowrap>
+        <input type="checkbox" id="appendValue" name="appendValue" value="true"
+            #if(${appendValue.equals('true')})
+               checked="checked"
+            #end
+                >
+        <br /><span class="subText">$i18n.getText("copyvaluefromfield-function.append.description")</span>
+    </td>
+</tr>
+<tr bgcolor="#ffffff">
     <td align="right" valign="top" bgcolor="#fffff0">$i18n.getText("copyvaluefromfield-function.option.label"):</td>
     <td bgcolor="#ffffff" nowrap>
         <input type="radio" id="copyType" name="copyType" value="same"

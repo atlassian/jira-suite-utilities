@@ -1,9 +1,10 @@
 package com.googlecode.jsu.workflow.function;
 
 
-import static com.googlecode.jsu.workflow.WorkflowCopyValueFromOtherFieldPostFunctionPluginFactory.PARAM_SOURCE_FIELD;
-import static com.googlecode.jsu.workflow.WorkflowCopyValueFromOtherFieldPostFunctionPluginFactory.PARAM_DEST_FIELD;
 import static com.googlecode.jsu.workflow.WorkflowCopyValueFromOtherFieldPostFunctionPluginFactory.PARAM_COPY_TYPE;
+import static com.googlecode.jsu.workflow.WorkflowCopyValueFromOtherFieldPostFunctionPluginFactory.PARAM_DEST_FIELD;
+import static com.googlecode.jsu.workflow.WorkflowCopyValueFromOtherFieldPostFunctionPluginFactory.PARAM_SOURCE_FIELD;
+import static com.googlecode.jsu.workflow.WorkflowCopyValueFromOtherFieldPostFunctionPluginFactory.PARAM_APPEND_VALUE;
 
 import java.util.Map;
 
@@ -42,6 +43,8 @@ public class CopyValueFromOtherFieldPostFunction extends AbstractPreserveChanges
         String fieldFromKey = args.get(PARAM_SOURCE_FIELD);
         String fieldToKey = args.get(PARAM_DEST_FIELD);
         String copyType = args.get(PARAM_COPY_TYPE);
+        String appendValue = args.get(PARAM_APPEND_VALUE);
+        boolean append = "true".equals(appendValue);
 
         Field fieldFrom = workflowUtils.getFieldFromKey(fieldFromKey);
         Field fieldTo = workflowUtils.getFieldFromKey(fieldToKey);
@@ -84,7 +87,7 @@ public class CopyValueFromOtherFieldPostFunction extends AbstractPreserveChanges
             }
 
             // It set the value to field.
-            workflowUtils.setFieldValue(currentUser, destIssue, fieldToKey, sourceValue, holder);
+            workflowUtils.setFieldValue(currentUser, destIssue, fieldTo, sourceValue, append, holder);
 
             if (log.isDebugEnabled()) {
                 log.debug("Value was successfully copied");
