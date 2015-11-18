@@ -1,0 +1,38 @@
+<tr bgcolor="#ffffff">
+    <td align="right" valign="top" bgcolor="#fffff0">
+        <span class="label">$i18n.getText("copyvaluefromfield-function.source.label"):</span>
+    </td>
+    <td bgcolor="#ffffff" nowrap>
+				        <select id="sourceFieldsList" name="sourceFieldsList">
+	            #foreach ($val in ${val-sourceFieldsList})
+	                <option value="${val.id}">$textutils.htmlEncode(${val.name})</option>
+	            #end
+	        </select>
+        <br><font size="1">$i18n.getText("copyvaluefromfield-function.source.description")</font>
+    </td>
+</tr>
+<tr bgcolor="#ffffff">
+    <td align="right" valign="top" bgcolor="#fffff0">
+        <span class="label">$i18n.getText("copyvaluefromfield-function.destination.label"):</span>
+    </td>
+    <td bgcolor="#ffffff" nowrap>
+				        <select id="destinationFieldsList" name="destinationFieldsList">
+	            #foreach ($val in ${val-destinationFieldsList})
+	                <option value="${val.id}">$textutils.htmlEncode(${val.name})</option>
+	            #end
+	        </select>
+        <br><font size="1">$i18n.getText("copyvaluefromfield-function.destination.description")</font>
+    </td>
+</tr>
+<tr bgcolor="#ffffff">
+    <td align="right" valign="top" bgcolor="#fffff0">$i18n.getText("copyvaluefromfield-function.option.label"):</td>
+    <td bgcolor="#ffffff" nowrap>
+        <input type="radio" id="copyType" name="copyType" value="same" checked="checked">$i18n.getText("copyvaluefromfield-function.optionsame.label")<br>
+        <input type="radio" id="copyType" name="copyType" value="parent">$i18n.getText("copyvaluetofield-function.optionparent.label")<br>
+    </td>
+</tr>
+<tr bgcolor="#ffffff">
+    <td colspan="2">
+        <div style="width: 60%;" class="infoBox centred">$i18n.getText("copyvaluetofield-function.option.description")</div>
+    </td>
+</tr>

@@ -275,6 +275,28 @@
                   location="templates/jira/workflow/function/copyvaluefromfield-function-edit.vm"/>
     </workflow-function>
 
+    <!-- share the factory class with *From* -->
+    <workflow-function key="copyValueToOtherField-function"
+                       i18n-name-key="workflow-function.copyvaluetootherfield-function.name"
+                       class="com.googlecode.jsu.workflow.WorkflowCopyValueFromOtherFieldPostFunctionPluginFactory"> <!-- reuse the factory class -->
+        <description key="workflow-function.copyvaluetootherfield-function.description"/>
+
+        <function-class>com.googlecode.jsu.workflow.function.CopyValueToOtherFieldPostFunction</function-class>
+
+        <orderable>true</orderable>
+        <unique>false</unique>
+        <deletable>true</deletable>
+        <default>false</default>
+
+        <resource type="velocity" name="view"
+                  location="templates/jira/workflow/function/copyvaluetofield-function-view.vm"/>
+        <resource type="velocity" name="input-parameters"
+                  location="templates/jira/workflow/function/copyvaluetofield-function-input.vm"/>
+        <resource type="velocity" name="edit-parameters"
+                  location="templates/jira/workflow/function/copyvaluetofield-function-edit.vm"/>
+    </workflow-function>
+
+
     <workflow-function key="updateIssueCustomField-function"
                        i18n-name-key="workflow-function.updateissuecustomfield-function.name"
                        class="com.googlecode.jsu.workflow.WorkflowUpdateIssueCustomFieldFunctionPluginFactory">
