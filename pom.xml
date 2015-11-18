@@ -6,7 +6,7 @@
     <groupId>com.googlecode</groupId>
     <artifactId>jira-suite-utilities</artifactId>
     <name>JIRA Suite Utilities</name>
-    <version>1.4.11-SNAPSHOT</version>
+    <version>1.4.12-SNAPSHOT</version>
     <packaging>atlassian-plugin</packaging>
 
     <organization>
@@ -186,9 +186,9 @@
 
         <jira.version>6.3.11</jira.version>
         <jira.data.version>6.3</jira.data.version>
-        <jira.plugin.version>4.2.20</jira.plugin.version>
+        <jira.plugin.version>6.1.2</jira.plugin.version> <!-- upgraded from 4.2.20 -->
         
-        <testkit.version>6.0.51</testkit.version>
+        <testkit.version>6.3.11</testkit.version> <!-- upgraded from 6.0.51 -->
 
         <scm.connection>scm:git:git://github.com/atlassian/jira-suite-utilities.git</scm.connection>
     </properties>
